@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2013 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 * Copyright (C) 2014 Jan Bajer aka bajasoft <jbajer@gmail.com>
 *
@@ -18,8 +18,8 @@
 *
 **************************************************************************/
 
-#ifndef OTTER_SEARCHWIDGET_H
-#define OTTER_SEARCHWIDGET_H
+#ifndef MEERKAT_SEARCHWIDGET_H
+#define MEERKAT_SEARCHWIDGET_H
 
 #include "../ComboBoxWidget.h"
 #include "../../core/WindowsManager.h"
@@ -27,7 +27,7 @@
 #include <QtCore/QTime>
 #include <QtWidgets/QCompleter>
 
-namespace Otter
+namespace Meerkat
 {
 
 class LineEditWidget;

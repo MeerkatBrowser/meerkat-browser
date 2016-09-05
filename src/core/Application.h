@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2013 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 * Copyright (C) 2015 Jan Bajer aka bajasoft <jbajer@gmail.com>
 *
@@ -18,8 +18,8 @@
 *
 **************************************************************************/
 
-#ifndef OTTER_APPLICATION_H
-#define OTTER_APPLICATION_H
+#ifndef MEERKAT_APPLICATION_H
+#define MEERKAT_APPLICATION_H
 
 #include "UpdateChecker.h"
 #include "SessionsManager.h"
@@ -29,7 +29,7 @@
 #include <QtWidgets/QApplication>
 #include <QtNetwork/QLocalServer>
 
-namespace Otter
+namespace Meerkat
 {
 
 class MainWindow;
@@ -108,6 +108,6 @@ signals:
 
 }
 
-Q_DECLARE_OPERATORS_FOR_FLAGS(Otter::Application::MainWindowFlags)
+Q_DECLARE_OPERATORS_FOR_FLAGS(Meerkat::Application::MainWindowFlags)
 
 #endif

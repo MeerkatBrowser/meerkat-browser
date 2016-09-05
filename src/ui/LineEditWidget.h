@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2015 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 *
 * This program is free software: you can redistribute it and/or modify
@@ -17,12 +17,12 @@
 *
 **************************************************************************/
 
-#ifndef OTTER_LINEEDITWIDGET_H
-#define OTTER_LINEEDITWIDGET_H
+#ifndef MEERKAT_LINEEDITWIDGET_H
+#define MEERKAT_LINEEDITWIDGET_H
 
 #include <QtWidgets/QLineEdit>
 
-namespace Otter
+namespace Meerkat
 {
 
 class LineEditWidget : public QLineEdit

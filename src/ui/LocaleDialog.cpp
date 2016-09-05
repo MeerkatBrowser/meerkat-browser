@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2013 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 * Copyright (C) 2016 Piotr Wójcik <chocimier@tlen.pl>
 *
@@ -26,7 +26,7 @@
 
 #include <QtCore/QCollator>
 
-namespace Otter
+namespace Meerkat
 {
 
 LocaleDialog::LocaleDialog(QWidget *parent) : Dialog(parent),
@@ -39,7 +39,7 @@ LocaleDialog::LocaleDialog(QWidget *parent) : Dialog(parent),
 
 	for (int i = 0; i < locales.count(); ++i)
 	{
-		const QString name(locales.at(i).baseName().remove(QLatin1String("otter-browser_")));
+		const QString name(locales.at(i).baseName().remove(QLatin1String("meerkat-browser_")));
 		const QLocale locale(name);
 
 		if (locale.nativeCountryName().isEmpty() || locale.nativeLanguageName().isEmpty())

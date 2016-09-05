@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 *
 * This program is free software: you can redistribute it and/or modify
@@ -17,12 +17,12 @@
 *
 **************************************************************************/
 
-#ifndef OTTER_COMBOBOXWIDGET_H
-#define OTTER_COMBOBOXWIDGET_H
+#ifndef MEERKAT_COMBOBOXWIDGET_H
+#define MEERKAT_COMBOBOXWIDGET_H
 
 #include <QtWidgets/QComboBox>
 
-namespace Otter
+namespace Meerkat
 {
 
 class ComboBoxWidget : public QComboBox

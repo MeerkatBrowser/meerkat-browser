@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2015 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 * Copyright (C) 2016 Jan Bajer aka bajasoft <jbajer@gmail.com>
 *
@@ -35,7 +35,7 @@
 #include <QtWebEngineWidgets/QWebEngineProfile>
 #include <QtWebEngineWidgets/QWebEngineSettings>
 
-namespace Otter
+namespace Meerkat
 {
 
 QString QtWebEngineWebBackend::m_engineVersion;
@@ -291,7 +291,7 @@ QStringList QtWebEngineWebBackend::getBlockedElements(const QString &domain) con
 
 QUrl QtWebEngineWebBackend::getHomePage() const
 {
-	return QUrl(QLatin1String("http://otter-browser.org/"));
+	return QUrl(QLatin1String("http://meerkat-browser.org/"));
 }
 
 QIcon QtWebEngineWebBackend::getIcon() const

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Otter::SaveSessionDialog</class>
- <widget class="QDialog" name="Otter::SaveSessionDialog">
+ <class>Meerkat::SaveSessionDialog</class>
+ <widget class="QDialog" name="Meerkat::SaveSessionDialog">
   <property name="geometry">
    <rect>
     <x>0</x>

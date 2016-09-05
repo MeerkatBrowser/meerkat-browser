@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2013 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 *
 * This program is free software: you can redistribute it and/or modify
@@ -30,7 +30,7 @@
 #include <QtCore/QSaveFile>
 #include <QtWidgets/QMessageBox>
 
-namespace Otter
+namespace Meerkat
 {
 
 BookmarksItem::BookmarksItem() : QStandardItem()
@@ -96,15 +96,15 @@ QVariant BookmarksItem::data(int role) const
 
 			if (model && model->getFormatMode() == BookmarksModel::NotesMode)
 			{
-				return QCoreApplication::translate("Otter::BookmarksModel", "Notes");
+				return QCoreApplication::translate("Meerkat::BookmarksModel", "Notes");
 			}
 
-			return QCoreApplication::translate("Otter::BookmarksModel", "Bookmarks");
+			return QCoreApplication::translate("Meerkat::BookmarksModel", "Bookmarks");
 		}
 
 		if (type == BookmarksModel::TrashBookmark)
 		{
-			return QCoreApplication::translate("Otter::BookmarksModel", "Trash");
+			return QCoreApplication::translate("Meerkat::BookmarksModel", "Trash");
 		}
 	}
 
@@ -385,7 +385,7 @@ void BookmarksModel::readBookmark(QXmlStreamReader *reader, BookmarksItem *paren
 					{
 						if (reader->isStartElement())
 						{
-							if (reader->name() == QLatin1String("metadata") && reader->attributes().value(QLatin1String("owner")).toString().startsWith(QLatin1String("http://otter-browser.org/")))
+							if (reader->name() == QLatin1String("metadata") && reader->attributes().value(QLatin1String("owner")).toString().startsWith(QLatin1String("http://meerkat-browser.org/")))
 							{
 								while (reader->readNext())
 								{
@@ -457,7 +457,7 @@ void BookmarksModel::readBookmark(QXmlStreamReader *reader, BookmarksItem *paren
 					{
 						if (reader->isStartElement())
 						{
-							if (reader->name() == QLatin1String("metadata") && reader->attributes().value(QLatin1String("owner")).toString().startsWith("http://otter-browser.org/"))
+							if (reader->name() == QLatin1String("metadata") && reader->attributes().value(QLatin1String("owner")).toString().startsWith("http://meerkat-browser.org/"))
 							{
 								while (reader->readNext())
 								{
@@ -550,7 +550,7 @@ void BookmarksModel::writeBookmark(QXmlStreamWriter *writer, QStandardItem *book
 			{
 				writer->writeStartElement(QLatin1String("info"));
 				writer->writeStartElement(QLatin1String("metadata"));
-				writer->writeAttribute(QLatin1String("owner"), QLatin1String("http://otter-browser.org/otter-xbel-bookmark"));
+				writer->writeAttribute(QLatin1String("owner"), QLatin1String("http://meerkat-browser.org/meerkat-xbel-bookmark"));
 				writer->writeTextElement(QLatin1String("keyword"), bookmark->data(KeywordRole).toString());
 				writer->writeEndElement();
 				writer->writeEndElement();
@@ -602,7 +602,7 @@ void BookmarksModel::writeBookmark(QXmlStreamWriter *writer, QStandardItem *book
 			{
 				writer->writeStartElement(QLatin1String("info"));
 				writer->writeStartElement(QLatin1String("metadata"));
-				writer->writeAttribute(QLatin1String("owner"), QLatin1String("http://otter-browser.org/otter-xbel-bookmark"));
+				writer->writeAttribute(QLatin1String("owner"), QLatin1String("http://meerkat-browser.org/meerkat-xbel-bookmark"));
 
 				if (!bookmark->data(KeywordRole).toString().isEmpty())
 				{

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Otter::CacheContentsWidget</class>
- <widget class="QWidget" name="Otter::CacheContentsWidget">
+ <class>Meerkat::CacheContentsWidget</class>
+ <widget class="QWidget" name="Meerkat::CacheContentsWidget">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -34,7 +34,7 @@
     </widget>
    </item>
    <item>
-    <widget class="Otter::ItemViewWidget" name="cacheViewWidget">
+    <widget class="Meerkat::ItemViewWidget" name="cacheViewWidget">
      <property name="contextMenuPolicy">
       <enum>Qt::CustomContextMenu</enum>
      </property>
@@ -102,7 +102,7 @@
           </widget>
          </item>
          <item row="0" column="1">
-          <widget class="Otter::TextLabelWidget" name="addressLabelWidget" native="true"/>
+          <widget class="Meerkat::TextLabelWidget" name="addressLabelWidget" native="true"/>
          </item>
          <item row="2" column="0">
           <widget class="QLabel" name="typeLabel">
@@ -112,7 +112,7 @@
           </widget>
          </item>
          <item row="2" column="1">
-          <widget class="Otter::TextLabelWidget" name="typeLabelWidget" native="true"/>
+          <widget class="Meerkat::TextLabelWidget" name="typeLabelWidget" native="true"/>
          </item>
          <item row="3" column="0">
           <widget class="QLabel" name="sizeLabel">
@@ -122,7 +122,7 @@
           </widget>
          </item>
          <item row="3" column="1">
-          <widget class="Otter::TextLabelWidget" name="sizeLabelWidget" native="true"/>
+          <widget class="Meerkat::TextLabelWidget" name="sizeLabelWidget" native="true"/>
          </item>
          <item row="4" column="0">
           <widget class="QLabel" name="lastModifiedLabel">
@@ -132,7 +132,7 @@
           </widget>
          </item>
          <item row="4" column="1">
-          <widget class="Otter::TextLabelWidget" name="lastModifiedLabelWidget" native="true"/>
+          <widget class="Meerkat::TextLabelWidget" name="lastModifiedLabelWidget" native="true"/>
          </item>
          <item row="5" column="0">
           <widget class="QLabel" name="expiresLabel">
@@ -142,7 +142,7 @@
           </widget>
          </item>
          <item row="5" column="1">
-          <widget class="Otter::TextLabelWidget" name="expiresLabelWidget" native="true"/>
+          <widget class="Meerkat::TextLabelWidget" name="expiresLabelWidget" native="true"/>
          </item>
          <item row="1" column="0">
           <widget class="QLabel" name="locationLabel">
@@ -152,7 +152,7 @@
           </widget>
          </item>
          <item row="1" column="1">
-          <widget class="Otter::TextLabelWidget" name="locationLabelWidget" native="true"/>
+          <widget class="Meerkat::TextLabelWidget" name="locationLabelWidget" native="true"/>
          </item>
         </layout>
        </widget>
@@ -233,13 +233,13 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>Otter::TextLabelWidget</class>
+   <class>Meerkat::TextLabelWidget</class>
    <extends>QWidget</extends>
    <header>src/ui/TextLabelWidget.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>Otter::ItemViewWidget</class>
+   <class>Meerkat::ItemViewWidget</class>
    <extends>QTreeView</extends>
    <header>src/ui/ItemViewWidget.h</header>
   </customwidget>

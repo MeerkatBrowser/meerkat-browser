@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2013 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 *
 * This program is free software: you can redistribute it and/or modify
@@ -17,8 +17,8 @@
 *
 **************************************************************************/
 
-#ifndef OTTER_TRANSFERSMANAGER_H
-#define OTTER_TRANSFERSMANAGER_H
+#ifndef MEERKAT_TRANSFERSMANAGER_H
+#define MEERKAT_TRANSFERSMANAGER_H
 
 #include <QtCore/QFile>
 #include <QtCore/QMimeType>
@@ -26,7 +26,7 @@
 #include <QtCore/QSettings>
 #include <QtNetwork/QNetworkReply>
 
-namespace Otter
+namespace Meerkat
 {
 
 class NetworkManager;
@@ -176,6 +176,6 @@ signals:
 
 }
 
-Q_DECLARE_OPERATORS_FOR_FLAGS(Otter::Transfer::TransferOptions)
+Q_DECLARE_OPERATORS_FOR_FLAGS(Meerkat::Transfer::TransferOptions)
 
 #endif

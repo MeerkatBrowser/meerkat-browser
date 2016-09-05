@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2013 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 *
 * This program is free software: you can redistribute it and/or modify
@@ -26,13 +26,13 @@
 #include <QtCore/QFile>
 #include <QtCore/QJsonDocument>
 
-namespace Otter
+namespace Meerkat
 {
 
 MenuButtonWidget::MenuButtonWidget(const ActionsManager::ActionEntryDefinition &definition, QWidget *parent) : ToolButtonWidget(definition, parent),
 	m_menu(new Menu(Menu::NoMenuRole, this))
 {
-	setIcon(ThemesManager::getIcon(QLatin1String("otter-browser"), false));
+	setIcon(ThemesManager::getIcon(QLatin1String("meerkat-browser"), false));
 	setText(definition.options.value(QLatin1String("text"), tr("Menu")).toString());
 	setMenu(m_menu);
 	setPopupMode(QToolButton::InstantPopup);

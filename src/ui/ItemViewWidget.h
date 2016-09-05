@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2013 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 * Copyright (C) 2015 Jan Bajer aka bajasoft <jbajer@gmail.com>
 * Copyright (C) 2015 Piotr Wójcik <chocimier@tlen.pl>
@@ -19,8 +19,8 @@
 *
 **************************************************************************/
 
-#ifndef OTTER_ITEMVIEWWIDGET_H
-#define OTTER_ITEMVIEWWIDGET_H
+#ifndef MEERKAT_ITEMVIEWWIDGET_H
+#define MEERKAT_ITEMVIEWWIDGET_H
 
 #include <QtCore/QSortFilterProxyModel>
 #include <QtGui/QContextMenuEvent>
@@ -28,7 +28,7 @@
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QTreeView>
 
-namespace Otter
+namespace Meerkat
 {
 
 class HeaderViewWidget : public QHeaderView

@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2015 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 *
 * This program is free software: you can redistribute it and/or modify
@@ -23,10 +23,10 @@
 #include "ThemesManager.h"
 #include "UserScript.h"
 #include "WebBackend.h"
-#ifdef OTTER_ENABLE_QTWEBENGINE
+#ifdef MEERKAT_ENABLE_QTWEBENGINE
 #include "../modules/backends/web/qtwebengine/QtWebEngineWebBackend.h"
 #endif
-#ifdef OTTER_ENABLE_QTWEBKIT
+#ifdef MEERKAT_ENABLE_QTWEBKIT
 #include "../modules/backends/web/qtwebkit/QtWebKitWebBackend.h"
 #endif
 
@@ -35,7 +35,7 @@
 #include <QtCore/QJsonDocument>
 #include <QtCore/QJsonObject>
 
-namespace Otter
+namespace Meerkat
 {
 
 Addon::Addon(QObject *parent) : QObject(parent),
@@ -66,10 +66,10 @@ bool AddonsManager::m_areUserScripsInitialized = false;
 
 AddonsManager::AddonsManager(QObject *parent) : QObject(parent)
 {
-#ifdef OTTER_ENABLE_QTWEBENGINE
+#ifdef MEERKAT_ENABLE_QTWEBENGINE
 	registerWebBackend(new QtWebEngineWebBackend(this), QLatin1String("qtwebengine"));
 #endif
-#ifdef OTTER_ENABLE_QTWEBKIT
+#ifdef MEERKAT_ENABLE_QTWEBKIT
 	registerWebBackend(new QtWebKitWebBackend(this), QLatin1String("qtwebkit"));
 #endif
 

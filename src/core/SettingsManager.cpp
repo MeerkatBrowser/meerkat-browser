@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2013 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 * Copyright (C) 2014, 2016 Piotr Wójcik <chocimier@tlen.pl>
 * Copyright (C) 2016 Jan Bajer aka bajasoft <jbajer@gmail.com>
@@ -27,7 +27,7 @@
 #include <QtCore/QStandardPaths>
 #include <QtCore/QTextStream>
 
-namespace Otter
+namespace Meerkat
 {
 
 SettingsManager* SettingsManager::m_instance = NULL;
@@ -47,7 +47,7 @@ void SettingsManager::createInstance(const QString &path, QObject *parent)
 	{
 		m_instance = new SettingsManager(parent);
 		m_optionIdentifierEnumerator = m_instance->metaObject()->indexOfEnumerator(QLatin1String("OptionIdentifier").data());
-		m_globalPath = path + QLatin1String("/otter.conf");
+		m_globalPath = path + QLatin1String("/meerkat.conf");
 		m_overridePath = path + QLatin1String("/override.ini");
 
 		QSettings defaults(QLatin1String(":/schemas/options.ini"), QSettings::IniFormat);

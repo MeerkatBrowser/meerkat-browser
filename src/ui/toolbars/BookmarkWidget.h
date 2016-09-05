@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2015 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 *
 * This program is free software: you can redistribute it and/or modify
@@ -17,12 +17,12 @@
 *
 **************************************************************************/
 
-#ifndef OTTER_BOOKMARKWIDGET_H
-#define OTTER_BOOKMARKWIDGET_H
+#ifndef MEERKAT_BOOKMARKWIDGET_H
+#define MEERKAT_BOOKMARKWIDGET_H
 
 #include "ToolButtonWidget.h"
 
-namespace Otter
+namespace Meerkat
 {
 
 class BookmarksItem;

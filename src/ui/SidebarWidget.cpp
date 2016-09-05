@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2014 - 2015 Piotr Wójcik <chocimier@tlen.pl>
 * Copyright (C) 2015 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 *
@@ -34,7 +34,7 @@
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QToolBar>
 
-namespace Otter
+namespace Meerkat
 {
 
 SidebarWidget::SidebarWidget(QWidget *parent) : QWidget(parent),

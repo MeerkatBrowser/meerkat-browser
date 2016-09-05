@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Otter::PreferencesPrivacyPageWidget</class>
- <widget class="QWidget" name="Otter::PreferencesPrivacyPageWidget">
+ <class>Meerkat::PreferencesPrivacyPageWidget</class>
+ <widget class="QWidget" name="Meerkat::PreferencesPrivacyPageWidget">
   <property name="geometry">
    <rect>
     <x>0</x>

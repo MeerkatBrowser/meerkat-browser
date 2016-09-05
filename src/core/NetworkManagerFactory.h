@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2013 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 * Copyright (C) 2014 Piotr Wójcik <chocimier@tlen.pl>
 *
@@ -18,8 +18,8 @@
 *
 **************************************************************************/
 
-#ifndef OTTER_NETWORKMANAGERFACTORY_H
-#define OTTER_NETWORKMANAGERFACTORY_H
+#ifndef MEERKAT_NETWORKMANAGERFACTORY_H
+#define MEERKAT_NETWORKMANAGERFACTORY_H
 
 #include <QtCore/QObject>
 #include <QtNetwork/QAuthenticator>
@@ -27,7 +27,7 @@
 #include <QtNetwork/QNetworkDiskCache>
 #include <QtNetwork/QSslCipher>
 
-namespace Otter
+namespace Meerkat
 {
 
 struct UserAgentInformation

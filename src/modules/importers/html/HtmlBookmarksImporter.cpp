@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2014 Piotr Wójcik <chocimier@tlen.pl>
 * Copyright (C) 2014 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 *
@@ -22,14 +22,14 @@
 #include "../../../core/BookmarksManager.h"
 
 #include <QtCore/QDir>
-#ifdef OTTER_ENABLE_QTWEBKIT
+#ifdef MEERKAT_ENABLE_QTWEBKIT
 //TODO QtWebKit should not be used directly
 #include <QtWebKitWidgets/QWebPage>
 #include <QtWebKitWidgets/QWebFrame>
 #include <QtWebKit/QWebElementCollection>
 #endif
 
-namespace Otter
+namespace Meerkat
 {
 
 HtmlBookmarksImporter::HtmlBookmarksImporter(QObject *parent) : BookmarksImporter(parent),
@@ -45,7 +45,7 @@ HtmlBookmarksImporter::~HtmlBookmarksImporter()
 	}
 }
 
-#ifdef OTTER_ENABLE_QTWEBKIT
+#ifdef MEERKAT_ENABLE_QTWEBKIT
 void HtmlBookmarksImporter::processElement(const QWebElement &element)
 {
 	const QString tagName(element.tagName().toLower());
@@ -178,7 +178,7 @@ QString HtmlBookmarksImporter::getBrowser() const
 
 QUrl HtmlBookmarksImporter::getHomePage() const
 {
-	return QUrl(QLatin1String("http://otter-browser.org/"));
+	return QUrl(QLatin1String("http://meerkat-browser.org/"));
 }
 
 QIcon HtmlBookmarksImporter::getIcon() const
@@ -193,7 +193,7 @@ QStringList HtmlBookmarksImporter::getFileFilters() const
 
 bool HtmlBookmarksImporter::import(const QString &path)
 {
-#ifdef OTTER_ENABLE_QTWEBKIT
+#ifdef MEERKAT_ENABLE_QTWEBKIT
 	QFile file(getSuggestedPath(path));
 
 	if (!file.open(QIODevice::ReadOnly))

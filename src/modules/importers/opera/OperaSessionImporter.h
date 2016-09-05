@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2014 - 2015 Piotr Wójcik <chocimier@tlen.pl>
 * Copyright (C) 2014 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 *
@@ -18,12 +18,12 @@
 *
 **************************************************************************/
 
-#ifndef OTTER_OPERASESSIONIMPORTER_H
-#define OTTER_OPERASESSIONIMPORTER_H
+#ifndef MEERKAT_OPERASESSIONIMPORTER_H
+#define MEERKAT_OPERASESSIONIMPORTER_H
 
 #include "../../../core/Importer.h"
 
-namespace Otter
+namespace Meerkat
 {
 
 class OperaSessionImporter : public Importer

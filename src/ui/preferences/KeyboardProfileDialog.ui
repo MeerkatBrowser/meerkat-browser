@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Otter::KeyboardProfileDialog</class>
- <widget class="QDialog" name="Otter::KeyboardProfileDialog">
+ <class>Meerkat::KeyboardProfileDialog</class>
+ <widget class="QDialog" name="Meerkat::KeyboardProfileDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -35,7 +35,7 @@
         </widget>
        </item>
        <item>
-        <widget class="Otter::ItemViewWidget" name="actionsViewWidget">
+        <widget class="Meerkat::ItemViewWidget" name="actionsViewWidget">
          <property name="editTriggers">
           <set>QAbstractItemView::CurrentChanged|QAbstractItemView::SelectedClicked</set>
          </property>
@@ -53,7 +53,7 @@
        <item>
         <layout class="QHBoxLayout" name="shortcutsLayout">
          <item>
-          <widget class="Otter::ItemViewWidget" name="shortcutsViewWidget">
+          <widget class="Meerkat::ItemViewWidget" name="shortcutsViewWidget">
            <property name="editTriggers">
             <set>QAbstractItemView::CurrentChanged|QAbstractItemView::SelectedClicked</set>
            </property>
@@ -199,7 +199,7 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>Otter::ItemViewWidget</class>
+   <class>Meerkat::ItemViewWidget</class>
    <extends>QTreeView</extends>
    <header>src/ui/ItemViewWidget.h</header>
   </customwidget>
@@ -209,7 +209,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>Otter::KeyboardProfileDialog</receiver>
+   <receiver>Meerkat::KeyboardProfileDialog</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -225,7 +225,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>Otter::KeyboardProfileDialog</receiver>
+   <receiver>Meerkat::KeyboardProfileDialog</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">

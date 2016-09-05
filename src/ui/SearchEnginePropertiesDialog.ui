@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Otter::SearchEnginePropertiesDialog</class>
- <widget class="QDialog" name="Otter::SearchEnginePropertiesDialog">
+ <class>Meerkat::SearchEnginePropertiesDialog</class>
+ <widget class="QDialog" name="Meerkat::SearchEnginePropertiesDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -32,7 +32,7 @@
         <widget class="QLineEdit" name="titleLineEdit"/>
        </item>
        <item>
-        <widget class="Otter::IconWidget" name="iconButton">
+        <widget class="Meerkat::IconWidget" name="iconButton">
          <property name="minimumSize">
           <size>
            <width>36</width>
@@ -377,7 +377,7 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>Otter::IconWidget</class>
+   <class>Meerkat::IconWidget</class>
    <extends>QToolButton</extends>
    <header>src/ui/IconWidget.h</header>
   </customwidget>
@@ -406,7 +406,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>Otter::SearchEnginePropertiesDialog</receiver>
+   <receiver>Meerkat::SearchEnginePropertiesDialog</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -422,7 +422,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>Otter::SearchEnginePropertiesDialog</receiver>
+   <receiver>Meerkat::SearchEnginePropertiesDialog</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">

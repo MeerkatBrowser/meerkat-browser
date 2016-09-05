@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 *
 * This program is free software: you can redistribute it and/or modify
@@ -17,14 +17,14 @@
 *
 **************************************************************************/
 
-#ifndef OTTER_QTWEBENGINETRANSFER_H
-#define OTTER_QTWEBENGINETRANSFER_H
+#ifndef MEERKAT_QTWEBENGINETRANSFER_H
+#define MEERKAT_QTWEBENGINETRANSFER_H
 
 #include "../../../../core/TransfersManager.h"
 
 #include <QtWebEngineWidgets/QWebEngineDownloadItem>
 
-namespace Otter
+namespace Meerkat
 {
 
 class QtWebEngineTransfer : public Transfer

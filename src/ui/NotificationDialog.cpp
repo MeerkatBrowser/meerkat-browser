@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2015 Jan Bajer aka bajasoft <jbajer@gmail.com>
 * Copyright (C) 2015 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 *
@@ -31,7 +31,7 @@
 #include <QtWidgets/QDesktopWidget>
 #include <QtWidgets/QStyleOptionFrame>
 
-namespace Otter
+namespace Meerkat
 {
 
 NotificationDialog::NotificationDialog(Notification *notification, QWidget *parent) : QDialog(parent),
@@ -51,7 +51,7 @@ NotificationDialog::NotificationDialog(Notification *notification, QWidget *pare
 	mainLayout->addWidget(notificationFrame);
 
 	QLabel *iconLabel(new QLabel(this));
-	iconLabel->setPixmap(ThemesManager::getIcon(QLatin1String("otter-browser-32")).pixmap(32, 32));
+	iconLabel->setPixmap(ThemesManager::getIcon(QLatin1String("meerkat-browser-32")).pixmap(32, 32));
 	iconLabel->setStyleSheet(QLatin1String("padding:5px;"));
 
 	QLabel *messageLabel(new QLabel(this));

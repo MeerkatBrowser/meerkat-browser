@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2013 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 * Copyright (C) 2014 Jan Bajer aka bajasoft <jbajer@gmail.com>
 *
@@ -39,7 +39,7 @@
 #include <QtWidgets/QFileDialog>
 #include <QtWidgets/QMessageBox>
 
-namespace Otter
+namespace Meerkat
 {
 
 namespace Utils

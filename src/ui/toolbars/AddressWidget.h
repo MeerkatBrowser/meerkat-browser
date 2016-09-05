@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2013 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 * Copyright (C) 2014 - 2016 Jan Bajer aka bajasoft <jbajer@gmail.com>
 *
@@ -18,8 +18,8 @@
 *
 **************************************************************************/
 
-#ifndef OTTER_ADDRESSWIDGET_H
-#define OTTER_ADDRESSWIDGET_H
+#ifndef MEERKAT_ADDRESSWIDGET_H
+#define MEERKAT_ADDRESSWIDGET_H
 
 #include "../ComboBoxWidget.h"
 #include "../../core/WindowsManager.h"
@@ -28,7 +28,7 @@
 #include <QtCore/QUrl>
 #include <QtWidgets/QLabel>
 
-namespace Otter
+namespace Meerkat
 {
 
 class AddressCompletionModel;
@@ -125,6 +125,6 @@ signals:
 
 }
 
-Q_DECLARE_OPERATORS_FOR_FLAGS(Otter::AddressWidget::CompletionModes)
+Q_DECLARE_OPERATORS_FOR_FLAGS(Meerkat::AddressWidget::CompletionModes)
 
 #endif

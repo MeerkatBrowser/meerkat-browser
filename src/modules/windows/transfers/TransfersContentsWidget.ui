@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Otter::TransfersContentsWidget</class>
- <widget class="QWidget" name="Otter::TransfersContentsWidget">
+ <class>Meerkat::TransfersContentsWidget</class>
+ <widget class="QWidget" name="Meerkat::TransfersContentsWidget">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -48,7 +48,7 @@
     </layout>
    </item>
    <item>
-    <widget class="Otter::ItemViewWidget" name="transfersViewWidget">
+    <widget class="Meerkat::ItemViewWidget" name="transfersViewWidget">
      <property name="contextMenuPolicy">
       <enum>Qt::CustomContextMenu</enum>
      </property>
@@ -156,19 +156,19 @@
           </widget>
          </item>
          <item row="0" column="1">
-          <widget class="Otter::TextLabelWidget" name="sourceLabelWidget" native="true"/>
+          <widget class="Meerkat::TextLabelWidget" name="sourceLabelWidget" native="true"/>
          </item>
          <item row="1" column="1">
-          <widget class="Otter::TextLabelWidget" name="targetLabelWidget" native="true"/>
+          <widget class="Meerkat::TextLabelWidget" name="targetLabelWidget" native="true"/>
          </item>
          <item row="2" column="1">
-          <widget class="Otter::TextLabelWidget" name="sizeLabelWidget" native="true"/>
+          <widget class="Meerkat::TextLabelWidget" name="sizeLabelWidget" native="true"/>
          </item>
          <item row="3" column="1">
-          <widget class="Otter::TextLabelWidget" name="downloadedLabelWidget" native="true"/>
+          <widget class="Meerkat::TextLabelWidget" name="downloadedLabelWidget" native="true"/>
          </item>
          <item row="4" column="1">
-          <widget class="Otter::TextLabelWidget" name="progressLabelWidget" native="true"/>
+          <widget class="Meerkat::TextLabelWidget" name="progressLabelWidget" native="true"/>
          </item>
         </layout>
        </widget>
@@ -217,13 +217,13 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>Otter::TextLabelWidget</class>
+   <class>Meerkat::TextLabelWidget</class>
    <extends>QWidget</extends>
    <header>src/ui/TextLabelWidget.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>Otter::ItemViewWidget</class>
+   <class>Meerkat::ItemViewWidget</class>
    <extends>QTreeView</extends>
    <header>src/ui/ItemViewWidget.h</header>
   </customwidget>

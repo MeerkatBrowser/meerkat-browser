@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2013 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 * Copyright (C) 2014 - 2015 Piotr Wójcik <chocimier@tlen.pl>
 * Copyright (C) 2015 Jan Bajer aka bajasoft <jbajer@gmail.com>
@@ -60,7 +60,7 @@
 #include <QtWidgets/QMessageBox>
 #include <QtWidgets/QVBoxLayout>
 
-namespace Otter
+namespace Meerkat
 {
 
 MainWindow::MainWindow(Application::MainWindowFlags flags, const SessionMainWindow &session, QWidget *parent) : QMainWindow(parent),
@@ -707,7 +707,7 @@ void MainWindow::triggerAction(int identifier, const QVariantMap &parameters)
 		case ActionsManager::AboutApplicationAction:
 			{
 				WebBackend *webBackend(AddonsManager::getWebBackend());
-				QString about = tr("<b>Otter %1</b><br>Web browser controlled by the user, not vice-versa.<br><a href=\"https://www.otter-browser.org/\">https://www.otter-browser.org/</a>").arg(Application::getInstance()->getFullVersion());
+                QString about = tr("<b>Meerkat %1</b><br>Web browser controlled by the user, not vice-versa.<br><a href=\"http://meerkat-browser.sourceforge.net/\">http://meerkat-browser.sourceforge.net/</a>").arg(Application::getInstance()->getFullVersion());
 
 				if (webBackend)
 				{
@@ -725,7 +725,7 @@ void MainWindow::triggerAction(int identifier, const QVariantMap &parameters)
 					}
 				}
 
-				QMessageBox::about(this, QLatin1String("Otter"), about);
+				QMessageBox::about(this, QLatin1String("Meerkat"), about);
 			}
 
 			break;
@@ -1143,7 +1143,7 @@ MainWindow* MainWindow::findMainWindow(QObject *parent)
 		return NULL;
 	}
 
-	if (parent->metaObject()->className() == QLatin1String("Otter::MainWindow"))
+	if (parent->metaObject()->className() == QLatin1String("Meerkat::MainWindow"))
 	{
 		return qobject_cast<MainWindow*>(parent);
 	}
@@ -1158,7 +1158,7 @@ MainWindow* MainWindow::findMainWindow(QObject *parent)
 
 	while (parent)
 	{
-		if (parent->metaObject()->className() == QLatin1String("Otter::MainWindow"))
+		if (parent->metaObject()->className() == QLatin1String("Meerkat::MainWindow"))
 		{
 			window = qobject_cast<MainWindow*>(parent);
 

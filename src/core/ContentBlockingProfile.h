@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2010 - 2014 David Rosca <nowrep@gmail.com>
 * Copyright (C) 2014 - 2016 Jan Bajer aka bajasoft <jbajer@gmail.com>
 * Copyright (C) 2015 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
@@ -19,14 +19,14 @@
 *
 **************************************************************************/
 
-#ifndef OTTER_CONTENTBLOCKINGPROFILE_H
-#define OTTER_CONTENTBLOCKINGPROFILE_H
+#ifndef MEERKAT_CONTENTBLOCKINGPROFILE_H
+#define MEERKAT_CONTENTBLOCKINGPROFILE_H
 
 #include "ContentBlockingManager.h"
 
 #include <QtCore/QRegularExpression>
 
-namespace Otter
+namespace Meerkat
 {
 
 class ContentBlockingProfile : public QObject

@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 * Copyright (C) 2016 Jan Bajer aka bajasoft <jbajer@gmail.com>
 *
@@ -18,12 +18,12 @@
 *
 **************************************************************************/
 
-#ifndef OTTER_USERSCRIPT_H
-#define OTTER_USERSCRIPT_H
+#ifndef MEERKAT_USERSCRIPT_H
+#define MEERKAT_USERSCRIPT_H
 
 #include "AddonsManager.h"
 
-namespace Otter
+namespace Meerkat
 {
 
 class UserScript : public Addon

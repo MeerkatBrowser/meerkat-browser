@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Otter::PreferencesAdvancedPageWidget</class>
- <widget class="QWidget" name="Otter::PreferencesAdvancedPageWidget">
+ <class>Meerkat::PreferencesAdvancedPageWidget</class>
+ <widget class="QWidget" name="Meerkat::PreferencesAdvancedPageWidget">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -12,7 +12,7 @@
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout">
    <item>
-    <widget class="Otter::ItemViewWidget" name="advancedViewWidget">
+    <widget class="Meerkat::ItemViewWidget" name="advancedViewWidget">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
        <horstretch>0</horstretch>
@@ -160,7 +160,7 @@
         </widget>
        </item>
        <item>
-        <widget class="Otter::ItemViewWidget" name="notificationsItemView">
+        <widget class="Meerkat::ItemViewWidget" name="notificationsItemView">
          <property name="editTriggers">
           <set>QAbstractItemView::NoEditTriggers</set>
          </property>
@@ -203,7 +203,7 @@
              <widget class="QToolButton" name="notificationsPlaySoundButton"/>
             </item>
             <item>
-             <widget class="Otter::FilePathWidget" name="notificationsPlaySoundFilePathWidget" native="true"/>
+             <widget class="Meerkat::FilePathWidget" name="notificationsPlaySoundFilePathWidget" native="true"/>
             </item>
            </layout>
           </item>
@@ -297,7 +297,7 @@
           </widget>
          </item>
          <item row="1" column="1">
-          <widget class="Otter::FilePathWidget" name="appearranceStyleSheetFilePathWidget" native="true"/>
+          <widget class="Meerkat::FilePathWidget" name="appearranceStyleSheetFilePathWidget" native="true"/>
          </item>
          <item row="0" column="1">
           <widget class="QComboBox" name="appearranceWidgetStyleComboBox"/>
@@ -427,7 +427,7 @@
           </widget>
          </item>
          <item>
-          <widget class="Otter::FilePathWidget" name="userStyleSheetFilePathWidget" native="true"/>
+          <widget class="Meerkat::FilePathWidget" name="userStyleSheetFilePathWidget" native="true"/>
          </item>
         </layout>
        </item>
@@ -464,7 +464,7 @@
        <item>
         <layout class="QHBoxLayout" name="downloadsMimeTypesLayout">
          <item>
-          <widget class="Otter::ItemViewWidget" name="downloadsItemView">
+          <widget class="Meerkat::ItemViewWidget" name="downloadsItemView">
            <property name="editTriggers">
             <set>QAbstractItemView::NoEditTriggers</set>
            </property>
@@ -591,7 +591,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="Otter::FilePathWidget" name="downloadsFilePathWidget" native="true"/>
+                <widget class="Meerkat::FilePathWidget" name="downloadsFilePathWidget" native="true"/>
                </item>
               </layout>
              </widget>
@@ -652,7 +652,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="Otter::ApplicationComboBoxWidget" name="downloadsApplicationComboBoxWidget"/>
+                <widget class="Meerkat::ApplicationComboBoxWidget" name="downloadsApplicationComboBoxWidget"/>
                </item>
               </layout>
              </widget>
@@ -960,7 +960,7 @@
                </widget>
               </item>
               <item>
-               <widget class="Otter::FilePathWidget" name="automaticProxyConfigurationFilePathWidget" native="true"/>
+               <widget class="Meerkat::FilePathWidget" name="automaticProxyConfigurationFilePathWidget" native="true"/>
               </item>
              </layout>
             </widget>
@@ -1004,7 +1004,7 @@
           <item>
            <layout class="QHBoxLayout" name="proxyExceptionsHorizontalLayout">
             <item>
-             <widget class="Otter::ItemViewWidget" name="proxyExceptionsItemView">
+             <widget class="Meerkat::ItemViewWidget" name="proxyExceptionsItemView">
               <property name="headerHidden">
                <bool>true</bool>
               </property>
@@ -1093,7 +1093,7 @@
        <item>
         <layout class="QHBoxLayout" name="ciphersLayout">
          <item>
-          <widget class="Otter::ItemViewWidget" name="ciphersViewWidget">
+          <widget class="Meerkat::ItemViewWidget" name="ciphersViewWidget">
            <property name="editTriggers">
             <set>QAbstractItemView::NoEditTriggers</set>
            </property>
@@ -1227,7 +1227,7 @@
         </widget>
        </item>
        <item>
-        <widget class="Otter::ItemViewWidget" name="updateChannelsItemView">
+        <widget class="Meerkat::ItemViewWidget" name="updateChannelsItemView">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
            <horstretch>0</horstretch>
@@ -1319,7 +1319,7 @@
        <item>
         <layout class="QHBoxLayout" name="keyboardProfilesLayout">
          <item>
-          <widget class="Otter::ItemViewWidget" name="keyboardViewWidget">
+          <widget class="Meerkat::ItemViewWidget" name="keyboardViewWidget">
            <property name="dragEnabled">
             <bool>true</bool>
            </property>
@@ -1472,7 +1472,7 @@
        <item>
         <layout class="QHBoxLayout" name="mouseProfilesLayout">
          <item>
-          <widget class="Otter::ItemViewWidget" name="mouseViewWidget">
+          <widget class="Meerkat::ItemViewWidget" name="mouseViewWidget">
            <property name="dragEnabled">
             <bool>true</bool>
            </property>
@@ -1613,18 +1613,18 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>Otter::ItemViewWidget</class>
+   <class>Meerkat::ItemViewWidget</class>
    <extends>QTreeView</extends>
    <header>src/ui/ItemViewWidget.h</header>
   </customwidget>
   <customwidget>
-   <class>Otter::FilePathWidget</class>
+   <class>Meerkat::FilePathWidget</class>
    <extends>QWidget</extends>
    <header>src/ui/FilePathWidget.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>Otter::ApplicationComboBoxWidget</class>
+   <class>Meerkat::ApplicationComboBoxWidget</class>
    <extends>QComboBox</extends>
    <header>src/ui/ApplicationComboBoxWidget.h</header>
   </customwidget>

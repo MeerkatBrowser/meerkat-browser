@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2013 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 *
 * This program is free software: you can redistribute it and/or modify
@@ -17,14 +17,14 @@
 *
 **************************************************************************/
 
-#ifndef OTTER_PREVIEWWIDGET_H
-#define OTTER_PREVIEWWIDGET_H
+#ifndef MEERKAT_PREVIEWWIDGET_H
+#define MEERKAT_PREVIEWWIDGET_H
 
 #include <QtCore/QPropertyAnimation>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QFrame>
 
-namespace Otter
+namespace Meerkat
 {
 
 class PreviewWidget : public QFrame

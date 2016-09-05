@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2013 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 *
 * This program is free software: you can redistribute it and/or modify
@@ -17,15 +17,15 @@
 *
 **************************************************************************/
 
-#ifndef OTTER_WINDOWSMANAGER_H
-#define OTTER_WINDOWSMANAGER_H
+#ifndef MEERKAT_WINDOWSMANAGER_H
+#define MEERKAT_WINDOWSMANAGER_H
 
 #include "ActionsManager.h"
 #include "SessionsManager.h"
 
 #include <QtCore/QUrl>
 
-namespace Otter
+namespace Meerkat
 {
 
 struct ClosedWindow
@@ -149,7 +149,7 @@ signals:
 
 }
 
-Q_DECLARE_OPERATORS_FOR_FLAGS(Otter::WindowsManager::OpenHints)
-Q_DECLARE_OPERATORS_FOR_FLAGS(Otter::WindowsManager::ContentStates)
+Q_DECLARE_OPERATORS_FOR_FLAGS(Meerkat::WindowsManager::OpenHints)
+Q_DECLARE_OPERATORS_FOR_FLAGS(Meerkat::WindowsManager::ContentStates)
 
 #endif

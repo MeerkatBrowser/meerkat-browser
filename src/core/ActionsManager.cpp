@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2013 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 * Copyright (C) 2014 - 2015 Piotr Wójcik <chocimier@tlen.pl>
 * Copyright (C) 2015 Jan Bajer aka bajasoft <jbajer@gmail.com>
@@ -29,7 +29,7 @@
 #include <QtCore/QSettings>
 #include <QtCore/QTextStream>
 
-namespace Otter
+namespace Meerkat
 {
 
 ActionsManager* ActionsManager::m_instance = NULL;
@@ -508,7 +508,7 @@ ActionsManager::ActionsManager(QObject *parent) : QObject(parent),
 	registerAction(SwitchApplicationLanguageAction, QT_TRANSLATE_NOOP("actions", "Switch Application Language…"), QString(), ThemesManager::getIcon(QLatin1String("preferences-desktop-locale")));
 	registerAction(CheckForUpdatesAction, QT_TRANSLATE_NOOP("actions", "Check for Updates…"));
 	registerAction(DiagnosticReportAction, QT_TRANSLATE_NOOP("actions", "Diagnostic Report…"));
-	registerAction(AboutApplicationAction, QT_TRANSLATE_NOOP("actions", "About Otter…"), QString(), ThemesManager::getIcon(QLatin1String("otter-browser"), NoFlags));
+	registerAction(AboutApplicationAction, QT_TRANSLATE_NOOP("actions", "About Meerkat…"), QString(), ThemesManager::getIcon(QLatin1String("meerkat-browser"), NoFlags));
 	registerAction(AboutQtAction, QT_TRANSLATE_NOOP("actions", "About Qt…"), QString(), ThemesManager::getIcon(QLatin1String("qt"), NoFlags));
 	registerAction(ExitAction, QT_TRANSLATE_NOOP("actions", "Exit"), QString(), ThemesManager::getIcon(QLatin1String("application-exit")));
 

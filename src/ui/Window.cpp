@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2013 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 * Copyright (C) 2015 Piotr Wójcik <chocimier@tlen.pl>
 *
@@ -47,7 +47,7 @@
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QToolButton>
 
-namespace Otter
+namespace Meerkat
 {
 
 quint64 Window::m_identifierCounter = 0;
@@ -169,7 +169,7 @@ void Window::triggerAction(int identifier, const QVariantMap &parameters)
 		case ActionsManager::PrintAction:
 			{
 				QPrinter printer;
-				printer.setCreator(QStringLiteral("Otter Browser %1").arg(Application::getInstance()->getFullVersion()));
+				printer.setCreator(QStringLiteral("Meerkat Browser %1").arg(Application::getInstance()->getFullVersion()));
 
 				QPrintDialog printDialog(&printer, this);
 				printDialog.setWindowTitle(tr("Print Page"));
@@ -186,7 +186,7 @@ void Window::triggerAction(int identifier, const QVariantMap &parameters)
 		case ActionsManager::PrintPreviewAction:
 			{
 				QPrintPreviewDialog printPreviewDialog(this);
-				printPreviewDialog.printer()->setCreator(QStringLiteral("Otter Browser %1").arg(Application::getInstance()->getFullVersion()));
+				printPreviewDialog.printer()->setCreator(QStringLiteral("Meerkat Browser %1").arg(Application::getInstance()->getFullVersion()));
 				printPreviewDialog.setWindowFlags(printPreviewDialog.windowFlags() | Qt::WindowMaximizeButtonHint | Qt::WindowMinimizeButtonHint);
 				printPreviewDialog.setWindowTitle(tr("Print Preview"));
 

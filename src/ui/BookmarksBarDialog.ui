@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Otter::BookmarksBarDialog</class>
- <widget class="QDialog" name="Otter::BookmarksBarDialog">
+ <class>Meerkat::BookmarksBarDialog</class>
+ <widget class="QDialog" name="Meerkat::BookmarksBarDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -27,7 +27,7 @@
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="Otter::BookmarksComboBoxWidget" name="folderComboBox"/>
+      <widget class="Meerkat::BookmarksComboBoxWidget" name="folderComboBox"/>
      </item>
      <item row="0" column="0">
       <widget class="QLabel" name="titleLabel">
@@ -58,7 +58,7 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>Otter::BookmarksComboBoxWidget</class>
+   <class>Meerkat::BookmarksComboBoxWidget</class>
    <extends>QComboBox</extends>
    <header>src/ui/BookmarksComboBoxWidget.h</header>
   </customwidget>
@@ -72,7 +72,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>Otter::BookmarksBarDialog</receiver>
+   <receiver>Meerkat::BookmarksBarDialog</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -88,7 +88,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>Otter::BookmarksBarDialog</receiver>
+   <receiver>Meerkat::BookmarksBarDialog</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">

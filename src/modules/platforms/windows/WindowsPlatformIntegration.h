@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2014 - 2016 Jan Bajer aka bajasoft <jbajer@gmail.com>
 *
 * This program is free software: you can redistribute it and/or modify
@@ -17,8 +17,8 @@
 *
 **************************************************************************/
 
-#ifndef OTTER_WINDOWSPLATFORMINTEGRATION_H
-#define OTTER_WINDOWSPLATFORMINTEGRATION_H
+#ifndef MEERKAT_WINDOWSPLATFORMINTEGRATION_H
+#define MEERKAT_WINDOWSPLATFORMINTEGRATION_H
 
 #include "../../../core/PlatformIntegration.h"
 
@@ -35,7 +35,7 @@
 
 #include <shlobj.h> // has to be after NOMINMAX!
 
-namespace Otter
+namespace Meerkat
 {
 
 // Support for versions of shlobj.h that don't include the Vista+ associations API's (MinGW in Qt?)

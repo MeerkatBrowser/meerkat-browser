@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2015 Jan Bajer aka bajasoft <jbajer@gmail.com>
 *
 * This program is free software: you can redistribute it and/or modify
@@ -29,7 +29,7 @@
 #include <QtXmlPatterns/QXmlSchema>
 #include <QtXmlPatterns/QXmlSchemaValidator>
 
-namespace Otter
+namespace Meerkat
 {
 
 Updater::Updater(const UpdateInformation &information, QObject *parent) : QObject(parent),
@@ -37,7 +37,7 @@ Updater::Updater(const UpdateInformation &information, QObject *parent) : QObjec
 	m_transfersCount(0),
 	m_transfersSuccessful(true)
 {
-	const QString path(QStandardPaths::writableLocation(QStandardPaths::TempLocation) + QLatin1String("/OtterBrowser/"));
+	const QString path(QStandardPaths::writableLocation(QStandardPaths::TempLocation) + QLatin1String("/MeerkatBrowser/"));
 	QDir directory(path);
 
 	if (!directory.exists())

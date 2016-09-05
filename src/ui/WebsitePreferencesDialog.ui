@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Otter::WebsitePreferencesDialog</class>
- <widget class="QDialog" name="Otter::WebsitePreferencesDialog">
+ <class>Meerkat::WebsitePreferencesDialog</class>
+ <widget class="QDialog" name="Meerkat::WebsitePreferencesDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -82,7 +82,7 @@
         </widget>
        </item>
        <item row="6" column="2">
-        <widget class="Otter::FilePathWidget" name="userStyleSheetFilePathWidget" native="true"/>
+        <widget class="Meerkat::FilePathWidget" name="userStyleSheetFilePathWidget" native="true"/>
        </item>
        <item row="1" column="1">
         <widget class="QLabel" name="encodingLabel">
@@ -331,7 +331,7 @@
        <item row="9" column="0" colspan="3">
         <layout class="QHBoxLayout" name="cookiesTableLayout">
          <item>
-          <widget class="Otter::ItemViewWidget" name="cookiesTableWidget">
+          <widget class="Meerkat::ItemViewWidget" name="cookiesTableWidget">
            <property name="editTriggers">
             <set>QAbstractItemView::NoEditTriggers</set>
            </property>
@@ -950,7 +950,7 @@
                </widget>
               </item>
               <item>
-               <widget class="Otter::FilePathWidget" name="widget" native="true"/>
+               <widget class="Meerkat::FilePathWidget" name="widget" native="true"/>
               </item>
              </layout>
             </widget>
@@ -988,7 +988,7 @@
         </widget>
        </item>
        <item row="3" column="1">
-        <widget class="Otter::ItemViewWidget" name="contentBlockingProfilesViewWidget">
+        <widget class="Meerkat::ItemViewWidget" name="contentBlockingProfilesViewWidget">
          <property name="sizeAdjustPolicy">
           <enum>QAbstractScrollArea::AdjustIgnored</enum>
          </property>
@@ -1038,12 +1038,12 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>Otter::ItemViewWidget</class>
+   <class>Meerkat::ItemViewWidget</class>
    <extends>QTreeView</extends>
    <header>src/ui/ItemViewWidget.h</header>
   </customwidget>
   <customwidget>
-   <class>Otter::FilePathWidget</class>
+   <class>Meerkat::FilePathWidget</class>
    <extends>QWidget</extends>
    <header>src/ui/FilePathWidget.h</header>
    <container>1</container>

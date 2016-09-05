@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2013 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 *
 * This program is free software: you can redistribute it and/or modify
@@ -23,7 +23,7 @@
 #include <QtCore/QCoreApplication>
 #include <QtGui/QPainter>
 
-namespace Otter
+namespace Meerkat
 {
 
 OptionDelegate::OptionDelegate(bool isSimple, QObject *parent) : QItemDelegate(parent),
@@ -47,7 +47,7 @@ void OptionDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option
 	switch (type)
 	{
 		case SettingsManager::BooleanType:
-			drawDisplay(painter, option, option.rect, index.data(Qt::DisplayRole).toBool() ? QCoreApplication::translate("Otter::OptionDelegate", "Yes") : QCoreApplication::translate("Otter::OptionDelegate", "No"));
+			drawDisplay(painter, option, option.rect, index.data(Qt::DisplayRole).toBool() ? QCoreApplication::translate("Meerkat::OptionDelegate", "Yes") : QCoreApplication::translate("Meerkat::OptionDelegate", "No"));
 
 			break;
 		case SettingsManager::ColorType:

@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2015 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 *
 * This program is free software: you can redistribute it and/or modify
@@ -20,11 +20,11 @@
 #include "PasswordsManager.h"
 #include "PasswordsStorageBackend.h"
 
-#ifdef OTTER_ENABLE_ENCRYPTION
+#ifdef MEERKAT_ENABLE_ENCRYPTION
 #include <gcrypt.h>
 #endif
 
-namespace Otter
+namespace Meerkat
 {
 
 PasswordsManager* PasswordsManager::m_instance = NULL;
@@ -62,7 +62,7 @@ QList<PasswordsManager::PasswordInformation> PasswordsManager::getPasswords(cons
 
 bool PasswordsManager::isEncryptionAvailable()
 {
-#ifdef OTTER_ENABLE_ENCRYPTION
+#ifdef MEERKAT_ENABLE_ENCRYPTION
 	return true;
 #else
 	return false;

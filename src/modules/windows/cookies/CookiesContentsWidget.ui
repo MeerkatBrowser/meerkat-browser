@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Otter::CookiesContentsWidget</class>
- <widget class="QWidget" name="Otter::CookiesContentsWidget">
+ <class>Meerkat::CookiesContentsWidget</class>
+ <widget class="QWidget" name="Meerkat::CookiesContentsWidget">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -34,7 +34,7 @@
     </widget>
    </item>
    <item>
-    <widget class="Otter::ItemViewWidget" name="cookiesViewWidget">
+    <widget class="Meerkat::ItemViewWidget" name="cookiesViewWidget">
      <property name="contextMenuPolicy">
       <enum>Qt::CustomContextMenu</enum>
      </property>
@@ -241,7 +241,7 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>Otter::ItemViewWidget</class>
+   <class>Meerkat::ItemViewWidget</class>
    <extends>QTreeView</extends>
    <header>src/ui/ItemViewWidget.h</header>
   </customwidget>

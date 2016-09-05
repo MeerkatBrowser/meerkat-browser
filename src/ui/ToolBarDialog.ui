@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Otter::ToolBarDialog</class>
- <widget class="QDialog" name="Otter::ToolBarDialog">
+ <class>Meerkat::ToolBarDialog</class>
+ <widget class="QDialog" name="Meerkat::ToolBarDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -132,7 +132,7 @@
       </widget>
      </item>
      <item row="2" column="1">
-      <widget class="Otter::BookmarksComboBoxWidget" name="folderComboBox"/>
+      <widget class="Meerkat::BookmarksComboBoxWidget" name="folderComboBox"/>
      </item>
      <item row="4" column="1">
       <widget class="QComboBox" name="fullScreenVisibilityComboBox"/>
@@ -188,7 +188,7 @@
         <item row="3" column="2">
          <layout class="QVBoxLayout" name="currentEntriesLayout">
           <item>
-           <widget class="Otter::ItemViewWidget" name="currentEntriesItemView">
+           <widget class="Meerkat::ItemViewWidget" name="currentEntriesItemView">
             <property name="editTriggers">
              <set>QAbstractItemView::NoEditTriggers</set>
             </property>
@@ -367,7 +367,7 @@
          </widget>
         </item>
         <item row="3" column="0">
-         <widget class="Otter::ItemViewWidget" name="availableEntriesItemView">
+         <widget class="Meerkat::ItemViewWidget" name="availableEntriesItemView">
           <property name="editTriggers">
            <set>QAbstractItemView::NoEditTriggers</set>
           </property>
@@ -407,12 +407,12 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>Otter::ItemViewWidget</class>
+   <class>Meerkat::ItemViewWidget</class>
    <extends>QTreeView</extends>
    <header>src/ui/ItemViewWidget.h</header>
   </customwidget>
   <customwidget>
-   <class>Otter::BookmarksComboBoxWidget</class>
+   <class>Meerkat::BookmarksComboBoxWidget</class>
    <extends>QComboBox</extends>
    <header>src/ui/BookmarksComboBoxWidget.h</header>
   </customwidget>
@@ -440,7 +440,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>Otter::ToolBarDialog</receiver>
+   <receiver>Meerkat::ToolBarDialog</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -456,7 +456,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>Otter::ToolBarDialog</receiver>
+   <receiver>Meerkat::ToolBarDialog</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">

@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2015 Jan Bajer aka bajasoft <jbajer@gmail.com>
 * Copyright (C) 2015 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 *
@@ -18,14 +18,14 @@
 *
 **************************************************************************/
 
-#ifndef OTTER_UPDATECHECKER_H
-#define OTTER_UPDATECHECKER_H
+#ifndef MEERKAT_UPDATECHECKER_H
+#define MEERKAT_UPDATECHECKER_H
 
 #include "SessionsManager.h"
 
 #include <QtNetwork/QNetworkReply>
 
-namespace Otter
+namespace Meerkat
 {
 
 struct UpdateInformation
@@ -60,6 +60,6 @@ signals:
 
 }
 
-Q_DECLARE_METATYPE(Otter::UpdateInformation)
+Q_DECLARE_METATYPE(Meerkat::UpdateInformation)
 
 #endif

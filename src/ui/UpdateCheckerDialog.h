@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2015 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 * Copyright (C) 2015 Jan Bajer aka bajasoft <jbajer@gmail.com>
 *
@@ -18,15 +18,15 @@
 *
 **************************************************************************/
 
-#ifndef OTTER_UPDATECHECKERDIALOG_H
-#define OTTER_UPDATECHECKERDIALOG_H
+#ifndef MEERKAT_UPDATECHECKERDIALOG_H
+#define MEERKAT_UPDATECHECKERDIALOG_H
 
 #include "Dialog.h"
 #include "../core/UpdateChecker.h"
 
 #include <QtWidgets/QAbstractButton>
 
-namespace Otter
+namespace Meerkat
 {
 
 namespace Ui

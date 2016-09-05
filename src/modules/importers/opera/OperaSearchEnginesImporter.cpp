@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2014, 2016 Piotr Wójcik <chocimier@tlen.pl>
 * Copyright (C) 2014 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 *
@@ -30,7 +30,7 @@
 #include <QtCore/QStandardPaths>
 #include <QtCore/QUrl>
 
-namespace Otter
+namespace Meerkat
 {
 
 OperaSearchEnginesImporter::OperaSearchEnginesImporter(QObject *parent) : Importer(parent),
@@ -97,7 +97,7 @@ QString OperaSearchEnginesImporter::getBrowser() const
 
 QUrl OperaSearchEnginesImporter::getHomePage() const
 {
-	return QUrl(QLatin1String("http://otter-browser.org/"));
+	return QUrl(QLatin1String("http://meerkat-browser.org/"));
 }
 
 QIcon OperaSearchEnginesImporter::getIcon() const

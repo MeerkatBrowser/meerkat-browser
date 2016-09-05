@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Otter::PreferencesGeneralPageWidget</class>
- <widget class="QWidget" name="Otter::PreferencesGeneralPageWidget">
+ <class>Meerkat::PreferencesGeneralPageWidget</class>
+ <widget class="QWidget" name="Meerkat::PreferencesGeneralPageWidget">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -124,7 +124,7 @@
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="Otter::FilePathWidget" name="downloadsFilePathWidget" native="true"/>
+      <widget class="Meerkat::FilePathWidget" name="downloadsFilePathWidget" native="true"/>
      </item>
     </layout>
    </item>
@@ -320,7 +320,7 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>Otter::FilePathWidget</class>
+   <class>Meerkat::FilePathWidget</class>
    <extends>QWidget</extends>
    <header>src/ui/FilePathWidget.h</header>
    <container>1</container>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Otter::MouseProfileDialog</class>
- <widget class="QDialog" name="Otter::MouseProfileDialog">
+ <class>Meerkat::MouseProfileDialog</class>
+ <widget class="QDialog" name="Meerkat::MouseProfileDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -37,7 +37,7 @@
        <item>
         <layout class="QHBoxLayout" name="gesturesLayout">
          <item>
-          <widget class="Otter::ItemViewWidget" name="gesturesViewWidget">
+          <widget class="Meerkat::ItemViewWidget" name="gesturesViewWidget">
            <property name="editTriggers">
             <set>QAbstractItemView::CurrentChanged</set>
            </property>
@@ -112,7 +112,7 @@
        <item>
         <layout class="QHBoxLayout" name="stepsLayout">
          <item>
-          <widget class="Otter::ItemViewWidget" name="stepsViewWidget">
+          <widget class="Meerkat::ItemViewWidget" name="stepsViewWidget">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
              <horstretch>0</horstretch>
@@ -252,7 +252,7 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>Otter::ItemViewWidget</class>
+   <class>Meerkat::ItemViewWidget</class>
    <extends>QTreeView</extends>
    <header>src/ui/ItemViewWidget.h</header>
   </customwidget>
@@ -262,7 +262,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>Otter::MouseProfileDialog</receiver>
+   <receiver>Meerkat::MouseProfileDialog</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -278,7 +278,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>Otter::MouseProfileDialog</receiver>
+   <receiver>Meerkat::MouseProfileDialog</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">

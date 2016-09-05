@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Otter::MainWindow</class>
- <widget class="QMainWindow" name="Otter::MainWindow">
+ <class>Meerkat::MainWindow</class>
+ <widget class="QMainWindow" name="Meerkat::MainWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -21,13 +21,13 @@
    <attribute name="dockWidgetArea">
     <number>8</number>
    </attribute>
-   <widget class="Otter::ConsoleWidget" name="consoleWidget"/>
+   <widget class="Meerkat::ConsoleWidget" name="consoleWidget"/>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>Otter::ConsoleWidget</class>
+   <class>Meerkat::ConsoleWidget</class>
    <extends>QWidget</extends>
    <header>src/ui/ConsoleWidget.h</header>
    <container>1</container>

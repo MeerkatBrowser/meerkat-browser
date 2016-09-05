@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2015 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 * Copyright (C) 2016 Jan Bajer aka bajasoft <jbajer@gmail.com>
 *
@@ -18,12 +18,12 @@
 *
 **************************************************************************/
 
-#ifndef OTTER_CONTENTBLOCKINGINTERVALDELEGATE_H
-#define OTTER_CONTENTBLOCKINGINTERVALDELEGATE_H
+#ifndef MEERKAT_CONTENTBLOCKINGINTERVALDELEGATE_H
+#define MEERKAT_CONTENTBLOCKINGINTERVALDELEGATE_H
 
 #include <QtWidgets/QItemDelegate>
 
-namespace Otter
+namespace Meerkat
 {
 
 class ContentBlockingIntervalDelegate : public QItemDelegate

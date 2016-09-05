@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Otter::StartupDialog</class>
- <widget class="QDialog" name="Otter::StartupDialog">
+ <class>Meerkat::StartupDialog</class>
+ <widget class="QDialog" name="Meerkat::StartupDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Welcome to Otter</string>
+   <string>Welcome to Meerkat</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,0,0,0,0,0">
    <item>
@@ -24,7 +24,7 @@
       </font>
      </property>
      <property name="text">
-      <string>Welcome to Otter</string>
+      <string>Welcome to Meerkat</string>
      </property>
     </widget>
    </item>
@@ -145,7 +145,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>Otter::StartupDialog</receiver>
+   <receiver>Meerkat::StartupDialog</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -161,7 +161,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>Otter::StartupDialog</receiver>
+   <receiver>Meerkat::StartupDialog</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">

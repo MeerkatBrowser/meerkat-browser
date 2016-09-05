@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2013 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 * Copyright (C) 2015 Jan Bajer aka bajasoft <jbajer@gmail.com>
 *
@@ -27,7 +27,7 @@
 
 #include <QtCore/QTimer>
 
-namespace Otter
+namespace Meerkat
 {
 
 TrayIcon::TrayIcon(Application *parent) : QObject(parent),
@@ -49,7 +49,7 @@ TrayIcon::TrayIcon(Application *parent) : QObject(parent),
 
 	m_trayIcon->setIcon(parent->windowIcon());
 	m_trayIcon->setContextMenu(menu);
-	m_trayIcon->setToolTip(tr("Otter Browser"));
+	m_trayIcon->setToolTip(tr("Meerkat Browser"));
 	m_trayIcon->show();
 
 	setParent(NULL);
@@ -125,7 +125,7 @@ void TrayIcon::showMessage(Notification *notification)
 
 	connect(m_trayIcon, SIGNAL(messageClicked()), this, SLOT(messageClicked()));
 
-	m_trayIcon->showMessage(tr("Otter Browser"), notification->getMessage(), QSystemTrayIcon::MessageIcon(m_notification->getLevel() + 1));
+	m_trayIcon->showMessage(tr("Meerkat Browser"), notification->getMessage(), QSystemTrayIcon::MessageIcon(m_notification->getLevel() + 1));
 
 	const int visibilityDuration(SettingsManager::getValue(SettingsManager::Interface_NotificationVisibilityDurationOption).toInt());
 

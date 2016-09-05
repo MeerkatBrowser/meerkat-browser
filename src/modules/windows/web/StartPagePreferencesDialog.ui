@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Otter::StartPagePreferencesDialog</class>
- <widget class="QDialog" name="Otter::StartPagePreferencesDialog">
+ <class>Meerkat::StartPagePreferencesDialog</class>
+ <widget class="QDialog" name="Meerkat::StartPagePreferencesDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -58,7 +58,7 @@
          <number>0</number>
         </property>
         <item row="0" column="1">
-         <widget class="Otter::FilePathWidget" name="backgroundFilePathWidget" native="true"/>
+         <widget class="Meerkat::FilePathWidget" name="backgroundFilePathWidget" native="true"/>
         </item>
         <item row="1" column="0">
          <widget class="QLabel" name="backgroundModeLabel">
@@ -94,7 +94,7 @@
          </widget>
         </item>
         <item row="2" column="1">
-         <widget class="Otter::ColorWidget" name="backgroundColorWidget"/>
+         <widget class="Meerkat::ColorWidget" name="backgroundColorWidget"/>
         </item>
        </layout>
       </widget>
@@ -189,13 +189,13 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>Otter::FilePathWidget</class>
+   <class>Meerkat::FilePathWidget</class>
    <extends>QWidget</extends>
    <header>src/ui/FilePathWidget.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>Otter::ColorWidget</class>
+   <class>Meerkat::ColorWidget</class>
    <extends>QPushButton</extends>
    <header>src/ui/ColorWidget.h</header>
   </customwidget>
@@ -214,7 +214,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>Otter::StartPagePreferencesDialog</receiver>
+   <receiver>Meerkat::StartPagePreferencesDialog</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -230,7 +230,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>Otter::StartPagePreferencesDialog</receiver>
+   <receiver>Meerkat::StartPagePreferencesDialog</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">

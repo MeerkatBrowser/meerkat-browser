@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2015 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 *
 * This program is free software: you can redistribute it and/or modify
@@ -17,15 +17,15 @@
 *
 **************************************************************************/
 
-#ifndef OTTER_PASSWORDSMANAGER_H
-#define OTTER_PASSWORDSMANAGER_H
+#ifndef MEERKAT_PASSWORDSMANAGER_H
+#define MEERKAT_PASSWORDSMANAGER_H
 
 #include <QtCore/QMap>
 #include <QtCore/QObject>
 #include <QtCore/QStringList>
 #include <QtCore/QUrl>
 
-namespace Otter
+namespace Meerkat
 {
 
 class PasswordsStorageBackend;

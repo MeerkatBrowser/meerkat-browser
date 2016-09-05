@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2013 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 * Copyright (C) 2014 Piotr Wójcik <chocimier@tlen.pl>
 * Copyright (C) 2015 Jan Bajer aka bajasoft <jbajer@gmail.com>
@@ -19,13 +19,13 @@
 *
 **************************************************************************/
 
-#ifndef OTTER_ACTIONSMANAGER_H
-#define OTTER_ACTIONSMANAGER_H
+#ifndef MEERKAT_ACTIONSMANAGER_H
+#define MEERKAT_ACTIONSMANAGER_H
 
 #include <QtCore/QVariantMap>
 #include <QtWidgets/QAction>
 
-namespace Otter
+namespace Meerkat
 {
 
 class Action : public QAction
@@ -307,6 +307,6 @@ private:
 
 }
 
-Q_DECLARE_OPERATORS_FOR_FLAGS(Otter::ActionsManager::ActionFlags)
+Q_DECLARE_OPERATORS_FOR_FLAGS(Meerkat::ActionsManager::ActionFlags)
 
 #endif

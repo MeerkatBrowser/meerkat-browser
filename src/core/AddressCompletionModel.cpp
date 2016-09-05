@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2013 - 2015 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 * Copyright (C) 2016 Jan Bajer aka bajasoft <jbajer@gmail.com>
 * Copyright (C) 2016 Piotr Wójcik <chocimier@tlen.pl>
@@ -33,7 +33,7 @@
 #include <QtCore/QMimeDatabase>
 #include <QtWidgets/QFileIconProvider>
 
-namespace Otter
+namespace Meerkat
 {
 
 AddressCompletionModel::AddressCompletionModel(QObject *parent) : QAbstractListModel(parent),

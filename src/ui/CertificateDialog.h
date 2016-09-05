@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2015 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 *
 * This program is free software: you can redistribute it and/or modify
@@ -17,15 +17,15 @@
 *
 **************************************************************************/
 
-#ifndef OTTER_CERTIFICATEDIALOG_H
-#define OTTER_CERTIFICATEDIALOG_H
+#ifndef MEERKAT_CERTIFICATEDIALOG_H
+#define MEERKAT_CERTIFICATEDIALOG_H
 
 #include "Dialog.h"
 
 #include <QtGui/QStandardItem>
 #include <QtNetwork/QSslCertificate>
 
-namespace Otter
+namespace Meerkat
 {
 
 namespace Ui

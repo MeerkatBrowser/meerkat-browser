@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2014 - 2015 Piotr Wójcik <chocimier@tlen.pl>
 * Copyright (C) 2015 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 *
@@ -18,13 +18,13 @@
 *
 **************************************************************************/
 
-#ifndef OTTER_IMPORTDIALOG_H
-#define OTTER_IMPORTDIALOG_H
+#ifndef MEERKAT_IMPORTDIALOG_H
+#define MEERKAT_IMPORTDIALOG_H
 
 #include "Dialog.h"
 #include "../core/Importer.h"
 
-namespace Otter
+namespace Meerkat
 {
 
 namespace Ui

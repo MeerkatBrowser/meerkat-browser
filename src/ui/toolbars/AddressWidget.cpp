@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2013 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 * Copyright (C) 2014 - 2016 Jan Bajer aka bajasoft <jbajer@gmail.com>
 * Copyright (C) 2014 Piotr Wójcik <chocimier@tlen.pl>
@@ -47,7 +47,7 @@
 #include <QtWidgets/QStyleOptionFrame>
 #include <QtWidgets/QToolTip>
 
-namespace Otter
+namespace Meerkat
 {
 
 AddressWidget::AddressWidget(Window *window, QWidget *parent) : ComboBoxWidget(parent),
@@ -195,7 +195,7 @@ void AddressWidget::paintEvent(QPaintEvent *event)
 	}
 	else if (state.testFlag(WindowsManager::ApplicationContentState))
 	{
-		badgeIcon = QLatin1String("otter-browser");
+		badgeIcon = QLatin1String("meerkat-browser");
 	}
 
 	panel.palette.setColor(QPalette::Base, badgeColor);

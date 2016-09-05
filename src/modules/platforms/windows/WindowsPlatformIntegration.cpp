@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2014 - 2016 Jan Bajer aka bajasoft <jbajer@gmail.com>
 *
 * This program is free software: you can redistribute it and/or modify
@@ -35,13 +35,13 @@
 #include <QtGui/QDesktopServices>
 #include <QtWidgets/QFileIconProvider>
 
-namespace Otter
+namespace Meerkat
 {
 
 QProcessEnvironment WindowsPlatformIntegration::m_environment;
 
 WindowsPlatformIntegration::WindowsPlatformIntegration(Application *parent) : PlatformIntegration(parent),
-	m_registrationIdentifier(QLatin1String("OtterBrowser")),
+	m_registrationIdentifier(QLatin1String("MeerkatBrowser")),
 	m_applicationFilePath(QDir::toNativeSeparators(QCoreApplication::applicationFilePath())),
 	m_applicationRegistration(QLatin1String("HKEY_CURRENT_USER\\Software\\RegisteredApplications"), QSettings::NativeFormat),
 	m_propertiesRegistration(QLatin1String("HKEY_CURRENT_USER\\Software\\Classes\\") + m_registrationIdentifier, QSettings::NativeFormat),
@@ -436,7 +436,7 @@ bool WindowsPlatformIntegration::setAsDefaultBrowser()
 			}
 		}
 
-        Console::addMessage(QCoreApplication::translate("main", "Failed to run File Associations Manager, error code: %1\nApplication ID: %2").arg(result).arg(pid), Otter::Console::OtherCategory, Console::ErrorLevel);
+        Console::addMessage(QCoreApplication::translate("main", "Failed to run File Associations Manager, error code: %1\nApplication ID: %2").arg(result).arg(pid), Meerkat::Console::OtherCategory, Console::ErrorLevel);
 	}
 	else if (QSysInfo::windowsVersion() >= QSysInfo::WV_VISTA)
 	{
@@ -455,7 +455,7 @@ bool WindowsPlatformIntegration::setAsDefaultBrowser()
 			}
 		}
 
-        Console::addMessage(QCoreApplication::translate("main", "Failed to run File Associations Manager, error code: %1").arg(result), Otter::Console::OtherCategory, Console::ErrorLevel);
+        Console::addMessage(QCoreApplication::translate("main", "Failed to run File Associations Manager, error code: %1").arg(result), Meerkat::Console::OtherCategory, Console::ErrorLevel);
 	}
 	else
 	{
@@ -468,11 +468,11 @@ bool WindowsPlatformIntegration::setAsDefaultBrowser()
 
 bool WindowsPlatformIntegration::registerToSystem()
 {
-	m_applicationRegistration.setValue(m_registrationIdentifier, QLatin1String("Software\\Clients\\StartMenuInternet\\OtterBrowser\\Capabilities"));
+	m_applicationRegistration.setValue(m_registrationIdentifier, QLatin1String("Software\\Clients\\StartMenuInternet\\MeerkatBrowser\\Capabilities"));
 	m_applicationRegistration.sync();
 
-	m_propertiesRegistration.setValue(QLatin1String("/."), QLatin1String("Otter Browser Document"));
-	m_propertiesRegistration.setValue(QLatin1String("FriendlyTypeName"), QLatin1String("Otter Browser Document"));
+	m_propertiesRegistration.setValue(QLatin1String("/."), QLatin1String("Meerkat Browser Document"));
+	m_propertiesRegistration.setValue(QLatin1String("FriendlyTypeName"), QLatin1String("Meerkat Browser Document"));
 	m_propertiesRegistration.setValue(QLatin1String("DefaultIcon/."), m_applicationFilePath + QLatin1String(",1"));
 	m_propertiesRegistration.setValue(QLatin1String("EditFlags"), 2);
 	m_propertiesRegistration.setValue(QLatin1String("shell/open/ddeexec/."), QString());
@@ -480,10 +480,10 @@ bool WindowsPlatformIntegration::registerToSystem()
 	m_propertiesRegistration.sync();
 
 	QSettings capabilities(QLatin1String("HKEY_CURRENT_USER\\Software\\Clients\\StartMenuInternet\\") + m_registrationIdentifier, QSettings::NativeFormat);
-	capabilities.setValue(QLatin1String("./"), QLatin1String("Otter Browser"));
+	capabilities.setValue(QLatin1String("./"), QLatin1String("Meerkat Browser"));
 	capabilities.setValue(QLatin1String("Capabilities/ApplicationDescription"), QLatin1String("Web browser controlled by the user, not vice-versa"));
 	capabilities.setValue(QLatin1String("Capabilities/ApplicationIcon"), m_applicationFilePath + QLatin1String(",0"));
-	capabilities.setValue(QLatin1String("Capabilities/ApplicationName"), QLatin1String("Otter Browser"));
+	capabilities.setValue(QLatin1String("Capabilities/ApplicationName"), QLatin1String("Meerkat Browser"));
 
 	for (int i = 0; i < m_registrationPairs.count(); ++i)
 	{
@@ -510,7 +510,7 @@ bool WindowsPlatformIntegration::registerToSystem()
 
 	if (m_applicationRegistration.status() != QSettings::NoError || capabilities.status() != QSettings::NoError)
 	{
-        Console::addMessage(QCoreApplication::translate("main", "Failed to register application to system registry: %1, %2").arg(m_applicationRegistration.status(), capabilities.status()), Otter::Console::OtherCategory, Console::ErrorLevel);
+        Console::addMessage(QCoreApplication::translate("main", "Failed to register application to system registry: %1, %2").arg(m_applicationRegistration.status(), capabilities.status()), Meerkat::Console::OtherCategory, Console::ErrorLevel);
 
 		return false;
 	}

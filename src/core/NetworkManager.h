@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2013 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 *
 * This program is free software: you can redistribute it and/or modify
@@ -17,13 +17,13 @@
 *
 **************************************************************************/
 
-#ifndef OTTER_NETWORKMANAGER_H
-#define OTTER_NETWORKMANAGER_H
+#ifndef MEERKAT_NETWORKMANAGER_H
+#define MEERKAT_NETWORKMANAGER_H
 
 #include <QtCore/QUrl>
 #include <QtNetwork/QNetworkAccessManager>
 
-namespace Otter
+namespace Meerkat
 {
 
 class CookieJar;

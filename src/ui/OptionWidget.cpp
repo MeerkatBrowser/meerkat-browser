@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2013 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 * Copyright (C) 2016 Piotr Wójcik <chocimier@tlen.pl>
 *
@@ -26,7 +26,7 @@
 #include <QtWidgets/QCompleter>
 #include <QtWidgets/QHBoxLayout>
 
-namespace Otter
+namespace Meerkat
 {
 
 OptionWidget::OptionWidget(const QString &option, const QVariant &value, SettingsManager::OptionType type, QWidget *parent) : QWidget(parent),

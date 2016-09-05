@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2015 Jan Bajer aka bajasoft <jbajer@gmail.com>
 *
 * This program is free software: you can redistribute it and/or modify
@@ -23,7 +23,7 @@
 
 #include <limits>
 
-namespace Otter
+namespace Meerkat
 {
 
 LongTermTimer::LongTermTimer(quint64 seconds, QObject *receiver, const char *member) : QObject(receiver),

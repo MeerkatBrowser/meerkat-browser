@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2013 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 *
 * This program is free software: you can redistribute it and/or modify
@@ -17,8 +17,8 @@
 *
 **************************************************************************/
 
-#ifndef OTTER_WINDOW_H
-#define OTTER_WINDOW_H
+#ifndef MEERKAT_WINDOW_H
+#define MEERKAT_WINDOW_H
 
 #include "../core/SessionsManager.h"
 #include "../core/WindowsManager.h"
@@ -30,7 +30,7 @@
 #include <QtWidgets/QUndoStack>
 #include <QtWidgets/QWidget>
 
-namespace Otter
+namespace Meerkat
 {
 
 struct LinkUrl

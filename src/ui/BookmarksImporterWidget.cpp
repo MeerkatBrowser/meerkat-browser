@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2014 Piotr Wójcik <chocimier@tlen.pl>
 * Copyright (C) 2015 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 *
@@ -26,7 +26,7 @@
 #include <QtWidgets/QInputDialog>
 #include <QtWidgets/QTreeView>
 
-namespace Otter
+namespace Meerkat
 {
 
 BookmarksImporterWidget::BookmarksImporterWidget(QWidget *parent) : QWidget(parent),

@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2015 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 *
 * This program is free software: you can redistribute it and/or modify
@@ -19,7 +19,7 @@
 
 #include "SessionModel.h"
 
-namespace Otter
+namespace Meerkat
 {
 
 SessionModel::SessionModel(const QString &path, QObject *parent) : QStandardItemModel(parent),

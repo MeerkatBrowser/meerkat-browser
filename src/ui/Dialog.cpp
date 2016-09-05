@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2015 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 *
 * This program is free software: you can redistribute it and/or modify
@@ -25,7 +25,7 @@
 #include <QtCore/QJsonDocument>
 #include <QtCore/QJsonObject>
 
-namespace Otter
+namespace Meerkat
 {
 
 Dialog::Dialog(QWidget *parent) : QDialog(parent),
@@ -108,7 +108,7 @@ void Dialog::resizeEvent(QResizeEvent *event)
 
 QString Dialog::normalizeDialogName(QString name)
 {
-	name.remove(QLatin1String("Otter__"));
+	name.remove(QLatin1String("Meerkat__"));
 
 	if (name.endsWith(QLatin1String("Dialog")))
 	{

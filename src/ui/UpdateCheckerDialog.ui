@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Otter::UpdateCheckerDialog</class>
- <widget class="QDialog" name="Otter::UpdateCheckerDialog">
+ <class>Meerkat::UpdateCheckerDialog</class>
+ <widget class="QDialog" name="Meerkat::UpdateCheckerDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -67,7 +67,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>Otter::UpdateCheckerDialog</receiver>
+   <receiver>Meerkat::UpdateCheckerDialog</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -83,7 +83,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>Otter::UpdateCheckerDialog</receiver>
+   <receiver>Meerkat::UpdateCheckerDialog</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">

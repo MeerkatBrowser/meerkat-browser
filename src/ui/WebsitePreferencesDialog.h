@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2013 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 * Copyright (C) 2014 Piotr Wójcik <chocimier@tlen.pl>
 * Copyright (C) 2015 - 2016 Jan Bajer aka bajasoft <jbajer@gmail.com>
@@ -19,15 +19,15 @@
 *
 **************************************************************************/
 
-#ifndef OTTER_WEBSITEPREFERENCESDIALOG_H
-#define OTTER_WEBSITEPREFERENCESDIALOG_H
+#ifndef MEERKAT_WEBSITEPREFERENCESDIALOG_H
+#define MEERKAT_WEBSITEPREFERENCESDIALOG_H
 
 #include "Dialog.h"
 
 #include <QtNetwork/QNetworkCookie>
 #include <QtWidgets/QAbstractButton>
 
-namespace Otter
+namespace Meerkat
 {
 
 namespace Ui

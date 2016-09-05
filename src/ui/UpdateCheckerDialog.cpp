@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2015 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 * Copyright (C) 2015 Jan Bajer aka bajasoft <jbajer@gmail.com>
 *
@@ -26,7 +26,7 @@
 
 #include <QtWidgets/QPushButton>
 
-namespace Otter
+namespace Meerkat
 {
 
 UpdateCheckerDialog::UpdateCheckerDialog(QWidget *parent, const QList<UpdateInformation> &availableUpdates) : Dialog(parent),
@@ -188,7 +188,7 @@ void UpdateCheckerDialog::readyToInstall()
 	m_ui->label->setText(tr("Download finished!"));
 	m_ui->buttonBox->addButton(tr("Install"), QDialogButtonBox::AcceptRole);
 
-	QLabel *informationLabel(new QLabel(tr("New version of Otter Browser is ready to install.\nClick Install button to restart browser and install the update or close this dialog to install the update during next browser restart."), this));
+	QLabel *informationLabel(new QLabel(tr("New version of Meerkat Browser is ready to install.\nClick Install button to restart browser and install the update or close this dialog to install the update during next browser restart."), this));
 	informationLabel->setWordWrap(true);
 
 	m_ui->gridLayout->addWidget(informationLabel);

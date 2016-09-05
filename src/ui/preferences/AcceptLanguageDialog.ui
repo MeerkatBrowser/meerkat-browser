@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Otter::AcceptLanguageDialog</class>
- <widget class="QDialog" name="Otter::AcceptLanguageDialog">
+ <class>Meerkat::AcceptLanguageDialog</class>
+ <widget class="QDialog" name="Meerkat::AcceptLanguageDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -41,7 +41,7 @@
       </widget>
      </item>
      <item row="1" column="0">
-      <widget class="Otter::ItemViewWidget" name="languagesViewWidget">
+      <widget class="Meerkat::ItemViewWidget" name="languagesViewWidget">
        <property name="editTriggers">
         <set>QAbstractItemView::NoEditTriggers</set>
        </property>
@@ -154,7 +154,7 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>Otter::ItemViewWidget</class>
+   <class>Meerkat::ItemViewWidget</class>
    <extends>QTreeView</extends>
    <header>src/ui/ItemViewWidget.h</header>
   </customwidget>
@@ -164,7 +164,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>Otter::AcceptLanguageDialog</receiver>
+   <receiver>Meerkat::AcceptLanguageDialog</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -180,7 +180,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>Otter::AcceptLanguageDialog</receiver>
+   <receiver>Meerkat::AcceptLanguageDialog</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">

@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2015 Piotr Wójcik <chocimier@tlen.pl>
 * Copyright (C) 2015 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 *
@@ -24,7 +24,7 @@
 #include <QtCore/QCoreApplication>
 #include <QtCore/QDateTime>
 
-namespace Otter
+namespace Meerkat
 {
 
 ProxyModel::ProxyModel(QStandardItemModel *model, const QList<QPair<QString, int> > &mapping, QObject *parent) : QIdentityProxyModel(parent),

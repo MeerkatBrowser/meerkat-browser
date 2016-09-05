@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2014 Jan Bajer aka bajasoft <jbajer@gmail.com>
 * Copyright (C) 2015 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 *
@@ -23,7 +23,7 @@
 
 #include "ui_JavaScriptPreferencesDialog.h"
 
-namespace Otter
+namespace Meerkat
 {
 
 JavaScriptPreferencesDialog::JavaScriptPreferencesDialog(const QHash<int, QVariant> &options, QWidget *parent) : Dialog(parent),

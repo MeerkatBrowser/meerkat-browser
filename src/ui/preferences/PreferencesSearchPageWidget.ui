@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Otter::PreferencesSearchPageWidget</class>
- <widget class="QWidget" name="Otter::PreferencesSearchPageWidget">
+ <class>Meerkat::PreferencesSearchPageWidget</class>
+ <widget class="QWidget" name="Meerkat::PreferencesSearchPageWidget">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -26,7 +26,7 @@
         </widget>
        </item>
        <item>
-        <widget class="Otter::ItemViewWidget" name="searchViewWidget">
+        <widget class="Meerkat::ItemViewWidget" name="searchViewWidget">
          <property name="editTriggers">
           <set>QAbstractItemView::SelectedClicked</set>
          </property>
@@ -155,7 +155,7 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>Otter::ItemViewWidget</class>
+   <class>Meerkat::ItemViewWidget</class>
    <extends>QTreeView</extends>
    <header>src/ui/ItemViewWidget.h</header>
   </customwidget>

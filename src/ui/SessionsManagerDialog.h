@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2013 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 *
 * This program is free software: you can redistribute it and/or modify
@@ -17,12 +17,12 @@
 *
 **************************************************************************/
 
-#ifndef OTTER_SESSIONSMANAGERDIALOG_H
-#define OTTER_SESSIONSMANAGERDIALOG_H
+#ifndef MEERKAT_SESSIONSMANAGERDIALOG_H
+#define MEERKAT_SESSIONSMANAGERDIALOG_H
 
 #include "Dialog.h"
 
-namespace Otter
+namespace Meerkat
 {
 
 namespace Ui

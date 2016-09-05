@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2014 Piotr Wójcik <chocimier@tlen.pl>
 * Copyright (C) 2015 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 *
@@ -26,7 +26,7 @@
 #include <QtCore/QCollator>
 #include <QtGui/QKeyEvent>
 
-namespace Otter
+namespace Meerkat
 {
 
 AcceptLanguageDialog::AcceptLanguageDialog(const QString &languages, QWidget *parent) : Dialog(parent),

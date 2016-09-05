@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2013 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 * Copyright (C) 2015 - 2016 Piotr Wójcik <chocimier@tlen.pl>
 *
@@ -33,7 +33,7 @@
 #define UNKNOWN_GESTURE -1
 #define NATIVE_GESTURE -2
 
-namespace Otter
+namespace Meerkat
 {
 
 GesturesManager::GestureStep::GestureStep() : type(QEvent::None),

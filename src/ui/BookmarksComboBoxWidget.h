@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2013 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 * Copyright (C) 2015 Piotr Wójcik <chocimier@tlen.pl>
 *
@@ -18,8 +18,8 @@
 *
 **************************************************************************/
 
-#ifndef OTTER_BOOKMARKSCOMBOBOXWIDGET_H
-#define OTTER_BOOKMARKSCOMBOBOXWIDGET_H
+#ifndef MEERKAT_BOOKMARKSCOMBOBOXWIDGET_H
+#define MEERKAT_BOOKMARKSCOMBOBOXWIDGET_H
 
 #include "../core/BookmarksModel.h"
 
@@ -27,7 +27,7 @@
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QTreeView>
 
-namespace Otter
+namespace Meerkat
 {
 
 class BookmarksItem;

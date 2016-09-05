@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2013 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 * Copyright (C) 2014 Piotr Wójcik <chocimier@tlen.pl>
 *
@@ -44,7 +44,7 @@
 #include <QtWidgets/QStyleOption>
 #include <QtWidgets/QToolTip>
 
-namespace Otter
+namespace Meerkat
 {
 
 TabBarWidget::TabBarWidget(QWidget *parent) : QTabBar(parent),
@@ -755,7 +755,7 @@ void TabBarWidget::updateButtons()
 
 void TabBarWidget::updateTabs(int index)
 {
-	if (index < 0 && sender() && sender()->inherits(QStringLiteral("Otter::Window").toLatin1()))
+	if (index < 0 && sender() && sender()->inherits(QStringLiteral("Meerkat::Window").toLatin1()))
 	{
 		for (int i = 0; i < count(); ++i)
 		{

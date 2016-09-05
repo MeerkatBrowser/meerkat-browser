@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2013 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 * Copyright (C) 2015 Jan Bajer aka bajasoft <jbajer@gmail.com>
 *
@@ -18,13 +18,13 @@
 *
 **************************************************************************/
 
-#ifndef OTTER_TRAYICON_H
-#define OTTER_TRAYICON_H
+#ifndef MEERKAT_TRAYICON_H
+#define MEERKAT_TRAYICON_H
 
 #include <QtWidgets/QAction>
 #include <QtWidgets/QSystemTrayIcon>
 
-namespace Otter
+namespace Meerkat
 {
 
 class Application;

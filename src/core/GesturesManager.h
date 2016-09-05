@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2013 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 * Copyright (C) 2015 - 2016 Piotr Wójcik <chocimier@tlen.pl>
 *
@@ -18,8 +18,8 @@
 *
 **************************************************************************/
 
-#ifndef OTTER_GESTURESMANAGER_H
-#define OTTER_GESTURESMANAGER_H
+#ifndef MEERKAT_GESTURESMANAGER_H
+#define MEERKAT_GESTURESMANAGER_H
 
 #include <QtCore/QObject>
 #include <QtGui/QMouseEvent>
@@ -27,7 +27,7 @@
 #include "../core/Utils.h"
 #include "../../3rdparty/mousegestures/MouseGestures.h"
 
-namespace Otter
+namespace Meerkat
 {
 
 class GesturesManager : public QObject

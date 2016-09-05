@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2014 Piotr Wójcik <chocimier@tlen.pl>
 * Copyright (C) 2014 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 *
@@ -18,15 +18,15 @@
 *
 **************************************************************************/
 
-#ifndef OTTER_OPERABOOKMARKSIMPORTER_H
-#define OTTER_OPERABOOKMARKSIMPORTER_H
+#ifndef MEERKAT_OPERABOOKMARKSIMPORTER_H
+#define MEERKAT_OPERABOOKMARKSIMPORTER_H
 
 #include "../../../core/BookmarksImporter.h"
 #include "../../../ui/BookmarksImporterWidget.h"
 
 #include <QtCore/QFile>
 
-namespace Otter
+namespace Meerkat
 {
 
 class OperaBookmarksImporter : public BookmarksImporter

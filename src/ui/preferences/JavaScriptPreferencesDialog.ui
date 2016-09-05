@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Otter::JavaScriptPreferencesDialog</class>
- <widget class="QDialog" name="Otter::JavaScriptPreferencesDialog">
+ <class>Meerkat::JavaScriptPreferencesDialog</class>
+ <widget class="QDialog" name="Meerkat::JavaScriptPreferencesDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -137,7 +137,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>Otter::JavaScriptPreferencesDialog</receiver>
+   <receiver>Meerkat::JavaScriptPreferencesDialog</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -153,7 +153,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>Otter::JavaScriptPreferencesDialog</receiver>
+   <receiver>Meerkat::JavaScriptPreferencesDialog</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">

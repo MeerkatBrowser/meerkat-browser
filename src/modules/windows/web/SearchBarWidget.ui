@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Otter::SearchBarWidget</class>
- <widget class="QWidget" name="Otter::SearchBarWidget">
+ <class>Meerkat::SearchBarWidget</class>
+ <widget class="QWidget" name="Meerkat::SearchBarWidget">
   <property name="geometry">
    <rect>
     <x>0</x>

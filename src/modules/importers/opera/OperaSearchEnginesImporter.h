@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2014, 2016 Piotr Wójcik <chocimier@tlen.pl>
 * Copyright (C) 2014 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 *
@@ -18,14 +18,14 @@
 *
 **************************************************************************/
 
-#ifndef OTTER_OPERASEARCHENGINESIMPORTER_H
-#define OTTER_OPERASEARCHENGINESIMPORTER_H
+#ifndef MEERKAT_OPERASEARCHENGINESIMPORTER_H
+#define MEERKAT_OPERASEARCHENGINESIMPORTER_H
 
 #include "../../../core/Importer.h"
 
 #include <QtWidgets/QCheckBox>
 
-namespace Otter
+namespace Meerkat
 {
 
 class OperaSearchEnginesImporter : public Importer

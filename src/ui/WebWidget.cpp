@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2013 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 * Copyright (C) 2015 Piotr Wójcik <chocimier@tlen.pl>
 * Copyright (C) 2015 Jan Bajer aka bajasoft <jbajer@gmail.com>
@@ -47,7 +47,7 @@
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QToolTip>
 
-namespace Otter
+namespace Meerkat
 {
 
 WebWidget::WebWidget(bool isPrivate, WebBackend *backend, ContentsWidget *parent) : QWidget(parent),
@@ -97,7 +97,7 @@ void WebWidget::bounceAction(int identifier, QVariantMap parameters)
 
 	while (parent)
 	{
-		if (parent->metaObject()->className() == QLatin1String("Otter::Window"))
+		if (parent->metaObject()->className() == QLatin1String("Meerkat::Window"))
 		{
 			window = qobject_cast<Window*>(parent);
 

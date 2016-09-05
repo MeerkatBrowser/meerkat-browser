@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2015 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 *
 * This program is free software: you can redistribute it and/or modify
@@ -17,16 +17,16 @@
 *
 **************************************************************************/
 
-#ifndef OTTER_SPELLCHECKMANAGER_H
-#define OTTER_SPELLCHECKMANAGER_H
+#ifndef MEERKAT_SPELLCHECKMANAGER_H
+#define MEERKAT_SPELLCHECKMANAGER_H
 
 #include <QtCore/QObject>
 
-#ifdef OTTER_ENABLE_SPELLCHECK
+#ifdef MEERKAT_ENABLE_SPELLCHECK
 #include "../../3rdparty/sonnet/src/core/speller.h"
 #endif
 
-namespace Otter
+namespace Meerkat
 {
 
 class SpellCheckManager : public QObject
@@ -52,7 +52,7 @@ protected:
 
 private:
 	static SpellCheckManager *m_instance;
-#ifdef OTTER_ENABLE_SPELLCHECK
+#ifdef MEERKAT_ENABLE_SPELLCHECK
 	static Sonnet::Speller* m_speller;
 #endif
 };

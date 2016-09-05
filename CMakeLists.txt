@@ -8,16 +8,16 @@ if (POLICY CMP0043)
 	cmake_policy(SET CMP0043 NEW)
 endif (POLICY CMP0043)
 
-project(otter-browser)
+project(meerkat-browser)
 
 set(MAJOR_VERSION "0")
 set(MINOR_VERSION "9")
 set(PATCH_VERSION "11")
 
-add_definitions(-DOTTER_VERSION_MAIN="${MAJOR_VERSION}.${MINOR_VERSION}.${PATCH_VERSION}")
-add_definitions(-DOTTER_VERSION_WEEKLY=" ")
-add_definitions(-DOTTER_VERSION_CONTEXT="-dev")
-add_definitions(-DOTTER_INSTALL_PREFIX="${CMAKE_INSTALL_PREFIX}")
+add_definitions(-DMEERKAT_VERSION_MAIN="${MAJOR_VERSION}.${MINOR_VERSION}.${PATCH_VERSION}")
+add_definitions(-DMEERKAT_VERSION_WEEKLY="139")
+add_definitions(-DMEERKAT_VERSION_CONTEXT=" weekly 139")
+add_definitions(-DMEERKAT_INSTALL_PREFIX="${CMAKE_INSTALL_PREFIX}")
 
 if (EXISTS "${CMAKE_ROOT}/Modules/CPack.cmake")
 	include(InstallRequiredSystemLibraries)
@@ -31,7 +31,7 @@ if (EXISTS "${CMAKE_ROOT}/Modules/CPack.cmake")
 	set(CPACK_PACKAGE_VERSION_MAJOR "${MAJOR_VERSION}")
 	set(CPACK_PACKAGE_VERSION_MINOR "${MINOR_VERSION}")
 	set(CPACK_PACKAGE_VERSION_PATCH "${PATCH_VERSION}")
-	set(CPACK_PACKAGE_NAME "otter-browser")
+	set(CPACK_PACKAGE_NAME "meerkat-browser")
 	set(CPACK_PACKAGE_FILE_NAME "${CPACK_PACKAGE_NAME}_${MAJOR_VERSION}.${MINOR_VERSION}.${CPACK_PACKAGE_VERSION_PATCH}")
 	set(CPACK_SOURCE_PACKAGE_FILE_NAME "${CPACK_PACKAGE_NAME}_${MAJOR_VERSION}.${MINOR_VERSION}.${CPACK_PACKAGE_VERSION_PATCH}")
 	set(CPACK_DEBIAN_PACKAGE_DEPENDS "libgcrypt (>= 1.6.0), libhunspell-1.3-0 (>= 1.3.3), libqt5multimedia5 (>=5.3.0), libqt5qml5 (>=5.3.0), libqt5webkit5 (>=5.3.0), libqt5xmlpatterns5 (>=5.3.0)")
@@ -94,7 +94,7 @@ set_package_properties(Qt5WebKitWidgets PROPERTIES URL "http://qt.io/" DESCRIPTI
 set_package_properties(Gcrypt PROPERTIES URL "http://directory.fsf.org/project/libgcrypt/" DESCRIPTION "Data encryption support" TYPE OPTIONAL)
 set_package_properties(Hunspell PROPERTIES URL "http://hunspell.github.io/" DESCRIPTION "Generic spell checking support" TYPE OPTIONAL)
 
-set(otter_src
+set(meerkat_src
 	src/main.cpp
 	src/core/ActionsManager.cpp
 	src/core/AddonsManager.cpp
@@ -261,11 +261,11 @@ set(otter_src
 	3rdparty/mousegestures/MouseGestures.cpp
 )
 
-qt5_add_resources(otter_res
+qt5_add_resources(meerkat_res
 	resources/resources.qrc
 )
 
-qt5_wrap_ui(otter_ui
+qt5_wrap_ui(meerkat_ui
 	src/ui/AcceptCookieDialog.ui
 	src/ui/AuthenticationDialog.ui
 	src/ui/BookmarkPropertiesDialog.ui
@@ -322,12 +322,12 @@ qt5_wrap_ui(otter_ui
 )
 
 if (Qt5WebEngineWidgets_FOUND AND ENABLE_QTWEBENGINE)
-	add_definitions(-DOTTER_ENABLE_QTWEBENGINE)
+	add_definitions(-DMEERKAT_ENABLE_QTWEBENGINE)
 
-	list(APPEND OTTER_BACKENDS_WEB "QtWebEngine")
+	list(APPEND MEERKAT_BACKENDS_WEB "QtWebEngine")
 
-	set(otter_src
-		${otter_src}
+	set(meerkat_src
+		${meerkat_src}
 		src/modules/backends/web/qtwebengine/QtWebEnginePage.cpp
 		src/modules/backends/web/qtwebengine/QtWebEngineUrlRequestInterceptor.cpp
 		src/modules/backends/web/qtwebengine/QtWebEngineTransfer.cpp
@@ -335,24 +335,24 @@ if (Qt5WebEngineWidgets_FOUND AND ENABLE_QTWEBENGINE)
 		src/modules/backends/web/qtwebengine/QtWebEngineWebWidget.cpp
 	)
 
-	qt5_add_resources(otter_res
+	qt5_add_resources(meerkat_res
 		src/modules/backends/web/qtwebengine/QtWebEngineResources.qrc
 	)
 endif (Qt5WebEngineWidgets_FOUND AND ENABLE_QTWEBENGINE)
 
 if (Qt5WebKitWidgets_FOUND AND ENABLE_QTWEBKIT)
-	add_definitions(-DOTTER_ENABLE_QTWEBKIT)
+	add_definitions(-DMEERKAT_ENABLE_QTWEBKIT)
 
 	if (${Qt5WebKitWidgets_VERSION_MINOR} GREATER 600)
-		list(APPEND OTTER_BACKENDS_WEB "QtWebKit")
+		list(APPEND MEERKAT_BACKENDS_WEB "QtWebKit")
 	else (${Qt5WebKitWidgets_VERSION_MINOR} GREATER 600)
-		add_definitions(-DOTTER_ENABLE_QTWEBKIT_LEGACY)
+		add_definitions(-DMEERKAT_ENABLE_QTWEBKIT_LEGACY)
 
-		list(APPEND OTTER_BACKENDS_WEB "QtWebKit (legacy)")
+		list(APPEND MEERKAT_BACKENDS_WEB "QtWebKit (legacy)")
 	endif (${Qt5WebKitWidgets_VERSION_MINOR} GREATER 600)
 
-	set(otter_src
-		${otter_src}
+	set(meerkat_src
+		${meerkat_src}
 		src/modules/backends/web/qtwebkit/QtWebKitCookieJar.cpp
 		src/modules/backends/web/qtwebkit/QtWebKitFtpListingNetworkReply.cpp
 		src/modules/backends/web/qtwebkit/QtWebKitHistoryInterface.cpp
@@ -367,24 +367,24 @@ if (Qt5WebKitWidgets_FOUND AND ENABLE_QTWEBKIT)
 		src/modules/backends/web/qtwebkit/3rdparty/qtftp/qurlinfo.cpp
 	)
 
-	qt5_add_resources(otter_res
+	qt5_add_resources(meerkat_res
 		src/modules/backends/web/qtwebkit/QtWebKitResources.qrc
 	)
 endif (Qt5WebKitWidgets_FOUND AND ENABLE_QTWEBKIT)
 
 if (GCRYPT_FOUND)
-	add_definitions(-DOTTER_ENABLE_ENCRYPTION)
+	add_definitions(-DMEERKAT_ENABLE_ENCRYPTION)
 	include_directories(${GCRYPT_INCLUDE_DIR})
 endif (GCRYPT_FOUND)
 
 if (HUNSPELL_FOUND)
-	add_definitions(-DOTTER_ENABLE_SPELLCHECK)
+	add_definitions(-DMEERKAT_ENABLE_SPELLCHECK)
 	add_definitions(-DSONNET_STATIC)
 	add_definitions(-DQT_STATICPLUGIN)
 	include_directories(${HUNSPELL_INCLUDE_DIR})
 
-	set(otter_src
-		${otter_src}
+	set(meerkat_src
+		${meerkat_src}
 		3rdparty/sonnet/src/core/client.cpp
 		3rdparty/sonnet/src/core/loader.cpp
 		3rdparty/sonnet/src/core/speller.cpp
@@ -397,8 +397,8 @@ if (HUNSPELL_FOUND)
 	)
 
 	if (Qt5WebKitWidgets_FOUND AND ENABLE_QTWEBKIT)
-		set(otter_src
-			${otter_src}
+		set(meerkat_src
+			${meerkat_src}
 			src/modules/backends/web/qtwebkit/qwebkitplatformplugin.h
 			src/modules/backends/web/qtwebkit/QtWebKitPlugin.cpp
 			src/modules/backends/web/qtwebkit/QtWebKitSpellChecker.cpp
@@ -424,29 +424,29 @@ if (WIN32)
 		endif (CMAKE_CL_64)
 	endif (MSVC)
 
-	set(otter_src
-		${otter_src}
-		otter-browser.rc
+	set(meerkat_src
+		${meerkat_src}
+		meerkat-browser.rc
 		src/modules/platforms/windows/WindowsPlatformIntegration.cpp
 	)
 elseif (APPLE)
-	set(MACOSX_BUNDLE_BUNDLE_NAME "Otter Browser")
+	set(MACOSX_BUNDLE_BUNDLE_NAME "Meerkat Browser")
 	set(MACOSX_BUNDLE_BUNDLE_VERSION ${MAJOR_VERSION}.${MINOR_VERSION}.${PATCH_VERSION})
 	set(MACOSX_BUNDLE_LONG_VERSION_STRING ${MAJOR_VERSION}.${MINOR_VERSION}.${PATCH_VERSION})
 	set(MACOSX_BUNDLE_SHORT_VERSION_STRING ${MAJOR_VERSION}.${MINOR_VERSION})
-	set(MACOSX_BUNDLE_ICON_FILE otter-browser.icns)
-	set(MACOSX_BUNDLE_GUI_IDENTIFIER "org.otter-browser.otter-browser")
-	set(MACOSX_BUNDLE_COPYRIGHT "Copyright (C) 2013-2016 Otter Browser Team. All rights reserved.")
-	set(otter_src
-		${otter_src}
+	set(MACOSX_BUNDLE_ICON_FILE meerkat-browser.icns)
+	set(MACOSX_BUNDLE_GUI_IDENTIFIER "org.meerkat-browser.meerkat-browser")
+	set(MACOSX_BUNDLE_COPYRIGHT "Copyright (C) 2013-2016 Meerkat Browser Team. All rights reserved.")
+	set(meerkat_src
+		${meerkat_src}
 		src/modules/platforms/mac/MacPlatformIntegration.mm
-		resources/icons/otter-browser.icns
+		resources/icons/meerkat-browser.icns
 	)
 
-	set_source_files_properties(resources/icons/otter-browser.icns PROPERTIES MACOSX_PACKAGE_LOCATION Resources)
+	set_source_files_properties(resources/icons/meerkat-browser.icns PROPERTIES MACOSX_PACKAGE_LOCATION Resources)
 elseif (UNIX)
-	set(otter_src
-		${otter_src}
+	set(meerkat_src
+		${meerkat_src}
 		src/modules/platforms/freedesktoporg/FreeDesktopOrgPlatformIntegration.cpp
 		3rdparty/libmimeapps/ConfigReader.cpp
 		3rdparty/libmimeapps/DesktopEntry.cpp
@@ -455,72 +455,72 @@ elseif (UNIX)
 	)
 endif (WIN32)
 
-add_executable(otter-browser WIN32 MACOSX_BUNDLE
-	${otter_ui}
-	${otter_res}
-	${otter_src}
+add_executable(meerkat-browser WIN32 MACOSX_BUNDLE
+	${meerkat_ui}
+	${meerkat_res}
+	${meerkat_src}
 )
 
 if (Qt5WebEngineWidgets_FOUND AND ENABLE_QTWEBENGINE)
-	target_link_libraries(otter-browser Qt5::WebEngineCore Qt5::WebEngineWidgets)
+	target_link_libraries(meerkat-browser Qt5::WebEngineCore Qt5::WebEngineWidgets)
 endif (Qt5WebEngineWidgets_FOUND AND ENABLE_QTWEBENGINE)
 
 if (Qt5WebKitWidgets_FOUND AND ENABLE_QTWEBKIT)
-	target_link_libraries(otter-browser Qt5::WebKit Qt5::WebKitWidgets)
+	target_link_libraries(meerkat-browser Qt5::WebKit Qt5::WebKitWidgets)
 endif (Qt5WebKitWidgets_FOUND AND ENABLE_QTWEBKIT)
 
 if (GCRYPT_FOUND)
-	target_link_libraries(otter-browser ${GCRYPT_LIBRARIES})
+	target_link_libraries(meerkat-browser ${GCRYPT_LIBRARIES})
 endif (GCRYPT_FOUND)
 
 if (HUNSPELL_FOUND)
-	target_link_libraries(otter-browser ${HUNSPELL_LIBRARIES})
+	target_link_libraries(meerkat-browser ${HUNSPELL_LIBRARIES})
 endif (HUNSPELL_FOUND)
 
 if (WIN32)
-	target_link_libraries(otter-browser Qt5::WinExtras ole32 shell32 advapi32 user32)
+	target_link_libraries(meerkat-browser Qt5::WinExtras ole32 shell32 advapi32 user32)
 elseif (APPLE)
 	find_library(FRAMEWORK_Cocoa Cocoa)
 	find_library(FRAMEWORK_Foundation Foundation)
 
-	target_link_libraries(otter-browser ${FRAMEWORK_Cocoa} ${FRAMEWORK_Foundation})
+	target_link_libraries(meerkat-browser ${FRAMEWORK_Cocoa} ${FRAMEWORK_Foundation})
 elseif (UNIX)
-	target_link_libraries(otter-browser Qt5::DBus)
+	target_link_libraries(meerkat-browser Qt5::DBus)
 endif (WIN32)
 
-target_link_libraries(otter-browser Qt5::Core Qt5::Gui Qt5::Multimedia Qt5::Network Qt5::PrintSupport Qt5::Qml Qt5::Widgets Qt5::XmlPatterns)
+target_link_libraries(meerkat-browser Qt5::Core Qt5::Gui Qt5::Multimedia Qt5::Network Qt5::PrintSupport Qt5::Qml Qt5::Widgets Qt5::XmlPatterns)
 
-set(OTTER_INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX})
+set(MEERKAT_INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX})
 set(XDG_APPS_INSTALL_DIR ${CMAKE_INSTALL_PREFIX}/share/applications CACHE FILEPATH "Install path for .desktop files")
 
 file(GLOB _qm_files resources/translations/*.qm)
 
 foreach(_current_QM_FILE ${_qm_files})
-	install(FILES ${_current_QM_FILE} DESTINATION ${CMAKE_INSTALL_PREFIX}/share/otter-browser/locale/)
+	install(FILES ${_current_QM_FILE} DESTINATION ${CMAKE_INSTALL_PREFIX}/share/meerkat-browser/locale/)
 endforeach(_current_QM_FILE)
 
-install(FILES resources/icons/otter-browser-16.png DESTINATION ${CMAKE_INSTALL_PREFIX}/share/icons/hicolor/16x16/apps/ RENAME otter-browser.png)
-install(FILES resources/icons/otter-browser-32.png DESTINATION ${CMAKE_INSTALL_PREFIX}/share/icons/hicolor/32x32/apps/ RENAME otter-browser.png)
-install(FILES resources/icons/otter-browser-48.png DESTINATION ${CMAKE_INSTALL_PREFIX}/share/icons/hicolor/48x48/apps/ RENAME otter-browser.png)
-install(FILES resources/icons/otter-browser-64.png DESTINATION ${CMAKE_INSTALL_PREFIX}/share/icons/hicolor/64x64/apps/ RENAME otter-browser.png)
-install(FILES resources/icons/otter-browser-128.png DESTINATION ${CMAKE_INSTALL_PREFIX}/share/icons/hicolor/128x128/apps/ RENAME otter-browser.png)
-install(FILES resources/icons/otter-browser-256.png DESTINATION ${CMAKE_INSTALL_PREFIX}/share/icons/hicolor/256x256/apps/ RENAME otter-browser.png)
-install(FILES otter-browser.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
-install(FILES man/otter-browser.1 DESTINATION ${CMAKE_INSTALL_MANDIR}/man1/)
-install(TARGETS otter-browser DESTINATION bin/)
+install(FILES resources/icons/meerkat-browser-16.png DESTINATION ${CMAKE_INSTALL_PREFIX}/share/icons/hicolor/16x16/apps/ RENAME meerkat-browser.png)
+install(FILES resources/icons/meerkat-browser-32.png DESTINATION ${CMAKE_INSTALL_PREFIX}/share/icons/hicolor/32x32/apps/ RENAME meerkat-browser.png)
+install(FILES resources/icons/meerkat-browser-48.png DESTINATION ${CMAKE_INSTALL_PREFIX}/share/icons/hicolor/48x48/apps/ RENAME meerkat-browser.png)
+install(FILES resources/icons/meerkat-browser-64.png DESTINATION ${CMAKE_INSTALL_PREFIX}/share/icons/hicolor/64x64/apps/ RENAME meerkat-browser.png)
+install(FILES resources/icons/meerkat-browser-128.png DESTINATION ${CMAKE_INSTALL_PREFIX}/share/icons/hicolor/128x128/apps/ RENAME meerkat-browser.png)
+install(FILES resources/icons/meerkat-browser-256.png DESTINATION ${CMAKE_INSTALL_PREFIX}/share/icons/hicolor/256x256/apps/ RENAME meerkat-browser.png)
+install(FILES meerkat-browser.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
+install(FILES man/meerkat-browser.1 DESTINATION ${CMAKE_INSTALL_MANDIR}/man1/)
+install(TARGETS meerkat-browser DESTINATION bin/)
 
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
 
-list(LENGTH OTTER_BACKENDS_WEB OTTER_BACKENDS_WEB_LENGTH)
+list(LENGTH MEERKAT_BACKENDS_WEB MEERKAT_BACKENDS_WEB_LENGTH)
 
-if (${OTTER_BACKENDS_WEB_LENGTH} EQUAL 0)
+if (${MEERKAT_BACKENDS_WEB_LENGTH} EQUAL 0)
 	message(SEND_ERROR "No web backends available!")
-else (${OTTER_BACKENDS_WEB_LENGTH} EQUAL 0)
-	set(OTTER_BACKENDS_WEB_SUMMARY "The following web backends will be built:\n")
+else (${MEERKAT_BACKENDS_WEB_LENGTH} EQUAL 0)
+	set(MEERKAT_BACKENDS_WEB_SUMMARY "The following web backends will be built:\n")
 
-	foreach(_backend ${OTTER_BACKENDS_WEB})
-		set(OTTER_BACKENDS_WEB_SUMMARY "${OTTER_BACKENDS_WEB_SUMMARY} * ${_backend}\n")
+	foreach(_backend ${MEERKAT_BACKENDS_WEB})
+		set(MEERKAT_BACKENDS_WEB_SUMMARY "${MEERKAT_BACKENDS_WEB_SUMMARY} * ${_backend}\n")
 	endforeach(_backend)
 
-	message(STATUS ${OTTER_BACKENDS_WEB_SUMMARY})
-endif (${OTTER_BACKENDS_WEB_LENGTH} EQUAL 0)
+	message(STATUS ${MEERKAT_BACKENDS_WEB_SUMMARY})
+endif (${MEERKAT_BACKENDS_WEB_LENGTH} EQUAL 0)

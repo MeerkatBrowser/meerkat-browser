@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2013 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 * Copyright (C) 2014 Jan Bajer aka bajasoft <jbajer@gmail.com>
 *
@@ -18,13 +18,13 @@
 *
 **************************************************************************/
 
-#ifndef OTTER_NETWORKAUTOMATICPROXY_H
-#define OTTER_NETWORKAUTOMATICPROXY_H
+#ifndef MEERKAT_NETWORKAUTOMATICPROXY_H
+#define MEERKAT_NETWORKAUTOMATICPROXY_H
 
 #include <QtNetwork/QNetworkProxy>
 #include <QtQml/QJSEngine>
 
-namespace Otter
+namespace Meerkat
 {
 
 class PacUtils : public QObject

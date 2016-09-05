@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2013 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 * Copyright (C) 2015 Jan Bajer aka bajasoft <jbajer@gmail.com>
 *
@@ -25,7 +25,7 @@
 
 #include "ui_PreferencesContentPageWidget.h"
 
-namespace Otter
+namespace Meerkat
 {
 
 PreferencesContentPageWidget::PreferencesContentPageWidget(QWidget *parent) :

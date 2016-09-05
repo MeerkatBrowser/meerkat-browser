@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2015 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 * Copyright (C) 2016 Jan Bajer aka bajasoft <jbajer@gmail.com>
 *
@@ -23,7 +23,7 @@
 #include <QtCore/QCoreApplication>
 #include <QtWidgets/QSpinBox>
 
-namespace Otter
+namespace Meerkat
 {
 
 ContentBlockingIntervalDelegate::ContentBlockingIntervalDelegate(QObject *parent) : QItemDelegate(parent)
@@ -38,7 +38,7 @@ void ContentBlockingIntervalDelegate::paint(QPainter *painter, const QStyleOptio
 	{
 		const int updateInterval(index.data(Qt::EditRole).toInt());
 
-		drawDisplay(painter, option, option.rect, ((updateInterval > 0) ? QCoreApplication::translate("Otter::ContentBlockingIntervalDelegate", "%n day(s)", "", updateInterval) : QCoreApplication::translate("Otter::ContentBlockingIntervalDelegate", "Never")));
+		drawDisplay(painter, option, option.rect, ((updateInterval > 0) ? QCoreApplication::translate("Meerkat::ContentBlockingIntervalDelegate", "%n day(s)", "", updateInterval) : QCoreApplication::translate("Meerkat::ContentBlockingIntervalDelegate", "Never")));
 	}
 }
 
@@ -65,8 +65,8 @@ QWidget* ContentBlockingIntervalDelegate::createEditor(QWidget *parent, const QS
 	Q_UNUSED(option)
 
 	QSpinBox *spinBox(new QSpinBox(parent));
-	spinBox->setSuffix(QCoreApplication::translate("Otter::ContentBlockingIntervalDelegate", " day(s)"));
-	spinBox->setSpecialValueText(QCoreApplication::translate("Otter::ContentBlockingIntervalDelegate", "Never"));
+	spinBox->setSuffix(QCoreApplication::translate("Meerkat::ContentBlockingIntervalDelegate", " day(s)"));
+	spinBox->setSpecialValueText(QCoreApplication::translate("Meerkat::ContentBlockingIntervalDelegate", "Never"));
 	spinBox->setMinimum(0);
 	spinBox->setMaximum(365);
 	spinBox->setValue(index.data(Qt::EditRole).toInt());

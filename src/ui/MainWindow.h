@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2013 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 * Copyright (C) 2014 - 2015 Piotr Wójcik <chocimier@tlen.pl>
 * Copyright (C) 2015 Jan Bajer aka bajasoft <jbajer@gmail.com>
@@ -19,8 +19,8 @@
 *
 **************************************************************************/
 
-#ifndef OTTER_MAINWINDOW_H
-#define OTTER_MAINWINDOW_H
+#ifndef MEERKAT_MAINWINDOW_H
+#define MEERKAT_MAINWINDOW_H
 
 #include "SidebarWidget.h"
 #include "toolbars/ActionWidget.h"
@@ -32,7 +32,7 @@
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QSplitter>
 
-namespace Otter
+namespace Meerkat
 {
 
 namespace Ui

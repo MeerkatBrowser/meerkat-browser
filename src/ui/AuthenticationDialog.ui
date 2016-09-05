@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Otter::AuthenticationDialog</class>
- <widget class="QDialog" name="Otter::AuthenticationDialog">
+ <class>Meerkat::AuthenticationDialog</class>
+ <widget class="QDialog" name="Meerkat::AuthenticationDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -105,7 +105,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>Otter::AuthenticationDialog</receiver>
+   <receiver>Meerkat::AuthenticationDialog</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -121,7 +121,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>Otter::AuthenticationDialog</receiver>
+   <receiver>Meerkat::AuthenticationDialog</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">

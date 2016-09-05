@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2013 - 2015 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 * Copyright (C) 2016 Jan Bajer aka bajasoft <jbajer@gmail.com>
 * Copyright (C) 2016 Piotr Wójcik <chocimier@tlen.pl>
@@ -19,15 +19,15 @@
 *
 **************************************************************************/
 
-#ifndef OTTER_ADDRESSCOMPLETIONMODEL_H
-#define OTTER_ADDRESSCOMPLETIONMODEL_H
+#ifndef MEERKAT_ADDRESSCOMPLETIONMODEL_H
+#define MEERKAT_ADDRESSCOMPLETIONMODEL_H
 
 #include "../core/SearchEnginesManager.h"
 
 #include <QtCore/QAbstractListModel>
 #include <QtCore/QUrl>
 
-namespace Otter
+namespace Meerkat
 {
 
 class AddressCompletionModel : public QAbstractListModel

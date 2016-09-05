@@ -90,17 +90,17 @@
         <file>icons/media-playback-start.png</file>
         <file>icons/notes.png</file>
         <file>icons/object-locked.png</file>
-        <file>icons/otter-browser-16.png</file>
-        <file>icons/otter-browser-32.png</file>
-        <file>icons/otter-browser-48.png</file>
-        <file>icons/otter-browser-64.png</file>
-        <file>icons/otter-browser-128.png</file>
-        <file>icons/otter-browser-256.png</file>
-        <file>icons/otter-browser-file-type-256.png</file>
-        <file>icons/otter-browser-file-type.ico</file>
-        <file>icons/otter-browser.ico</file>
-        <file>icons/otter-browser.png</file>
-        <file>icons/otter-browser.svg</file>
+        <file>icons/meerkat-browser-16.png</file>
+        <file>icons/meerkat-browser-32.png</file>
+        <file>icons/meerkat-browser-48.png</file>
+        <file>icons/meerkat-browser-64.png</file>
+        <file>icons/meerkat-browser-128.png</file>
+        <file>icons/meerkat-browser-256.png</file>
+        <file>icons/meerkat-browser-file-type-256.png</file>
+        <file>icons/meerkat-browser-file-type.ico</file>
+        <file>icons/meerkat-browser.ico</file>
+        <file>icons/meerkat-browser.png</file>
+        <file>icons/meerkat-browser.svg</file>
         <file>icons/permission-capture-audio-video.png</file>
         <file>icons/permission-capture-audio.png</file>
         <file>icons/permission-capture-video.png</file>

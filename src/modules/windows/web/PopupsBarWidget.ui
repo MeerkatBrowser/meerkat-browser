@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Otter::PopupsBarWidget</class>
- <widget class="QWidget" name="Otter::PopupsBarWidget">
+ <class>Meerkat::PopupsBarWidget</class>
+ <widget class="QWidget" name="Meerkat::PopupsBarWidget">
   <property name="geometry">
    <rect>
     <x>0</x>

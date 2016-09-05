@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Otter::PreferencesContentPageWidget</class>
- <widget class="QWidget" name="Otter::PreferencesContentPageWidget">
+ <class>Meerkat::PreferencesContentPageWidget</class>
+ <widget class="QWidget" name="Meerkat::PreferencesContentPageWidget">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -111,7 +111,7 @@
     </widget>
    </item>
    <item>
-    <widget class="Otter::ItemViewWidget" name="fontsViewWidget">
+    <widget class="Meerkat::ItemViewWidget" name="fontsViewWidget">
      <property name="autoScroll">
       <bool>false</bool>
      </property>
@@ -231,7 +231,7 @@
     </widget>
    </item>
    <item>
-    <widget class="Otter::ItemViewWidget" name="colorsViewWidget">
+    <widget class="Meerkat::ItemViewWidget" name="colorsViewWidget">
      <property name="editTriggers">
       <set>QAbstractItemView::NoEditTriggers</set>
      </property>
@@ -263,7 +263,7 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>Otter::ItemViewWidget</class>
+   <class>Meerkat::ItemViewWidget</class>
    <extends>QTreeView</extends>
    <header>src/ui/ItemViewWidget.h</header>
   </customwidget>

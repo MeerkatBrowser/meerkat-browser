@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2013 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 * Copyright (C) 2014 Jan Bajer aka bajasoft <jbajer@gmail.com>
 *
@@ -18,8 +18,8 @@
 *
 **************************************************************************/
 
-#ifndef OTTER_UTILS_H
-#define OTTER_UTILS_H
+#ifndef MEERKAT_UTILS_H
+#define MEERKAT_UTILS_H
 
 #include <QtCore/QMimeType>
 #include <QtCore/QUrl>
@@ -27,7 +27,7 @@
 
 #define SECONDS_IN_DAY 86400
 
-namespace Otter
+namespace Meerkat
 {
 
 struct ApplicationInformation

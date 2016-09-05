@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2015 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 *
 * This program is free software: you can redistribute it and/or modify
@@ -33,7 +33,7 @@
 #include <QtWidgets/QMessageBox>
 #include <QtWidgets/QVBoxLayout>
 
-namespace Otter
+namespace Meerkat
 {
 
 SourceViewerWebWidget::SourceViewerWebWidget(bool isPrivate, ContentsWidget *parent) : WebWidget(isPrivate, NULL, parent),
@@ -291,7 +291,7 @@ void SourceViewerWebWidget::showContextMenu(const QPoint &position)
 	QWidget *child(childAt(position.isNull() ? mapFromGlobal(QCursor::pos()) : position));
 	QMenu menu;
 
-	if (child && child->metaObject()->className() == QLatin1String("Otter::MarginWidget"))
+	if (child && child->metaObject()->className() == QLatin1String("Meerkat::MarginWidget"))
 	{
 		QAction *showLineNumbersAction(menu.addAction(tr("Show Line Numbers")));
 		showLineNumbersAction->setCheckable(true);

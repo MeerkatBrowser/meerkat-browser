@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2013 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 * Copyright (C) 2015 Jan Bajer aka bajasoft <jbajer@gmail.com>
 *
@@ -74,7 +74,7 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QStyleFactory>
 
-namespace Otter
+namespace Meerkat
 {
 
 Application* Application::m_instance = NULL;
@@ -88,17 +88,17 @@ Application::Application(int &argc, char **argv) : QApplication(argc, argv),
 	m_isHidden(false),
 	m_isUpdating(false)
 {
-	setApplicationName(QLatin1String("Otter"));
-	setApplicationDisplayName(QLatin1String("Otter Browser"));
-	setApplicationVersion(OTTER_VERSION_MAIN);
-	setWindowIcon(QIcon::fromTheme(QLatin1String("otter-browser"), QIcon(QLatin1String(":/icons/otter-browser.png"))));
+	setApplicationName(QLatin1String("Meerkat"));
+	setApplicationDisplayName(QLatin1String("Meerkat Browser"));
+	setApplicationVersion(MEERKAT_VERSION_MAIN);
+	setWindowIcon(QIcon::fromTheme(QLatin1String("meerkat-browser"), QIcon(QLatin1String(":/icons/meerkat-browser.png"))));
 
 	m_instance = this;
 
-	QString profilePath(QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + QLatin1String("/otter"));
+	QString profilePath(QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + QLatin1String("/meerkat"));
 	QString cachePath(QStandardPaths::writableLocation(QStandardPaths::CacheLocation));
 
-	m_localePath = OTTER_INSTALL_PREFIX + QLatin1String("/share/otter-browser/locale/");
+	m_localePath = MEERKAT_INSTALL_PREFIX + QLatin1String("/share/meerkat-browser/locale/");
 
 	if (QFile::exists(applicationDirPath() + QLatin1String("/locale/")))
 	{
@@ -171,7 +171,7 @@ Application::Application(int &argc, char **argv) : QApplication(argc, argv),
 
 		if (!profilePath.contains(QDir::separator()))
 		{
-			profilePath = QDir(QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + QLatin1String("/otter/profiles/")).absoluteFilePath(profilePath);
+			profilePath = QDir(QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + QLatin1String("/meerkat/profiles/")).absoluteFilePath(profilePath);
 		}
 	}
 
@@ -698,10 +698,10 @@ void Application::setLocale(const QString &locale)
 		installTranslator(m_applicationTranslator);
 	}
 
-	const QString identifier(locale.endsWith(QLatin1String(".qm")) ? QFileInfo(locale).baseName().remove(QLatin1String("otter-browser_")) : ((locale == QLatin1String("system")) ? QLocale::system().name() : locale));
+	const QString identifier(locale.endsWith(QLatin1String(".qm")) ? QFileInfo(locale).baseName().remove(QLatin1String("meerkat-browser_")) : ((locale == QLatin1String("system")) ? QLocale::system().name() : locale));
 
 	m_qtTranslator->load(QLatin1String("qt_") + ((locale.isEmpty() || locale == QLatin1String("system")) ? QLocale::system().name() : identifier), QLibraryInfo::location(QLibraryInfo::TranslationsPath));
-	m_applicationTranslator->load((locale.endsWith(QLatin1String(".qm")) ? locale : QLatin1String("otter-browser_") + ((locale.isEmpty() || locale == QLatin1String("system")) ? QLocale::system().name() : locale)), m_localePath);
+	m_applicationTranslator->load((locale.endsWith(QLatin1String(".qm")) ? locale : QLatin1String("meerkat-browser_") + ((locale.isEmpty() || locale == QLatin1String("system")) ? QLocale::system().name() : locale)), m_localePath);
 
 	QLocale::setDefault(QLocale(identifier));
 }
@@ -771,30 +771,30 @@ QString Application::createReport()
 	QString report;
 	QTextStream stream(&report);
 	stream.setFieldAlignment(QTextStream::AlignLeft);
-	stream << QLatin1String("Otter Browser diagnostic report created on ") << QDateTime::currentDateTimeUtc().toString(Qt::ISODate);
+	stream << QLatin1String("Meerkat Browser diagnostic report created on ") << QDateTime::currentDateTimeUtc().toString(Qt::ISODate);
 	stream << QLatin1String("\n\nVersion:\n\t");
 	stream.setFieldWidth(20);
 	stream << QLatin1String("Main Number");
-	stream << OTTER_VERSION_MAIN;
+	stream << MEERKAT_VERSION_MAIN;
 	stream.setFieldWidth(0);
 	stream << QLatin1String("\n\t");
 	stream.setFieldWidth(20);
 	stream << QLatin1String("Weekly Number");
 
-	if (QString(OTTER_VERSION_WEEKLY).trimmed().isEmpty())
+	if (QString(MEERKAT_VERSION_WEEKLY).trimmed().isEmpty())
 	{
 		stream << QLatin1Char('-');
 	}
 	else
 	{
-		stream << OTTER_VERSION_WEEKLY;
+		stream << MEERKAT_VERSION_WEEKLY;
 	}
 
 	stream.setFieldWidth(0);
 	stream << QLatin1String("\n\t");
 	stream.setFieldWidth(20);
 	stream << QLatin1String("Context");
-	stream << OTTER_VERSION_CONTEXT;
+	stream << MEERKAT_VERSION_CONTEXT;
 	stream.setFieldWidth(0);
 	stream << QLatin1String("\n\t");
 	stream.setFieldWidth(20);
@@ -809,7 +809,7 @@ QString Application::createReport()
 	stream << QLatin1String("\n\t");
 	stream.setFieldWidth(20);
 	stream << QLatin1String("Configuration");
-	stream << SessionsManager::getWritableDataPath(QLatin1String("otter.conf"));
+	stream << SessionsManager::getWritableDataPath(QLatin1String("meerkat.conf"));
 	stream.setFieldWidth(0);
 	stream << QLatin1String("\n\t");
 	stream.setFieldWidth(20);
@@ -882,7 +882,7 @@ QString Application::createReport()
 
 QString Application::getFullVersion() const
 {
-	return QStringLiteral("%1%2").arg(OTTER_VERSION_MAIN).arg(OTTER_VERSION_CONTEXT);
+	return QStringLiteral("%1%2").arg(MEERKAT_VERSION_MAIN).arg(MEERKAT_VERSION_CONTEXT);
 }
 
 QString Application::getLocalePath() const
@@ -962,7 +962,7 @@ bool Application::canClose()
 		{
 			QMessageBox messageBox;
 			messageBox.setWindowTitle(tr("Question"));
-			messageBox.setText(tr("You are about to quit the current Otter Browser session."));
+			messageBox.setText(tr("You are about to quit the current Meerkat Browser session."));
 			messageBox.setInformativeText(tr("Do you want to continue?"));
 			messageBox.setIcon(QMessageBox::Question);
 			messageBox.setStandardButtons(QMessageBox::Yes | QMessageBox::Cancel);

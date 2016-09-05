@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2013 - 2014 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 * Copyright (C) 2015 - 2016 Piotr Wójcik <chocimier@tlen.pl>
 *
@@ -18,13 +18,13 @@
 *
 **************************************************************************/
 
-#ifndef OTTER_LOCALLISTINGNETWORKREPLY_H
-#define OTTER_LOCALLISTINGNETWORKREPLY_H
+#ifndef MEERKAT_LOCALLISTINGNETWORKREPLY_H
+#define MEERKAT_LOCALLISTINGNETWORKREPLY_H
 
 #include <QtCore/QUrl>
 #include <QtNetwork/QNetworkReply>
 
-namespace Otter
+namespace Meerkat
 {
 
 class LocalListingNetworkReply : public QNetworkReply

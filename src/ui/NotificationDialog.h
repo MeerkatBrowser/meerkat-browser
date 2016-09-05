@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2015 Jan Bajer aka bajasoft <jbajer@gmail.com>
 * Copyright (C) 2015 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 *
@@ -18,14 +18,14 @@
 *
 **************************************************************************/
 
-#ifndef OTTER_NOTIFICATIONDIALOG_H
-#define OTTER_NOTIFICATIONDIALOG_H
+#ifndef MEERKAT_NOTIFICATIONDIALOG_H
+#define MEERKAT_NOTIFICATIONDIALOG_H
 
 #include <QtCore/QPropertyAnimation>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QLabel>
 
-namespace Otter
+namespace Meerkat
 {
 
 class Notification;

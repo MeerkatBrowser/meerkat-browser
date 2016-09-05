@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2015 Jan Bajer aka bajasoft <jbajer@gmail.com>
 *
 * This program is free software: you can redistribute it and/or modify
@@ -24,7 +24,7 @@
 
 #include <QtWidgets/QMenu>
 
-namespace Otter
+namespace Meerkat
 {
 
 PopupsBarWidget::PopupsBarWidget(const QUrl &parentUrl, QWidget *parent) : QWidget(parent),

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Otter::NotesContentsWidget</class>
- <widget class="QWidget" name="Otter::NotesContentsWidget">
+ <class>Meerkat::NotesContentsWidget</class>
+ <widget class="QWidget" name="Meerkat::NotesContentsWidget">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -41,7 +41,7 @@
      <property name="childrenCollapsible">
       <bool>false</bool>
      </property>
-     <widget class="Otter::ItemViewWidget" name="notesViewWidget">
+     <widget class="Meerkat::ItemViewWidget" name="notesViewWidget">
       <property name="contextMenuPolicy">
        <enum>Qt::CustomContextMenu</enum>
       </property>
@@ -107,10 +107,10 @@
              </widget>
             </item>
             <item row="0" column="1">
-             <widget class="Otter::TextLabelWidget" name="addressLabelWidget" native="true"/>
+             <widget class="Meerkat::TextLabelWidget" name="addressLabelWidget" native="true"/>
             </item>
             <item row="1" column="1">
-             <widget class="Otter::TextLabelWidget" name="dateLabelWidget" native="true"/>
+             <widget class="Meerkat::TextLabelWidget" name="dateLabelWidget" native="true"/>
             </item>
            </layout>
           </widget>
@@ -171,12 +171,12 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>Otter::ItemViewWidget</class>
+   <class>Meerkat::ItemViewWidget</class>
    <extends>QTreeView</extends>
    <header>src/ui/ItemViewWidget.h</header>
   </customwidget>
   <customwidget>
-   <class>Otter::TextLabelWidget</class>
+   <class>Meerkat::TextLabelWidget</class>
    <extends>QWidget</extends>
    <header>src/ui/TextLabelWidget.h</header>
    <container>1</container>

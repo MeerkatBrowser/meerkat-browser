@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2015 Jan Bajer aka bajasoft <jbajer@gmail.com>
 *
 * This program is free software: you can redistribute it and/or modify
@@ -17,12 +17,12 @@
 *
 **************************************************************************/
 
-#ifndef OTTER_POPUPSBARWIDGET_H
-#define OTTER_POPUPSBARWIDGET_H
+#ifndef MEERKAT_POPUPSBARWIDGET_H
+#define MEERKAT_POPUPSBARWIDGET_H
 
 #include "../../../ui/WebWidget.h"
 
-namespace Otter
+namespace Meerkat
 {
 
 namespace Ui

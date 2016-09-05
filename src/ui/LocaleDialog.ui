@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Otter::LocaleDialog</class>
- <widget class="QDialog" name="Otter::LocaleDialog">
+ <class>Meerkat::LocaleDialog</class>
+ <widget class="QDialog" name="Meerkat::LocaleDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -51,7 +51,7 @@
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="Otter::FilePathWidget" name="customFilePathWidget" native="true">
+      <widget class="Meerkat::FilePathWidget" name="customFilePathWidget" native="true">
        <property name="enabled">
         <bool>false</bool>
        </property>
@@ -73,7 +73,7 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>Otter::FilePathWidget</class>
+   <class>Meerkat::FilePathWidget</class>
    <extends>QWidget</extends>
    <header>src/ui/FilePathWidget.h</header>
    <container>1</container>
@@ -84,7 +84,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>Otter::LocaleDialog</receiver>
+   <receiver>Meerkat::LocaleDialog</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -100,7 +100,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>Otter::LocaleDialog</receiver>
+   <receiver>Meerkat::LocaleDialog</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">

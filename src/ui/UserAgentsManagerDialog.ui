@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Otter::UserAgentsManagerDialog</class>
- <widget class="QDialog" name="Otter::UserAgentsManagerDialog">
+ <class>Meerkat::UserAgentsManagerDialog</class>
+ <widget class="QDialog" name="Meerkat::UserAgentsManagerDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -17,7 +17,7 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,0">
      <item>
-      <widget class="Otter::ItemViewWidget" name="userAgentsView">
+      <widget class="Meerkat::ItemViewWidget" name="userAgentsView">
        <property name="editTriggers">
         <set>QAbstractItemView::AnyKeyPressed|QAbstractItemView::CurrentChanged|QAbstractItemView::DoubleClicked|QAbstractItemView::EditKeyPressed</set>
        </property>
@@ -140,7 +140,7 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>Otter::ItemViewWidget</class>
+   <class>Meerkat::ItemViewWidget</class>
    <extends>QTreeView</extends>
    <header>src/ui/ItemViewWidget.h</header>
   </customwidget>
@@ -150,7 +150,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>Otter::UserAgentsManagerDialog</receiver>
+   <receiver>Meerkat::UserAgentsManagerDialog</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -166,7 +166,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>Otter::UserAgentsManagerDialog</receiver>
+   <receiver>Meerkat::UserAgentsManagerDialog</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">

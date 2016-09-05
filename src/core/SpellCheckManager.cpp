@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2015 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 *
 * This program is free software: you can redistribute it and/or modify
@@ -20,11 +20,11 @@
 #include "SpellCheckManager.h"
 #include "SessionsManager.h"
 
-namespace Otter
+namespace Meerkat
 {
 
 SpellCheckManager* SpellCheckManager::m_instance = NULL;
-#ifdef OTTER_ENABLE_SPELLCHECK
+#ifdef MEERKAT_ENABLE_SPELLCHECK
 Sonnet::Speller* SpellCheckManager::m_speller = NULL;
 #endif
 
@@ -34,7 +34,7 @@ SpellCheckManager::SpellCheckManager(QObject *parent) : QObject(parent)
 
 SpellCheckManager::~SpellCheckManager()
 {
-#ifdef OTTER_ENABLE_SPELLCHECK
+#ifdef MEERKAT_ENABLE_SPELLCHECK
 	delete m_speller;
 #endif
 }
@@ -44,8 +44,8 @@ void SpellCheckManager::createInstance(QObject *parent)
 	if (!m_instance)
 	{
 		m_instance = new SpellCheckManager(parent);
-#ifdef OTTER_ENABLE_SPELLCHECK
-		qputenv("OTTER_DICTIONARIES", SessionsManager::getWritableDataPath(QLatin1String("dictionaries")).toLatin1());
+#ifdef MEERKAT_ENABLE_SPELLCHECK
+		qputenv("MEERKAT_DICTIONARIES", SessionsManager::getWritableDataPath(QLatin1String("dictionaries")).toLatin1());
 
 		m_speller = new Sonnet::Speller();
 #endif
@@ -59,7 +59,7 @@ SpellCheckManager* SpellCheckManager::getInstance()
 
 QString SpellCheckManager::getDefaultDictionary()
 {
-#ifdef OTTER_ENABLE_SPELLCHECK
+#ifdef MEERKAT_ENABLE_SPELLCHECK
 	return m_speller->defaultLanguage();
 #else
 	return QString();
@@ -70,7 +70,7 @@ QList<SpellCheckManager::DictionaryInformation> SpellCheckManager::getDictionari
 {
 	QList<DictionaryInformation> dictionaries;
 
-#ifdef OTTER_ENABLE_SPELLCHECK
+#ifdef MEERKAT_ENABLE_SPELLCHECK
 	const QMap<QString, QString> availableDictionaries(m_speller->availableDictionaries());
 	QMap<QString, QString>::const_iterator iterator;
 

@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 * Copyright (C) 2016 Jan Bajer aka bajasoft <jbajer@gmail.com>
 *
@@ -27,7 +27,7 @@
 #include <QtCore/QRegularExpression>
 #include <QtCore/QTextStream>
 
-namespace Otter
+namespace Meerkat
 {
 
 UserScript::UserScript(const QString &path, QObject *parent) : Addon(parent),

@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 * Copyright (C) 2016 Jan Bajer aka bajasoft <jbajer@gmail.com>
 *
@@ -18,14 +18,14 @@
 *
 **************************************************************************/
 
-#ifndef OTTER_QTWEBENGINEURLREQUESTINTERCEPTOR_H
-#define OTTER_QTWEBENGINEURLREQUESTINTERCEPTOR_H
+#ifndef MEERKAT_QTWEBENGINEURLREQUESTINTERCEPTOR_H
+#define MEERKAT_QTWEBENGINEURLREQUESTINTERCEPTOR_H
 
 #include <QtCore/QMap>
 #include <QtCore/QVector>
 #include <QtWebEngineCore/QWebEngineUrlRequestInterceptor>
 
-namespace Otter
+namespace Meerkat
 {
 
 class QtWebEngineUrlRequestInterceptor : public QWebEngineUrlRequestInterceptor

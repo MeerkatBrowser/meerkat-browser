@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2013 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 * Copyright (C) 2016 Piotr Wójcik <chocimier@tlen.pl>
 *
@@ -18,13 +18,13 @@
 *
 **************************************************************************/
 
-#ifndef OTTER_FILEPATHWIDGET_H
-#define OTTER_FILEPATHWIDGET_H
+#ifndef MEERKAT_FILEPATHWIDGET_H
+#define MEERKAT_FILEPATHWIDGET_H
 
 #include <QtWidgets/QFileDialog>
 #include <QtWidgets/QLineEdit>
 
-namespace Otter
+namespace Meerkat
 {
 
 class FilePathWidget : public QWidget

@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2013 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 * Copyright (C) 2016 Piotr Wójcik <chocimier@tlen.pl>
 *
@@ -27,7 +27,7 @@
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QPushButton>
 
-namespace Otter
+namespace Meerkat
 {
 
 FilePathWidget::FilePathWidget(QWidget *parent) : QWidget(parent),

@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2015 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 *
 * This program is free software: you can redistribute it and/or modify
@@ -24,7 +24,7 @@
 
 #include "ui_WebsiteInformationDialog.h"
 
-namespace Otter
+namespace Meerkat
 {
 
 WebsiteInformationDialog::WebsiteInformationDialog(WebWidget *widget, QWidget *parent) : Dialog(parent),
@@ -69,8 +69,8 @@ WebsiteInformationDialog::WebsiteInformationDialog(WebWidget *widget, QWidget *p
 	}
 	else if (state.testFlag(WindowsManager::ApplicationContentState))
 	{
-		m_ui->stateLabel->setText(tr("You are viewing safe page from Otter Browser."));
-		m_ui->stateIconLabel->setPixmap(ThemesManager::getIcon(QLatin1String("otter-browser"), false).pixmap(16, 16));
+		m_ui->stateLabel->setText(tr("You are viewing safe page from Meerkat Browser."));
+		m_ui->stateIconLabel->setPixmap(ThemesManager::getIcon(QLatin1String("meerkat-browser"), false).pixmap(16, 16));
 	}
 	else
 	{

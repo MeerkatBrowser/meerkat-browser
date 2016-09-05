@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2015 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 *
 * This program is free software: you can redistribute it and/or modify
@@ -17,14 +17,14 @@
 *
 **************************************************************************/
 
-#ifndef OTTER_NOTESMANAGER_H
-#define OTTER_NOTESMANAGER_H
+#ifndef MEERKAT_NOTESMANAGER_H
+#define MEERKAT_NOTESMANAGER_H
 
 #include "BookmarksModel.h"
 
 #include <QtCore/QObject>
 
-namespace Otter
+namespace Meerkat
 {
 
 class NotesManager : public QObject

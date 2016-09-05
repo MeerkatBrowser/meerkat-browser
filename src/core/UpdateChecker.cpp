@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2015 Jan Bajer aka bajasoft <jbajer@gmail.com>
 * Copyright (C) 2015 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 *
@@ -30,7 +30,7 @@
 #include <QtCore/QJsonDocument>
 #include <QtCore/QJsonObject>
 
-namespace Otter
+namespace Meerkat
 {
 
 UpdateChecker::UpdateChecker(QObject *parent, bool inBackground) : QObject(parent),
@@ -76,7 +76,7 @@ void UpdateChecker::runUpdateCheck()
 	const QJsonArray channels(updateData.value(QLatin1String("channels")).toArray());
 	const QString platform(Application::getInstance()->getPlatformIntegration()->getPlatform());
 	const int mainVersion(QCoreApplication::applicationVersion().remove(QChar('.')).toInt());
-	const int subVersion(QString(OTTER_VERSION_WEEKLY).toInt());
+	const int subVersion(QString(MEERKAT_VERSION_WEEKLY).toInt());
 	QList<UpdateInformation> availableUpdates;
 
 	for (int i = 0; i < channels.count(); ++i)

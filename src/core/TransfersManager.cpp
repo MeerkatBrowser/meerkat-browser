@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2013 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 *
 * This program is free software: you can redistribute it and/or modify
@@ -33,7 +33,7 @@
 #include <QtCore/QTimer>
 #include <QtWidgets/QMessageBox>
 
-namespace Otter
+namespace Meerkat
 {
 
 TransfersManager* TransfersManager::m_instance = NULL;
@@ -184,7 +184,7 @@ void Transfer::start(QNetworkReply *reply, const QString &target)
 
 	if (temporaryFileName.isEmpty())
 	{
-		temporaryFileName = QLatin1String("otter-download-XXXXXX.") + m_mimeType.preferredSuffix();
+		temporaryFileName = QLatin1String("meerkat-download-XXXXXX.") + m_mimeType.preferredSuffix();
 	}
 	else if (temporaryFileName.contains(QLatin1Char('.')))
 	{

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Otter::ContentBlockingDialog</class>
- <widget class="QDialog" name="Otter::ContentBlockingDialog">
+ <class>Meerkat::ContentBlockingDialog</class>
+ <widget class="QDialog" name="Meerkat::ContentBlockingDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -47,7 +47,7 @@
        <item>
         <layout class="QHBoxLayout" name="profilesHorizontalLayout">
          <item>
-          <widget class="Otter::ItemViewWidget" name="profilesViewWidget">
+          <widget class="Meerkat::ItemViewWidget" name="profilesViewWidget">
            <property name="sizeAdjustPolicy">
             <enum>QAbstractScrollArea::AdjustIgnored</enum>
            </property>
@@ -168,7 +168,7 @@
        <item>
         <layout class="QHBoxLayout" name="customRulesHorizontalLayout">
          <item>
-          <widget class="Otter::ItemViewWidget" name="customRulesViewWidget">
+          <widget class="Meerkat::ItemViewWidget" name="customRulesViewWidget">
            <property name="alternatingRowColors">
             <bool>true</bool>
            </property>
@@ -235,7 +235,7 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>Otter::ItemViewWidget</class>
+   <class>Meerkat::ItemViewWidget</class>
    <extends>QTreeView</extends>
    <header>src/ui/ItemViewWidget.h</header>
   </customwidget>

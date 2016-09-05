@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2013 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 *
 * This program is free software: you can redistribute it and/or modify
@@ -17,8 +17,8 @@
 *
 **************************************************************************/
 
-#ifndef OTTER_SEARCHENGINESMANAGER_H
-#define OTTER_SEARCHENGINESMANAGER_H
+#ifndef MEERKAT_SEARCHENGINESMANAGER_H
+#define MEERKAT_SEARCHENGINESMANAGER_H
 
 #include <QtCore/QFile>
 #include <QtCore/QUrlQuery>
@@ -26,7 +26,7 @@
 #include <QtGui/QStandardItemModel>
 #include <QtNetwork/QNetworkAccessManager>
 
-namespace Otter
+namespace Meerkat
 {
 
 class SearchEnginesManager : public QObject
