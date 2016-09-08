@@ -24,7 +24,7 @@
 #include <gcrypt.h>
 #endif
 
-namespace Meerkat
+namespace Otter
 {
 
 PasswordsManager* PasswordsManager::m_instance = NULL;
