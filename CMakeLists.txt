@@ -373,7 +373,7 @@ if (Qt5WebKitWidgets_FOUND AND ENABLE_QTWEBKIT)
 endif (Qt5WebKitWidgets_FOUND AND ENABLE_QTWEBKIT)
 
 if (GCRYPT_FOUND)
-	add_definitions(-DMEERKAT_ENABLE_ENCRYPTION)
+	add_definitions(-DOTTER_ENABLE_ENCRYPTION)
 	include_directories(${GCRYPT_INCLUDE_DIR})
 endif (GCRYPT_FOUND)
 

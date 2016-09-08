@@ -62,7 +62,7 @@ QList<PasswordsManager::PasswordInformation> PasswordsManager::getPasswords(cons
 
 bool PasswordsManager::isEncryptionAvailable()
 {
-#ifdef MEERKAT_ENABLE_ENCRYPTION
+#ifdef OTTER_ENABLE_ENCRYPTION
 	return true;
 #else
 	return false;
