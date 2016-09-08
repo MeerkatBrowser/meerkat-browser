@@ -20,7 +20,7 @@
 #include "PasswordsManager.h"
 #include "PasswordsStorageBackend.h"
 
-#ifdef MEERKAT_ENABLE_ENCRYPTION
+#ifdef OTTER_ENABLE_ENCRYPTION
 #include <gcrypt.h>
 #endif
 
