@@ -81,6 +81,7 @@ QtWebKitWebWidget::QtWebKitWebWidget(bool isPrivate, WebBackend *backend, QtWebK
 	m_loadingState(WindowsManager::FinishedLoadingState),
 	m_transfersTimer(0),
 	m_canLoadPlugins(false),
+	m_isAudioMuted(false),
 	m_isTyped(false),
 	m_isNavigating(false)
 {
@@ -148,6 +149,9 @@ QtWebKitWebWidget::QtWebKitWebWidget(bool isPrivate, WebBackend *backend, QtWebK
 	connect(m_page, SIGNAL(featurePermissionRequestCanceled(QWebFrame*,QWebPage::Feature)), this, SLOT(handlePermissionCancel(QWebFrame*,QWebPage::Feature)));
 	connect(m_page, SIGNAL(loadStarted()), this, SLOT(pageLoadStarted()));
 	connect(m_page, SIGNAL(loadFinished(bool)), this, SLOT(pageLoadFinished()));
+#ifndef OTTER_ENABLE_QTWEBKIT_LEGACY
+	connect(m_page, SIGNAL(recentlyAudibleChanged(bool)), this, SLOT(handleAudibleStateChange(bool)));
+#endif
 	connect(m_page, SIGNAL(viewingMediaChanged(bool)), this, SLOT(updateNavigationActions()));
 	connect(m_page->mainFrame(), SIGNAL(contentsSizeChanged(QSize)), this, SIGNAL(progressBarGeometryChanged()));
 	connect(m_page->mainFrame(), SIGNAL(initialLayoutCompleted()), this, SIGNAL(progressBarGeometryChanged()));
@@ -307,6 +311,13 @@ void QtWebKitWebWidget::pageLoadStarted()
 
 void QtWebKitWebWidget::pageLoadFinished()
 {
+#ifndef OTTER_ENABLE_QTWEBKIT_LEGACY
+	if (m_isAudioMuted)
+	{
+		muteAudio(m_page->mainFrame(), true);
+	}
+#endif
+
 	if (m_loadingState != WindowsManager::OngoingLoadingState)
 	{
 		return;
@@ -537,6 +548,30 @@ void QtWebKitWebWidget::resetSpellCheck(QWebElement element)
 		m_page->runScript(QLatin1String("resetSpellCheck"), element);
 	}
 }
+
+#ifndef OTTER_ENABLE_QTWEBKIT_LEGACY
+void QtWebKitWebWidget::muteAudio(QWebFrame *frame, bool isMuted)
+{
+	if (!frame)
+	{
+		return;
+	}
+
+	const QWebElementCollection elements(frame->findAllElements(QLatin1String("audio, video")));
+
+	for (int i = 0; i < elements.count(); ++i)
+	{
+		elements.at(i).evaluateJavaScript(QLatin1String("this.muted = ") + (isMuted ? QLatin1String("true") : QLatin1String("false")));
+	}
+
+	const QList<QWebFrame*> frames(frame->childFrames());
+
+	for (int i = 0; i < frames.count(); ++i)
+	{
+		muteAudio(frames.at(i), isMuted);
+	}
+}
+#endif
 
 void QtWebKitWebWidget::openRequest(const QUrl &url, QNetworkAccessManager::Operation operation, QIODevice *outgoingData)
 {
@@ -928,6 +963,15 @@ void QtWebKitWebWidget::triggerAction(int identifier, const QVariantMap &paramet
 			updateNavigationActions();
 
 			return;
+#ifndef OTTER_ENABLE_QTWEBKIT_LEGACY
+		case ActionsManager::MuteTabMediaAction:
+			m_isAudioMuted = !m_isAudioMuted;
+
+			muteAudio(m_page->mainFrame(), m_isAudioMuted);
+			handleAudibleStateChange(m_page->recentlyAudible());
+
+			return;
+#endif
 		case ActionsManager::OpenLinkAction:
 			{
 				m_webView->page()->settings()->setAttribute(QWebSettings::JavascriptCanOpenWindows, true);
@@ -2438,6 +2482,18 @@ bool QtWebKitWebWidget::hasSelection() const
 {
 	return m_page->hasSelection();
 }
+
+#ifndef OTTER_ENABLE_QTWEBKIT_LEGACY
+bool QtWebKitWebWidget::isAudible() const
+{
+	return m_page->recentlyAudible();
+}
+
+bool QtWebKitWebWidget::isAudioMuted() const
+{
+	return m_isAudioMuted;
+}
+#endif
 
 bool QtWebKitWebWidget::isPrivate() const
 {

@@ -17,31 +17,29 @@
 *
 **************************************************************************/
 
-#ifndef MEERKAT_NAVIGATIONACTIONWIDGET_H
-#define MEERKAT_NAVIGATIONACTIONWIDGET_H
+#ifndef MEERKAT_MENUBUTTONWIDGET_H
+#define MEERKAT_MENUBUTTONWIDGET_H
 
-#include "ActionWidget.h"
-#include "../../core/SessionsManager.h"
+#include "../../../ui/ToolButtonWidget.h"
 
 namespace Meerkat
 {
 
-class NavigationActionWidget : public ActionWidget
+class Menu;
+
+class MenuButtonWidget : public ToolButtonWidget
 {
 	Q_OBJECT
 
 public:
-	explicit NavigationActionWidget(Window *window, const ActionsManager::ActionEntryDefinition &definition, QWidget *parent = NULL);
-
-	bool eventFilter(QObject *object, QEvent *event);
-
-protected:
-	void addMenuEntry(int index, const WindowHistoryEntry &entry);
-	bool event(QEvent *event);
+	explicit MenuButtonWidget(const ActionsManager::ActionEntryDefinition &definition, QWidget *parent);
 
 protected slots:
-	void goToHistoryIndex(QAction *action);
+	void toolBarModified(int identifier);
 	void updateMenu();
+
+private:
+	Menu *m_menu;
 };
 
 }

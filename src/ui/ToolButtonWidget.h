@@ -17,33 +17,45 @@
 *
 **************************************************************************/
 
-#ifndef MEERKAT_BOOKMARKWIDGET_H
-#define MEERKAT_BOOKMARKWIDGET_H
+#ifndef MEERKAT_TOOLBUTTONWIDGET_H
+#define MEERKAT_TOOLBUTTONWIDGET_H
 
-#include "ToolButtonWidget.h"
+#include "../core/ToolBarsManager.h"
+
+#include <QtCore/QVariantMap>
+#include <QtWidgets/QToolButton>
 
 namespace Meerkat
 {
 
-class BookmarksItem;
+class Menu;
 
-class BookmarkWidget : public ToolButtonWidget
+class ToolButtonWidget : public QToolButton
 {
 	Q_OBJECT
 
 public:
-	explicit BookmarkWidget(BookmarksItem *bookmark, const ActionsManager::ActionEntryDefinition &definition, QWidget *parent = NULL);
-	explicit BookmarkWidget(const QString &path, const ActionsManager::ActionEntryDefinition &definition, QWidget *parent = NULL);
+	explicit ToolButtonWidget(const ActionsManager::ActionEntryDefinition &definition, QWidget *parent = NULL);
+
+	QVariantMap getOptions() const;
+	bool isCustomized() const;
+
+public slots:
+	void setOptions(const QVariantMap &options);
 
 protected:
-	void mouseReleaseEvent(QMouseEvent *event);
+	void paintEvent(QPaintEvent *event);
+	void addMenu(Menu *menu, const QList<ActionsManager::ActionEntryDefinition> &entries);
+	bool event(QEvent *event);
 
 protected slots:
-	void removeBookmark(BookmarksItem *bookmark);
-	void updateBookmark(BookmarksItem *bookmark);
+	void setButtonStyle(Qt::ToolButtonStyle buttonStyle);
+	void setIconSize(int size);
+	void setMaximumButtonSize(int size);
 
 private:
-	BookmarksItem *m_bookmark;
+	QVariantMap m_options;
+	bool m_isCustomized;
 };
 
 }

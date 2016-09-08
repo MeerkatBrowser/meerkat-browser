@@ -20,8 +20,8 @@
 #ifndef MEERKAT_ACTIONWIDGET_H
 #define MEERKAT_ACTIONWIDGET_H
 
-#include "ToolButtonWidget.h"
-#include "../../core/ActionsManager.h"
+#include "../../../core/ActionsManager.h"
+#include "../../../ui/ToolButtonWidget.h"
 
 #include <QtCore/QPointer>
 

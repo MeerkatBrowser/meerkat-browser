@@ -199,6 +199,7 @@ bool Action::isLocal(int identifier)
 		case ActionsManager::CloneTabAction:
 		case ActionsManager::ClearTabHistoryAction:
 		case ActionsManager::PurgeTabHistoryAction:
+		case ActionsManager::MuteTabMediaAction:
 		case ActionsManager::OpenLinkAction:
 		case ActionsManager::OpenLinkInCurrentTabAction:
 		case ActionsManager::OpenLinkInNewTabAction:
@@ -348,6 +349,7 @@ ActionsManager::ActionsManager(QObject *parent) : QObject(parent),
 	registerAction(AlwaysOnTopTabAction, QT_TRANSLATE_NOOP("actions", "Stay on Top"), QString(), QIcon(), (IsEnabledFlag | IsCheckableFlag));
 	registerAction(ClearTabHistoryAction, QT_TRANSLATE_NOOP("actions", "Clear Tab History"), QT_TRANSLATE_NOOP("actions", "Remove Local Tab History"));
 	registerAction(PurgeTabHistoryAction, QT_TRANSLATE_NOOP("actions", "Purge Tab History"), QT_TRANSLATE_NOOP("actions", "Remove Local and Global Tab History"));
+	registerAction(MuteTabMediaAction, QT_TRANSLATE_NOOP("actions", "Mute Tab Media"), QString(), ThemesManager::getIcon(QLatin1String("audio-volume-medium")), NoFlags);
 	registerAction(SuspendTabAction, QT_TRANSLATE_NOOP("actions", "Suspend Tab"), QString(), QIcon(), NoFlags);
 	registerAction(CloseTabAction, QT_TRANSLATE_NOOP("actions", "Close Tab"), QString(), ThemesManager::getIcon(QLatin1String("tab-close")), NoFlags);
 	registerAction(CloseOtherTabsAction, QT_TRANSLATE_NOOP("actions", "Close Other Tabs"), QString(), ThemesManager::getIcon(QLatin1String("tab-close-other")));

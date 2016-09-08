@@ -21,8 +21,8 @@
 #ifndef MEERKAT_SEARCHWIDGET_H
 #define MEERKAT_SEARCHWIDGET_H
 
-#include "../ComboBoxWidget.h"
-#include "../../core/WindowsManager.h"
+#include "../../../core/WindowsManager.h"
+#include "../../../ui/ComboBoxWidget.h"
 
 #include <QtCore/QTime>
 #include <QtWidgets/QCompleter>

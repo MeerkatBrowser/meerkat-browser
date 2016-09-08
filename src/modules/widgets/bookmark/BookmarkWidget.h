@@ -17,41 +17,35 @@
 *
 **************************************************************************/
 
-#include "StatusMessageWidget.h"
-#include "../MainWindow.h"
+#ifndef MEERKAT_BOOKMARKWIDGET_H
+#define MEERKAT_BOOKMARKWIDGET_H
 
-#include <QtGui/QGuiApplication>
-#include <QtWidgets/QStyle>
+#include "../../../ui/ToolButtonWidget.h"
 
 namespace Meerkat
 {
 
-StatusMessageWidget::StatusMessageWidget(QWidget *parent) : QLabel(parent)
+class BookmarksItem;
+
+class BookmarkWidget : public ToolButtonWidget
 {
-	setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
-	setIndent(style()->pixelMetric(QStyle::PM_ButtonMargin));
+	Q_OBJECT
 
-	MainWindow *window(MainWindow::findMainWindow(parent));
+public:
+	explicit BookmarkWidget(BookmarksItem *bookmark, const ActionsManager::ActionEntryDefinition &definition, QWidget *parent = NULL);
+	explicit BookmarkWidget(const QString &path, const ActionsManager::ActionEntryDefinition &definition, QWidget *parent = NULL);
 
-	if (window)
-	{
-		connect(window, SIGNAL(statusMessageChanged(QString)), this, SLOT(setMessage(QString)));
-	}
-}
+protected:
+	void mouseReleaseEvent(QMouseEvent *event);
 
-void StatusMessageWidget::resizeEvent(QResizeEvent *event)
-{
-	QLabel::resizeEvent(event);
+protected slots:
+	void removeBookmark(BookmarksItem *bookmark);
+	void updateBookmark(BookmarksItem *bookmark);
 
-	setMessage(m_message);
-}
-
-void StatusMessageWidget::setMessage(const QString &message)
-{
-	m_message = message;
-
-	setText(QFontMetrics(font()).elidedText(m_message, (QGuiApplication::isLeftToRight() ? Qt::ElideRight : Qt::ElideLeft), width()));
-}
+private:
+	BookmarksItem *m_bookmark;
+};
 
 }
 
+#endif

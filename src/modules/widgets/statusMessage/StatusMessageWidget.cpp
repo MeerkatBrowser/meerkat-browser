@@ -17,47 +17,41 @@
 *
 **************************************************************************/
 
-#ifndef MEERKAT_TOOLBUTTONWIDGET_H
-#define MEERKAT_TOOLBUTTONWIDGET_H
+#include "StatusMessageWidget.h"
+#include "../../../ui/MainWindow.h"
 
-#include "../../core/ToolBarsManager.h"
-
-#include <QtCore/QVariantMap>
-#include <QtWidgets/QToolButton>
+#include <QtGui/QGuiApplication>
+#include <QtWidgets/QStyle>
 
 namespace Meerkat
 {
 
-class Menu;
-
-class ToolButtonWidget : public QToolButton
+StatusMessageWidget::StatusMessageWidget(QWidget *parent) : QLabel(parent)
 {
-	Q_OBJECT
+	setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+	setIndent(style()->pixelMetric(QStyle::PM_ButtonMargin));
 
-public:
-	explicit ToolButtonWidget(const ActionsManager::ActionEntryDefinition &definition, QWidget *parent = NULL);
+	MainWindow *window(MainWindow::findMainWindow(parent));
 
-	QVariantMap getOptions() const;
-	bool isCustomized() const;
+	if (window)
+	{
+		connect(window, SIGNAL(statusMessageChanged(QString)), this, SLOT(setMessage(QString)));
+	}
+}
 
-public slots:
-	void setOptions(const QVariantMap &options);
+void StatusMessageWidget::resizeEvent(QResizeEvent *event)
+{
+	QLabel::resizeEvent(event);
 
-protected:
-	void paintEvent(QPaintEvent *event);
-	void addMenu(Menu *menu, const QList<ActionsManager::ActionEntryDefinition> &entries);
-	bool event(QEvent *event);
+	setMessage(m_message);
+}
 
-protected slots:
-	void setButtonStyle(Qt::ToolButtonStyle buttonStyle);
-	void setIconSize(int size);
-	void setMaximumButtonSize(int size);
+void StatusMessageWidget::setMessage(const QString &message)
+{
+	m_message = message;
 
-private:
-	QVariantMap m_options;
-	bool m_isCustomized;
-};
+	setText(QFontMetrics(font()).elidedText(m_message, (QGuiApplication::isLeftToRight() ? Qt::ElideRight : Qt::ElideLeft), width()));
+}
 
 }
 
-#endif

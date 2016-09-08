@@ -17,44 +17,49 @@
 *
 **************************************************************************/
 
-#ifndef MEERKAT_CONTENTBLOCKINGINFORMATIONWIDGET_H
-#define MEERKAT_CONTENTBLOCKINGINFORMATIONWIDGET_H
+#ifndef MEERKAT_PROGRESSINFORMATIONWIDGET_H
+#define MEERKAT_PROGRESSINFORMATIONWIDGET_H
 
-#include "ToolButtonWidget.h"
-#include "../../core/NetworkManager.h"
+#include "../../../core/ActionsManager.h"
+#include "../../../ui/WebWidget.h"
+
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QProgressBar>
 
 namespace Meerkat
 {
 
 class Window;
 
-class ContentBlockingInformationWidget : public ToolButtonWidget
+class ProgressInformationWidget : public QWidget
 {
 	Q_OBJECT
 
 public:
-	explicit ContentBlockingInformationWidget(Window *window, const ActionsManager::ActionEntryDefinition &definition, QWidget *parent = NULL);
+	enum ProgressInformationType
+	{
+		UnknownType = 0,
+		DocumentProgressType,
+		TotalSizeType,
+		ElementsType,
+		SpeedType,
+		ElapsedTimeType,
+		MessageType
+	};
 
-protected:
-	void paintEvent(QPaintEvent *event);
-	void resizeEvent(QResizeEvent *event);
-	void updateState();
+	explicit ProgressInformationWidget(Window *window, const ActionsManager::ActionEntryDefinition &definition, QWidget *parent = NULL);
+
+	QSize sizeHint() const;
 
 protected slots:
-	void clear();
-	void openElement(QAction *action);
-	void toggleOption(QAction *action);
-	void populateElementsMenu();
-	void populateProfilesMenu();
-	void handleRequest(const NetworkManager::ResourceInformation &request);
+	void updateStatus(WebWidget::PageInformation key, const QVariant &value = QVariant());
 	void setWindow(Window *window);
 
 private:
 	Window *m_window;
-	QMenu *m_elementsMenu;
-	QMenu *m_profilesMenu;
-	QIcon m_icon;
-	int m_amount;
+	QLabel *m_label;
+	QProgressBar *m_progressBar;
+	ProgressInformationType m_type;
 };
 
 }

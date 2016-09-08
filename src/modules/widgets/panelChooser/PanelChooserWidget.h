@@ -21,7 +21,7 @@
 #ifndef MEERKAT_PANELCHOOSERWIDGET_H
 #define MEERKAT_PANELCHOOSERWIDGET_H
 
-#include "ToolButtonWidget.h"
+#include "../../../ui/ToolButtonWidget.h"
 
 namespace Meerkat
 {

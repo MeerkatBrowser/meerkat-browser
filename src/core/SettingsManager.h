@@ -239,17 +239,30 @@ public:
 		StringType
 	};
 
+	enum OptionFlag
+	{
+		NoFlags = 0,
+		IsEnabledFlag = 1,
+		IsVisibleFlag = 2,
+		IsBuiltInFlag = 4
+	};
+
+	Q_DECLARE_FLAGS(OptionFlags, OptionFlag)
+
 	struct OptionDefinition
 	{
-		QString name;
 		QVariant defaultValue;
 		QStringList choices;
 		OptionType type;
+		OptionFlags flags;
+		int identifier;
+
+		OptionDefinition() : flags(IsEnabledFlag | IsVisibleFlag), identifier(-1) {}
 	};
 
 	static void createInstance(const QString &path, QObject *parent = NULL);
 	static void removeOverride(const QUrl &url, const QString &key = QString());
-	static void setOptionDefinition(int identifier, const OptionDefinition &definition);
+	static void updateOptionDefinition(int identifier, const OptionDefinition &definition);
 	static void setValue(int identifier, const QVariant &value, const QUrl &url = QUrl());
 	static SettingsManager* getInstance();
 	static QString getOptionName(int identifier);
@@ -270,7 +283,6 @@ private:
 	static QString m_globalPath;
 	static QString m_overridePath;
 	static QHash<int, OptionDefinition> m_definitions;
-	static QHash<int, QVariant> m_defaults;
 	static int m_optionIdentifierEnumerator;
 
 signals:
@@ -279,5 +291,7 @@ signals:
 };
 
 }
+
+Q_DECLARE_OPERATORS_FOR_FLAGS(Otter::SettingsManager::OptionFlags)
 
 #endif

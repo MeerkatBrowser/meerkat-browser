@@ -34,7 +34,7 @@ if (EXISTS "${CMAKE_ROOT}/Modules/CPack.cmake")
 	set(CPACK_PACKAGE_NAME "meerkat-browser")
 	set(CPACK_PACKAGE_FILE_NAME "${CPACK_PACKAGE_NAME}_${MAJOR_VERSION}.${MINOR_VERSION}.${CPACK_PACKAGE_VERSION_PATCH}")
 	set(CPACK_SOURCE_PACKAGE_FILE_NAME "${CPACK_PACKAGE_NAME}_${MAJOR_VERSION}.${MINOR_VERSION}.${CPACK_PACKAGE_VERSION_PATCH}")
-	set(CPACK_DEBIAN_PACKAGE_DEPENDS "libgcrypt (>= 1.6.0), libhunspell-1.3-0 (>= 1.3.3), libqt5multimedia5 (>=5.3.0), libqt5qml5 (>=5.3.0), libqt5webkit5 (>=5.3.0), libqt5xmlpatterns5 (>=5.3.0)")
+	set(CPACK_DEBIAN_PACKAGE_DEPENDS "libhunspell-1.3-0 (>= 1.3.3), libqt5multimedia5 (>=5.3.0), libqt5qml5 (>=5.3.0), libqt5webkit5 (>=5.3.0), libqt5xmlpatterns5 (>=5.3.0)")
 	set(CPACK_DEBIAN_PACKAGE_RECOMMENDS "gstreamer0.10-plugins-base, gstreamer0.10-plugins-good")
 	set(CPACK_DEBIAN_PACKAGE_PRIORITY "optional")
 	set(CPACK_DEBIAN_PACKAGE_SECTION "web")
@@ -84,14 +84,12 @@ option(ENABLE_QTWEBKIT "Enable QtWebKit backend (requires Qt 5.3)" ON)
 find_package(Qt5 5.3.0 REQUIRED COMPONENTS Core DBus Gui Multimedia Network PrintSupport Qml Widgets XmlPatterns)
 find_package(Qt5WebEngineWidgets 5.6.0 QUIET)
 find_package(Qt5WebKitWidgets 5.3.0 QUIET)
-find_package(Gcrypt 1.6.0 QUIET)
 find_package(Hunspell 1.3.0 QUIET)
 
 set_package_properties(Qt5WebEngineCore PROPERTIES URL "http://qt.io/" DESCRIPTION "QtWebEngine based backend (core)" TYPE OPTIONAL)
 set_package_properties(Qt5WebEngineWidgets PROPERTIES URL "http://qt.io/" DESCRIPTION "QtWebEngine based backend (widgets)" TYPE OPTIONAL)
 set_package_properties(Qt5WebKit PROPERTIES URL "http://qt.io/" DESCRIPTION "QtWebKit based backend (core)" TYPE OPTIONAL)
 set_package_properties(Qt5WebKitWidgets PROPERTIES URL "http://qt.io/" DESCRIPTION "QtWebKit based backend (widgets)" TYPE OPTIONAL)
-set_package_properties(Gcrypt PROPERTIES URL "http://directory.fsf.org/project/libgcrypt/" DESCRIPTION "Data encryption support" TYPE OPTIONAL)
 set_package_properties(Hunspell PROPERTIES URL "http://hunspell.github.io/" DESCRIPTION "Generic spell checking support" TYPE OPTIONAL)
 
 set(meerkat_src
@@ -197,6 +195,7 @@ set(meerkat_src
 	src/ui/ToolBarAreaWidget.cpp
 	src/ui/ToolBarDialog.cpp
 	src/ui/ToolBarWidget.cpp
+	src/ui/ToolButtonWidget.cpp
 	src/ui/TransferDialog.cpp
 	src/ui/TrayIcon.cpp
 	src/ui/UpdateCheckerDialog.cpp
@@ -222,23 +221,22 @@ set(meerkat_src
 	src/ui/preferences/PreferencesPrivacyPageWidget.cpp
 	src/ui/preferences/PreferencesSearchPageWidget.cpp
 	src/ui/preferences/SearchKeywordDelegate.cpp
-	src/ui/toolbars/ActionWidget.cpp
-	src/ui/toolbars/AddressWidget.cpp
-	src/ui/toolbars/BookmarkWidget.cpp
-	src/ui/toolbars/ContentBlockingInformationWidget.cpp
-	src/ui/toolbars/NavigationActionWidget.cpp
-	src/ui/toolbars/MenuButtonWidget.cpp
-	src/ui/toolbars/PanelChooserWidget.cpp
-	src/ui/toolbars/ProgressInformationWidget.cpp
-	src/ui/toolbars/SearchWidget.cpp
-	src/ui/toolbars/StatusMessageWidget.cpp
-	src/ui/toolbars/ToolButtonWidget.cpp
-	src/ui/toolbars/ZoomWidget.cpp
 	src/modules/importers/html/HtmlBookmarksImporter.cpp
 	src/modules/importers/opera/OperaBookmarksImporter.cpp
 	src/modules/importers/opera/OperaNotesImporter.cpp
 	src/modules/importers/opera/OperaSearchEnginesImporter.cpp
 	src/modules/importers/opera/OperaSessionImporter.cpp
+	src/modules/widgets/action/ActionWidget.cpp
+	src/modules/widgets/action/NavigationActionWidget.cpp
+	src/modules/widgets/address/AddressWidget.cpp
+	src/modules/widgets/bookmark/BookmarkWidget.cpp
+	src/modules/widgets/contentBlockingInformation/ContentBlockingInformationWidget.cpp
+	src/modules/widgets/menuButton/MenuButtonWidget.cpp
+	src/modules/widgets/panelChooser/PanelChooserWidget.cpp
+	src/modules/widgets/progressInformation/ProgressInformationWidget.cpp
+	src/modules/widgets/search/SearchWidget.cpp
+	src/modules/widgets/statusMessage/StatusMessageWidget.cpp
+	src/modules/widgets/zoom/ZoomWidget.cpp
 	src/modules/windows/addons/AddonsContentsWidget.cpp
 	src/modules/windows/bookmarks/BookmarksContentsWidget.cpp
 	src/modules/windows/cache/CacheContentsWidget.cpp
@@ -371,11 +369,6 @@ if (Qt5WebKitWidgets_FOUND AND ENABLE_QTWEBKIT)
 		src/modules/backends/web/qtwebkit/QtWebKitResources.qrc
 	)
 endif (Qt5WebKitWidgets_FOUND AND ENABLE_QTWEBKIT)
-
-if (GCRYPT_FOUND)
-	add_definitions(-DOTTER_ENABLE_ENCRYPTION)
-	include_directories(${GCRYPT_INCLUDE_DIR})
-endif (GCRYPT_FOUND)
 
 if (HUNSPELL_FOUND)
 	add_definitions(-DMEERKAT_ENABLE_SPELLCHECK)
