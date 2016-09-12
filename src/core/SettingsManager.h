@@ -293,6 +293,6 @@ signals:
 
 }
 
-Q_DECLARE_OPERATORS_FOR_FLAGS(Otter::SettingsManager::OptionFlags)
+Q_DECLARE_OPERATORS_FOR_FLAGS(Meerkat::SettingsManager::OptionFlags)
 
 #endif

@@ -20,7 +20,7 @@
 #include "PasswordsManager.h"
 #include "PasswordsStorageBackend.h"
 
-namespace Otter
+namespace Meerkat
 {
 
 PasswordsManager* PasswordsManager::m_instance = NULL;

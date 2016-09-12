@@ -15,8 +15,8 @@ set(MINOR_VERSION "9")
 set(PATCH_VERSION "11")
 
 add_definitions(-DMEERKAT_VERSION_MAIN="${MAJOR_VERSION}.${MINOR_VERSION}.${PATCH_VERSION}")
-add_definitions(-DMEERKAT_VERSION_WEEKLY="139")
-add_definitions(-DMEERKAT_VERSION_CONTEXT=" weekly 139")
+add_definitions(-DMEERKAT_VERSION_WEEKLY="140")
+add_definitions(-DMEERKAT_VERSION_CONTEXT=" weekly 140")
 add_definitions(-DMEERKAT_INSTALL_PREFIX="${CMAKE_INSTALL_PREFIX}")
 
 if (EXISTS "${CMAKE_ROOT}/Modules/CPack.cmake")
