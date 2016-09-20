@@ -510,7 +510,7 @@ bool WindowsPlatformIntegration::registerToSystem()
 
 	if (m_applicationRegistration.status() != QSettings::NoError || capabilities.status() != QSettings::NoError)
 	{
-        Console::addMessage(QCoreApplication::translate("main", "Failed to register application to system registry: %1, %2").arg(m_applicationRegistration.status(), capabilities.status()), Meerkat::Console::OtherCategory, Console::ErrorLevel);
+        Console::addMessage(QCoreApplication::translate("main", "Failed to register application to system registry: %1, %2").arg(m_applicationRegistration.status(), capabilities.status()), Otter::Console::OtherCategory, Console::ErrorLevel);
 
 		return false;
 	}
