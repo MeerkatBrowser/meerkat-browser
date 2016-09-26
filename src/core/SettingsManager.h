@@ -108,7 +108,6 @@ public:
 		Choices_WarnQuitOption,
 		Choices_WarnQuitTransfersOption,
 		Content_BackgroundColorOption,
-		Content_BlockingProfilesOption,
 		Content_CursiveFontOption,
 		Content_DefaultCharacterEncodingOption,
 		Content_DefaultFixedFontSizeOption,
@@ -129,6 +128,7 @@ public:
 		Content_ZoomTextOnlyOption,
 		ContentBlocking_EnableContentBlockingOption,
 		ContentBlocking_EnableWildcardsOption,
+		ContentBlocking_ProfilesOption,
 		History_BrowsingLimitAmountGlobalOption,
 		History_BrowsingLimitAmountWindowOption,
 		History_BrowsingLimitPeriodOption,
@@ -271,7 +271,7 @@ public:
 	static QVariant getValue(int identifier, const QUrl &url = QUrl());
 	static QStringList getOptions();
 	static OptionDefinition getOptionDefinition(int identifier);
-	static int registerOption(const QString &name, const OptionDefinition &definition);
+	static int registerOption(const QString &name, const QVariant &defaultValue, OptionType type, const QStringList &choices = QStringList());
 	static int getOptionIdentifier(const QString &name);
 	static bool hasOverride(const QUrl &url, const QString &key = QString());
 
@@ -279,13 +279,14 @@ protected:
 	explicit SettingsManager(QObject *parent = NULL);
 
 	static QString getHost(const QUrl &url);
+	static void registerOption(int identifier, const QVariant &defaultValue, OptionType type, const QStringList &choices = QStringList());
 
 private:
 	static SettingsManager *m_instance;
 	static QString m_globalPath;
 	static QString m_overridePath;
+	static QVector<OptionDefinition> m_definitions;
 	static QHash<QString, int> m_customOptions;
-	static QHash<int, OptionDefinition> m_definitions;
 	static int m_identifierCounter;
 	static int m_optionIdentifierEnumerator;
 

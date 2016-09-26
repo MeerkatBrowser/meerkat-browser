@@ -22,6 +22,8 @@
 
 #include "ActionsManager.h"
 
+#include <QtCore/QCoreApplication>
+
 namespace Otter
 {
 
@@ -67,9 +69,15 @@ public:
 		bool wasRemoved;
 
 		ToolBarDefinition() : normalVisibility(AlwaysVisibleToolBar), fullScreenVisibility(AlwaysHiddenToolBar), location(Qt::NoToolBarArea), buttonStyle(Qt::ToolButtonIconOnly), identifier(-1), iconSize(-1), maximumButtonSize(-1), row(-1), canReset(false), isDefault(false), wasRemoved(false) {}
+
+		QString getTitle() const
+		{
+			return (isDefault ? QCoreApplication::translate("actions", title.toUtf8()) : title);
+		}
 	};
 
 	static void createInstance(QObject *parent = NULL);
+	static void resetToolBars();
 	static void setToolBar(ToolBarsManager::ToolBarDefinition definition);
 	static void setToolBarsLocked(bool locked);
 	static ToolBarsManager* getInstance();
@@ -85,7 +93,6 @@ public slots:
 	void configureToolBar(int identifier = -1);
 	void resetToolBar(int identifier = -1);
 	void removeToolBar(int identifier = -1);
-	void resetToolBars();
 
 protected:
 	void timerEvent(QTimerEvent *event);

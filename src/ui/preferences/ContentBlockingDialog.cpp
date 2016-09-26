@@ -42,7 +42,7 @@ ContentBlockingDialog::ContentBlockingDialog(QWidget *parent) : Dialog(parent),
 {
 	m_ui->setupUi(this);
 
-	const QStringList globalProfiles(SettingsManager::getValue(SettingsManager::Content_BlockingProfilesOption).toStringList());
+	const QStringList globalProfiles(SettingsManager::getValue(SettingsManager::ContentBlocking_ProfilesOption).toStringList());
 
 	m_ui->profilesViewWidget->setModel(ContentBlockingManager::createModel(this, globalProfiles));
 	m_ui->profilesViewWidget->setItemDelegate(new OptionDelegate(true, this));
@@ -54,7 +54,7 @@ ContentBlockingDialog::ContentBlockingDialog(QWidget *parent) : Dialog(parent),
 	m_ui->enableCustomRulesCheckBox->setChecked(globalProfiles.contains("custom"));
 
 	QStandardItemModel *customRulesModel(new QStandardItemModel(this));
-	QFile file(SessionsManager::getWritableDataPath("blocking/custom.txt"));
+	QFile file(SessionsManager::getWritableDataPath("contentBlocking/custom.txt"));
 
 	if (file.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
@@ -211,7 +211,7 @@ void ContentBlockingDialog::save()
 
 	if (m_ui->enableCustomRulesCheckBox->isChecked())
 	{
-		QFile file(SessionsManager::getWritableDataPath("blocking/custom.txt"));
+		QFile file(SessionsManager::getWritableDataPath("contentBlocking/custom.txt"));
 
 		if (!file.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text))
 		{
@@ -241,7 +241,7 @@ void ContentBlockingDialog::save()
 		}
 	}
 
-	SettingsManager::setValue(SettingsManager::Content_BlockingProfilesOption, profiles);
+	SettingsManager::setValue(SettingsManager::ContentBlocking_ProfilesOption, profiles);
 	SettingsManager::setValue(SettingsManager::ContentBlocking_EnableWildcardsOption, m_ui->enableWildcardsCheckBox->isChecked());
 
 	close();

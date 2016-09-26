@@ -39,11 +39,15 @@ QtWebKitWebBackend* QtWebKitWebBackend::m_instance = NULL;
 QPointer<WebWidget> QtWebKitWebBackend::m_activeWidget = NULL;
 QMap<QString, QString> QtWebKitWebBackend::m_userAgentComponents;
 QMap<QString, QString> QtWebKitWebBackend::m_userAgents;
+int QtWebKitWebBackend::m_enableMediaOption = -1;
+int QtWebKitWebBackend::m_enableMediaSourceOption = -1;
 
 QtWebKitWebBackend::QtWebKitWebBackend(QObject *parent) : WebBackend(parent),
 	m_isInitialized(false)
 {
 	m_instance = this;
+	m_enableMediaOption = SettingsManager::registerOption(QLatin1String("QtWebKitBackend/EnableMedia"), true, SettingsManager::BooleanType);
+	m_enableMediaSourceOption = SettingsManager::registerOption(QLatin1String("QtWebKitBackend/EnableMediaSource"), false, SettingsManager::BooleanType);
 
 	const QString cachePath(SessionsManager::getCachePath());
 
@@ -175,6 +179,13 @@ WebWidget* QtWebKitWebBackend::createWidget(bool isPrivate, ContentsWidget *pare
 	{
 		m_isInitialized = true;
 
+#ifndef OTTER_ENABLE_QTWEBKIT_LEGACY
+		QStringList pluginSearchPaths(QWebSettings::pluginSearchPaths());
+		pluginSearchPaths.append(QCoreApplication::applicationDirPath());
+
+		QWebSettings::setPluginSearchPaths(pluginSearchPaths);
+#endif
+
 		QWebHistoryInterface::setDefaultInterface(new QtWebKitHistoryInterface(this));
 
 		QWebSettings::setMaximumPagesInCache(SettingsManager::getValue(SettingsManager::Cache_PagesInMemoryLimitOption).toInt());
@@ -278,6 +289,21 @@ QString QtWebKitWebBackend::getActiveDictionary()
 QList<SpellCheckManager::DictionaryInformation> QtWebKitWebBackend::getDictionaries() const
 {
 	return SpellCheckManager::getDictionaries();
+}
+
+int QtWebKitWebBackend::getOptionIdentifier(QtWebKitWebBackend::OptionIdentifier identifier)
+{
+	switch (identifier)
+	{
+		case QtWebKitBackend_EnableMediaOption:
+			return m_enableMediaOption;
+		case QtWebKitBackend_EnableMediaSourceOption:
+			return m_enableMediaSourceOption;
+		default:
+			return -1;
+	}
+
+	return -1;
 }
 
 bool QtWebKitWebBackend::requestThumbnail(const QUrl &url, const QSize &size)

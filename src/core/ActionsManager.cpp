@@ -493,6 +493,7 @@ ActionsManager::ActionsManager(QObject *parent) : QObject(parent),
 	registerAction(ShowSidebarAction, QT_TRANSLATE_NOOP("actions", "Show Sidebar"), QString(), QIcon(), (IsEnabledFlag | IsCheckableFlag));
 	registerAction(ShowErrorConsoleAction, QT_TRANSLATE_NOOP("actions", "Show Error Console"), QString(), QIcon(), (IsEnabledFlag | IsCheckableFlag));
 	registerAction(LockToolBarsAction, QT_TRANSLATE_NOOP("actions", "Lock Toolbars"), QString(), QIcon(), (IsEnabledFlag | IsCheckableFlag));
+	registerAction(ResetToolBarsAction, QT_TRANSLATE_NOOP("actions", "Reset to Defaults…"), QT_TRANSLATE_NOOP("actions", "Reset Toolbars to Defaults…"), QIcon(), (IsEnabledFlag | IsCheckableFlag));
 	registerAction(OpenPanelAction, QT_TRANSLATE_NOOP("actions", "Open Panel as Tab"), QString(), ThemesManager::getIcon(QLatin1String("arrow-right")));
 	registerAction(ClosePanelAction, QT_TRANSLATE_NOOP("actions", "Close Panel"), QString(), ThemesManager::getIcon(QLatin1String("window-close")));
 	registerAction(ContentBlockingAction, QT_TRANSLATE_NOOP("actions", "Content Blocking…"));
@@ -613,6 +614,18 @@ void ActionsManager::triggerAction(int identifier, QObject *parent, const QVaria
 	}
 }
 
+void ActionsManager::registerAction(int identifier, const QString &text, const QString &description, const QIcon &icon, ActionFlags flags)
+{
+	ActionsManager::ActionDefinition action;
+	action.text = text;
+	action.description = description;
+	action.icon = icon;
+	action.identifier = identifier;
+	action.flags = flags;
+
+	m_definitions.append(action);
+}
+
 ActionsManager* ActionsManager::getInstance()
 {
 	return m_instance;
@@ -685,20 +698,6 @@ ActionsManager::ActionDefinition ActionsManager::getActionDefinition(int identif
 	}
 
 	return m_definitions[identifier];
-}
-
-int ActionsManager::registerAction(int identifier, const QString &text, const QString &description, const QIcon &icon, ActionFlags flags)
-{
-	ActionsManager::ActionDefinition action;
-	action.text = text;
-	action.description = description;
-	action.icon = icon;
-	action.identifier = identifier;
-	action.flags = flags;
-
-	m_definitions.append(action);
-
-	return (m_definitions.count() - 1);
 }
 
 int ActionsManager::getActionIdentifier(const QString &name)

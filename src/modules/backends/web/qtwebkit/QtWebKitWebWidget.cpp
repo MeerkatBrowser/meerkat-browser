@@ -21,9 +21,10 @@
 #include "QtWebKitWebWidget.h"
 #include "QtWebKitInspector.h"
 #include "QtWebKitNetworkManager.h"
+#include "QtWebKitPage.h"
 #include "QtWebKitPluginFactory.h"
 #include "QtWebKitPluginWidget.h"
-#include "QtWebKitPage.h"
+#include "QtWebKitWebBackend.h"
 #include "../../../../core/ActionsManager.h"
 #include "../../../../core/AddonsManager.h"
 #include "../../../../core/BookmarksManager.h"
@@ -526,14 +527,32 @@ void QtWebKitWebWidget::linkHovered(const QString &link)
 
 void QtWebKitWebWidget::clearPluginToken()
 {
-	m_pluginToken = QString();
+	QList<QWebFrame*> frames;
+	frames.append(m_page->mainFrame());
+
+	while (!frames.isEmpty())
+	{
+		QWebFrame *frame(frames.takeFirst());
+		QWebElement element(frame->documentElement().findFirst(QStringLiteral("object[data-otter-browser=\"%1\"], embed[data-otter-browser=\"%1\"]").arg(m_pluginToken)));
+
+		if (!element.isNull())
+		{
+			element.removeAttribute(QLatin1String("data-otter-browser"));
+
+			break;
+		}
+
+		frames.append(frame->childFrames());
+	}
 
 	Action *loadPluginsAction(getExistingAction(ActionsManager::LoadPluginsAction));
 
 	if (loadPluginsAction)
 	{
-		loadPluginsAction->setEnabled(true);
+		loadPluginsAction->setEnabled(findChildren<QtWebKitPluginWidget*>().count() > 0);
 	}
+
+	m_pluginToken = QString();
 }
 
 void QtWebKitWebWidget::resetSpellCheck(QWebElement element)
@@ -846,8 +865,8 @@ void QtWebKitWebWidget::updateOptions(const QUrl &url)
 	settings->setAttribute(QWebSettings::OfflineWebApplicationCacheEnabled, getOption(SettingsManager::Browser_EnableOfflineWebApplicationCacheOption, url).toBool());
 	settings->setDefaultTextEncoding(getOption(SettingsManager::Content_DefaultCharacterEncodingOption, url).toString());
 #ifndef OTTER_ENABLE_QTWEBKIT_LEGACY
-//TODO Use registerOption()
-//	settings->setAttribute(QWebSettings::MediaSourceEnabled, getOption(SettingsManager::QtWebKitBackend_EnableMediaSourceOption, url).toBool());
+	settings->setAttribute(QWebSettings::MediaEnabled, getOption(QtWebKitWebBackend::getOptionIdentifier(QtWebKitWebBackend::QtWebKitBackend_EnableMediaOption), url).toBool());
+	settings->setAttribute(QWebSettings::MediaSourceEnabled, getOption(QtWebKitWebBackend::getOptionIdentifier(QtWebKitWebBackend::QtWebKitBackend_EnableMediaSourceOption), url).toBool());
 
 	if (settings->testAttribute(QWebSettings::PrivateBrowsingEnabled))
 	{
@@ -2556,20 +2575,10 @@ bool QtWebKitWebWidget::eventFilter(QObject *object, QEvent *event)
 			{
 				m_pluginToken = QUuid::createUuid().toString();
 
-				hitResult.element().setAttribute(QLatin1String("data-otter-browser"), m_pluginToken);
-
 				QWebElement element(hitResult.element().clone());
+				element.setAttribute(QLatin1String("data-otter-browser"), m_pluginToken);
 
 				hitResult.element().replace(element);
-
-				element.removeAttribute(QLatin1String("data-otter-browser"));
-
-				Action *loadPluginsAction(getExistingAction(ActionsManager::LoadPluginsAction));
-
-				if (loadPluginsAction)
-				{
-					loadPluginsAction->setEnabled(findChildren<QtWebKitPluginWidget*>().count() > 0);
-				}
 
 				return true;
 			}

@@ -298,7 +298,7 @@ void ToolBarsManager::resetToolBars()
 
 	for (int i = 0; i < customToolBars.count(); ++i)
 	{
-		emit toolBarRemoved(customToolBars.at(i));
+		emit m_instance->toolBarRemoved(customToolBars.at(i));
 	}
 
 	m_definitions.clear();
@@ -314,7 +314,7 @@ void ToolBarsManager::resetToolBars()
 
 	for (int i = 0; i < m_definitions.count(); ++i)
 	{
-		emit toolBarModified(i);
+		emit m_instance->toolBarModified(i);
 	}
 
 	m_instance->scheduleSave();
@@ -506,11 +506,6 @@ QHash<QString, ToolBarsManager::ToolBarDefinition> ToolBarsManager::loadToolBars
 			toolBar.normalVisibility = AlwaysVisibleToolBar;
 		}
 
-		if (isDefault)
-		{
-			toolBar.title = QCoreApplication::translate("actions", toolBar.title.toUtf8());
-		}
-
 		if (location == QLatin1String("top"))
 		{
 			toolBar.location = Qt::TopToolBarArea;
@@ -560,7 +555,8 @@ QVector<ToolBarsManager::ToolBarDefinition> ToolBarsManager::getToolBarDefinitio
 {
 	if (m_definitions.isEmpty())
 	{
-		const QHash<QString, ToolBarsManager::ToolBarDefinition> defaultDefinitions(loadToolBars(SessionsManager::getReadableDataPath(QLatin1String("toolBars.json"), true), true));
+		const QString bundledToolBarsPath(SessionsManager::getReadableDataPath(QLatin1String("toolBars.json"), true));
+		const QHash<QString, ToolBarsManager::ToolBarDefinition> defaultDefinitions(loadToolBars(bundledToolBarsPath, true));
 
 		m_definitions.reserve(OtherToolBar);
 
@@ -571,7 +567,7 @@ QVector<ToolBarsManager::ToolBarDefinition> ToolBarsManager::getToolBarDefinitio
 
 		const QString customToolBarsPath(SessionsManager::getReadableDataPath(QLatin1String("toolBars.json")));
 
-		if (QFile::exists(customToolBarsPath))
+		if (QFile::exists(customToolBarsPath) && bundledToolBarsPath != customToolBarsPath)
 		{
 			const QHash<QString, ToolBarDefinition> customDefinitions(loadToolBars(customToolBarsPath, false));
 
