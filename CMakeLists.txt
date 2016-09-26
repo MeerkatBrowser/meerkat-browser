@@ -478,7 +478,7 @@ elseif (APPLE)
 
 	target_link_libraries(meerkat-browser ${FRAMEWORK_Cocoa} ${FRAMEWORK_Foundation})
 elseif (UNIX)
-	target_link_libraries(meerkat-browser Qt5::DBus)
+	target_link_libraries(otter-browser Qt5::DBus)
 endif (WIN32)
 
 target_link_libraries(meerkat-browser Qt5::Core Qt5::Gui Qt5::Multimedia Qt5::Network Qt5::PrintSupport Qt5::Qml Qt5::Widgets Qt5::XmlPatterns)
