@@ -48,7 +48,7 @@ void SettingsManager::createInstance(const QString &path, QObject *parent)
 	{
 		m_instance = new SettingsManager(parent);
 		m_optionIdentifierEnumerator = m_instance->metaObject()->indexOfEnumerator(QLatin1String("OptionIdentifier").data());
-		m_globalPath = path + QLatin1String("/meerkat.conf");
+		m_globalPath = path + QLatin1String("/otter.conf");
 		m_overridePath = path + QLatin1String("/override.ini");
 
 		QSettings defaults(QLatin1String(":/schemas/options.ini"), QSettings::IniFormat);
