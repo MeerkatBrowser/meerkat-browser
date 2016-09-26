@@ -22,7 +22,7 @@
 
 #include "ActionsManager.h"
 
-namespace Meerkat
+namespace Otter
 {
 
 class ToolBarsManager : public QObject
