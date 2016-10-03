@@ -107,6 +107,6 @@ signals:
 
 }
 
-Q_DECLARE_OPERATORS_FOR_FLAGS(Meerkat::Application::MainWindowFlags)
+Q_DECLARE_OPERATORS_FOR_FLAGS(Otter::Application::MainWindowFlags)
 
 #endif
