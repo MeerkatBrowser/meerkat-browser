@@ -810,7 +810,7 @@ QString Application::createReport()
 	stream << QLatin1String("\n\t");
 	stream.setFieldWidth(20);
 	stream << QLatin1String("Configuration");
-	stream << SessionsManager::getWritableDataPath(QLatin1String("meerkat.conf"));
+	stream << SessionsManager::getWritableDataPath(QLatin1String("otter.conf"));
 	stream.setFieldWidth(0);
 	stream << QLatin1String("\n\t");
 	stream.setFieldWidth(20);
