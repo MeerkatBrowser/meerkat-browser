@@ -24,7 +24,7 @@
 #include "core/WindowsManager.h"
 #include "ui/MainWindow.h"
 #include "ui/StartupDialog.h"
-#ifdef OTTER_ENABLE_CRASHREPORTS
+#ifdef MEERKAT_ENABLE_CRASHREPORTS
 #if defined(Q_OS_WIN32)
 #include "../3rdparty/breakpad/src/client/windows/handler/exception_handler.h"
 #elif defined(Q_OS_LINUX)
@@ -56,9 +56,9 @@ void meerkatMessageHander(QtMsgType type, const QMessageLogContext &context, con
 }
 #endif
 
-#ifdef OTTER_ENABLE_CRASHREPORTS
+#ifdef MEERKAT_ENABLE_CRASHREPORTS
 #if defined(Q_OS_WIN32)
-bool otterCrashDumpHandler(const wchar_t *dumpDirectory, const wchar_t *dumpIdentifier, void *context, EXCEPTION_POINTERS *exceptionInformation, MDRawAssertionInfo *assertionInformation, bool succeeded)
+bool meerkatCrashDumpHandler(const wchar_t *dumpDirectory, const wchar_t *dumpIdentifier, void *context, EXCEPTION_POINTERS *exceptionInformation, MDRawAssertionInfo *assertionInformation, bool succeeded)
 {
 	Q_UNUSED(context)
 	Q_UNUSED(exceptionInformation)
@@ -78,7 +78,7 @@ bool otterCrashDumpHandler(const wchar_t *dumpDirectory, const wchar_t *dumpIden
 	return succeeded;
 }
 #elif defined(Q_OS_LINUX)
-bool otterCrashDumpHandler(const google_breakpad::MinidumpDescriptor &descriptor, void *context, bool succeeded)
+bool meerkatCrashDumpHandler(const google_breakpad::MinidumpDescriptor &descriptor, void *context, bool succeeded)
 {
 	Q_UNUSED(context)
 
@@ -103,11 +103,11 @@ int main(int argc, char *argv[])
 	qInstallMessageHandler(meerkatMessageHander);
 #endif
 
-#ifdef OTTER_ENABLE_CRASHREPORTS
+#ifdef MEERKAT_ENABLE_CRASHREPORTS
 #if defined(Q_OS_WIN32)
-	new google_breakpad::ExceptionHandler(reinterpret_cast<const wchar_t*>(QStandardPaths::writableLocation(QStandardPaths::TempLocation).utf16()), 0, otterCrashDumpHandler, 0, true);
+    new google_breakpad::ExceptionHandler(reinterpret_cast<const wchar_t*>(QStandardPaths::writableLocation(QStandardPaths::TempLocation).utf16()), 0, meerkatrCrashDumpHandler, 0, true);
 #elif defined(Q_OS_LINUX)
-	new google_breakpad::ExceptionHandler(google_breakpad::MinidumpDescriptor(QStandardPaths::writableLocation(QStandardPaths::TempLocation).toStdString()), 0, otterCrashDumpHandler, 0, true, -1);
+    new google_breakpad::ExceptionHandler(google_breakpad::MinidumpDescriptor(QStandardPaths::writableLocation(QStandardPaths::TempLocation).toStdString()), 0, meerkatCrashDumpHandler, 0, true, -1);
 #endif
 #endif
 

@@ -15,8 +15,8 @@ set(MINOR_VERSION "9")
 set(PATCH_VERSION "11")
 
 add_definitions(-DMEERKAT_VERSION_MAIN="${MAJOR_VERSION}.${MINOR_VERSION}.${PATCH_VERSION}")
-add_definitions(-DMEERKAT_VERSION_WEEKLY="141")
-add_definitions(-DMEERKAT_VERSION_CONTEXT=" weekly 141")
+add_definitions(-DMEERKAT_VERSION_WEEKLY="142")
+add_definitions(-DMEERKAT_VERSION_CONTEXT=" weekly 142")
 add_definitions(-DMEERKAT_INSTALL_PREFIX="${CMAKE_INSTALL_PREFIX}")
 
 if (EXISTS "${CMAKE_ROOT}/Modules/CPack.cmake")
@@ -372,19 +372,19 @@ if (Qt5WebKitWidgets_FOUND AND ENABLE_QTWEBKIT)
 endif (Qt5WebKitWidgets_FOUND AND ENABLE_QTWEBKIT)
 
 if (ENABLE_CRASHREPORTS)
-	add_definitions(-DOTTER_ENABLE_CRASHREPORTS)
+        add_definitions(-DMEERKAT_ENABLE_CRASHREPORTS)
 	include_directories(${CMAKE_SOURCE_DIR}/3rdparty/breakpad/src/)
 
 	if (WIN32)
-		set(otter_src
-			${otter_src}
+                set(meerkat_src
+                        ${meerkat_src}
 			3rdparty/breakpad/src/common/windows/guid_string.cc
 			3rdparty/breakpad/src/client/windows/crash_generation/crash_generation_client.cc
 			3rdparty/breakpad/src/client/windows/handler/exception_handler.cc
 		)
 	elseif (CMAKE_SYSTEM_NAME MATCHES "Linux")
-		set(otter_src
-			${otter_src}
+                set(meerkat_src
+                        ${meerkat_src}
 			3rdparty/breakpad/src/client/minidump_file_writer.cc
 			3rdparty/breakpad/src/client/linux/crash_generation/crash_generation_client.cc
 			3rdparty/breakpad/src/client/linux/dump_writer_common/thread_info.cc
@@ -519,14 +519,14 @@ elseif (APPLE)
 
 	target_link_libraries(meerkat-browser ${FRAMEWORK_Cocoa} ${FRAMEWORK_Foundation})
 elseif (UNIX)
-	target_link_libraries(otter-browser Qt5::DBus)
+        target_link_libraries(meerkat-browser Qt5::DBus)
 
 	if (ENABLE_CRASHREPORTS)
-		target_link_libraries(otter-browser -lpthread)
+                target_link_libraries(meerkat-browser -lpthread)
 	endif (ENABLE_CRASHREPORTS)
 endif (WIN32)
 
-target_link_libraries(otter-browser Qt5::Core Qt5::Gui Qt5::Multimedia Qt5::Network Qt5::PrintSupport Qt5::Qml Qt5::Widgets Qt5::XmlPatterns -lpthread)
+target_link_libraries(meerkat-browser Qt5::Core Qt5::Gui Qt5::Multimedia Qt5::Network Qt5::PrintSupport Qt5::Qml Qt5::Widgets Qt5::XmlPatterns -lpthread)
 
 set(MEERKAT_INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX})
 set(XDG_APPS_INSTALL_DIR ${CMAKE_INSTALL_PREFIX}/share/applications CACHE FILEPATH "Install path for .desktop files")

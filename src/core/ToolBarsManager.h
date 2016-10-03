@@ -24,7 +24,7 @@
 
 #include <QtCore/QCoreApplication>
 
-namespace Otter
+namespace Meerkat
 {
 
 class ToolBarsManager : public QObject

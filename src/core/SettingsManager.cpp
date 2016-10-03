@@ -53,7 +53,7 @@ void SettingsManager::createInstance(const QString &path, QObject *parent)
 	}
 
 	m_instance = new SettingsManager(parent);
-	m_globalPath = path + QLatin1String("/otter.conf");
+    m_globalPath = path + QLatin1String("/meerkat.conf");
 	m_overridePath = path + QLatin1String("/override.ini");
 	m_optionIdentifierEnumerator = m_instance->metaObject()->indexOfEnumerator(QLatin1String("OptionIdentifier").data());
 	m_identifierCounter = m_instance->metaObject()->enumerator(m_optionIdentifierEnumerator).keyCount();
@@ -245,7 +245,7 @@ void SettingsManager::createInstance(const QString &path, QObject *parent)
 	registerOption(Updates_AutomaticInstallOption, false, BooleanType);
 	registerOption(Updates_CheckIntervalOption, 7, IntegerType);
 	registerOption(Updates_LastCheckOption, QString(), StringType);
-	registerOption(Updates_ServerUrlOption, QLatin1String("https://www.otter-browser.org/updates/update.json"), StringType);
+    registerOption(Updates_ServerUrlOption, QLatin1String("http://meerkat-browser.sourceforge.net/updates/update.json"), StringType);
 }
 
 void SettingsManager::removeOverride(const QUrl &url, const QString &key)
