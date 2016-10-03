@@ -33,10 +33,21 @@ class PasswordsStorageBackend : public Addon
 public:
 	explicit PasswordsStorageBackend(QObject *parent = NULL);
 
+	virtual void clearPasswords(const QString &host = QString());
 	virtual void addPassword(const PasswordsManager::PasswordInformation &password);
+	virtual void removePassword(const PasswordsManager::PasswordInformation &password);
 	QUrl getUpdateUrl() const;
-	virtual QList<PasswordsManager::PasswordInformation> getPasswords(const QUrl &url);
+	virtual QStringList getHosts();
+	virtual QList<PasswordsManager::PasswordInformation> getPasswords(const QUrl &url, PasswordsManager::PasswordTypes types = PasswordsManager::AnyPassword);
 	AddonType getType() const;
+	virtual PasswordsManager::PasswordMatch hasPassword(const PasswordsManager::PasswordInformation &password);
+	virtual bool hasPasswords(const QUrl &url, PasswordsManager::PasswordTypes types = PasswordsManager::AnyPassword);
+
+protected:
+	static PasswordsManager::PasswordMatch comparePasswords(const PasswordsManager::PasswordInformation &first, const PasswordsManager::PasswordInformation &second);
+
+signals:
+	void passwordsModified();
 };
 
 }

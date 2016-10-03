@@ -550,27 +550,30 @@ QNetworkReply* QtWebKitNetworkManager::createRequest(QNetworkAccessManager::Oper
 	{
 		if (QString(request.rawHeader(QByteArray("X-Otter-Token"))) == m_widget->getPasswordToken())
 		{
-			const QJsonObject object(QJsonDocument::fromJson(QByteArray::fromBase64(request.rawHeader(QByteArray("X-Otter-Data")))).object());
+			const QJsonObject passwordObject(QJsonDocument::fromJson(QByteArray::fromBase64(request.rawHeader(QByteArray("X-Otter-Data")))).object());
+			const QJsonArray fieldsArray(passwordObject.value(QLatin1String("fields")).toArray());
 			PasswordsManager::PasswordInformation password;
-			password.url = QUrl(object.value(QLatin1String("url")).toString());
+			password.url = QUrl(passwordObject.value(QLatin1String("url")).toString());
+			password.timeAdded = QDateTime::currentDateTime();
 			password.type = PasswordsManager::FormPassword;
 
-			const QJsonObject fields(object.value(QLatin1String("fields")).toObject());
-			QJsonObject::const_iterator iterator;
-
-			for (iterator = fields.constBegin(); iterator != fields.constEnd(); ++iterator)
+			for (int i = 0; i < fieldsArray.count(); ++i)
 			{
-				password.fields[iterator.key()] = iterator.value().toString();
+				const QJsonObject fieldObject(fieldsArray.at(i).toObject());
+				PasswordsManager::FieldInformation field;
+				field.name = fieldObject.value(QLatin1String("name")).toString();
+				field.value = fieldObject.value(QLatin1String("value")).toString();
+				field.type = ((fieldObject.value(QLatin1String("type")).toString() == QLatin1String("password")) ? PasswordsManager::PasswordField : PasswordsManager::TextField);
+
+				password.fields.append(field);
 			}
 
-			const QJsonArray passwords(object.value(QLatin1String("passwords")).toArray());
+			PasswordsManager::PasswordMatch match(PasswordsManager::hasPassword(password));
 
-			for (int i = 0; i < passwords.count(); ++i)
+			if (match != PasswordsManager::FullMatch)
 			{
-				password.passwords.append(passwords.at(i).toString());
+				m_widget->notifySavePasswordRequested(password, (match == PasswordsManager::PartialMatch));
 			}
-
-			m_widget->notifyAddPasswordRequested(password);
 		}
 
 		QUrl url;

@@ -657,6 +657,17 @@ void MainWindow::triggerAction(int identifier, const QVariantMap &parameters)
 			}
 
 			break;
+		case ActionsManager::PasswordsAction:
+			{
+				const QUrl url(QLatin1String("about:passwords"));
+
+				if (!SessionsManager::hasUrl(url, true))
+				{
+					m_windowsManager->open(url);
+				}
+			}
+
+			break;
 		case ActionsManager::TransfersAction:
 			{
 				const QUrl url(QLatin1String("about:transfers"));
@@ -702,7 +713,7 @@ void MainWindow::triggerAction(int identifier, const QVariantMap &parameters)
 			break;
 		case ActionsManager::DiagnosticReportAction:
 			{
-				ReportDialog *dialog(new ReportDialog(this));
+				ReportDialog *dialog(new ReportDialog(Application::FullReport, this));
 				dialog->show();
 			}
 

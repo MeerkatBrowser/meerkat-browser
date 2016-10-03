@@ -19,6 +19,7 @@
 
 #include "PasswordsManager.h"
 #include "PasswordsStorageBackend.h"
+#include "../modules/backends/passwords/file/FilePasswordsStorageBackend.h"
 
 namespace Meerkat
 {
@@ -35,6 +36,17 @@ void PasswordsManager::createInstance(QObject *parent)
 	if (!m_instance)
 	{
 		m_instance = new PasswordsManager(parent);
+		m_backend = new FilePasswordsStorageBackend(m_instance);
+
+		connect(m_backend, SIGNAL(passwordsModified()), m_instance, SIGNAL(passwordsModified()));
+	}
+}
+
+void PasswordsManager::clearPasswords(const QString &host)
+{
+	if (m_backend)
+	{
+		m_backend->clearPasswords(host);
 	}
 }
 
@@ -46,19 +58,37 @@ void PasswordsManager::addPassword(const PasswordInformation &password)
 	}
 }
 
+void PasswordsManager::removePassword(const PasswordsManager::PasswordInformation &password)
+{
+	if (m_backend)
+	{
+		m_backend->removePassword(password);
+	}
+}
+
 PasswordsManager* PasswordsManager::getInstance()
 {
 	return m_instance;
 }
 
-QList<PasswordsManager::PasswordInformation> PasswordsManager::getPasswords(const QUrl &url)
+QStringList PasswordsManager::getHosts()
 {
-	return (m_backend ? m_backend->getPasswords(url) : QList<PasswordsManager::PasswordInformation>());
+	return (m_backend ? m_backend->getHosts() : QStringList());
 }
 
-bool PasswordsManager::isEncryptionAvailable()
+QList<PasswordsManager::PasswordInformation> PasswordsManager::getPasswords(const QUrl &url, PasswordTypes types)
 {
-	return false;
+	return (m_backend ? m_backend->getPasswords(url, types) : QList<PasswordsManager::PasswordInformation>());
+}
+
+PasswordsManager::PasswordMatch PasswordsManager::hasPassword(const PasswordsManager::PasswordInformation &password)
+{
+	return (m_backend ? m_backend->hasPassword(password) : NoMatch);
+}
+
+bool PasswordsManager::hasPasswords(const QUrl &url, PasswordTypes types)
+{
+	return (m_backend ? m_backend->hasPasswords(url, types) : false);
 }
 
 }

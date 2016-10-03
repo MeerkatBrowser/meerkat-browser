@@ -54,6 +54,9 @@
 
 #include <QtCore/QDataStream>
 #include <QtCore/QFileInfo>
+#include <QtCore/QJsonArray>
+#include <QtCore/QJsonDocument>
+#include <QtCore/QJsonObject>
 #include <QtCore/QMimeData>
 #include <QtCore/QTimer>
 #include <QtCore/QUuid>
@@ -121,6 +124,7 @@ QtWebKitWebWidget::QtWebKitWebWidget(bool isPrivate, WebBackend *backend, QtWebK
 	if (isPrivate)
 	{
 		m_webView->settings()->setAttribute(QWebSettings::LocalStorageEnabled, false);
+		m_webView->settings()->setAttribute(QWebSettings::OfflineStorageDatabaseEnabled, false);
 		m_webView->settings()->setAttribute(QWebSettings::OfflineWebApplicationCacheEnabled, false);
 	}
 #endif
@@ -369,7 +373,7 @@ void QtWebKitWebWidget::pageLoadFinished()
 		}
 	}
 
-	if (!SettingsManager::getValue(SettingsManager::Browser_EnablePasswordsManagerOption).toBool() || !SettingsManager::getValue(SettingsManager::Browser_AskToSavePasswordOption).toBool())
+	if (!SettingsManager::getValue(SettingsManager::Browser_RememberPasswordsOption).toBool())
 	{
 		return;
 	}
@@ -396,12 +400,12 @@ void QtWebKitWebWidget::pageLoadFinished()
 
 	const QString script(QString(file.readAll()).arg(m_passwordToken));
 
+	file.close();
+
 	for (int j = 0; j < frames.count(); ++j)
 	{
 		frames.at(j)->documentElement().evaluateJavaScript(script);
 	}
-
-	file.close();
 }
 
 void QtWebKitWebWidget::downloadFile(const QNetworkRequest &request)
@@ -829,9 +833,9 @@ void QtWebKitWebWidget::notifyPermissionRequested(QWebFrame *frame, QWebPage::Fe
 	}
 }
 
-void QtWebKitWebWidget::notifyAddPasswordRequested(const PasswordsManager::PasswordInformation &password)
+void QtWebKitWebWidget::notifySavePasswordRequested(const PasswordsManager::PasswordInformation &password, bool isUpdate)
 {
-	emit requestedAddPassword(password);
+	emit requestedSavePassword(password, isUpdate);
 }
 
 void QtWebKitWebWidget::notifyContentStateChanged()
@@ -871,6 +875,7 @@ void QtWebKitWebWidget::updateOptions(const QUrl &url)
 	if (settings->testAttribute(QWebSettings::PrivateBrowsingEnabled))
 	{
 		settings->setAttribute(QWebSettings::LocalStorageEnabled, false);
+		settings->setAttribute(QWebSettings::OfflineStorageDatabaseEnabled, false);
 		settings->setAttribute(QWebSettings::OfflineWebApplicationCacheEnabled, false);
 	}
 #endif
@@ -938,6 +943,39 @@ void QtWebKitWebWidget::removeHistoryIndex(int index, bool purge)
 	}
 
 	setHistory(history);
+}
+
+void QtWebKitWebWidget::fillPassword(const PasswordsManager::PasswordInformation &password)
+{
+	QFile file(QLatin1String(":/modules/backends/web/qtwebkit/resources/formFiller.js"));
+	file.open(QIODevice::ReadOnly);
+
+	QJsonArray fieldsArray;
+
+	for (int i = 0; i < password.fields.count(); ++i)
+	{
+		QJsonObject fieldObject;
+		fieldObject.insert(QLatin1String("name"), password.fields.at(i).name);
+		fieldObject.insert(QLatin1String("value"), password.fields.at(i).value);
+		fieldObject.insert(QLatin1String("type"), ((password.fields.at(i).type == PasswordsManager::PasswordField) ? QLatin1String("password") : QLatin1String("text")));
+
+		fieldsArray.append(fieldObject);
+	}
+
+	const QString script(QString(file.readAll()).arg(QString(QJsonDocument(fieldsArray).toJson(QJsonDocument::Indented))));
+
+	file.close();
+
+	QList<QWebFrame*> frames;
+	frames.append(m_page->mainFrame());
+
+	while (!frames.isEmpty())
+	{
+		QWebFrame *frame(frames.takeFirst());
+		frame->documentElement().evaluateJavaScript(script);
+
+		frames.append(frame->childFrames());
+	}
 }
 
 void QtWebKitWebWidget::triggerAction(int identifier, const QVariantMap &parameters)

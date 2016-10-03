@@ -27,8 +27,6 @@
 #include <QtCore/QStandardPaths>
 #include <QtCore/QTextStream>
 #include <QtCore/QVector>
-#include <QtGui/QColor>
-#include <QtGui/QFont>
 
 namespace Meerkat
 {
@@ -77,9 +75,9 @@ void SettingsManager::createInstance(const QString &path, QObject *parent)
 	registerOption(AddressField_SuggestLocalPathsOption, true, BooleanType);
 	registerOption(AddressField_SuggestSearchOption, true, BooleanType);
 	registerOption(AddressField_SuggestSpecialPagesOption, true, BooleanType);
-	registerOption(Backends_WebOption, QLatin1String("qtwebkit"), EnumerationType, QStringList({QLatin1String("qtwebkit")}));
+	registerOption(Backends_PasswordsOption, QLatin1String("file"), EnumerationType, QStringList(QLatin1String("file")));
+	registerOption(Backends_WebOption, QLatin1String("qtwebkit"), EnumerationType, QStringList(QLatin1String("qtwebkit")));
 	registerOption(Browser_AlwaysAskWhereToSaveDownloadOption, true, BooleanType);
-	registerOption(Browser_AskToSavePasswordOption, true, BooleanType);
 	registerOption(Browser_DelayRestoringOfBackgroundTabsOption, false, BooleanType);
 	registerOption(Browser_EnableFullScreenOption, QLatin1String("ask"), EnumerationType, QStringList({QLatin1String("ask"), QLatin1String("allow"), QLatin1String("disallow")}));
 	registerOption(Browser_EnableGeolocationOption, QLatin1String("ask"), EnumerationType, QStringList({QLatin1String("ask"), QLatin1String("allow"), QLatin1String("disallow")}));
@@ -94,7 +92,6 @@ void SettingsManager::createInstance(const QString &path, QObject *parent)
 	registerOption(Browser_EnableNotificationsOption, QLatin1String("ask"), EnumerationType, QStringList({QLatin1String("ask"), QLatin1String("allow"), QLatin1String("disallow")}));
 	registerOption(Browser_EnableOfflineStorageDatabaseOption, false, BooleanType);
 	registerOption(Browser_EnableOfflineWebApplicationCacheOption, false, BooleanType);
-	registerOption(Browser_EnablePasswordsManagerOption, true, BooleanType);
 	registerOption(Browser_EnablePluginsOption, QLatin1String("onDemand"), EnumerationType, QStringList({QLatin1String("enabled"), QLatin1String("onDemand"), QLatin1String("disabled")}));
 	registerOption(Browser_EnablePointerLockOption, QLatin1String("ask"), EnumerationType, QStringList({QLatin1String("ask"), QLatin1String("allow"), QLatin1String("disallow")}));
 	registerOption(Browser_EnableSingleKeyShortcutsOption, true, BooleanType);
@@ -108,13 +105,14 @@ void SettingsManager::createInstance(const QString &path, QObject *parent)
 	registerOption(Browser_JavaScriptCanDisableContextMenuOption, true, BooleanType);
 	registerOption(Browser_JavaScriptCanOpenWindowsOption, true, BooleanType);
 	registerOption(Browser_JavaScriptCanShowStatusMessagesOption, false, BooleanType);
-	registerOption(Browser_KeyboardShortcutsProfilesOrderOption, QStringList(), ListType);
+	registerOption(Browser_KeyboardShortcutsProfilesOrderOption, QStringList({QLatin1String("platform"), QLatin1String("default")}), ListType);
 	registerOption(Browser_LocaleOption, QLatin1String("system"), StringType);
-	registerOption(Browser_MouseProfilesOrderOption, QStringList(), ListType);
+	registerOption(Browser_MouseProfilesOrderOption, QStringList(QLatin1String("default")), ListType);
 	registerOption(Browser_OfflineStorageLimitOption, 10240, IntegerType);
 	registerOption(Browser_OfflineWebApplicationCacheLimitOption, 10240, IntegerType);
 	registerOption(Browser_OpenLinksInNewTabOption, true, BooleanType);
 	registerOption(Browser_PrivateModeOption, false, BooleanType);
+	registerOption(Browser_RememberPasswordsOption, false, BooleanType);
 	registerOption(Browser_ReuseCurrentTabOption, false, BooleanType);
 	registerOption(Browser_ShowSelectionContextMenuOnDoubleClickOption, false, BooleanType);
 	registerOption(Browser_SpellCheckDictionaryOption, QString(), StringType);
@@ -129,24 +127,24 @@ void SettingsManager::createInstance(const QString &path, QObject *parent)
 	registerOption(Choices_WarnOpenBookmarkFolderOption, true, BooleanType);
 	registerOption(Choices_WarnQuitOption, QLatin1String("noWarn"), EnumerationType, QStringList({QLatin1String("alwaysWarn"), QLatin1String("warnOpenTabs"), QLatin1String("noWarn")}));
 	registerOption(Choices_WarnQuitTransfersOption, true, BooleanType);
-	registerOption(Content_BackgroundColorOption, QColor(QLatin1String("#FFFFFF")), ColorType);
-	registerOption(Content_CursiveFontOption, QFont(QLatin1String("Impact")), FontType);
+	registerOption(Content_BackgroundColorOption, QLatin1String("#FFFFFF"), ColorType);
+	registerOption(Content_CursiveFontOption, QLatin1String("Impact"), FontType);
 	registerOption(Content_DefaultCharacterEncodingOption, QString(), StringType);
 	registerOption(Content_DefaultFixedFontSizeOption, 16, IntegerType);
 	registerOption(Content_DefaultFontSizeOption, 16, IntegerType);
 	registerOption(Content_DefaultZoomOption, 100, IntegerType);
-	registerOption(Content_FantasyFontOption, QFont(QLatin1String("Comic Sans MS")), FontType);
-	registerOption(Content_FixedFontOption, QFont(QLatin1String("DejaVu Sans Mono")), FontType);
-	registerOption(Content_LinkColorOption, QColor(QLatin1String("#0000EE")), ColorType);
+	registerOption(Content_FantasyFontOption, QLatin1String("Comic Sans MS"), FontType);
+	registerOption(Content_FixedFontOption, QLatin1String("DejaVu Sans Mono"), FontType);
+	registerOption(Content_LinkColorOption, QLatin1String("#0000EE"), ColorType);
 	registerOption(Content_MinimumFontSizeOption, -1, IntegerType);
 	registerOption(Content_PageReloadTimeOption, -1, IntegerType);
 	registerOption(Content_PopupsPolicyOption, QLatin1String("ask"), EnumerationType, QStringList({QLatin1String("ask"), QLatin1String("blockAll"), QLatin1String("openAll"), QLatin1String("openAllInBackground")}));
-	registerOption(Content_SansSerifFontOption, QFont(QLatin1String("DejaVu Sans")), FontType);
-	registerOption(Content_SerifFontOption, QFont(QLatin1String("DejaVu Serif")), FontType);
-	registerOption(Content_StandardFontOption, QFont(QLatin1String("DejaVu Serif")), FontType);
-	registerOption(Content_TextColorOption, QColor(QLatin1String("#000000")), ColorType);
+	registerOption(Content_SansSerifFontOption, QLatin1String("DejaVu Sans"), FontType);
+	registerOption(Content_SerifFontOption, QLatin1String("DejaVu Serif"), FontType);
+	registerOption(Content_StandardFontOption, QLatin1String("DejaVu Serif"), FontType);
+	registerOption(Content_TextColorOption, QLatin1String("#000000"), ColorType);
 	registerOption(Content_UserStyleSheetOption, QString(), PathType);
-	registerOption(Content_VisitedLinkColorOption, QColor(QLatin1String("#551A8B")), ColorType);
+	registerOption(Content_VisitedLinkColorOption, QLatin1String("#551A8B"), ColorType);
 	registerOption(Content_ZoomTextOnlyOption, false, BooleanType);
 	registerOption(ContentBlocking_EnableContentBlockingOption, true, BooleanType);
 	registerOption(ContentBlocking_EnableWildcardsOption, true, BooleanType);
@@ -157,7 +155,7 @@ void SettingsManager::createInstance(const QString &path, QObject *parent)
 	registerOption(History_ClearOnCloseOption, QStringList(), ListType);
 	registerOption(History_DownloadsLimitPeriodOption, 7, IntegerType);
 	registerOption(History_ExpandBranchesOption, QLatin1String("first"), EnumerationType, QStringList({QLatin1String("first"), QLatin1String("all"), QLatin1String("none")}));
-	registerOption(History_ManualClearOptionsOption, QStringList(), ListType);
+	registerOption(History_ManualClearOptionsOption, QStringList({QLatin1String("browsing"), QLatin1String("cookies"), QLatin1String("forms"), QLatin1String("downloads"), QLatin1String("caches")}), ListType);
 	registerOption(History_ManualClearPeriodOption, 1, IntegerType);
 	registerOption(History_RememberBrowsingOption, true, BooleanType);
 	registerOption(History_RememberDownloadsOption, true, BooleanType);
@@ -186,11 +184,12 @@ void SettingsManager::createInstance(const QString &path, QObject *parent)
 	registerOption(Network_UserAgentOption, QLatin1String("default"), StringType);
 	registerOption(Network_WorkOfflineOption, false, BooleanType);
 	registerOption(Paths_DownloadsOption, QStandardPaths::writableLocation(QStandardPaths::DownloadLocation), PathType);
+	registerOption(Paths_OpenFileOption, QStandardPaths::standardLocations(QStandardPaths::HomeLocation).value(0), PathType);
 	registerOption(Paths_SaveFileOption, QStandardPaths::writableLocation(QStandardPaths::DownloadLocation), PathType);
 	registerOption(Proxy_AutomaticConfigurationPathOption, QString(), PathType);
 	registerOption(Proxy_CommonPortOption, 8080, IntegerType);
 	registerOption(Proxy_CommonServersOption, QString(), StringType);
-	registerOption(Proxy_ExceptionsOption, QString(), ListType);
+	registerOption(Proxy_ExceptionsOption, QStringList(QLatin1String("localhost")), ListType);
 	registerOption(Proxy_FtpPortOption, 8080, IntegerType);
 	registerOption(Proxy_FtpServersOption, QString(), StringType);
 	registerOption(Proxy_HttpPortOption, 8080, IntegerType);
@@ -205,24 +204,24 @@ void SettingsManager::createInstance(const QString &path, QObject *parent)
 	registerOption(Proxy_UseHttpsOption, false, BooleanType);
 	registerOption(Proxy_UseSocksOption, false, BooleanType);
 	registerOption(Proxy_UseSystemAuthenticationOption, false, BooleanType);
-	registerOption(Search_DefaultQuickSearchEngineOption, QLatin1String("duckduckgo"), EnumerationType, QStringList({QLatin1String("duckduckgo")}));
-	registerOption(Search_DefaultSearchEngineOption, QLatin1String("duckduckgo"), EnumerationType, QStringList({QLatin1String("duckduckgo")}));
+	registerOption(Search_DefaultQuickSearchEngineOption, QLatin1String("duckduckgo"), EnumerationType, QStringList(QLatin1String("duckduckgo")));
+	registerOption(Search_DefaultSearchEngineOption, QLatin1String("duckduckgo"), EnumerationType, QStringList(QLatin1String("duckduckgo")));
 	registerOption(Search_EnableFindInPageAsYouTypeOption, true, BooleanType);
 	registerOption(Search_ReuseLastQuickFindQueryOption, false, BooleanType);
-	registerOption(Search_SearchEnginesOrderOption, QStringList(), ListType);
+	registerOption(Search_SearchEnginesOrderOption, QStringList({QLatin1String("duckduckgo"), QLatin1String("wikipedia"), QLatin1String("startpage"), QLatin1String("google"), QLatin1String("yahoo"), QLatin1String("bing"), QLatin1String("youtube")}), ListType);
 	registerOption(Search_SearchEnginesSuggestionsOption, false, BooleanType);
-	registerOption(Security_CiphersOption, QStringList({QLatin1String("default")}), ListType);
+	registerOption(Security_CiphersOption, QStringList(QLatin1String("default")), ListType);
 	registerOption(Security_IgnoreSslErrorsOption, QStringList(), ListType);
 	registerOption(Sessions_OpenInExistingWindowOption, false, BooleanType);
 	registerOption(Sidebar_CurrentPanelOption, QString(), StringType);
-	registerOption(Sidebar_PanelsOption, QStringList(), ListType);
+	registerOption(Sidebar_PanelsOption, QStringList({QLatin1String("bookmarks"), QLatin1String("history"), QLatin1String("notes"), QLatin1String("transfers")}), ListType);
 	registerOption(Sidebar_ReverseOption, false, BooleanType);
 	registerOption(Sidebar_ShowToggleEdgeOption, false, BooleanType);
 	registerOption(Sidebar_VisibleOption, false, BooleanType);
 	registerOption(Sidebar_WidthOption, 300, IntegerType);
 	registerOption(SourceViewer_ShowLineNumbersOption, true, BooleanType);
 	registerOption(SourceViewer_WrapLinesOption, false, BooleanType);
-	registerOption(StartPage_BackgroundColorOption, QColor(), ColorType);
+	registerOption(StartPage_BackgroundColorOption, QString(), ColorType);
 	registerOption(StartPage_BackgroundModeOption, QLatin1String("standard"), EnumerationType, QStringList({QLatin1String("standard"), QLatin1String("bestFit"), QLatin1String("center"), QLatin1String("stretch"), QLatin1String("tile")}));
 	registerOption(StartPage_BackgroundPathOption, QString(), StringType);
 	registerOption(StartPage_BookmarksFolderOption, QLatin1String("/Start Page/"), StringType);

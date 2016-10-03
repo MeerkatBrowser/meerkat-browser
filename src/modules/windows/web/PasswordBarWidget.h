@@ -38,7 +38,7 @@ class PasswordBarWidget : public QWidget
 	Q_OBJECT
 
 public:
-	explicit PasswordBarWidget(const PasswordsManager::PasswordInformation &password, QWidget *parent = NULL);
+	explicit PasswordBarWidget(const PasswordsManager::PasswordInformation &password, bool isUpdate, QWidget *parent = NULL);
 	~PasswordBarWidget();
 
 	bool shouldClose(const QUrl &url) const;
@@ -51,8 +51,8 @@ protected slots:
 	void rejected();
 
 private:
-	PasswordsManager::PasswordInformation m_password;
 	QDateTime m_created;
+	PasswordsManager::PasswordInformation m_password;
 	Ui::PasswordBarWidget *m_ui;
 
 signals:

@@ -24,6 +24,7 @@
 #include "PopupsBarWidget.h"
 #include "ProgressBarWidget.h"
 #include "SearchBarWidget.h"
+#include "SelectPasswordDialog.h"
 #include "StartPageWidget.h"
 #include "../../../core/AddonsManager.h"
 #include "../../../core/InputInterpreter.h"
@@ -361,6 +362,29 @@ void WebContentsWidget::triggerAction(int identifier, const QVariantMap &paramet
 					connect(interpreter, SIGNAL(requestedSearch(QString,QString,WindowsManager::OpenHints)), this, SIGNAL(requestedSearch(QString,QString,WindowsManager::OpenHints)));
 
 					interpreter->interpret(text, WindowsManager::calculateOpenHints(), true);
+				}
+			}
+
+			break;
+		case ActionsManager::FillPasswordAction:
+			{
+				const QList<PasswordsManager::PasswordInformation> passwords(PasswordsManager::getPasswords(getUrl(), PasswordsManager::FormPassword));
+
+				if (!passwords.isEmpty())
+				{
+					if (passwords.count() == 1)
+					{
+						m_webWidget->fillPassword(passwords.first());
+					}
+					else
+					{
+						SelectPasswordDialog dialog(passwords, this);
+
+						if (dialog.exec() == QDialog::Accepted)
+						{
+							m_webWidget->fillPassword(dialog.getPassword());
+						}
+					}
 				}
 			}
 
@@ -804,17 +828,32 @@ void WebContentsWidget::handleUrlChange(const QUrl &url)
 	}
 }
 
-void WebContentsWidget::handleAddPasswordRequest(const PasswordsManager::PasswordInformation &password)
+void WebContentsWidget::handleSavePasswordRequest(const PasswordsManager::PasswordInformation &password, bool isUpdate)
 {
 	if (!m_passwordBarWidget)
 	{
-		m_passwordBarWidget = new PasswordBarWidget(password, this);
+		bool isValid(false);
 
-		connect(m_passwordBarWidget, SIGNAL(requestedClose()), this, SLOT(closePasswordBar()));
+		for (int i = 0; i < password.fields.count(); ++i)
+		{
+			if (password.fields.at(i).type == PasswordsManager::PasswordField && !password.fields.at(i).value.isEmpty())
+			{
+				isValid = true;
 
-		m_layout->insertWidget(0, m_passwordBarWidget);
+				break;
+			}
+		}
 
-		m_passwordBarWidget->show();
+		if (isValid)
+		{
+			m_passwordBarWidget = new PasswordBarWidget(password, isUpdate, this);
+
+			connect(m_passwordBarWidget, SIGNAL(requestedClose()), this, SLOT(closePasswordBar()));
+
+			m_layout->insertWidget(0, m_passwordBarWidget);
+
+			m_passwordBarWidget->show();
+		}
 	}
 }
 
@@ -1078,7 +1117,7 @@ void WebContentsWidget::setWidget(WebWidget *widget, bool isPrivate)
 	connect(m_webWidget, SIGNAL(requestedSearch(QString,QString,WindowsManager::OpenHints)), this, SIGNAL(requestedSearch(QString,QString,WindowsManager::OpenHints)));
 	connect(m_webWidget, SIGNAL(requestedPopupWindow(QUrl,QUrl)), this, SLOT(handlePopupWindowRequest(QUrl,QUrl)));
 	connect(m_webWidget, SIGNAL(requestedPermission(WebWidget::FeaturePermission,QUrl,bool)), this, SLOT(handlePermissionRequest(WebWidget::FeaturePermission,QUrl,bool)));
-	connect(m_webWidget, SIGNAL(requestedAddPassword(PasswordsManager::PasswordInformation)), this, SLOT(handleAddPasswordRequest(PasswordsManager::PasswordInformation)));
+	connect(m_webWidget, SIGNAL(requestedSavePassword(PasswordsManager::PasswordInformation,bool)), this, SLOT(handleSavePasswordRequest(PasswordsManager::PasswordInformation,bool)));
 	connect(m_webWidget, SIGNAL(requestedGeometryChange(QRect)), this, SIGNAL(requestedGeometryChange(QRect)));
 	connect(m_webWidget, SIGNAL(statusMessageChanged(QString)), this, SIGNAL(statusMessageChanged(QString)));
 	connect(m_webWidget, SIGNAL(titleChanged(QString)), this, SIGNAL(titleChanged(QString)));

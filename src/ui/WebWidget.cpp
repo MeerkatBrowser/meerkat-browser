@@ -407,6 +407,11 @@ void WebWidget::clearOptions()
 	m_options.clear();
 }
 
+void WebWidget::fillPassword(const PasswordsManager::PasswordInformation &password)
+{
+	Q_UNUSED(password)
+}
+
 void WebWidget::openUrl(const QUrl &url, WindowsManager::OpenHints hints)
 {
 	WebWidget *widget(clone(false, hints.testFlag(WindowsManager::PrivateOpen)));
@@ -574,6 +579,11 @@ void WebWidget::showContextMenu(const QPoint &position)
 	menu.exec(mapToGlobal(hitPosition));
 }
 
+void WebWidget::updatePasswords()
+{
+	updatePageActions(getUrl());
+}
+
 void WebWidget::updateQuickSearch()
 {
 	if (m_quickSearchMenu)
@@ -584,6 +594,11 @@ void WebWidget::updateQuickSearch()
 
 void WebWidget::updatePageActions(const QUrl &url)
 {
+	if (m_actions.contains(ActionsManager::FillPasswordAction))
+	{
+		m_actions[ActionsManager::FillPasswordAction]->setEnabled(!Utils::isUrlEmpty(url) && PasswordsManager::hasPasswords(url, PasswordsManager::FormPassword));
+	}
+
 	if (m_actions.contains(ActionsManager::BookmarkPageAction))
 	{
 		m_actions[ActionsManager::BookmarkPageAction]->setOverrideText(BookmarksManager::hasBookmark(url) ? QT_TRANSLATE_NOOP("actions", "Edit Bookmark…") : QT_TRANSLATE_NOOP("actions", "Add Bookmark…"));
@@ -1163,6 +1178,8 @@ Action* WebWidget::getAction(int identifier)
 			handleAudibleStateChange(isAudible());
 
 			break;
+		case ActionsManager::FillPasswordAction:
+			connect(PasswordsManager::getInstance(), SIGNAL(passwordsModified()), this, SLOT(updatePasswords()));
 		case ActionsManager::BookmarkPageAction:
 		case ActionsManager::WebsitePreferencesAction:
 			updatePageActions(getUrl());

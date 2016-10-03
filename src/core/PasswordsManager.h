@@ -20,7 +20,7 @@
 #ifndef MEERKAT_PASSWORDSMANAGER_H
 #define MEERKAT_PASSWORDSMANAGER_H
 
-#include <QtCore/QMap>
+#include <QtCore/QDateTime>
 #include <QtCore/QObject>
 #include <QtCore/QStringList>
 #include <QtCore/QUrl>
@@ -35,27 +35,59 @@ class PasswordsManager : public QObject
 	Q_OBJECT
 
 public:
+	enum FieldType
+	{
+		UnknownField = 0,
+		PasswordField,
+		TextField
+	};
+
+	enum PasswordMatch
+	{
+		NoMatch = 0,
+		PartialMatch,
+		FullMatch
+	};
+
 	enum PasswordType
 	{
-		FormPassword = 0,
-		AuthPassword = 1
+		UnknownPassword = 0,
+		FormPassword = 1,
+		AuthPassword = 2,
+		AnyPassword = (FormPassword | AuthPassword)
+	};
+
+	Q_DECLARE_FLAGS(PasswordTypes, PasswordType)
+
+	struct FieldInformation
+	{
+		QString name;
+		QString value;
+		FieldType type;
+
+		FieldInformation() : type(UnknownField) {}
 	};
 
 	struct PasswordInformation
 	{
 		QUrl url;
-		QStringList passwords;
-		QMap<QString, QString> fields;
+		QDateTime timeAdded;
+		QDateTime timeUsed;
+		QList<FieldInformation> fields;
 		PasswordType type;
 
 		PasswordInformation() : type(FormPassword) {}
 	};
 
 	static void createInstance(QObject *parent = NULL);
+	static void clearPasswords(const QString &host = QString());
 	static void addPassword(const PasswordInformation &password);
+	static void removePassword(const PasswordInformation &password);
 	static PasswordsManager* getInstance();
-	static QList<PasswordInformation> getPasswords(const QUrl &url);
-	static bool isEncryptionAvailable();
+	static QStringList getHosts();
+	static QList<PasswordInformation> getPasswords(const QUrl &url, PasswordTypes types = AnyPassword);
+	static PasswordMatch hasPassword(const PasswordInformation &password);
+	static bool hasPasswords(const QUrl &url, PasswordTypes types = AnyPassword);
 
 protected:
 	explicit PasswordsManager(QObject *parent = NULL);
@@ -63,8 +95,13 @@ protected:
 private:
 	static PasswordsManager *m_instance;
 	static PasswordsStorageBackend *m_backend;
+
+signals:
+	void passwordsModified();
 };
 
 }
+
+Q_DECLARE_OPERATORS_FOR_FLAGS(Otter::PasswordsManager::PasswordTypes)
 
 #endif

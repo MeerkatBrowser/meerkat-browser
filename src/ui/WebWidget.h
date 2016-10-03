@@ -211,6 +211,7 @@ public:
 public slots:
 	virtual void triggerAction(int identifier, const QVariantMap &parameters = QVariantMap()) = 0;
 	virtual void clearOptions();
+	virtual void fillPassword(const PasswordsManager::PasswordInformation &password);
 	virtual void goToHistoryIndex(int index) = 0;
 	virtual void removeHistoryIndex(int index, bool purge = false) = 0;
 	virtual void showContextMenu(const QPoint &position = QPoint());
@@ -262,6 +263,7 @@ protected slots:
 	void quickSearchMenuAboutToShow();
 	void handleLoadingStateChange(WindowsManager::LoadingState state);
 	void handleAudibleStateChange(bool isAudible);
+	void updatePasswords();
 	void updateQuickSearch();
 	virtual void updatePageActions(const QUrl &url);
 	virtual void updateNavigationActions();
@@ -305,7 +307,7 @@ signals:
 	void requestedSearch(const QString &query, const QString &search, WindowsManager::OpenHints hints);
 	void requestedPopupWindow(const QUrl &parentUrl, const QUrl &popupUrl);
 	void requestedPermission(WebWidget::FeaturePermission feature, const QUrl &url, bool cancel);
-	void requestedAddPassword(const PasswordsManager::PasswordInformation &password);
+	void requestedSavePassword(const PasswordsManager::PasswordInformation &password, bool isUpdate);
 	void requestedGeometryChange(const QRect &geometry);
 	void progressBarGeometryChanged();
 	void statusMessageChanged(const QString &message);

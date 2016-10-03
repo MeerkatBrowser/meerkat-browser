@@ -26,7 +26,17 @@ PasswordsStorageBackend::PasswordsStorageBackend(QObject *parent) : Addon(parent
 {
 }
 
+void PasswordsStorageBackend::clearPasswords(const QString &host)
+{
+	Q_UNUSED(host)
+}
+
 void PasswordsStorageBackend::addPassword(const PasswordsManager::PasswordInformation &password)
+{
+	Q_UNUSED(password)
+}
+
+void PasswordsStorageBackend::removePassword(const PasswordsManager::PasswordInformation &password)
 {
 	Q_UNUSED(password)
 }
@@ -36,9 +46,15 @@ QUrl PasswordsStorageBackend::getUpdateUrl() const
 	return QUrl();
 }
 
-QList<PasswordsManager::PasswordInformation> PasswordsStorageBackend::getPasswords(const QUrl &url)
+QStringList PasswordsStorageBackend::getHosts()
+{
+	return QStringList();
+}
+
+QList<PasswordsManager::PasswordInformation> PasswordsStorageBackend::getPasswords(const QUrl &url, PasswordsManager::PasswordTypes types)
 {
 	Q_UNUSED(url)
+	Q_UNUSED(types)
 
 	return QList<PasswordsManager::PasswordInformation>();
 }
@@ -46,6 +62,51 @@ QList<PasswordsManager::PasswordInformation> PasswordsStorageBackend::getPasswor
 Addon::AddonType PasswordsStorageBackend::getType() const
 {
 	return PasswordsStorageBackendType;
+}
+
+PasswordsManager::PasswordMatch PasswordsStorageBackend::comparePasswords(const PasswordsManager::PasswordInformation &first, const PasswordsManager::PasswordInformation &second)
+{
+	if (first.type != second.type || first.url != second.url || first.fields.count() != second.fields.count())
+	{
+		return PasswordsManager::NoMatch;
+	}
+
+	PasswordsManager::PasswordMatch match(PasswordsManager::FullMatch);
+
+	for (int i = 0; i < first.fields.count(); ++i)
+	{
+		if (first.fields.at(i).name != second.fields.at(i).name || first.fields.at(i).type != second.fields.at(i).type)
+		{
+			return PasswordsManager::NoMatch;
+		}
+
+		if (first.fields.at(i).value != second.fields.at(i).value)
+		{
+			if (first.fields.at(i).type != PasswordsManager::PasswordField)
+			{
+				return PasswordsManager::NoMatch;
+			}
+
+			match = PasswordsManager::PartialMatch;
+		}
+	}
+
+	return match;
+}
+
+PasswordsManager::PasswordMatch PasswordsStorageBackend::hasPassword(const PasswordsManager::PasswordInformation &password)
+{
+	Q_UNUSED(password)
+
+	return PasswordsManager::NoMatch;
+}
+
+bool PasswordsStorageBackend::hasPasswords(const QUrl &url, PasswordsManager::PasswordTypes types)
+{
+	Q_UNUSED(url)
+	Q_UNUSED(types)
+
+	return false;
 }
 
 }

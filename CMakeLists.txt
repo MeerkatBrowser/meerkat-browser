@@ -12,7 +12,7 @@ project(meerkat-browser)
 
 set(MAJOR_VERSION "0")
 set(MINOR_VERSION "9")
-set(PATCH_VERSION "11")
+set(PATCH_VERSION "12")
 
 add_definitions(-DMEERKAT_VERSION_MAIN="${MAJOR_VERSION}.${MINOR_VERSION}.${PATCH_VERSION}")
 add_definitions(-DMEERKAT_VERSION_WEEKLY="142")
@@ -222,6 +222,7 @@ set(meerkat_src
 	src/ui/preferences/PreferencesPrivacyPageWidget.cpp
 	src/ui/preferences/PreferencesSearchPageWidget.cpp
 	src/ui/preferences/SearchKeywordDelegate.cpp
+	src/modules/backends/passwords/file/FilePasswordsStorageBackend.cpp
 	src/modules/importers/html/HtmlBookmarksImporter.cpp
 	src/modules/importers/opera/OperaBookmarksImporter.cpp
 	src/modules/importers/opera/OperaNotesImporter.cpp
@@ -245,6 +246,7 @@ set(meerkat_src
 	src/modules/windows/cookies/CookiesContentsWidget.cpp
 	src/modules/windows/history/HistoryContentsWidget.cpp
 	src/modules/windows/notes/NotesContentsWidget.cpp
+	src/modules/windows/passwords/PasswordsContentsWidget.cpp
 	src/modules/windows/transfers/ProgressBarDelegate.cpp
 	src/modules/windows/transfers/TransfersContentsWidget.cpp
 	src/modules/windows/web/PasswordBarWidget.cpp
@@ -252,6 +254,7 @@ set(meerkat_src
 	src/modules/windows/web/PopupsBarWidget.cpp
 	src/modules/windows/web/ProgressBarWidget.cpp
 	src/modules/windows/web/SearchBarWidget.cpp
+	src/modules/windows/web/SelectPasswordDialog.cpp
 	src/modules/windows/web/StartPageModel.cpp
 	src/modules/windows/web/StartPagePreferencesDialog.cpp
 	src/modules/windows/web/StartPageWidget.cpp
@@ -312,11 +315,13 @@ qt5_wrap_ui(meerkat_ui
 	src/modules/windows/cookies/CookiesContentsWidget.ui
 	src/modules/windows/history/HistoryContentsWidget.ui
 	src/modules/windows/notes/NotesContentsWidget.ui
+	src/modules/windows/passwords/PasswordsContentsWidget.ui
 	src/modules/windows/transfers/TransfersContentsWidget.ui
 	src/modules/windows/web/PasswordBarWidget.ui
 	src/modules/windows/web/PermissionBarWidget.ui
 	src/modules/windows/web/PopupsBarWidget.ui
 	src/modules/windows/web/SearchBarWidget.ui
+	src/modules/windows/web/SelectPasswordDialog.ui
 	src/modules/windows/web/StartPagePreferencesDialog.ui
 )
 
@@ -526,7 +531,7 @@ elseif (UNIX)
 	endif (ENABLE_CRASHREPORTS)
 endif (WIN32)
 
-target_link_libraries(otter-browser Qt5::Core Qt5::Gui Qt5::Multimedia Qt5::Network Qt5::PrintSupport Qt5::Qml Qt5::Widgets Qt5::XmlPatterns -lpthread)
+target_link_libraries(otter-browser Qt5::Core Qt5::Gui Qt5::Multimedia Qt5::Network Qt5::PrintSupport Qt5::Qml Qt5::Widgets Qt5::XmlPatterns)
 
 set(MEERKAT_INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX})
 set(XDG_APPS_INSTALL_DIR ${CMAKE_INSTALL_PREFIX}/share/applications CACHE FILEPATH "Install path for .desktop files")
