@@ -1613,18 +1613,18 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>Meerkat::ItemViewWidget</class>
+   <class>Otter::ItemViewWidget</class>
    <extends>QTreeView</extends>
    <header>src/ui/ItemViewWidget.h</header>
   </customwidget>
   <customwidget>
-   <class>Meerkat::FilePathWidget</class>
+   <class>Otter::FilePathWidget</class>
    <extends>QWidget</extends>
    <header>src/ui/FilePathWidget.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>Meerkat::ApplicationComboBoxWidget</class>
+   <class>Otter::ApplicationComboBoxWidget</class>
    <extends>QComboBox</extends>
    <header>src/ui/ApplicationComboBoxWidget.h</header>
   </customwidget>
