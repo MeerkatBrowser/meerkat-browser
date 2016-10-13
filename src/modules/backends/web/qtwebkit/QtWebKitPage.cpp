@@ -33,7 +33,6 @@
 #include <QtGui/QDesktopServices>
 #include <QtGui/QGuiApplication>
 #include <QtGui/QWheelEvent>
-#include <QtWidgets/QFileDialog>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QInputDialog>
 #include <QtWidgets/QLineEdit>
@@ -391,6 +390,13 @@ QWebPage* QtWebKitPage::createWindow(QWebPage::WebWindowType type)
 	return QWebPage::createWindow(type);
 }
 
+QString QtWebKitPage::chooseFile(QWebFrame *frame, const QString &suggestedFile)
+{
+	Q_UNUSED(frame)
+
+	return Utils::getOpenPaths(QStringList(suggestedFile)).value(0);
+}
+
 QString QtWebKitPage::userAgentForUrl(const QUrl &url) const
 {
 	if (m_networkManager)
@@ -568,14 +574,10 @@ bool QtWebKitPage::extension(QWebPage::Extension extension, const QWebPage::Exte
 {
 	if (extension == QWebPage::ChooseMultipleFilesExtension && m_widget)
 	{
+		const QWebPage::ChooseMultipleFilesExtensionOption *filesOption(static_cast<const QWebPage::ChooseMultipleFilesExtensionOption*>(option));
 		QWebPage::ChooseMultipleFilesExtensionReturn *filesOutput(static_cast<QWebPage::ChooseMultipleFilesExtensionReturn*>(output));
 
-		filesOutput->fileNames = QFileDialog::getOpenFileNames(m_widget, tr("Open File"), SettingsManager::getValue(SettingsManager::Paths_OpenFileOption).toString());
-
-		if (!filesOutput->fileNames.isEmpty())
-		{
-			SettingsManager::setValue(SettingsManager::Paths_OpenFileOption, QFileInfo(filesOutput->fileNames.first()).dir().canonicalPath());
-		}
+		filesOutput->fileNames = Utils::getOpenPaths(filesOption->suggestedFileNames, QStringList(), true);
 
 		return true;
 	}
@@ -612,8 +614,34 @@ bool QtWebKitPage::extension(QWebPage::Extension extension, const QWebPage::Exte
 			return false;
 		}
 
+		QString title;
+
+		if ((errorOption->domain == QWebPage::QtNetwork && (errorOption->error == QNetworkReply::HostNotFoundError || errorOption->error == QNetworkReply::ContentNotFoundError)) || (errorOption->domain == QWebPage::Http && errorOption->error == 404))
+		{
+			if (errorOption->url.isLocalFile())
+			{
+				title = tr("File not found");
+			}
+			else
+			{
+				title = tr("Server not found");
+			}
+		}
+		else if (errorOption->domain == QWebPage::QtNetwork && errorOption->error == QNetworkReply::ConnectionRefusedError)
+		{
+			title = tr("Connection refused");
+		}
+		else if (errorOption->domain == QWebPage::WebKit)
+		{
+			title = tr("WebKit error %1").arg(errorOption->error);
+		}
+		else
+		{
+			title = tr("Network error %1").arg(errorOption->error);
+		}
+
 		errorOutput->baseUrl = errorOption->url;
-		errorOutput->content = Utils::createErrorPage(errorOption->url, QString::number(errorOption->error), errorOption->errorString).toUtf8();
+		errorOutput->content = Utils::createErrorPage(errorOption->url, title, errorOption->errorString).toUtf8();
 
 		return true;
 	}

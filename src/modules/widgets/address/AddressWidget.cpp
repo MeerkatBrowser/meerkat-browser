@@ -446,6 +446,21 @@ void AddressWidget::hidePopup()
 	m_removeModelTimer = startTimer(250);
 }
 
+void AddressWidget::hideCompletion()
+{
+	if (m_completionView)
+	{
+		m_completionView->hide();
+		m_completionView->deleteLater();
+		m_completionView = NULL;
+
+		QString statusTip;
+		QStatusTipEvent statusTipEvent(statusTip);
+
+		QApplication::sendEvent(this, &statusTipEvent);
+	}
+}
+
 void AddressWidget::optionChanged(int identifier, const QVariant &value)
 {
 	if (identifier == SettingsManager::AddressField_CompletionModeOption)
@@ -605,12 +620,7 @@ void AddressWidget::openUrl(const QString &url)
 
 void AddressWidget::openUrl(const QModelIndex &index)
 {
-	if (m_completionView)
-	{
-		m_completionView->hide();
-		m_completionView->deleteLater();
-		m_completionView = NULL;
-	}
+	hideCompletion();
 
 	if (!index.isValid())
 	{
@@ -699,7 +709,6 @@ void AddressWidget::updateFeeds()
 		m_feedsLabel->setPixmap(ThemesManager::getIcon(QLatin1String("application-rss+xml")).pixmap(m_feedsLabel->size()));
 		m_feedsLabel->setCursor(Qt::ArrowCursor);
 		m_feedsLabel->setToolTip(tr("Feed List"));
-		m_feedsLabel->setCursor(Qt::ArrowCursor);
 		m_feedsLabel->setFocusPolicy(Qt::NoFocus);
 		m_feedsLabel->installEventFilter(this);
 
@@ -716,7 +725,17 @@ void AddressWidget::updateFeeds()
 
 void AddressWidget::updateLoadPlugins()
 {
-	const bool canLoadPlugins(SettingsManager::getValue(SettingsManager::AddressField_ShowLoadPluginsIconOption).toBool() && m_window && !m_window->isAboutToClose() && m_window->getContentsWidget()->getAction(ActionsManager::LoadPluginsAction) && m_window->getContentsWidget()->getAction(ActionsManager::LoadPluginsAction)->isEnabled());
+	bool canLoadPlugins(false);
+
+	if (SettingsManager::getValue(SettingsManager::AddressField_ShowLoadPluginsIconOption).toBool() && m_window && !m_window->isAboutToClose())
+	{
+		Action *loadPluginsAction(m_window->getContentsWidget()->getAction(ActionsManager::LoadPluginsAction));
+
+		if (loadPluginsAction && loadPluginsAction->isEnabled())
+		{
+			canLoadPlugins = true;
+		}
+	}
 
 	if (canLoadPlugins && !m_loadPluginsLabel)
 	{
@@ -728,7 +747,6 @@ void AddressWidget::updateLoadPlugins()
 		m_loadPluginsLabel->setPixmap(ThemesManager::getIcon(QLatin1String("preferences-plugin")).pixmap(m_loadPluginsLabel->size()));
 		m_loadPluginsLabel->setCursor(Qt::ArrowCursor);
 		m_loadPluginsLabel->setToolTip(tr("Click to load all plugins on the page"));
-		m_loadPluginsLabel->setCursor(Qt::ArrowCursor);
 		m_loadPluginsLabel->setFocusPolicy(Qt::NoFocus);
 		m_loadPluginsLabel->installEventFilter(this);
 
@@ -802,12 +820,7 @@ void AddressWidget::setCompletion(const QString &filter)
 {
 	if (filter.isEmpty() || m_completionModel->rowCount() == 0)
 	{
-		if (m_completionView)
-		{
-			m_completionView->hide();
-			m_completionView->deleteLater();
-			m_completionView = NULL;
-		}
+		hideCompletion();
 
 		m_lineEdit->setCompletion(QString());
 		m_lineEdit->setFocus();
@@ -1200,9 +1213,7 @@ bool AddressWidget::eventFilter(QObject *object, QEvent *event)
 			{
 				if (!m_lineEdit->hasFocus())
 				{
-					m_completionView->hide();
-					m_completionView->deleteLater();
-					m_completionView = NULL;
+					hideCompletion();
 				}
 
 				return true;
@@ -1230,9 +1241,7 @@ bool AddressWidget::eventFilter(QObject *object, QEvent *event)
 						break;
 					}
 
-					m_completionView->hide();
-					m_completionView->deleteLater();
-					m_completionView = NULL;
+					hideCompletion();
 
 					m_lineEdit->setFocus();
 
@@ -1251,9 +1260,7 @@ bool AddressWidget::eventFilter(QObject *object, QEvent *event)
 	}
 	else if (object == m_completionView && event->type() == QEvent::MouseButtonPress && !m_completionView->viewport()->underMouse())
 	{
-		m_completionView->hide();
-		m_completionView->deleteLater();
-		m_completionView = NULL;
+		hideCompletion();
 
 		m_lineEdit->setFocus();
 
@@ -1271,11 +1278,22 @@ bool AddressWidget::eventFilter(QObject *object, QEvent *event)
 			{
 				m_completionView->setCurrentIndex(index);
 			}
+
+			QStatusTipEvent statusTipEvent(index.data(Qt::StatusTipRole).toString());
+
+			QApplication::sendEvent(this, &statusTipEvent);
 		}
 	}
 	else if (object == m_completionView && (event->type() == QEvent::InputMethod || event->type() == QEvent::ShortcutOverride))
 	{
 		QApplication::sendEvent(m_lineEdit, event);
+	}
+	else if (object == m_completionView && (event->type() == QEvent::Close || event->type() == QEvent::Hide || event->type() == QEvent::Leave))
+	{
+		QString statusTip;
+		QStatusTipEvent statusTipEvent(statusTip);
+
+		QApplication::sendEvent(this, &statusTipEvent);
 	}
 
 	return QObject::eventFilter(object, event);

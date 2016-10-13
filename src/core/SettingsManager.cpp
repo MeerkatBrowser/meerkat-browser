@@ -129,7 +129,7 @@ void SettingsManager::createInstance(const QString &path, QObject *parent)
 	registerOption(Choices_WarnQuitTransfersOption, true, BooleanType);
 	registerOption(Content_BackgroundColorOption, QLatin1String("#FFFFFF"), ColorType);
 	registerOption(Content_CursiveFontOption, QLatin1String("Impact"), FontType);
-	registerOption(Content_DefaultCharacterEncodingOption, QString(), StringType);
+	registerOption(Content_DefaultCharacterEncodingOption, QLatin1String("auto"), StringType);
 	registerOption(Content_DefaultFixedFontSizeOption, 16, IntegerType);
 	registerOption(Content_DefaultFontSizeOption, 16, IntegerType);
 	registerOption(Content_DefaultZoomOption, 100, IntegerType);
@@ -485,14 +485,14 @@ int SettingsManager::getOptionIdentifier(const QString &name)
 	return m_instance->metaObject()->enumerator(m_optionIdentifierEnumerator).keyToValue(mutableName.toLatin1());
 }
 
-bool SettingsManager::hasOverride(const QUrl &url, const QString &key)
+bool SettingsManager::hasOverride(const QUrl &url, int identifier)
 {
-	if (key.isEmpty())
+	if (identifier < 0)
 	{
 		return QSettings(m_overridePath, QSettings::IniFormat).childGroups().contains(getHost(url));
 	}
 
-	return QSettings(m_overridePath, QSettings::IniFormat).contains(getHost(url) + QLatin1Char('/') + key);
+	return QSettings(m_overridePath, QSettings::IniFormat).contains(getHost(url) + QLatin1Char('/') + getOptionName(identifier));
 }
 
 }

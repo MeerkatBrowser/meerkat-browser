@@ -189,7 +189,6 @@ set(meerkat_src
 	src/ui/SourceViewerWidget.cpp
 	src/ui/StartupDialog.cpp
 	src/ui/StatusBarWidget.cpp
-	src/ui/TabBarStyle.cpp
 	src/ui/TabBarWidget.cpp
 	src/ui/TabSwitcherWidget.cpp
 	src/ui/TextLabelWidget.cpp
@@ -453,8 +452,8 @@ if (WIN32)
 	if (MSVC)
 		set(CMAKE_PREFIX_PATH $ENV{QTDIR})
 		set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /MP")
-		set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MP /GL")
-		set(CMAKE_EXE_LINKER_FLAGS_RELEASE "${CMAKE_EXE_LINKER_FLAGS_RELEASE} /LTCG")
+		set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MP /GL /Zi")
+		set(CMAKE_EXE_LINKER_FLAGS_RELEASE "${CMAKE_EXE_LINKER_FLAGS_RELEASE} /LTCG /DEBUG /OPT:REF")
 
 		if (CMAKE_CL_64)
 			set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:WINDOWS /ENTRY:\"mainCRTStartup\"")

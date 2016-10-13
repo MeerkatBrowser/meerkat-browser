@@ -20,21 +20,18 @@
 #ifndef MEERKAT_ITEMDELEGATE_H
 #define MEERKAT_ITEMDELEGATE_H
 
-#include <QtWidgets/QItemDelegate>
+#include <QtWidgets/QStyledItemDelegate>
 
 namespace Meerkat
 {
 
-class ItemDelegate : public QItemDelegate
+class ItemDelegate : public QStyledItemDelegate
 {
 public:
-	explicit ItemDelegate(bool forceIcon, QObject *parent = NULL);
+	explicit ItemDelegate(QObject *parent = NULL);
 
 	void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const;
 	QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const;
-
-private:
-	bool m_forceIcon;
 };
 
 }
