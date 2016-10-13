@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 *
 * This program is free software: you can redistribute it and/or modify
@@ -17,13 +17,13 @@
 *
 **************************************************************************/
 
-#ifndef OTTER_SELECTPASSWORDDIALOG_H
-#define OTTER_SELECTPASSWORDDIALOG_H
+#ifndef MEERKAT_SELECTPASSWORDDIALOG_H
+#define MEERKAT_SELECTPASSWORDDIALOG_H
 
 #include "../../../ui/Dialog.h"
 #include "../../../core/PasswordsManager.h"
 
-namespace Otter
+namespace Meerkat
 {
 
 namespace Ui

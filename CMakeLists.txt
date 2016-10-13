@@ -15,8 +15,8 @@ set(MINOR_VERSION "9")
 set(PATCH_VERSION "12")
 
 add_definitions(-DMEERKAT_VERSION_MAIN="${MAJOR_VERSION}.${MINOR_VERSION}.${PATCH_VERSION}")
-add_definitions(-DMEERKAT_VERSION_WEEKLY="142")
-add_definitions(-DMEERKAT_VERSION_CONTEXT=" weekly 142")
+add_definitions(-DMEERKAT_VERSION_WEEKLY="")
+add_definitions(-DMEERKAT_VERSION_CONTEXT="")
 add_definitions(-DMEERKAT_INSTALL_PREFIX="${CMAKE_INSTALL_PREFIX}")
 
 if (EXISTS "${CMAKE_ROOT}/Modules/CPack.cmake")
@@ -531,7 +531,7 @@ elseif (UNIX)
 	endif (ENABLE_CRASHREPORTS)
 endif (WIN32)
 
-target_link_libraries(otter-browser Qt5::Core Qt5::Gui Qt5::Multimedia Qt5::Network Qt5::PrintSupport Qt5::Qml Qt5::Widgets Qt5::XmlPatterns)
+target_link_libraries(meerkat-browser Qt5::Core Qt5::Gui Qt5::Multimedia Qt5::Network Qt5::PrintSupport Qt5::Qml Qt5::Widgets Qt5::XmlPatterns)
 
 set(MEERKAT_INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX})
 set(XDG_APPS_INSTALL_DIR ${CMAKE_INSTALL_PREFIX}/share/applications CACHE FILEPATH "Install path for .desktop files")

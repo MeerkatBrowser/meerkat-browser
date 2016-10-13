@@ -119,7 +119,7 @@ signals:
 
 }
 
-Q_DECLARE_OPERATORS_FOR_FLAGS(Otter::Application::MainWindowFlags)
-Q_DECLARE_OPERATORS_FOR_FLAGS(Otter::Application::ReportOptions)
+Q_DECLARE_OPERATORS_FOR_FLAGS(Meerkat::Application::MainWindowFlags)
+Q_DECLARE_OPERATORS_FOR_FLAGS(Meerkat::Application::ReportOptions)
 
 #endif

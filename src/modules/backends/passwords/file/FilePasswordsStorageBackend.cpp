@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 *
 * This program is free software: you can redistribute it and/or modify
@@ -26,7 +26,7 @@
 #include <QtCore/QJsonDocument>
 #include <QtCore/QJsonObject>
 
-namespace Otter
+namespace Meerkat
 {
 
 FilePasswordsStorageBackend::FilePasswordsStorageBackend(QObject *parent) : PasswordsStorageBackend(parent),
@@ -275,7 +275,7 @@ QString FilePasswordsStorageBackend::getVersion() const
 
 QUrl FilePasswordsStorageBackend::getHomePage() const
 {
-	return QUrl(QLatin1String("http://otter-browser.org/"));
+    return QUrl(QLatin1String("http://meerkat-browser.sourceforge.net/"));
 }
 
 QIcon FilePasswordsStorageBackend::getIcon() const

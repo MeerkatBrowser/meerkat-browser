@@ -102,6 +102,6 @@ signals:
 
 }
 
-Q_DECLARE_OPERATORS_FOR_FLAGS(Otter::PasswordsManager::PasswordTypes)
+Q_DECLARE_OPERATORS_FOR_FLAGS(Meerkat::PasswordsManager::PasswordTypes)
 
 #endif

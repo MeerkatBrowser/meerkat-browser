@@ -4,8 +4,8 @@ IDI_ICON1 ICON DISCARDABLE "resources/icons/meerkat-browser.ico"
 IDI_ICON2 ICON DISCARDABLE "resources/icons/meerkat-browser-file-type.ico"
 
 VS_VERSION_INFO VERSIONINFO
-	FILEVERSION 0,9,1,1
-	PRODUCTVERSION 0,9,1,1
+    FILEVERSION 0,9,1,2
+    PRODUCTVERSION 0,9,1,2
 BEGIN
 	BLOCK "StringFileInfo"
 	BEGIN
@@ -13,12 +13,12 @@ BEGIN
 		BEGIN
             VALUE "CompanyName", "Meerkat Browser Team"
             VALUE "FileDescription", "Meerkat Browser"
-			VALUE "FileVersion", "0.9.11"
+            VALUE "FileVersion", "0.9.12"
             VALUE "InternalName", "meerkat-browser"
             VALUE "LegalCopyright", "Copyright (C) 2015-2016 Meerkat Browser Team"
             VALUE "OriginalFilename", "meerkat-browser.exe"
             VALUE "ProductName", "Meerkat Browser"
-			VALUE "ProductVersion", "0.9.11"
+            VALUE "ProductVersion", "0.9.12"
 		END
 	END
 	BLOCK "VarFileInfo"
