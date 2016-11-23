@@ -21,7 +21,7 @@
 
 #include <QtWidgets/QApplication>
 
-namespace Meerkat
+namespace Otter
 {
 
 ProgressBarDelegate::ProgressBarDelegate(QObject *parent) : QStyledItemDelegate(parent)
