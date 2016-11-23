@@ -17,12 +17,12 @@
 *
 **************************************************************************/
 
-#ifndef MEERKAT_PROGRESSBARDELEGATE_H
-#define MEERKAT_PROGRESSBARDELEGATE_H
+#ifndef OTTER_PROGRESSBARDELEGATE_H
+#define OTTER_PROGRESSBARDELEGATE_H
 
 #include <QtWidgets/QStyledItemDelegate>
 
-namespace Meerkat
+namespace Otter
 {
 
 class ProgressBarDelegate : public QStyledItemDelegate
