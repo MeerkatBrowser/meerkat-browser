@@ -1,5 +1,5 @@
 /**************************************************************************
-* Meerkat Browser: Web browser controlled by the user, not vice-versa.
+* Otte Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2013 - 2015 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 *
 * This program is free software: you can redistribute it and/or modify
