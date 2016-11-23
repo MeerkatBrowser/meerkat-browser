@@ -1,5 +1,5 @@
 /**************************************************************************
-* Meerkat Browser: Web browser controlled by the user, not vice-versa.
+* Otter Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2013 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 *
 * This program is free software: you can redistribute it and/or modify
@@ -17,8 +17,8 @@
 *
 **************************************************************************/
 
-#ifndef MEERKAT_SEARCHDELEGATE_H
-#define MEERKAT_SEARCHDELEGATE_H
+#ifndef OTTER_SEARCHDELEGATE_H
+#define OTTER_SEARCHDELEGATE_H
 
 #include <QtWidgets/QItemDelegate>
 
