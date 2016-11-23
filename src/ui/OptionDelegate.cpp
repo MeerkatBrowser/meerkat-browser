@@ -47,7 +47,7 @@ void OptionDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option
 	switch (type)
 	{
 		case SettingsManager::BooleanType:
-			drawDisplay(painter, option, option.rect, index.data(Qt::DisplayRole).toBool() ? QCoreApplication::translate("Otter::OptionDelegate", "Yes") : QCoreApplication::translate("Meerkat::OptionDelegate", "No"));
+			drawDisplay(painter, option, option.rect, index.data(Qt::DisplayRole).toBool() ? QCoreApplication::translate("Otter::OptionDelegate", "Yes") : QCoreApplication::translate("Otter::OptionDelegate", "No"));
 
 			break;
 		case SettingsManager::ColorType:
