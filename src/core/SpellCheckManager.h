@@ -52,7 +52,7 @@ protected:
 
 private:
 	static SpellCheckManager *m_instance;
-#ifdef MEERKAT_ENABLE_SPELLCHECK
+#ifdef OTTER_ENABLE_SPELLCHECK
 	static Sonnet::Speller* m_speller;
 #endif
 };
