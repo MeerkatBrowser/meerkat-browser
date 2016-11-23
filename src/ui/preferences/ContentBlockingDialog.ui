@@ -50,7 +50,7 @@
        <item>
         <layout class="QHBoxLayout" name="profilesHorizontalLayout">
          <item>
-          <widget class="Meerkat::ItemViewWidget" name="profilesViewWidget">
+          <widget class="Otter::ItemViewWidget" name="profilesViewWidget">
            <property name="sizeAdjustPolicy">
             <enum>QAbstractScrollArea::AdjustIgnored</enum>
            </property>
