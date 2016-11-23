@@ -84,7 +84,7 @@ QString OperaSessionImporter::getBrowser() const
 
 QUrl OperaSessionImporter::getHomePage() const
 {
-	return QUrl(QLatin1String("http://meerkat-browser.org/"));
+	return QUrl(QLatin1String("http://meerkat-browser.sourceforge.net/"));
 }
 
 QIcon OperaSessionImporter::getIcon() const

@@ -291,7 +291,7 @@ QStringList QtWebEngineWebBackend::getBlockedElements(const QString &domain) con
 
 QUrl QtWebEngineWebBackend::getHomePage() const
 {
-	return QUrl(QLatin1String("http://meerkat-browser.org/"));
+	return QUrl(QLatin1String("http://meerkat-browser.sourceforge.net/"));
 }
 
 QIcon QtWebEngineWebBackend::getIcon() const

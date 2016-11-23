@@ -385,7 +385,7 @@ void BookmarksModel::readBookmark(QXmlStreamReader *reader, BookmarksItem *paren
 					{
 						if (reader->isStartElement())
 						{
-							if (reader->name() == QLatin1String("metadata") && reader->attributes().value(QLatin1String("owner")).toString().startsWith(QLatin1String("http://meerkat-browser.org/")))
+                            if (reader->name() == QLatin1String("metadata") && reader->attributes().value(QLatin1String("owner")).toString().startsWith(QLatin1String("http://meerkat-browser.sourceforge.net/")))
 							{
 								while (reader->readNext())
 								{
@@ -457,7 +457,7 @@ void BookmarksModel::readBookmark(QXmlStreamReader *reader, BookmarksItem *paren
 					{
 						if (reader->isStartElement())
 						{
-							if (reader->name() == QLatin1String("metadata") && reader->attributes().value(QLatin1String("owner")).toString().startsWith("http://meerkat-browser.org/"))
+                            if (reader->name() == QLatin1String("metadata") && reader->attributes().value(QLatin1String("owner")).toString().startsWith("http://meerkat-browser.sourceforge.net/"))
 							{
 								while (reader->readNext())
 								{
@@ -550,7 +550,7 @@ void BookmarksModel::writeBookmark(QXmlStreamWriter *writer, QStandardItem *book
 			{
 				writer->writeStartElement(QLatin1String("info"));
 				writer->writeStartElement(QLatin1String("metadata"));
-				writer->writeAttribute(QLatin1String("owner"), QLatin1String("http://meerkat-browser.org/meerkat-xbel-bookmark"));
+                writer->writeAttribute(QLatin1String("owner"), QLatin1String("http://meerkat-browser.sourceforge.net/meerkat-xbel-bookmark"));
 				writer->writeTextElement(QLatin1String("keyword"), bookmark->data(KeywordRole).toString());
 				writer->writeEndElement();
 				writer->writeEndElement();
@@ -602,7 +602,7 @@ void BookmarksModel::writeBookmark(QXmlStreamWriter *writer, QStandardItem *book
 			{
 				writer->writeStartElement(QLatin1String("info"));
 				writer->writeStartElement(QLatin1String("metadata"));
-				writer->writeAttribute(QLatin1String("owner"), QLatin1String("http://meerkat-browser.org/meerkat-xbel-bookmark"));
+                writer->writeAttribute(QLatin1String("owner"), QLatin1String("http://meerkat-browser.sourceforge.net/meerkat-xbel-bookmark"));
 
 				if (!bookmark->data(KeywordRole).toString().isEmpty())
 				{
