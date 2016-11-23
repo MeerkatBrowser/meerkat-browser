@@ -814,7 +814,7 @@ void TabBarWidget::updateButtons()
 
 void TabBarWidget::updateTabs(int index)
 {
-	if (index < 0 && sender() && sender()->inherits(QStringLiteral("Meerkat::Window").toLatin1()))
+	if (index < 0 && sender() && sender()->inherits(QStringLiteral("Otter::Window").toLatin1()))
 	{
 		for (int i = 0; i < count(); ++i)
 		{
