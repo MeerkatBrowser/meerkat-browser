@@ -24,7 +24,7 @@
 
 #include <QtWidgets/QItemDelegate>
 
-namespace Meerkat
+namespace Otter
 {
 
 class OptionDelegate : public QItemDelegate
