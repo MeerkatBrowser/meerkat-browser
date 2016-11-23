@@ -1,5 +1,5 @@
 /**************************************************************************
-* Meerkat Browser: Web browser controlled by the user, not vice-versa.
+* Otter Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2013 - 2015 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 * Copyright (C) 2016 Jan Bajer aka bajasoft <jbajer@gmail.com>
 *
@@ -27,7 +27,7 @@
 
 #include <QtGui/QPainter>
 
-namespace Meerkat
+namespace Otter
 {
 
 AddressDelegate::AddressDelegate(bool isAddressField, QObject *parent) : QItemDelegate(parent),
