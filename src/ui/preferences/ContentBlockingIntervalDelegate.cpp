@@ -65,8 +65,8 @@ QWidget* ContentBlockingIntervalDelegate::createEditor(QWidget *parent, const QS
 	Q_UNUSED(option)
 
 	QSpinBox *spinBox(new QSpinBox(parent));
-	spinBox->setSuffix(QCoreApplication::translate("Meerkat::ContentBlockingIntervalDelegate", " day(s)"));
-	spinBox->setSpecialValueText(QCoreApplication::translate("Meerkat::ContentBlockingIntervalDelegate", "Never"));
+	spinBox->setSuffix(QCoreApplication::translate("Otter::ContentBlockingIntervalDelegate", " day(s)"));
+	spinBox->setSpecialValueText(QCoreApplication::translate("Otter::ContentBlockingIntervalDelegate", "Never"));
 	spinBox->setMinimum(0);
 	spinBox->setMaximum(365);
 	spinBox->setValue(index.data(Qt::EditRole).toInt());
