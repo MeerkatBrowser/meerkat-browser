@@ -1624,7 +1624,7 @@
    <header>src/ui/ItemViewWidget.h</header>
   </customwidget>
   <customwidget>
-   <class>Meerkat::ApplicationComboBoxWidget</class>
+   <class>Otter::ApplicationComboBoxWidget</class>
    <extends>QComboBox</extends>
    <header>src/ui/ApplicationComboBoxWidget.h</header>
   </customwidget>
