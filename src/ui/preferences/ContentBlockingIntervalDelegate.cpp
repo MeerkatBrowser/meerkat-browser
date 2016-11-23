@@ -38,7 +38,7 @@ void ContentBlockingIntervalDelegate::paint(QPainter *painter, const QStyleOptio
 	{
 		const int updateInterval(index.data(Qt::EditRole).toInt());
 
-		drawDisplay(painter, option, option.rect, ((updateInterval > 0) ? QCoreApplication::translate("Meerkat::ContentBlockingIntervalDelegate", "%n day(s)", "", updateInterval) : QCoreApplication::translate("Meerkat::ContentBlockingIntervalDelegate", "Never")));
+		drawDisplay(painter, option, option.rect, ((updateInterval > 0) ? QCoreApplication::translate("Otter::ContentBlockingIntervalDelegate", "%n day(s)", "", updateInterval) : QCoreApplication::translate("Otter::ContentBlockingIntervalDelegate", "Never")));
 	}
 }
 
