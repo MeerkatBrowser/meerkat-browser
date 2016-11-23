@@ -24,7 +24,7 @@ namespace Meerkat
 {
 
 SpellCheckManager* SpellCheckManager::m_instance(nullptr);
-#ifdef OTTER_ENABLE_SPELLCHECK
+#ifdef MEERKAT_ENABLE_SPELLCHECK
 Sonnet::Speller* SpellCheckManager::m_speller(nullptr);
 #endif
 

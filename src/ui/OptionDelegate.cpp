@@ -38,7 +38,7 @@ void OptionDelegate::initStyleOption(QStyleOptionViewItem *option, const QModelI
 	switch (SettingsManager::getOptionDefinition(SettingsManager::getOptionIdentifier(index.data(Qt::UserRole).toString())).type)
 	{
 		case SettingsManager::BooleanType:
-			option->text = (index.data(Qt::DisplayRole).toBool() ? QCoreApplication::translate("Otter::OptionDelegate", "Yes") : QCoreApplication::translate("Otter::OptionDelegate", "No"));
+			option->text = (index.data(Qt::DisplayRole).toBool() ? QCoreApplication::translate("Meerkat::OptionDelegate", "Yes") : QCoreApplication::translate("Meerkat::OptionDelegate", "No"));
 
 			break;
 		case SettingsManager::ColorType:

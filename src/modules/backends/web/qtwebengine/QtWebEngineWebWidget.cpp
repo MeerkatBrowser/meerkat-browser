@@ -54,7 +54,7 @@
 #include <QtWidgets/QToolTip>
 #include <QtWidgets/QVBoxLayout>
 
-namespace Otter
+namespace Meerkat
 {
 
 QtWebEngineWebWidget::QtWebEngineWebWidget(bool isPrivate, WebBackend *backend, ContentsWidget *parent) : WebWidget(isPrivate, backend, parent),

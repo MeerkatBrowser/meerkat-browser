@@ -165,6 +165,6 @@ signals:
 
 }
 
-Q_DECLARE_OPERATORS_FOR_FLAGS(Otter::ContentBlockingProfile::ProfileFlags)
+Q_DECLARE_OPERATORS_FOR_FLAGS(Meerkat::ContentBlockingProfile::ProfileFlags)
 
 #endif

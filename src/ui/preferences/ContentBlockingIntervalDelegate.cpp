@@ -53,8 +53,8 @@ QWidget* ContentBlockingIntervalDelegate::createEditor(QWidget *parent, const QS
 	Q_UNUSED(option)
 
 	QSpinBox *widget(new QSpinBox(parent));
-	widget->setSuffix(QCoreApplication::translate("Otter::ContentBlockingIntervalDelegate", " day(s)"));
-	widget->setSpecialValueText(QCoreApplication::translate("Otter::ContentBlockingIntervalDelegate", "Never"));
+	widget->setSuffix(QCoreApplication::translate("Meerkat::ContentBlockingIntervalDelegate", " day(s)"));
+	widget->setSpecialValueText(QCoreApplication::translate("Meerkat::ContentBlockingIntervalDelegate", "Never"));
 	widget->setMinimum(0);
 	widget->setMaximum(365);
 	widget->setValue(index.data(Qt::DisplayRole).toInt());
@@ -73,7 +73,7 @@ QString ContentBlockingIntervalDelegate::displayText(const QVariant &value, cons
 
 	const int updateInterval(value.toInt());
 
-	return ((updateInterval > 0) ? QCoreApplication::translate("Otter::ContentBlockingIntervalDelegate", "%n day(s)", "", updateInterval) : QCoreApplication::translate("Otter::ContentBlockingIntervalDelegate", "Never"));
+	return ((updateInterval > 0) ? QCoreApplication::translate("Meerkat::ContentBlockingIntervalDelegate", "%n day(s)", "", updateInterval) : QCoreApplication::translate("Meerkat::ContentBlockingIntervalDelegate", "Never"));
 }
 
 }

@@ -23,7 +23,7 @@
 #include "ItemDelegate.h"
 #include "OptionWidget.h"
 
-namespace Otter
+namespace Meerkat
 {
 
 class OptionDelegate : public ItemDelegate

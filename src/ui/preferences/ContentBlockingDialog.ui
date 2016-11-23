@@ -52,7 +52,7 @@
          <item>
           <layout class="QVBoxLayout" name="profilesVerticalLayout">
            <item>
-            <widget class="Otter::ItemViewWidget" name="profilesViewWidget">
+            <widget class="Meerkat::ItemViewWidget" name="profilesViewWidget">
              <property name="sizeAdjustPolicy">
               <enum>QAbstractScrollArea::AdjustIgnored</enum>
              </property>
