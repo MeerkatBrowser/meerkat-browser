@@ -22,7 +22,7 @@
 
 #include <QtWidgets/QItemDelegate>
 
-namespace Meerkat
+namespace Otter
 {
 
 class SearchDelegate : public QItemDelegate
