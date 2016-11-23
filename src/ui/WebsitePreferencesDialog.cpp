@@ -20,7 +20,6 @@
 **************************************************************************/
 
 #include "WebsitePreferencesDialog.h"
-#include "OptionDelegate.h"
 #include "preferences/ContentBlockingIntervalDelegate.h"
 #include "../core/ContentBlockingManager.h"
 #include "../core/ContentBlockingProfile.h"
@@ -139,11 +138,7 @@ WebsitePreferencesDialog::WebsitePreferencesDialog(const QUrl &url, const QList<
 		}
 		else
 		{
-			const UserAgentInformation userAgent(NetworkManagerFactory::getUserAgent(userAgents.at(i)));
-			const QString title(userAgent.title);
-
-			m_ui->userAgentComboBox->addItem((title.isEmpty() ? tr("(Untitled)") : QCoreApplication::translate("userAgents", title.toUtf8())), userAgents.at(i));
-			m_ui->userAgentComboBox->setItemData((i + 1), userAgent.value, (Qt::UserRole + 1));
+			m_ui->userAgentComboBox->addItem(NetworkManagerFactory::getUserAgent(userAgents.at(i)).getTitle(), userAgents.at(i));
 		}
 	}
 
@@ -385,7 +380,6 @@ void WebsitePreferencesDialog::updateValues(bool checked)
 	const QStringList contentBlockingProfiles(SettingsManager::getValue(SettingsManager::ContentBlocking_ProfilesOption, url).toStringList());
 
 	m_ui->contentBlockingProfilesViewWidget->setModel(ContentBlockingManager::createModel(this, contentBlockingProfiles));
-	m_ui->contentBlockingProfilesViewWidget->setItemDelegate(new OptionDelegate(true, this));
 	m_ui->contentBlockingProfilesViewWidget->setItemDelegateForColumn(1, new ContentBlockingIntervalDelegate(this));
 	m_ui->contentBlockingProfilesViewWidget->setViewMode(ItemViewWidget::TreeViewMode);
 	m_ui->contentBlockingProfilesViewWidget->header()->setSectionResizeMode(0, QHeaderView::Stretch);

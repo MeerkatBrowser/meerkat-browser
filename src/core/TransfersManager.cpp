@@ -36,14 +36,14 @@
 namespace Meerkat
 {
 
-TransfersManager* TransfersManager::m_instance = NULL;
+TransfersManager* TransfersManager::m_instance(nullptr);
 QList<Transfer*> TransfersManager::m_transfers;
 QList<Transfer*> TransfersManager::m_privateTransfers;
-bool TransfersManager::m_isInitilized = false;
+bool TransfersManager::m_isInitilized(false);
 
 Transfer::Transfer(TransferOptions options, QObject *parent) : QObject(parent ? parent : TransfersManager::getInstance()),
-	m_reply(NULL),
-	m_device(NULL),
+	m_reply(nullptr),
+	m_device(nullptr),
 	m_speed(0),
 	m_bytesStart(0),
 	m_bytesReceivedDifference(0),
@@ -58,8 +58,8 @@ Transfer::Transfer(TransferOptions options, QObject *parent) : QObject(parent ? 
 }
 
 Transfer::Transfer(const QSettings &settings, QObject *parent) : QObject(parent ? parent : TransfersManager::getInstance()),
-	m_reply(NULL),
-	m_device(NULL),
+	m_reply(nullptr),
+	m_device(nullptr),
 	m_source(settings.value(QLatin1String("source")).toUrl()),
 	m_target(settings.value(QLatin1String("target")).toString()),
 	m_timeStarted(settings.value(QLatin1String("timeStarted")).toDateTime()),
@@ -79,8 +79,8 @@ Transfer::Transfer(const QSettings &settings, QObject *parent) : QObject(parent 
 }
 
 Transfer::Transfer(const QUrl &source, const QString &target, TransferOptions options, QObject *parent) : QObject(parent ? parent : TransfersManager::getInstance()),
-	m_reply(NULL),
-	m_device(NULL),
+	m_reply(nullptr),
+	m_device(nullptr),
 	m_source(source),
 	m_target(target),
 	m_speed(0),
@@ -103,8 +103,8 @@ Transfer::Transfer(const QUrl &source, const QString &target, TransferOptions op
 }
 
 Transfer::Transfer(const QNetworkRequest &request, const QString &target, TransferOptions options, QObject *parent) : QObject(parent ? parent : TransfersManager::getInstance()),
-	m_reply(NULL),
-	m_device(NULL),
+	m_reply(nullptr),
+	m_device(nullptr),
 	m_source(request.url()),
 	m_target(target),
 	m_speed(0),
@@ -247,6 +247,7 @@ void Transfer::start(QNetworkReply *reply, const QString &target)
 	}
 
 	QString finalTarget;
+	bool canOverwriteExisting(false);
 
 	if (target.isEmpty())
 	{
@@ -272,7 +273,10 @@ void Transfer::start(QNetworkReply *reply, const QString &target)
 		{
 			m_isSelectingPath = true;
 
-			path = Utils::getSavePath(fileName, path).path;
+			const SaveInformation information(Utils::getSavePath(fileName, path));
+
+			path = information.path;
+			canOverwriteExisting = information.canOverwriteExisting;
 
 			m_isSelectingPath = false;
 
@@ -283,7 +287,7 @@ void Transfer::start(QNetworkReply *reply, const QString &target)
 					m_reply->abort();
 				}
 
-				m_device = NULL;
+				m_device = nullptr;
 
 				cancel();
 
@@ -300,7 +304,7 @@ void Transfer::start(QNetworkReply *reply, const QString &target)
 
 	if (!finalTarget.isEmpty())
 	{
-		setTarget(finalTarget);
+		setTarget(finalTarget, canOverwriteExisting);
 	}
 
 	if (m_state == FinishedState)
@@ -337,7 +341,7 @@ void Transfer::downloadProgress(qint64 bytesReceived, qint64 bytesTotal)
 
 void Transfer::downloadData()
 {
-	if (!m_reply)
+	if (!m_reply || !m_device)
 	{
 		return;
 	}
@@ -354,6 +358,11 @@ void Transfer::downloadData()
 
 	m_device->write(m_reply->readAll());
 	m_device->seek(m_device->size());
+
+	if (m_state == RunningState && m_reply->attribute(QNetworkRequest::SourceIsFromCacheAttribute).toBool() && m_bytesTotal >= 0 && m_device->size() == m_bytesTotal)
+	{
+		downloadFinished();
+	}
 }
 
 void Transfer::downloadFinished()
@@ -364,7 +373,7 @@ void Transfer::downloadFinished()
 		{
 			m_device->close();
 			m_device->deleteLater();
-			m_device = NULL;
+			m_device = nullptr;
 		}
 
 		if (m_options.testFlag(CanAutoDeleteOption) && !m_isSelectingPath)
@@ -426,7 +435,7 @@ void Transfer::downloadFinished()
 	{
 		m_device->close();
 		m_device->deleteLater();
-		m_device = NULL;
+		m_device = nullptr;
 
 		if (m_reply)
 		{
@@ -518,7 +527,7 @@ void Transfer::stop()
 	{
 		m_device->close();
 		m_device->deleteLater();
-		m_device = NULL;
+		m_device = nullptr;
 	}
 
 	if (m_state == RunningState)
@@ -555,7 +564,7 @@ void Transfer::setOpenCommand(const QString &command)
 			file->close();
 			file->deleteLater();
 
-			m_device = NULL;
+			m_device = nullptr;
 		}
 
 		openTarget();
@@ -777,7 +786,7 @@ bool Transfer::restart()
 	return true;
 }
 
-bool Transfer::setTarget(const QString &target)
+bool Transfer::setTarget(const QString &target, bool canOverwriteExisting)
 {
 	if (m_target == target)
 	{
@@ -786,7 +795,7 @@ bool Transfer::setTarget(const QString &target)
 
 	QString mutableTarget(target);
 
-	if (QFile::exists(target) && !m_options.testFlag(CanOverwriteOption))
+	if (!canOverwriteExisting && !m_options.testFlag(CanOverwriteOption) && QFile::exists(target))
 	{
 		const QMessageBox::StandardButton result(QMessageBox::question(SessionsManager::getActiveWindow(), tr("Question"), tr("File with the same name already exists.\nDo you want to overwrite it?\n\n%1").arg(target), (QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel)));
 
@@ -1051,7 +1060,7 @@ Transfer* TransfersManager::startTransfer(const QUrl &source, const QString &tar
 	{
 		transfer->deleteLater();
 
-		return NULL;
+		return nullptr;
 	}
 
 	addTransfer(transfer);
@@ -1067,7 +1076,7 @@ Transfer* TransfersManager::startTransfer(const QNetworkRequest &request, const 
 	{
 		transfer->deleteLater();
 
-		return NULL;
+		return nullptr;
 	}
 
 	addTransfer(transfer);
@@ -1083,7 +1092,7 @@ Transfer* TransfersManager::startTransfer(QNetworkReply *reply, const QString &t
 	{
 		transfer->deleteLater();
 
-		return NULL;
+		return nullptr;
 	}
 
 	addTransfer(transfer);

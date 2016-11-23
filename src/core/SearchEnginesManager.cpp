@@ -32,12 +32,12 @@
 namespace Meerkat
 {
 
-SearchEnginesManager* SearchEnginesManager::m_instance = NULL;
-QStandardItemModel* SearchEnginesManager::m_searchEnginesModel = NULL;
+SearchEnginesManager* SearchEnginesManager::m_instance(nullptr);
+QStandardItemModel* SearchEnginesManager::m_searchEnginesModel(nullptr);
 QStringList SearchEnginesManager::m_searchEnginesOrder;
 QStringList SearchEnginesManager::m_searchKeywords;
 QHash<QString, SearchEnginesManager::SearchEngineDefinition> SearchEnginesManager::m_searchEngines;
-bool SearchEnginesManager::m_isInitialized = false;
+bool SearchEnginesManager::m_isInitialized(false);
 
 SearchEnginesManager::SearchEnginesManager(QObject *parent) : QObject(parent)
 {
@@ -156,9 +156,9 @@ void SearchEnginesManager::updateSearchEnginesModel()
 		if (!search.identifier.isEmpty())
 		{
 			QStandardItem *item(new QStandardItem((search.icon.isNull() ? ThemesManager::getIcon(QLatin1String("edit-find")) : search.icon), QString()));
-			item->setData(search.title, Qt::UserRole);
-			item->setData(search.identifier, (Qt::UserRole + 1));
-			item->setData(search.keyword, (Qt::UserRole + 2));
+			item->setData(search.title, TitleRole);
+			item->setData(search.identifier, IdentifierRole);
+			item->setData(search.keyword, KeywordRole);
 			item->setFlags(item->flags() | Qt::ItemNeverHasChildren);
 
 			m_searchEnginesModel->appendRow(item);
@@ -169,7 +169,6 @@ void SearchEnginesManager::updateSearchEnginesModel()
 	{
 		QStandardItem *separatorItem(new QStandardItem());
 		separatorItem->setData(QLatin1String("separator"), Qt::AccessibleDescriptionRole);
-		separatorItem->setData(QSize(-1, 10), Qt::SizeHintRole);
 		separatorItem->setFlags(Qt::ItemIsEnabled | Qt::ItemNeverHasChildren);
 
 		QStandardItem *manageItem(new QStandardItem(ThemesManager::getIcon(QLatin1String("configure")), tr("Manage Search Engines…")));
@@ -304,7 +303,7 @@ SearchEnginesManager::SearchEngineDefinition SearchEnginesManager::loadSearchEng
 
 	if (reader.readNextStartElement() && reader.name() == QLatin1String("OpenSearchDescription"))
 	{
-		SearchUrl *currentUrl(NULL);
+		SearchUrl *currentUrl(nullptr);
 
 		while (!reader.atEnd())
 		{
@@ -328,7 +327,7 @@ SearchEnginesManager::SearchEngineDefinition SearchEnginesManager::loadSearchEng
 					}
 					else
 					{
-						currentUrl = NULL;
+						currentUrl = nullptr;
 					}
 
 					if (currentUrl)

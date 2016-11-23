@@ -46,6 +46,13 @@ public:
 		NameRole = (Qt::UserRole + 1)
 	};
 
+	enum ReplaceMode
+	{
+		UnknownMode = 0,
+		ReplaceAllMode,
+		IgnoreAllMode
+	};
+
 	explicit AddonsContentsWidget(Window *window);
 	~AddonsContentsWidget();
 
@@ -69,6 +76,7 @@ protected slots:
 	void filterAddons(const QString &filter);
 	void addAddon();
 	void addAddon(Addon *addon);
+	void reloadAddon();
 	void removeAddons();
 	void save();
 	void showContextMenu(const QPoint &point);

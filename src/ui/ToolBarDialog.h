@@ -38,14 +38,21 @@ class ToolBarDialog : public Dialog
 	Q_OBJECT
 
 public:
-	explicit ToolBarDialog(int identifier = -1, QWidget *parent = NULL);
+	enum DataRole
+	{
+		IdentifierRole = Qt::UserRole,
+		OptionsRole
+	};
+
+	explicit ToolBarDialog(int identifier = -1, QWidget *parent = nullptr);
 	~ToolBarDialog();
 
 	ToolBarsManager::ToolBarDefinition getDefinition() const;
+	bool eventFilter(QObject *object, QEvent *event);
 
 protected:
 	void changeEvent(QEvent *event);
-	void addEntry(const ActionsManager::ActionEntryDefinition &entry, QStandardItem *parent = NULL);
+	void addEntry(const ActionsManager::ActionEntryDefinition &entry, QStandardItem *parent = nullptr);
 	QStandardItem* createEntry(const QString &identifier, const QVariantMap &options = QVariantMap());
 	ActionsManager::ActionEntryDefinition getEntry(QStandardItem *item) const;
 

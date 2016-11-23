@@ -1,7 +1,7 @@
 /**************************************************************************
 * Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2013 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
-* Copyright (C) 2015 Jan Bajer aka bajasoft <jbajer@gmail.com>
+* Copyright (C) 2015 - 2016 Jan Bajer aka bajasoft <jbajer@gmail.com>
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -72,22 +72,23 @@
 #include <QtWidgets/QCheckBox>
 #include <QtWidgets/QMessageBox>
 #include <QtWidgets/QPushButton>
-#include <QtWidgets/QStyleFactory>
+#include <QtWidgets/QStyle>
 
 namespace Meerkat
 {
 
-Application* Application::m_instance = NULL;
-PlatformIntegration* Application::m_platformIntegration = NULL;
-TrayIcon* Application::m_trayIcon = NULL;
-QTranslator* Application::m_qtTranslator = NULL;
-QTranslator* Application::m_applicationTranslator = NULL;
-QLocalServer* Application::m_localServer = NULL;
+Application* Application::m_instance(nullptr);
+PlatformIntegration* Application::m_platformIntegration(nullptr);
+TrayIcon* Application::m_trayIcon(nullptr);
+QTranslator* Application::m_qtTranslator(nullptr);
+QTranslator* Application::m_applicationTranslator(nullptr);
+QLocalServer* Application::m_localServer(nullptr);
 QString Application::m_localePath;
+QString Application::m_systemWidgetStyle;
 QCommandLineParser Application::m_commandLineParser;
 QList<MainWindow*> Application::m_windows;
-bool Application::m_isHidden = false;
-bool Application::m_isUpdating = false;
+bool Application::m_isHidden(false);
+bool Application::m_isUpdating(false);
 
 Application::Application(int &argc, char **argv) : QApplication(argc, argv)
 {
@@ -255,7 +256,7 @@ Application::Application(int &argc, char **argv) : QApplication(argc, argv)
 
 	if (socket.waitForConnected(500))
 	{
-		const QStringList decodedArguments = arguments;
+		const QStringList decodedArguments(arguments);
 		QStringList encodedArguments;
 
 #ifdef Q_OS_WIN
@@ -280,6 +281,8 @@ Application::Application(int &argc, char **argv) : QApplication(argc, argv)
 
 	connect(m_localServer, SIGNAL(newConnection()), this, SLOT(newConnection()));
 
+	m_localServer->setSocketOptions(QLocalServer::UserAccessOption);
+
 	if (!m_localServer->listen(server) && m_localServer->serverError() == QAbstractSocket::AddressInUseError && QLocalServer::removeServer(server))
 	{
 		m_localServer->listen(server);
@@ -292,7 +295,7 @@ Application::Application(int &argc, char **argv) : QApplication(argc, argv)
 
 	if (!isReadOnly && !QFileInfo(profilePath).isWritable())
 	{
-		QMessageBox::warning(NULL, tr("Warning"), tr("Profile directory (%1) is not writable, application will be running in read-only mode.").arg(profilePath), QMessageBox::Close);
+		QMessageBox::warning(nullptr, tr("Warning"), tr("Profile directory (%1) is not writable, application will be running in read-only mode.").arg(profilePath), QMessageBox::Close);
 
 		isReadOnly = true;
 	}
@@ -398,7 +401,7 @@ Application::Application(int &argc, char **argv) : QApplication(argc, argv)
 
 	if (!QSslSocket::supportsSsl() || (webBackend && webBackend->getSslVersion().isEmpty()))
 	{
-		QMessageBox::warning(NULL, tr("Warning"), tr("SSL support is not available or incomplete.\nSome websites may work incorrectly or do not work at all."), QMessageBox::Close);
+		QMessageBox::warning(nullptr, tr("Warning"), tr("SSL support is not available or incomplete.\nSome websites may work incorrectly or do not work at all."), QMessageBox::Close);
 	}
 
 	if (SettingsManager::getValue(SettingsManager::Browser_EnableTrayIconOption).toBool())
@@ -436,6 +439,8 @@ Application::Application(int &argc, char **argv) : QApplication(argc, argv)
 		LongTermTimer::runTimer((interval * SECONDS_IN_DAY), this, SLOT(periodicUpdateCheck()));
 	}
 
+	m_systemWidgetStyle = style()->objectName();
+
 	setStyle(SettingsManager::getValue(SettingsManager::Interface_WidgetStyleOption).toString());
 
 	const QString styleSheet(SettingsManager::getValue(SettingsManager::Interface_StyleSheetOption).toString());
@@ -461,6 +466,8 @@ Application::Application(int &argc, char **argv) : QApplication(argc, argv)
 
 Application::~Application()
 {
+	m_systemWidgetStyle.clear();
+
 	for (int i = 0; i < m_windows.count(); ++i)
 	{
 		m_windows.at(i)->deleteLater();
@@ -478,7 +485,7 @@ void Application::optionChanged(int identifier, const QVariant &value)
 		else if (m_trayIcon && !value.toBool())
 		{
 			m_trayIcon->deleteLater();
-			m_trayIcon = NULL;
+			m_trayIcon = nullptr;
 		}
 	}
 }
@@ -546,7 +553,7 @@ void Application::newConnection()
 
 	socket->waitForReadyRead(1000);
 
-	MainWindow *window(getWindows().isEmpty() ? NULL : getWindow());
+	MainWindow *window(getWindows().isEmpty() ? nullptr : getWindow());
 	QString data;
 	QTextStream stream(socket);
 	stream >> data;
@@ -575,7 +582,7 @@ void Application::newConnection()
 	{
 		const SessionInformation sessionData(SessionsManager::getSession(session));
 
-		if (sessionData.isClean || QMessageBox::warning(NULL, tr("Warning"), tr("This session was not saved correctly.\nAre you sure that you want to restore this session anyway?"), (QMessageBox::Yes | QMessageBox::No), QMessageBox::No) == QMessageBox::Yes)
+		if (sessionData.isClean || QMessageBox::warning(nullptr, tr("Warning"), tr("This session was not saved correctly.\nAre you sure that you want to restore this session anyway?"), (QMessageBox::Yes | QMessageBox::No), QMessageBox::No) == QMessageBox::Yes)
 		{
 			for (int i = 0; i < sessionData.windows.count(); ++i)
 			{
@@ -647,6 +654,11 @@ void Application::clearHistory()
 		{
 			NetworkManagerFactory::clearCache();
 		}
+
+		if (shouldClearAll || clearSettings.contains(QLatin1String("passwords")))
+		{
+			PasswordsManager::clearPasswords();
+		}
 	}
 }
 
@@ -692,7 +704,7 @@ void Application::showUpdateDetails()
 
 	if (notification)
 	{
-		UpdateCheckerDialog *dialog(new UpdateCheckerDialog(NULL, notification->getData().value<QList<UpdateInformation> >()));
+		UpdateCheckerDialog *dialog(new UpdateCheckerDialog(nullptr, notification->getData().value<QList<UpdateInformation> >()));
 		dialog->show();
 	}
 }
@@ -948,6 +960,11 @@ QString Application::getLocalePath()
 	return m_localePath;
 }
 
+QString Application::getSystemWidgetStyle()
+{
+	return m_systemWidgetStyle;
+}
+
 QList<MainWindow*> Application::getWindows()
 {
 	return m_windows;
@@ -1064,7 +1081,7 @@ bool Application::isUpdating() const
 
 bool Application::isRunning() const
 {
-	return (m_localServer == NULL);
+	return (m_localServer == nullptr);
 }
 
 }

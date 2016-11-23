@@ -34,14 +34,19 @@ class SearchEnginesManager : public QObject
 	Q_OBJECT
 
 public:
+	enum SearchEngineRole
+	{
+		TitleRole = Qt::UserRole,
+		IdentifierRole,
+		KeywordRole
+	};
+
 	struct SearchUrl
 	{
 		QString url;
 		QString enctype;
-		QString method;
+		QString method = QLatin1String("get");
 		QUrlQuery parameters;
-
-		SearchUrl() : method(QLatin1String("get")) {}
 	};
 
 	struct SearchEngineDefinition
@@ -50,17 +55,15 @@ public:
 		QString title;
 		QString description;
 		QString keyword;
-		QString encoding;
+		QString encoding = QLatin1String("UTF-8");
 		QUrl formUrl;
 		QUrl selfUrl;
 		SearchUrl resultsUrl;
 		SearchUrl suggestionsUrl;
 		QIcon icon;
-
-		SearchEngineDefinition() : encoding(QLatin1String("UTF-8")) {}
 	};
 
-	static void createInstance(QObject *parent = NULL);
+	static void createInstance(QObject *parent = nullptr);
 	static void loadSearchEngines();
 	static void addSearchEngine(const SearchEngineDefinition &searchEngine, bool isDefault = false);
 	static void setupQuery(const QString &query, const SearchUrl &searchUrl, QNetworkRequest *request, QNetworkAccessManager::Operation *method, QByteArray *body);
@@ -74,7 +77,7 @@ public:
 	static bool setupSearchQuery(const QString &query, const QString &searchEngine, QNetworkRequest *request, QNetworkAccessManager::Operation *method, QByteArray *body);
 
 protected:
-	explicit SearchEnginesManager(QObject *parent = NULL);
+	explicit SearchEnginesManager(QObject *parent = nullptr);
 
 	static void initialize();
 	static void updateSearchEnginesModel();

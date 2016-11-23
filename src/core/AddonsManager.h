@@ -50,7 +50,7 @@ public:
 		WebBackendType
 	};
 
-	explicit Addon(QObject *parent = NULL);
+	explicit Addon(QObject *parent = nullptr);
 
 	virtual QString getTitle() const = 0;
 	virtual QString getDescription() const = 0;
@@ -82,9 +82,13 @@ public:
 		QUrl url;
 		QIcon icon;
 
-		SpecialPageInformation() {}
+		explicit SpecialPageInformation(const QString &valueTitle, const QString &valueDescription, const QUrl &valueUrl, const QIcon &valueIcon) : title(valueTitle), description(valueDescription), url(valueUrl), icon(valueIcon)
+		{
+		}
 
-		SpecialPageInformation(const QString &valueTitle, const QString &valueDescription, const QUrl &valueUrl, const QIcon &valueIcon) : title(valueTitle), description(valueDescription), url(valueUrl), icon(valueIcon) {}
+		SpecialPageInformation()
+		{
+		}
 
 		QString getTitle() const
 		{
@@ -97,7 +101,7 @@ public:
 		}
 	};
 
-	static void createInstance(QObject *parent = NULL);
+	static void createInstance(QObject *parent = nullptr);
 	static void registerWebBackend(WebBackend *backend, const QString &name);
 	static void registerSpecialPage(const SpecialPageInformation &information, const QString &name);
 	static void loadUserScripts();
@@ -110,7 +114,7 @@ public:
 	static QStringList getSpecialPages();
 
 protected:
-	explicit AddonsManager(QObject *parent = NULL);
+	explicit AddonsManager(QObject *parent = nullptr);
 
 private:
 	static AddonsManager *m_instance;

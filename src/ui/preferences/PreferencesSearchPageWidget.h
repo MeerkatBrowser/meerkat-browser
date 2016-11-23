@@ -21,6 +21,7 @@
 #ifndef MEERKAT_PREFERENCESSEARCHPAGEWIDGET_H
 #define MEERKAT_PREFERENCESSEARCHPAGEWIDGET_H
 
+#include "../ItemDelegate.h"
 #include "../../core/SearchEnginesManager.h"
 
 #include <QtWidgets/QWidget>
@@ -33,17 +34,28 @@ namespace Ui
 	class PreferencesSearchPageWidget;
 }
 
+class SearchKeywordDelegate : public ItemDelegate
+{
+public:
+	explicit SearchKeywordDelegate(QObject *parent);
+
+	void updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &option, const QModelIndex &index) const;
+	void setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const;
+	QWidget* createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const;
+};
+
 class PreferencesSearchPageWidget : public QWidget
 {
 	Q_OBJECT
 
 public:
-	explicit PreferencesSearchPageWidget(QWidget *parent = NULL);
+	explicit PreferencesSearchPageWidget(QWidget *parent = nullptr);
 	~PreferencesSearchPageWidget();
 
 protected:
 	void changeEvent(QEvent *event);
 	void updateReaddSearchMenu();
+	QList<QStandardItem*> createRow(const SearchEnginesManager::SearchEngineDefinition &searchEngine) const;
 
 protected slots:
 	void addSearchEngine();

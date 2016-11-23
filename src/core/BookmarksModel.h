@@ -32,10 +32,10 @@ class BookmarksItem : public QStandardItem
 {
 public:
 	void remove();
-	void setData(const QVariant &value, int role);
+	void setData(const QVariant &value, int role) override;
 	void setItemData(const QVariant &value, int role);
-	QStandardItem* clone() const;
-	QVariant data(int role) const;
+	QStandardItem* clone() const override;
+	QVariant data(int role) const override;
 	QList<QUrl> getUrls() const;
 
 protected:
@@ -83,35 +83,33 @@ public:
 
 	struct BookmarkMatch
 	{
-		BookmarksItem *bookmark;
+		BookmarksItem *bookmark = nullptr;
 		QString match;
-
-		BookmarkMatch () : bookmark(NULL) {}
 	};
 
-	explicit BookmarksModel(const QString &path, FormatMode mode, QObject *parent = NULL);
+	explicit BookmarksModel(const QString &path, FormatMode mode, QObject *parent = nullptr);
 
 	void trashBookmark(BookmarksItem *bookmark);
 	void restoreBookmark(BookmarksItem *bookmark);
 	void removeBookmark(BookmarksItem *bookmark);
-	BookmarksItem* addBookmark(BookmarkType type, quint64 identifier = 0, const QUrl &url = QUrl(), const QString &title = QString(), BookmarksItem *parent = NULL, int index = -1);
+	BookmarksItem* addBookmark(BookmarkType type, quint64 identifier = 0, const QUrl &url = QUrl(), const QString &title = QString(), BookmarksItem *parent = nullptr, int index = -1);
 	BookmarksItem* getBookmark(const QString &keyword) const;
 	BookmarksItem* getBookmark(const QModelIndex &index) const;
 	BookmarksItem* getBookmark(quint64 identifier) const;
 	BookmarksItem* getRootItem() const;
 	BookmarksItem* getTrashItem() const;
 	BookmarksItem* getItem(const QString &path) const;
-	QMimeData* mimeData(const QModelIndexList &indexes) const;
-	QStringList mimeTypes() const;
+	QMimeData* mimeData(const QModelIndexList &indexes) const override;
+	QStringList mimeTypes() const override;
 	QStringList getKeywords() const;
 	QList<BookmarkMatch> findBookmarks(const QString &prefix) const;
-	QList<BookmarksItem*> findUrls(const QUrl &url, QStandardItem *branch = NULL) const;
+	QList<BookmarksItem*> findUrls(const QUrl &url, QStandardItem *branch = nullptr) const;
 	QList<BookmarksItem*> getBookmarks(const QUrl &url) const;
 	FormatMode getFormatMode() const;
 	bool moveBookmark(BookmarksItem *bookmark, BookmarksItem *newParent, int newRow = -1);
-	bool dropMimeData(const QMimeData *data, Qt::DropAction action, int row, int column, const QModelIndex &parent);
+	bool dropMimeData(const QMimeData *data, Qt::DropAction action, int row, int column, const QModelIndex &parent) override;
 	bool save(const QString &path) const;
-	bool setData(const QModelIndex &index, const QVariant &value, int role);
+	bool setData(const QModelIndex &index, const QVariant &value, int role) override;
 	bool hasBookmark(const QUrl &url) const;
 	bool hasKeyword(const QString &keyword) const;
 
@@ -124,7 +122,12 @@ protected:
 	void removeBookmarkUrl(BookmarksItem *bookmark);
 	void readdBookmarkUrl(BookmarksItem *bookmark);
 
+protected slots:
+	void notifyBookmarkModified(const QModelIndex &index);
+
 private:
+	BookmarksItem *m_rootItem;
+	BookmarksItem *m_trashItem;
 	QHash<BookmarksItem*, QPair<QModelIndex, int> > m_trash;
 	QHash<QUrl, QList<BookmarksItem*> > m_urls;
 	QHash<QString, BookmarksItem*> m_keywords;

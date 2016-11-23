@@ -38,7 +38,7 @@ public:
 		DeferredTime
 	};
 
-	explicit UserScript(const QString &path, QObject *parent = NULL);
+	explicit UserScript(const QString &path, QObject *parent = nullptr);
 
 	QString getName() const;
 	QString getTitle() const;
@@ -55,6 +55,9 @@ public:
 	AddonType getType() const;
 	bool isEnabledForUrl(const QUrl &url);
 	bool shouldRunOnSubFrames() const;
+
+public slots:
+	void reload();
 
 protected:
 	QString checkUrlSubString(const QString &rule, const QString &urlSubString, QString generatedUrl, int position = 0) const;

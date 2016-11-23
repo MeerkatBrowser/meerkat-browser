@@ -1,7 +1,7 @@
 /**************************************************************************
 * Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2013 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
-* Copyright (C) 2015 Jan Bajer aka bajasoft <jbajer@gmail.com>
+* Copyright (C) 2015 - 2016 Jan Bajer aka bajasoft <jbajer@gmail.com>
 * Copyright (C) 2015 Piotr Wójcik <chocimier@tlen.pl>
 *
 * This program is free software: you can redistribute it and/or modify
@@ -36,7 +36,7 @@ class HeaderViewWidget : public QHeaderView
 	Q_OBJECT
 
 public:
-	explicit HeaderViewWidget(Qt::Orientation orientation, QWidget *parent = NULL);
+	explicit HeaderViewWidget(Qt::Orientation orientation, QWidget *parent = nullptr);
 
 public slots:
 	void setSort(int column, Qt::SortOrder order);
@@ -66,7 +66,7 @@ public:
 		TreeViewMode = 1
 	};
 
-	explicit ItemViewWidget(QWidget *parent = NULL);
+	explicit ItemViewWidget(QWidget *parent = nullptr);
 
 	void setData(const QModelIndex &index, const QVariant &value, int role);
 	void setModel(QAbstractItemModel *model);

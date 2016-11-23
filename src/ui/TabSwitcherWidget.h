@@ -20,10 +20,10 @@
 #ifndef MEERKAT_TABSWITCHERWIDGET_H
 #define MEERKAT_TABSWITCHERWIDGET_H
 
-#include <QtGui/QStandardItemModel>
+#include "ItemViewWidget.h"
+
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QLabel>
-#include <QtWidgets/QListView>
 
 namespace Meerkat
 {
@@ -43,7 +43,7 @@ public:
 		WheelReason = 2
 	};
 
-	explicit TabSwitcherWidget(WindowsManager *manager, QWidget *parent = NULL);
+	explicit TabSwitcherWidget(WindowsManager *manager, QWidget *parent = nullptr);
 
 	void show(SwitcherReason reason);
 	void accept();
@@ -56,7 +56,7 @@ protected:
 	void hideEvent(QHideEvent *event);
 	void keyPressEvent(QKeyEvent *event);
 	void keyReleaseEvent(QKeyEvent *event);
-	QList<QStandardItem*> createRow(Window *window) const;
+	QStandardItem* createRow(Window *window) const;
 	int findRow(qint64 identifier) const;
 
 protected slots:
@@ -70,7 +70,7 @@ private:
 	WindowsManager *m_windowsManager;
 	QStandardItemModel *m_model;
 	QFrame *m_frame;
-	QListView *m_tabsView;
+	ItemViewWidget *m_tabsView;
 	QLabel *m_previewLabel;
 	QMovie *m_loadingMovie;
 	SwitcherReason m_reason;

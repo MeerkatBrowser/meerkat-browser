@@ -27,7 +27,7 @@
 namespace Meerkat
 {
 
-HandlersManager* HandlersManager::m_instance = NULL;
+HandlersManager* HandlersManager::m_instance(nullptr);
 
 HandlersManager::HandlersManager(QObject *parent) : QObject(parent)
 {

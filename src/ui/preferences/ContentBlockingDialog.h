@@ -31,18 +31,23 @@ namespace Ui
 	class ContentBlockingDialog;
 }
 
+class ContentBlockingProfile;
+
 class ContentBlockingDialog : public Dialog
 {
 	Q_OBJECT
 
 public:
-	explicit ContentBlockingDialog(QWidget *parent = NULL);
+	explicit ContentBlockingDialog(QWidget *parent = nullptr);
 	~ContentBlockingDialog();
 
 protected:
 	void changeEvent(QEvent *event);
+	void updateModel(ContentBlockingProfile *profile, bool isNewOrMoved);
 
 protected slots:
+	void addProfile();
+	void editProfile();
 	void updateProfile();
 	void updateProfilesActions();
 	void addRule();

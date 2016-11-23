@@ -35,9 +35,7 @@ struct UpdateInformation
 	QUrl detailsUrl;
 	QUrl scriptUrl;
 	QUrl fileUrl;
-	bool isAvailable;
-
-	UpdateInformation() : isAvailable(false) {}
+	bool isAvailable = false;
 };
 
 class UpdateChecker : public QObject
@@ -45,7 +43,7 @@ class UpdateChecker : public QObject
 	Q_OBJECT
 
 public:
-	explicit UpdateChecker(QObject *parent = NULL, bool inBackground = true);
+	explicit UpdateChecker(QObject *parent = nullptr, bool inBackground = true);
 
 protected slots:
 	void runUpdateCheck();

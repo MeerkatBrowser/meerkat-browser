@@ -2,6 +2,7 @@
 * Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2013 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 * Copyright (C) 2014 - 2016 Jan Bajer aka bajasoft <jbajer@gmail.com>
+* Copyright (C) 2014 Piotr Wójcik <chocimier@tlen.pl>
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -26,6 +27,7 @@
 
 #include <QtCore/QTime>
 #include <QtCore/QUrl>
+#include <QtWidgets/QItemDelegate>
 #include <QtWidgets/QLabel>
 
 namespace Meerkat
@@ -35,6 +37,36 @@ class AddressCompletionModel;
 class ItemViewWidget;
 class LineEditWidget;
 class Window;
+
+class AddressDelegate : public QItemDelegate
+{
+	Q_OBJECT
+
+public:
+	enum DisplayMode
+	{
+		CompactMode = 0,
+		ColumnsMode
+	};
+
+	enum ViewMode
+	{
+		CompletionMode = 0,
+		HistoryMode
+	};
+
+	explicit AddressDelegate(ViewMode mode, QObject *parent = nullptr);
+
+	void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const;
+	QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const;
+
+protected slots:
+	void optionChanged(int identifier, const QVariant &value);
+
+private:
+	DisplayMode m_displayMode;
+	ViewMode m_viewMode;
+};
 
 class AddressWidget : public ComboBoxWidget
 {
@@ -50,7 +82,7 @@ public:
 
 	Q_DECLARE_FLAGS(CompletionModes, CompletionMode)
 
-	explicit AddressWidget(Window *window, QWidget *parent = NULL);
+	explicit AddressWidget(Window *window, QWidget *parent = nullptr);
 
 	void showPopup();
 	void hidePopup();
@@ -64,7 +96,7 @@ public slots:
 	void handleUserInput(const QString &text, WindowsManager::OpenHints hints = WindowsManager::DefaultOpen);
 	void setText(const QString &text);
 	void setUrl(const QUrl &url, bool force = false);
-	void setWindow(Window *window = NULL);
+	void setWindow(Window *window = nullptr);
 
 protected:
 	void changeEvent(QEvent *event);
@@ -79,6 +111,7 @@ protected:
 	void mouseReleaseEvent(QMouseEvent *event);
 	void wheelEvent(QWheelEvent *event);
 	void hideCompletion();
+	void updateGeometries();
 	bool startDrag(QMouseEvent *event);
 
 protected slots:
@@ -101,6 +134,7 @@ private:
 	LineEditWidget *m_lineEdit;
 	AddressCompletionModel *m_completionModel;
 	ItemViewWidget *m_completionView;
+	QAbstractItemView *m_visibleView;
 	QLabel *m_bookmarkLabel;
 	QLabel *m_feedsLabel;
 	QLabel *m_loadPluginsLabel;

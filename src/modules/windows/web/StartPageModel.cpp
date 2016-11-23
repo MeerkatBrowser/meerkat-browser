@@ -20,7 +20,6 @@
 #include "StartPageModel.h"
 #include "../../../core/AddonsManager.h"
 #include "../../../core/BookmarksManager.h"
-#include "../../../core/BookmarksModel.h"
 #include "../../../core/SessionsManager.h"
 #include "../../../core/SettingsManager.h"
 #include "../../../core/WebBackend.h"
@@ -28,12 +27,13 @@
 #include <QtCore/QDir>
 #include <QtCore/QFile>
 #include <QtCore/QMimeData>
+#include <QtGui/QPainter>
 
 namespace Meerkat
 {
 
 StartPageModel::StartPageModel(QObject *parent) : QStandardItemModel(parent),
-	m_bookmark(NULL)
+	m_bookmark(nullptr)
 {
 	optionChanged(SettingsManager::Backends_WebOption);
 	reloadModel();
@@ -58,9 +58,9 @@ void StartPageModel::dragEnded()
 {
 	for (int i = 0; i < rowCount(); ++i)
 	{
-		if (item(i) && item(i)->data(BookmarksModel::UserRole).toBool())
+		if (item(i) && item(i)->data(IsDraggedRole).toBool())
 		{
-			item(i)->setData(QVariant(), BookmarksModel::UserRole);
+			item(i)->setData(QVariant(), IsDraggedRole);
 
 			emit isReloadingTileChanged(item(i)->index());
 		}
@@ -202,7 +202,22 @@ void StartPageModel::reloadTile(const QModelIndex &index, bool full)
 			return;
 		}
 
-		if (AddonsManager::getWebBackend()->requestThumbnail(url, size))
+		if (url.scheme() == QLatin1String("about"))
+		{
+			const AddonsManager::SpecialPageInformation information(AddonsManager::getSpecialPage(url.path()));
+
+			QPixmap thumbnail(size);
+			thumbnail.fill();
+
+			QPainter painter(&thumbnail);
+
+			information.icon.paint(&painter, QRect(QPoint(0, 0), size));
+
+			m_reloads[index.data(BookmarksModel::UrlRole).toUrl()] = qMakePair(index.data(BookmarksModel::IdentifierRole).toULongLong(), full);
+
+			thumbnailCreated(url, thumbnail, information.getTitle());
+		}
+		else if (AddonsManager::getWebBackend()->requestThumbnail(url, size))
 		{
 			m_reloads[index.data(BookmarksModel::UrlRole).toUrl()] = qMakePair(index.data(BookmarksModel::IdentifierRole).toULongLong(), full);
 		}
@@ -219,7 +234,7 @@ QMimeData* StartPageModel::mimeData(const QModelIndexList &indexes) const
 	{
 		mimeData->setProperty("x-item-index", indexes.at(0));
 
-		itemFromIndex(indexes.at(0))->setData(true, BookmarksModel::UserRole);
+		itemFromIndex(indexes.at(0))->setData(true, IsDraggedRole);
 	}
 
 	for (int i = 0; i < indexes.count(); ++i)
@@ -237,6 +252,16 @@ QMimeData* StartPageModel::mimeData(const QModelIndexList &indexes) const
 	connect(mimeData, SIGNAL(destroyed()), this, SLOT(dragEnded()));
 
 	return mimeData;
+}
+
+QVariant StartPageModel::data(const QModelIndex &index, int role) const
+{
+	if (role == IsReloadingRole)
+	{
+		return m_reloads.contains(index.data(BookmarksModel::UrlRole).toUrl());
+	}
+
+	return QStandardItemModel::data(index, role);
 }
 
 QStringList StartPageModel::mimeTypes() const
@@ -273,11 +298,6 @@ bool StartPageModel::event(QEvent *event)
 	}
 
 	return QStandardItemModel::event(event);
-}
-
-bool StartPageModel::isReloadingTile(const QModelIndex &index) const
-{
-	return m_reloads.contains(index.data(BookmarksModel::UrlRole).toUrl());
 }
 
 }

@@ -143,7 +143,6 @@ set(meerkat_src
 	src/core/WindowsManager.cpp
 	src/ui/AcceptCookieDialog.cpp
 	src/ui/ActionComboBoxWidget.cpp
-	src/ui/AddressDelegate.cpp
 	src/ui/ApplicationComboBoxWidget.cpp
 	src/ui/AuthenticationDialog.cpp
 	src/ui/BookmarkPropertiesDialog.cpp
@@ -181,7 +180,6 @@ set(meerkat_src
 	src/ui/ReloadTimeDialog.cpp
 	src/ui/ReportDialog.cpp
 	src/ui/SaveSessionDialog.cpp
-	src/ui/SearchDelegate.cpp
 	src/ui/SearchEnginePropertiesDialog.cpp
 	src/ui/SessionsManagerDialog.cpp
 	src/ui/SidebarWidget.cpp
@@ -207,20 +205,18 @@ set(meerkat_src
 	src/ui/Window.cpp
 	src/ui/WorkspaceWidget.cpp
 	src/ui/preferences/AcceptLanguageDialog.cpp
-	src/ui/preferences/ActionDelegate.cpp
 	src/ui/preferences/ContentBlockingDialog.cpp
 	src/ui/preferences/ContentBlockingIntervalDelegate.cpp
+	src/ui/preferences/ContentBlockingProfileDialog.cpp
 	src/ui/preferences/CookiesExceptionsDialog.cpp
 	src/ui/preferences/JavaScriptPreferencesDialog.cpp
 	src/ui/preferences/KeyboardProfileDialog.cpp
-	src/ui/preferences/KeyboardShortcutDelegate.cpp
 	src/ui/preferences/MouseProfileDialog.cpp
 	src/ui/preferences/PreferencesAdvancedPageWidget.cpp
 	src/ui/preferences/PreferencesContentPageWidget.cpp
 	src/ui/preferences/PreferencesGeneralPageWidget.cpp
 	src/ui/preferences/PreferencesPrivacyPageWidget.cpp
 	src/ui/preferences/PreferencesSearchPageWidget.cpp
-	src/ui/preferences/SearchKeywordDelegate.cpp
 	src/modules/backends/passwords/file/FilePasswordsStorageBackend.cpp
 	src/modules/importers/html/HtmlBookmarksImporter.cpp
 	src/modules/importers/opera/OperaBookmarksImporter.cpp
@@ -246,7 +242,6 @@ set(meerkat_src
 	src/modules/windows/history/HistoryContentsWidget.cpp
 	src/modules/windows/notes/NotesContentsWidget.cpp
 	src/modules/windows/passwords/PasswordsContentsWidget.cpp
-	src/modules/windows/transfers/ProgressBarDelegate.cpp
 	src/modules/windows/transfers/TransfersContentsWidget.cpp
 	src/modules/windows/web/PasswordBarWidget.cpp
 	src/modules/windows/web/PermissionBarWidget.cpp
@@ -298,6 +293,7 @@ qt5_wrap_ui(meerkat_ui
 	src/ui/WebsitePreferencesDialog.ui
 	src/ui/preferences/AcceptLanguageDialog.ui
 	src/ui/preferences/ContentBlockingDialog.ui
+	src/ui/preferences/ContentBlockingProfileDialog.ui
 	src/ui/preferences/CookiesExceptionsDialog.ui
 	src/ui/preferences/JavaScriptPreferencesDialog.ui
 	src/ui/preferences/KeyboardProfileDialog.ui

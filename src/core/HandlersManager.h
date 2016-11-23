@@ -38,10 +38,8 @@ struct HandlerDefinition
 {
 	QString openCommand;
 	QString downloadsPath;
-	TransferMode transferMode;
-	bool isExplicit;
-
-	HandlerDefinition() : transferMode(IgnoreTransferMode), isExplicit(true) {}
+	TransferMode transferMode = IgnoreTransferMode;
+	bool isExplicit = true;
 };
 
 class HandlersManager : public QObject
@@ -49,13 +47,13 @@ class HandlersManager : public QObject
 	Q_OBJECT
 
 public:
-	static void createInstance(QObject *parent = NULL);
+	static void createInstance(QObject *parent = nullptr);
 	static HandlersManager* getInstance();
 	static HandlerDefinition getHandler(const QString &type);
 	static void setHandler(const QString &type, const HandlerDefinition &definition);
 
 protected:
-	explicit HandlersManager(QObject *parent = NULL);
+	explicit HandlersManager(QObject *parent = nullptr);
 
 private:
 	static HandlersManager *m_instance;

@@ -36,10 +36,10 @@ class Window;
 class ToolBarDragAreaWidget : public QWidget
 {
 public:
-	void paintEvent(QPaintEvent *event);
-	void mousePressEvent(QMouseEvent *event);
-	void mouseMoveEvent(QMouseEvent *event);
-	void mouseReleaseEvent(QMouseEvent *event);
+	void paintEvent(QPaintEvent *event) override;
+	void mousePressEvent(QMouseEvent *event) override;
+	void mouseMoveEvent(QMouseEvent *event) override;
+	void mouseReleaseEvent(QMouseEvent *event) override;
 
 protected:
 	explicit ToolBarDragAreaWidget(ToolBarWidget *parent);
@@ -58,19 +58,21 @@ class ToolBarWidget : public QToolBar
 public:
 	explicit ToolBarWidget(int identifier, Window *window, QWidget *parent);
 
-	static QMenu* createCustomizationMenu(int identifier, QList<QAction*> actions = QList<QAction*>(), QWidget *parent = NULL);
+	static QMenu* createCustomizationMenu(int identifier, QList<QAction*> actions = QList<QAction*>(), QWidget *parent = nullptr);
 	void reload();
+	void resetGeometry();
 	void setDefinition(const ToolBarsManager::ToolBarDefinition &definition);
 	Qt::ToolBarArea getArea() const;
 	Qt::ToolButtonStyle getButtonStyle() const;
 	int getIdentifier() const;
 	int getIconSize() const;
 	int getMaximumButtonSize() const;
-	bool event(QEvent *event);
+	bool event(QEvent *event) override;
 
 protected:
-	void paintEvent(QPaintEvent *event);
-	void contextMenuEvent(QContextMenuEvent *event);
+	void changeEvent(QEvent *event) override;
+	void paintEvent(QPaintEvent *event) override;
+	void contextMenuEvent(QContextMenuEvent *event) override;
 	void startToolBarDragging();
 	void endToolBarDragging();
 

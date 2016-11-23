@@ -135,9 +135,7 @@ public:
 		QUrl mediaUrl;
 		QPoint position;
 		QRect geometry;
-		HitTestFlags flags;
-
-		HitTestResult() : flags(NoFlagsTest) {}
+		HitTestFlags flags = NoFlagsTest;
 
 		explicit HitTestResult(const QVariant &result)
 		{
@@ -156,6 +154,10 @@ public:
 			geometry = QRect(geometryMap.value(QLatin1String("x")).toInt(), geometryMap.value(QLatin1String("y")).toInt(), geometryMap.value(QLatin1String("w")).toInt(), geometryMap.value(QLatin1String("h")).toInt());
 			position = map.value(QLatin1String("position")).toPoint();
 			flags = static_cast<HitTestFlags>(map.value(QLatin1String("flags")).toInt());
+		}
+
+		HitTestResult()
+		{
 		}
 	};
 
@@ -225,7 +227,7 @@ public slots:
 	void setRequestedUrl(const QUrl &url, bool isTyped = true, bool onlyUpdate = false);
 
 protected:
-	explicit WebWidget(bool isPrivate, WebBackend *backend, ContentsWidget *parent = NULL);
+	explicit WebWidget(bool isPrivate, WebBackend *backend, ContentsWidget *parent = nullptr);
 
 	void timerEvent(QTimerEvent *event);
 	void bounceAction(int identifier, QVariantMap parameters);
@@ -299,6 +301,7 @@ private:
 signals:
 	void aboutToNavigate();
 	void aboutToReload();
+	void needsAttention();
 	void requestedCloseWindow();
 	void requestedOpenUrl(const QUrl &url, WindowsManager::OpenHints hints);
 	void requestedAddBookmark(const QUrl &url, const QString &title, const QString &description);

@@ -48,7 +48,7 @@ public:
 		OtherGesturesContext
 	};
 
-	static void createInstance(QObject *parent = NULL);
+	static void createInstance(QObject *parent = nullptr);
 	static void loadProfiles();
 	static GesturesManager* getInstance();
 	static bool startGesture(QObject *object, QEvent *event, QList<GesturesContext> contexts = QList<GesturesContext>({GenericGesturesContext}), const QVariantMap &parameters = QVariantMap());
@@ -67,16 +67,14 @@ protected:
 		GestureStep(QEvent::Type type, Qt::MouseButton button, Qt::KeyboardModifiers modifiers = Qt::NoModifier);
 		explicit GestureStep(const QInputEvent *event);
 
-		bool operator ==(const GestureStep &other);
-		bool operator !=(const GestureStep &other);
+		bool operator ==(const GestureStep &other) const;
+		bool operator !=(const GestureStep &other) const;
 	};
 
 	struct MouseGesture
 	{
 		QList<GestureStep> steps;
-		int action;
-
-		MouseGesture() : action(0) {}
+		int action = 0;
 	};
 
 	explicit GesturesManager(QObject *parent);

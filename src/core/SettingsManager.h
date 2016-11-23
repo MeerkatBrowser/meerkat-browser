@@ -105,6 +105,7 @@ public:
 		Choices_WarnFormResendOption,
 		Choices_WarnLowDiskSpaceOption,
 		Choices_WarnOpenBookmarkFolderOption,
+		Choices_WarnOpenMultipleDroppedUrlsOption,
 		Choices_WarnQuitOption,
 		Choices_WarnQuitTransfersOption,
 		Content_BackgroundColorOption,
@@ -126,6 +127,7 @@ public:
 		Content_UserStyleSheetOption,
 		Content_VisitedLinkColorOption,
 		Content_ZoomTextOnlyOption,
+		ContentBlocking_CosmeticFiltersModeOption,
 		ContentBlocking_EnableContentBlockingOption,
 		ContentBlocking_EnableWildcardsOption,
 		ContentBlocking_ProfilesOption,
@@ -214,8 +216,11 @@ public:
 		StartPage_TilesPerRowOption,
 		StartPage_ZoomLevelOption,
 		TabBar_EnablePreviewsOption,
-		TabBar_MaximumTabSizeOption,
-		TabBar_MinimumTabSizeOption,
+		TabBar_EnableThumbnailsOption,
+		TabBar_MaximumTabHeightOption,
+		TabBar_MinimumTabHeightOption,
+		TabBar_MaximumTabWidthOption,
+		TabBar_MinimumTabWidthOption,
 		TabBar_OpenNextToActiveOption,
 		TabBar_RequireModifierToSwitchTabOnScrollOption,
 		TabBar_ShowCloseButtonOption,
@@ -238,6 +243,7 @@ public:
 		IntegerType,
 		ListType,
 		PathType,
+		PasswordType,
 		StringType
 	};
 
@@ -255,14 +261,12 @@ public:
 	{
 		QVariant defaultValue;
 		QStringList choices;
-		OptionType type;
-		OptionFlags flags;
-		int identifier;
-
-		OptionDefinition() : type(UnknownType), flags(IsEnabledFlag | IsVisibleFlag), identifier(-1) {}
+		OptionType type = UnknownType;
+		OptionFlags flags = static_cast<OptionFlags>(IsEnabledFlag | IsVisibleFlag);
+		int identifier = -1;
 	};
 
-	static void createInstance(const QString &path, QObject *parent = NULL);
+	static void createInstance(const QString &path, QObject *parent = nullptr);
 	static void removeOverride(const QUrl &url, const QString &key = QString());
 	static void updateOptionDefinition(int identifier, const OptionDefinition &definition);
 	static void setValue(int identifier, const QVariant &value, const QUrl &url = QUrl());
@@ -277,7 +281,7 @@ public:
 	static bool hasOverride(const QUrl &url, int identifier = -1);
 
 protected:
-	explicit SettingsManager(QObject *parent = NULL);
+	explicit SettingsManager(QObject *parent = nullptr);
 
 	static QString getHost(const QUrl &url);
 	static void registerOption(int identifier, const QVariant &defaultValue, OptionType type, const QStringList &choices = QStringList());

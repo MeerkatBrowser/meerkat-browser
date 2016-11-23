@@ -32,9 +32,9 @@
 namespace Meerkat
 {
 
-ActionsManager* ActionsManager::m_instance = NULL;
+ActionsManager* ActionsManager::m_instance(nullptr);
 QVector<ActionsManager::ActionDefinition> ActionsManager::m_definitions;
-int ActionsManager::m_actionIdentifierEnumerator = 0;
+int ActionsManager::m_actionIdentifierEnumerator(0);
 
 Action::Action(int identifier, QObject *parent) : QAction(parent),
 	m_identifier(identifier),
@@ -638,7 +638,7 @@ Action* ActionsManager::getAction(int identifier, QObject *parent)
 {
 	MainWindow *window(MainWindow::findMainWindow(parent));
 
-	return (window ? window->getAction(identifier) : NULL);
+	return (window ? window->getAction(identifier) : nullptr);
 }
 
 QString ActionsManager::getReport()

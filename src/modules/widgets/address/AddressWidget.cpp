@@ -20,7 +20,6 @@
 **************************************************************************/
 
 #include "AddressWidget.h"
-#include "../../../ui/AddressDelegate.h"
 #include "../../../ui/BookmarkPropertiesDialog.h"
 #include "../../../ui/ContentsWidget.h"
 #include "../../../ui/ItemViewWidget.h"
@@ -50,15 +49,159 @@
 namespace Meerkat
 {
 
+AddressDelegate::AddressDelegate(ViewMode mode, QObject *parent) : QItemDelegate(parent),
+	m_displayMode((SettingsManager::getValue(SettingsManager::AddressField_CompletionDisplayModeOption).toString() == QLatin1String("columns")) ? ColumnsMode : CompactMode),
+	m_viewMode(mode)
+{
+	connect(SettingsManager::getInstance(), SIGNAL(valueChanged(int,QVariant)), this, SLOT(optionChanged(int,QVariant)));
+}
+
+void AddressDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
+{
+	drawBackground(painter, option, index);
+
+	QRect titleRectangle(option.rect);
+
+	if (static_cast<AddressCompletionModel::EntryType>(index.data(AddressCompletionModel::TypeRole).toInt()) == AddressCompletionModel::HeaderType)
+	{
+		titleRectangle = titleRectangle.marginsRemoved(QMargins(2, 2, 2, 2));
+
+		if (index.row() != 0)
+		{
+			QPen pen(Qt::lightGray);
+			pen.setWidth(1);
+			pen.setStyle(Qt::SolidLine);
+
+			painter->setPen(pen);
+			painter->drawLine((option.rect.left() + 5), (option.rect.top() + 3), (option.rect.right() - 5), (option.rect.top() + 3));
+		}
+
+		drawDisplay(painter, option, titleRectangle, index.data(AddressCompletionModel::TitleRole).toString());
+
+		return;
+	}
+
+	if (option.direction == Qt::RightToLeft)
+	{
+		titleRectangle.setRight(option.rect.width() - 33);
+	}
+	else
+	{
+		titleRectangle.setLeft(33);
+	}
+
+	QRect decorationRectangle(option.rect);
+
+	if (option.direction == Qt::RightToLeft)
+	{
+		decorationRectangle.setLeft(option.rect.width() - 33);
+	}
+	else
+	{
+		decorationRectangle.setRight(33);
+	}
+
+	decorationRectangle = decorationRectangle.marginsRemoved(QMargins(2, 2, 2, 2));
+
+	QIcon icon(index.data(Qt::DecorationRole).value<QIcon>());
+
+	if (icon.isNull())
+	{
+		icon = ThemesManager::getIcon(QLatin1String("tab"));
+	}
+
+	icon.paint(painter, decorationRectangle, option.decorationAlignment);
+
+	QString url(index.data(Qt::DisplayRole).toString());
+	const QString description((m_viewMode == HistoryMode) ? Utils::formatDateTime(index.data(HistoryModel::TimeVisitedRole).toDateTime()) : index.data(AddressCompletionModel::TitleRole).toString());
+	QStyleOptionViewItem linkOption(option);
+
+	if (static_cast<AddressCompletionModel::EntryType>(index.data(AddressCompletionModel::TypeRole).toInt()) != AddressCompletionModel::SearchSuggestionType)
+	{
+		linkOption.palette.setColor(QPalette::Text, option.palette.color(QPalette::Link));
+	}
+
+	if (m_displayMode == ColumnsMode)
+	{
+		const int maxUrlWidth(option.rect.width() / 2);
+
+		url = option.fontMetrics.elidedText(url, Qt::ElideRight, (maxUrlWidth - 40));
+
+		drawDisplay(painter, linkOption, titleRectangle, url);
+
+		if (!description.isEmpty())
+		{
+			if (option.direction == Qt::RightToLeft)
+			{
+				titleRectangle.setRight(maxUrlWidth);
+			}
+			else
+			{
+				titleRectangle.setLeft(maxUrlWidth);
+			}
+
+			drawDisplay(painter, option, titleRectangle, description);
+		}
+
+		return;
+	}
+
+	drawDisplay(painter, linkOption, titleRectangle, url);
+
+	if (!description.isEmpty())
+	{
+		const int urlLength(option.fontMetrics.width(url + QLatin1Char(' ')));
+
+		if (urlLength < titleRectangle.width())
+		{
+			if (option.direction == Qt::RightToLeft)
+			{
+				titleRectangle.setRight(option.rect.width() - (urlLength + 33));
+			}
+			else
+			{
+				titleRectangle.setLeft(urlLength + 33);
+			}
+
+			drawDisplay(painter, option, titleRectangle, QLatin1String("- ") + description);
+		}
+	}
+}
+
+void AddressDelegate::optionChanged(int identifier, const QVariant &value)
+{
+	if (identifier == SettingsManager::AddressField_CompletionDisplayModeOption)
+	{
+		m_displayMode = ((value.toString() == QLatin1String("columns")) ? ColumnsMode : CompactMode);
+	}
+}
+
+QSize AddressDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
+{
+	QSize size(index.data(Qt::SizeHintRole).toSize());
+
+	if (index.row() != 0 && static_cast<AddressCompletionModel::EntryType>(index.data(AddressCompletionModel::TypeRole).toInt()) == AddressCompletionModel::HeaderType)
+	{
+		size.setHeight(option.fontMetrics.height() * 1.75);
+	}
+	else
+	{
+		size.setHeight(option.fontMetrics.height() * 1.25);
+	}
+
+	return size;
+}
+
 AddressWidget::AddressWidget(Window *window, QWidget *parent) : ComboBoxWidget(parent),
-	m_window(NULL),
+	m_window(nullptr),
 	m_lineEdit(new LineEditWidget(this)),
 	m_completionModel(new AddressCompletionModel(this)),
-	m_completionView(NULL),
-	m_bookmarkLabel(NULL),
-	m_feedsLabel(NULL),
-	m_loadPluginsLabel(NULL),
-	m_urlIconLabel(NULL),
+	m_completionView(nullptr),
+	m_visibleView(nullptr),
+	m_bookmarkLabel(nullptr),
+	m_feedsLabel(nullptr),
+	m_loadPluginsLabel(nullptr),
+	m_urlIconLabel(nullptr),
 	m_completionModes(NoCompletionMode),
 	m_hints(WindowsManager::DefaultOpen),
 	m_removeModelTimer(0),
@@ -78,7 +221,7 @@ AddressWidget::AddressWidget(Window *window, QWidget *parent) : ComboBoxWidget(p
 	setLineEdit(m_lineEdit);
 	setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
 	setMinimumWidth(100);
-	setItemDelegate(new AddressDelegate(true, this));
+	setItemDelegate(new AddressDelegate(AddressDelegate::HistoryMode, this));
 	setInsertPolicy(QComboBox::NoInsert);
 	setMouseTracking(true);
 	setWindow(window);
@@ -88,6 +231,11 @@ AddressWidget::AddressWidget(Window *window, QWidget *parent) : ComboBoxWidget(p
 
 	m_lineEdit->setStyleSheet(QLatin1String("QLineEdit {background:transparent;}"));
 	m_lineEdit->installEventFilter(this);
+
+	view()->installEventFilter(this);
+	view()->viewport()->setAttribute(Qt::WA_Hover);
+	view()->viewport()->setMouseTracking(true);
+	view()->viewport()->installEventFilter(this);
 
 	if (toolBar)
 	{
@@ -116,9 +264,21 @@ void AddressWidget::changeEvent(QEvent *event)
 {
 	ComboBoxWidget::changeEvent(event);
 
-	if (event->type() == QEvent::LanguageChange && !m_isUsingSimpleMode)
+	switch (event->type())
 	{
-		m_lineEdit->setPlaceholderText(tr("Enter address or search…"));
+		case QEvent::LanguageChange:
+			if (!m_isUsingSimpleMode)
+			{
+				m_lineEdit->setPlaceholderText(tr("Enter address or search…"));
+			}
+
+			break;
+		case QEvent::LayoutDirectionChange:
+			updateGeometries();
+
+			break;
+		default:
+			break;
 	}
 }
 
@@ -201,14 +361,8 @@ void AddressWidget::paintEvent(QPaintEvent *event)
 	panel.palette.setColor(QPalette::Base, badgeColor);
 	panel.state = QStyle::State_Active;
 
-	QRect rectangle(style()->subElementRect(QStyle::SE_LineEditContents, &panel, this));
-	rectangle.setWidth(30);
-	rectangle.moveTo(panel.lineWidth, panel.lineWidth);
-
-	m_securityBadgeRectangle = rectangle;
-
-	painter.fillRect(rectangle, badgeColor);
-	painter.setClipRect(rectangle);
+	painter.fillRect(m_securityBadgeRectangle, badgeColor);
+	painter.setClipRect(m_securityBadgeRectangle);
 
 	style()->drawPrimitive(QStyle::PE_PanelLineEdit, &panel, &painter, this);
 
@@ -216,11 +370,14 @@ void AddressWidget::paintEvent(QPaintEvent *event)
 	linePalette.setCurrentColorGroup(QPalette::Disabled);
 
 	painter.setPen(QPen(linePalette.mid().color(), 1));
-	painter.drawLine(rectangle.right(), rectangle.top(), rectangle.right(), rectangle.bottom());
+
+	const int badgeLineX((layoutDirection() == Qt::RightToLeft) ? m_securityBadgeRectangle.left() : m_securityBadgeRectangle.right());
+
+	painter.drawLine(badgeLineX, m_securityBadgeRectangle.top(), badgeLineX, m_securityBadgeRectangle.bottom());
 
 	if (!badgeIcon.isEmpty())
 	{
-		ThemesManager::getIcon(badgeIcon, false).paint(&painter, rectangle.adjusted(4, 4, -4, -4));
+		ThemesManager::getIcon(badgeIcon, false).paint(&painter, m_securityBadgeRectangle.adjusted(4, 4, -4, -4));
 	}
 }
 
@@ -228,20 +385,7 @@ void AddressWidget::resizeEvent(QResizeEvent *event)
 {
 	ComboBoxWidget::resizeEvent(event);
 
-	updateLineEdit();
-
-	if (m_isHistoryDropdownEnabled || m_isUsingSimpleMode)
-	{
-		QStyleOptionFrame panel;
-		panel.initFrom(m_lineEdit);
-		panel.rect = rect();
-		panel.lineWidth = 1;
-
-		m_historyDropdownArrowRectangle = style()->subElementRect(QStyle::SE_LineEditContents, &panel, this);
-		m_historyDropdownArrowRectangle.setLeft(m_historyDropdownArrowRectangle.left() + m_historyDropdownArrowRectangle.width() - 12);
-	}
-
-	updateIcons();
+	updateGeometries();
 }
 
 void AddressWidget::focusInEvent(QFocusEvent *event)
@@ -434,6 +578,8 @@ void AddressWidget::showPopup()
 
 	m_lineEdit->setText(text);
 
+	m_visibleView = view();
+
 	ComboBoxWidget::showPopup();
 }
 
@@ -442,6 +588,13 @@ void AddressWidget::hidePopup()
 	m_popupHideTime = QTime::currentTime();
 
 	ComboBoxWidget::hidePopup();
+
+	QString statusTip;
+	QStatusTipEvent statusTipEvent(statusTip);
+
+	QApplication::sendEvent(this, &statusTipEvent);
+
+	m_visibleView = nullptr;
 
 	m_removeModelTimer = startTimer(250);
 }
@@ -452,12 +605,14 @@ void AddressWidget::hideCompletion()
 	{
 		m_completionView->hide();
 		m_completionView->deleteLater();
-		m_completionView = NULL;
+		m_completionView = nullptr;
 
 		QString statusTip;
 		QStatusTipEvent statusTipEvent(statusTip);
 
 		QApplication::sendEvent(this, &statusTipEvent);
+
+		m_visibleView = nullptr;
 	}
 }
 
@@ -465,7 +620,7 @@ void AddressWidget::optionChanged(int identifier, const QVariant &value)
 {
 	if (identifier == SettingsManager::AddressField_CompletionModeOption)
 	{
-		const QString completionMode = value.toString();
+		const QString completionMode(value.toString());
 
 		if (completionMode == QLatin1String("inlineAndPopup"))
 		{
@@ -543,7 +698,7 @@ void AddressWidget::optionChanged(int identifier, const QVariant &value)
 		else if (!value.toBool() && m_bookmarkLabel)
 		{
 			m_bookmarkLabel->deleteLater();
-			m_bookmarkLabel = NULL;
+			m_bookmarkLabel = nullptr;
 
 			updateIcons();
 		}
@@ -575,7 +730,7 @@ void AddressWidget::optionChanged(int identifier, const QVariant &value)
 			if (!value.toBool() && m_urlIconLabel)
 			{
 				m_urlIconLabel->deleteLater();
-				m_urlIconLabel = NULL;
+				m_urlIconLabel = nullptr;
 
 				updateIcons();
 			}
@@ -717,7 +872,7 @@ void AddressWidget::updateFeeds()
 	else if (feeds.isEmpty() && m_feedsLabel)
 	{
 		m_feedsLabel->deleteLater();
-		m_feedsLabel = NULL;
+		m_feedsLabel = nullptr;
 
 		updateIcons();
 	}
@@ -755,7 +910,7 @@ void AddressWidget::updateLoadPlugins()
 	else if (!canLoadPlugins && m_loadPluginsLabel)
 	{
 		m_loadPluginsLabel->deleteLater();
-		m_loadPluginsLabel = NULL;
+		m_loadPluginsLabel = nullptr;
 
 		updateIcons();
 	}
@@ -769,51 +924,54 @@ void AddressWidget::updateLineEdit()
 void AddressWidget::updateIcons()
 {
 	QMargins margins(5, 0, 0, 0);
+	const bool isRightToLeft(layoutDirection() == Qt::RightToLeft);
 
 	if (!m_isUsingSimpleMode)
 	{
-		margins.setLeft(margins.left() + 30);
+		margins.setLeft(margins.left() + 31);
 	}
 
 	if (m_urlIconLabel)
 	{
-		m_urlIconLabel->move(36, ((height() - m_urlIconLabel->height()) / 2));
+		m_urlIconLabel->move((isRightToLeft ? (width() - 54) : 36), ((height() - m_urlIconLabel->height()) / 2));
 
 		margins.setLeft(margins.left() + 22);
 	}
 
 	if (m_isHistoryDropdownEnabled || m_isUsingSimpleMode)
 	{
-		margins.setRight(margins.right() + m_historyDropdownArrowRectangle.width());
+		margins.setRight(margins.right() + 13);
 	}
 
 	if (m_bookmarkLabel)
 	{
 		margins.setRight(margins.right() + 22);
 
-		m_bookmarkLabel->move((width() - margins.right()), ((height() - m_bookmarkLabel->height()) / 2));
+		m_bookmarkLabel->move((isRightToLeft ? (margins.right() - 16) : (width() - margins.right())), ((height() - m_bookmarkLabel->height()) / 2));
 	}
 
 	if (m_feedsLabel)
 	{
 		margins.setRight(margins.right() + 22);
 
-		m_feedsLabel->move((width() - margins.right()), ((height() - m_feedsLabel->height()) / 2));
+		m_feedsLabel->move((isRightToLeft ? (margins.right() - 16) : (width() - margins.right())), ((height() - m_feedsLabel->height()) / 2));
 	}
 
 	if (m_loadPluginsLabel)
 	{
 		margins.setRight(margins.right() + 22);
 
-		m_loadPluginsLabel->move((width() - margins.right()), ((height() - m_loadPluginsLabel->height()) / 2));
+		m_loadPluginsLabel->move((isRightToLeft ? (margins.right() - 16) : (width() - margins.right())), ((height() - m_loadPluginsLabel->height()) / 2));
 	}
 
 	margins.setRight(margins.right() + 3);
 
 	m_lineEdit->resize((width() - margins.left() - margins.right()), height());
-	m_lineEdit->move(QPoint(margins.left(), 0));
+	m_lineEdit->move(QPoint((isRightToLeft ? margins.right() : margins.left()), 0));
 
 	m_lineEditRectangle = m_lineEdit->geometry();
+
+	updateLineEdit();
 }
 
 void AddressWidget::setCompletion(const QString &filter)
@@ -837,7 +995,7 @@ void AddressWidget::setCompletion(const QString &filter)
 			m_completionView->setFocusPolicy(Qt::NoFocus);
 			m_completionView->setFocusProxy(m_lineEdit);
 			m_completionView->setModel(m_completionModel);
-			m_completionView->setItemDelegate(new AddressDelegate(true, this));
+			m_completionView->setItemDelegate(new AddressDelegate(AddressDelegate::CompletionMode, m_completionView));
 			m_completionView->setEditTriggers(QAbstractItemView::NoEditTriggers);
 			m_completionView->setFixedWidth(width());
 			m_completionView->installEventFilter(this);
@@ -852,6 +1010,8 @@ void AddressWidget::setCompletion(const QString &filter)
 
 			m_completionView->move(mapToGlobal(contentsRect().bottomLeft()));
 			m_completionView->show();
+
+			m_visibleView = m_completionView;
 		}
 
 		int completionHeight(5);
@@ -896,6 +1056,46 @@ void AddressWidget::activate(Qt::FocusReason reason)
 	m_lineEdit->activate(reason);
 }
 
+void AddressWidget::updateGeometries()
+{
+	QStyleOptionFrame panel;
+	panel.initFrom(m_lineEdit);
+	panel.rect = rect();
+	panel.lineWidth = 1;
+
+	const QRect rectangle(style()->subElementRect(QStyle::SE_LineEditContents, &panel, this));
+
+	if (m_isHistoryDropdownEnabled || m_isUsingSimpleMode)
+	{
+		m_historyDropdownArrowRectangle = rectangle;
+
+		if (layoutDirection() == Qt::RightToLeft)
+		{
+			m_historyDropdownArrowRectangle.setRight(13);
+		}
+		else
+		{
+			m_historyDropdownArrowRectangle.setLeft(m_historyDropdownArrowRectangle.width() - 13);
+		}
+	}
+
+	if (!m_isUsingSimpleMode)
+	{
+		m_securityBadgeRectangle = rectangle;
+
+		if (layoutDirection() == Qt::RightToLeft)
+		{
+			m_securityBadgeRectangle.setLeft(m_securityBadgeRectangle.width() - 31);
+		}
+		else
+		{
+			m_securityBadgeRectangle.setRight(31);
+		}
+	}
+
+	updateIcons();
+}
+
 void AddressWidget::setIcon(const QIcon &icon)
 {
 	if (m_urlIconLabel)
@@ -927,7 +1127,7 @@ void AddressWidget::setUrl(const QUrl &url, bool force)
 		updateFeeds();
 	}
 
-	if ((force || !hasFocus()) && url.scheme() != QLatin1String("javascript"))
+	if (!m_window || ((force || !hasFocus()) && url.scheme() != QLatin1String("javascript")))
 	{
 		const QString text(Utils::isUrlEmpty(url) ? QString() : url.toString());
 
@@ -1119,7 +1319,7 @@ bool AddressWidget::eventFilter(QObject *object, QEvent *event)
 				}
 				else
 				{
-					BookmarkPropertiesDialog dialog(url.adjusted(QUrl::RemovePassword), m_window->getTitle(), QString(), NULL, -1, true, this);
+					BookmarkPropertiesDialog dialog(url.adjusted(QUrl::RemovePassword), m_window->getTitle(), QString(), nullptr, -1, true, this);
 					dialog.exec();
 				}
 
@@ -1266,15 +1466,19 @@ bool AddressWidget::eventFilter(QObject *object, QEvent *event)
 
 		return true;
 	}
-	else if (m_completionView && object == m_completionView->viewport() && event->type() == QEvent::MouseMove)
+	else if (object == m_completionView && (event->type() == QEvent::InputMethod || event->type() == QEvent::ShortcutOverride))
+	{
+		QApplication::sendEvent(m_lineEdit, event);
+	}
+	else if (m_visibleView && object == m_visibleView->viewport() && event->type() == QEvent::MouseMove)
 	{
 		QMouseEvent *mouseEvent(static_cast<QMouseEvent*>(event));
 
 		if (mouseEvent)
 		{
-			const QModelIndex index(m_completionView->indexAt(mouseEvent->pos()));
+			const QModelIndex index(m_visibleView->indexAt(mouseEvent->pos()));
 
-			if (index.isValid())
+			if (index.isValid() && m_visibleView == m_completionView)
 			{
 				m_completionView->setCurrentIndex(index);
 			}
@@ -1284,11 +1488,7 @@ bool AddressWidget::eventFilter(QObject *object, QEvent *event)
 			QApplication::sendEvent(this, &statusTipEvent);
 		}
 	}
-	else if (object == m_completionView && (event->type() == QEvent::InputMethod || event->type() == QEvent::ShortcutOverride))
-	{
-		QApplication::sendEvent(m_lineEdit, event);
-	}
-	else if (object == m_completionView && (event->type() == QEvent::Close || event->type() == QEvent::Hide || event->type() == QEvent::Leave))
+	else if (object == m_visibleView && (event->type() == QEvent::Close || event->type() == QEvent::Hide || event->type() == QEvent::Leave))
 	{
 		QString statusTip;
 		QStatusTipEvent statusTipEvent(statusTip);

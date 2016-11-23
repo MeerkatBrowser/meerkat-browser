@@ -49,19 +49,19 @@
 namespace Meerkat
 {
 
-QString WebContentsWidget::m_sharedQuickFindQuery = NULL;
+QString WebContentsWidget::m_sharedQuickFindQuery = nullptr;
 QMap<int, QPixmap> WebContentsWidget::m_scrollCursors;
 
 WebContentsWidget::WebContentsWidget(bool isPrivate, WebWidget *widget, Window *window) : ContentsWidget(window),
-	m_websiteInformationDialog(NULL),
+	m_websiteInformationDialog(nullptr),
 	m_layout(new QVBoxLayout(this)),
-	m_webWidget(NULL),
+	m_webWidget(nullptr),
 	m_window(window),
-	m_startPageWidget(NULL),
-	m_searchBarWidget(NULL),
-	m_progressBarWidget(NULL),
-	m_passwordBarWidget(NULL),
-	m_popupsBarWidget(NULL),
+	m_startPageWidget(nullptr),
+	m_searchBarWidget(nullptr),
+	m_progressBarWidget(nullptr),
+	m_passwordBarWidget(nullptr),
+	m_popupsBarWidget(nullptr),
 	m_scrollMode(NoScroll),
 	m_createStartPageTimer(0),
 	m_deleteStartPageTimer(0),
@@ -97,7 +97,7 @@ void WebContentsWidget::timerEvent(QTimerEvent *event)
 		m_deleteStartPageTimer = 0;
 
 		m_startPageWidget->deleteLater();
-		m_startPageWidget = NULL;
+		m_startPageWidget = nullptr;
 	}
 	else if (event->timerId() == m_quickFindTimer && m_searchBarWidget)
 	{
@@ -670,7 +670,7 @@ void WebContentsWidget::triggerAction(int identifier, const QVariantMap &paramet
 			{
 				m_websiteInformationDialog->close();
 				m_websiteInformationDialog->deleteLater();
-				m_websiteInformationDialog = NULL;
+				m_websiteInformationDialog = nullptr;
 			}
 			else
 			{
@@ -765,7 +765,7 @@ void WebContentsWidget::closePasswordBar()
 	{
 		m_passwordBarWidget->hide();
 		m_passwordBarWidget->deleteLater();
-		m_passwordBarWidget = NULL;
+		m_passwordBarWidget = nullptr;
 	}
 }
 
@@ -775,7 +775,7 @@ void WebContentsWidget::closePopupsBar()
 	{
 		m_popupsBarWidget->hide();
 		m_popupsBarWidget->deleteLater();
-		m_popupsBarWidget = NULL;
+		m_popupsBarWidget = nullptr;
 	}
 }
 
@@ -916,6 +916,8 @@ void WebContentsWidget::handlePermissionRequest(WebWidget::FeaturePermission fea
 
 		m_permissionBarWidgets.append(widget);
 
+		emit needsAttention();
+
 		connect(widget, SIGNAL(permissionChanged(WebWidget::PermissionPolicies)), this, SLOT(notifyPermissionChanged(WebWidget::PermissionPolicies)));
 	}
 }
@@ -929,7 +931,7 @@ void WebContentsWidget::handleLoadingStateChange(WindowsManager::LoadingState st
 
 		if (tabCrashingAction == QLatin1String("ask"))
 		{
-			ContentsDialog dialog(ThemesManager::getIcon(QLatin1String("dialog-warning")), tr("Question"), tr("This tab has crashed."), tr("Do you want to try to reload it?"), (QDialogButtonBox::Yes | QDialogButtonBox::Close), NULL, this);
+			ContentsDialog dialog(ThemesManager::getIcon(QLatin1String("dialog-warning")), tr("Question"), tr("This tab has crashed."), tr("Do you want to try to reload it?"), (QDialogButtonBox::Yes | QDialogButtonBox::Close), nullptr, this);
 			dialog.setCheckBox(tr("Do not show this message again"), false);
 
 			showDialog(&dialog);
@@ -985,7 +987,7 @@ void WebContentsWidget::notifyRequestedOpenUrl(const QUrl &url, WindowsManager::
 
 void WebContentsWidget::notifyRequestedNewWindow(WebWidget *widget, WindowsManager::OpenHints hints)
 {
-	emit requestedNewWindow(new WebContentsWidget(isPrivate(), widget, NULL), hints);
+	emit requestedNewWindow(new WebContentsWidget(isPrivate(), widget, nullptr), hints);
 }
 
 void WebContentsWidget::updateFindHighlight(WebWidget::FindFlags flags)
@@ -1111,6 +1113,7 @@ void WebContentsWidget::setWidget(WebWidget *widget, bool isPrivate)
 	connect(SettingsManager::getInstance(), SIGNAL(valueChanged(int,QVariant)), this, SLOT(optionChanged(int,QVariant)));
 	connect(m_webWidget, SIGNAL(aboutToNavigate()), this, SIGNAL(aboutToNavigate()));
 	connect(m_webWidget, SIGNAL(aboutToNavigate()), this, SLOT(closePopupsBar()));
+	connect(m_webWidget, SIGNAL(needsAttention()), this, SIGNAL(needsAttention()));
 	connect(m_webWidget, SIGNAL(requestedAddBookmark(QUrl,QString,QString)), this, SIGNAL(requestedAddBookmark(QUrl,QString,QString)));
 	connect(m_webWidget, SIGNAL(requestedEditBookmark(QUrl)), this, SIGNAL(requestedEditBookmark(QUrl)));
 	connect(m_webWidget, SIGNAL(requestedOpenUrl(QUrl,WindowsManager::OpenHints)), this, SLOT(notifyRequestedOpenUrl(QUrl,WindowsManager::OpenHints)));
@@ -1188,7 +1191,7 @@ void WebContentsWidget::setUrl(const QUrl &url, bool typed)
 	}
 	else if (url.scheme() != QLatin1String("view-source") && m_webWidget->getUrl().scheme() == QLatin1String("view-source"))
 	{
-		setWidget(NULL, isPrivate());
+		setWidget(nullptr, isPrivate());
 	}
 
 	m_webWidget->setRequestedUrl(url, typed);
@@ -1208,7 +1211,7 @@ void WebContentsWidget::setParent(Window *window)
 	if (m_progressBarWidget)
 	{
 		m_progressBarWidget->deleteLater();
-		m_progressBarWidget = NULL;
+		m_progressBarWidget = nullptr;
 	}
 
 	if (window && m_webWidget)
@@ -1228,10 +1231,10 @@ WebContentsWidget* WebContentsWidget::clone(bool cloneHistory)
 {
 	if (!canClone())
 	{
-		return NULL;
+		return nullptr;
 	}
 
-	WebContentsWidget *webWidget(new WebContentsWidget(m_webWidget->isPrivate(), m_webWidget->clone(cloneHistory), NULL));
+	WebContentsWidget *webWidget(new WebContentsWidget(m_webWidget->isPrivate(), m_webWidget->clone(cloneHistory), nullptr));
 	webWidget->m_webWidget->setRequestedUrl(m_webWidget->getUrl(), false, true);
 
 	return webWidget;

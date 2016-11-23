@@ -24,8 +24,8 @@
 namespace Meerkat
 {
 
-PasswordsManager* PasswordsManager::m_instance = NULL;
-PasswordsStorageBackend* PasswordsManager::m_backend = NULL;
+PasswordsManager* PasswordsManager::m_instance(nullptr);
+PasswordsStorageBackend* PasswordsManager::m_backend(nullptr);
 
 PasswordsManager::PasswordsManager(QObject *parent) : QObject(parent)
 {
@@ -47,6 +47,14 @@ void PasswordsManager::clearPasswords(const QString &host)
 	if (m_backend)
 	{
 		m_backend->clearPasswords(host);
+	}
+}
+
+void PasswordsManager::clearPasswords(int period)
+{
+	if (m_backend)
+	{
+		m_backend->clearPasswords(period);
 	}
 }
 

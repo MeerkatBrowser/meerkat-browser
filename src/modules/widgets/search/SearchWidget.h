@@ -26,6 +26,7 @@
 
 #include <QtCore/QTime>
 #include <QtWidgets/QCompleter>
+#include <QtWidgets/QItemDelegate>
 
 namespace Meerkat
 {
@@ -34,12 +35,21 @@ class LineEditWidget;
 class SearchSuggester;
 class Window;
 
+class SearchDelegate : public QItemDelegate
+{
+public:
+	explicit SearchDelegate(QObject *parent = nullptr);
+
+	void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const;
+	QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const;
+};
+
 class SearchWidget : public ComboBoxWidget
 {
 	Q_OBJECT
 
 public:
-	explicit SearchWidget(Window *window, QWidget *parent = NULL);
+	explicit SearchWidget(Window *window, QWidget *parent = nullptr);
 
 	void hidePopup();
 	QString getCurrentSearchEngine() const;
@@ -47,7 +57,7 @@ public:
 
 public slots:
 	void activate(Qt::FocusReason reason);
-	void setWindow(Window *window = NULL);
+	void setWindow(Window *window = nullptr);
 	void setSearchEngine(const QString &searchEngine = QString());
 	void setOptions(const QVariantMap &options);
 
@@ -61,6 +71,7 @@ protected:
 	void mousePressEvent(QMouseEvent *event);
 	void mouseReleaseEvent(QMouseEvent *event);
 	void wheelEvent(QWheelEvent *event);
+	void updateGeometries();
 
 protected slots:
 	void optionChanged(int identifier, const QVariant &value);

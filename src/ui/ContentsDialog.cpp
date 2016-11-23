@@ -22,6 +22,7 @@
 
 #include <QtGui/QMouseEvent>
 #include <QtWidgets/QDialog>
+#include <QtWidgets/QPushButton>
 #include <QtWidgets/QScrollBar>
 #include <QtWidgets/QStyle>
 
@@ -33,10 +34,10 @@ ContentsDialog::ContentsDialog(const QIcon &icon, const QString &title, const QS
 	m_headerWidget(new QWidget(this)),
 	m_payloadWidget(payload),
 	m_closeLabel(new QLabel(m_headerWidget)),
-	m_detailsLabel(NULL),
-	m_scrollArea(NULL),
-	m_checkBox(NULL),
-	m_buttonBox(NULL),
+	m_detailsLabel(nullptr),
+	m_scrollArea(nullptr),
+	m_checkBox(nullptr),
+	m_buttonBox(nullptr),
 	m_isAccepted(false)
 {
 	QBoxLayout *mainLayout(new QBoxLayout(QBoxLayout::TopToBottom, this));
@@ -151,7 +152,12 @@ ContentsDialog::ContentsDialog(const QIcon &icon, const QString &title, const QS
 			{
 				connect(this, SIGNAL(accepted()), dialog, SLOT(accept()));
 				connect(this, SIGNAL(rejected()), dialog, SLOT(reject()));
-				connect(dialog, SIGNAL(finished(int)), this, SLOT(finished(int)));
+				connect(dialog, &QDialog::finished, [&](int result)
+				{
+					m_isAccepted = (result == QDialog::Accepted);
+
+					close();
+				});
 			}
 		}
 
@@ -167,7 +173,7 @@ ContentsDialog::ContentsDialog(const QIcon &icon, const QString &title, const QS
 
 		m_contentsLayout->addWidget(m_buttonBox);
 
-		connect(m_buttonBox, SIGNAL(clicked(QAbstractButton*)), this, SLOT(clicked(QAbstractButton*)));
+		connect(m_buttonBox, SIGNAL(clicked(QAbstractButton*)), this, SLOT(handleButtonClick(QAbstractButton*)));
 	}
 
 	setContextMenuPolicy(Qt::PreventContextMenu);
@@ -206,7 +212,44 @@ void ContentsDialog::closeEvent(QCloseEvent *event)
 	event->accept();
 }
 
-void ContentsDialog::clicked(QAbstractButton *button)
+void ContentsDialog::keyPressEvent(QKeyEvent *event)
+{
+	if (event->matches(QKeySequence::Cancel))
+	{
+		m_isAccepted = false;
+
+		close();
+	}
+	else if (!event->modifiers())
+	{
+		switch (event->key())
+		{
+			case Qt::Key_Enter:
+			case Qt::Key_Return:
+				{
+					QList<QPushButton*> buttons(findChildren<QPushButton*>());
+
+					for (int i = 0; i < buttons.count(); ++i)
+					{
+						if (buttons.at(i)->isDefault())
+						{
+							buttons.at(i)->click();
+
+							return;
+						}
+					}
+				}
+
+				break;
+			default:
+				break;
+		}
+	}
+
+	event->ignore();
+}
+
+void ContentsDialog::handleButtonClick(QAbstractButton *button)
 {
 	if (m_buttonBox)
 	{
@@ -223,13 +266,6 @@ void ContentsDialog::clicked(QAbstractButton *button)
 				break;
 		}
 	}
-
-	close();
-}
-
-void ContentsDialog::finished(int result)
-{
-	m_isAccepted = (result == QDialog::Accepted);
 
 	close();
 }

@@ -26,28 +26,19 @@
 namespace Meerkat
 {
 
-OptionDelegate::OptionDelegate(bool isSimple, QObject *parent) : QItemDelegate(parent),
+OptionDelegate::OptionDelegate(bool isSimple, QObject *parent) : ItemDelegate(parent),
 	m_isSimple(isSimple)
 {
 }
 
-void OptionDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
+void OptionDelegate::initStyleOption(QStyleOptionViewItem *option, const QModelIndex &index) const
 {
-	const SettingsManager::OptionType type(SettingsManager::getOptionDefinition(SettingsManager::getOptionIdentifier(index.data(Qt::UserRole).toString())).type);
+	ItemDelegate::initStyleOption(option, index);
 
-	if (type == SettingsManager::UnknownType)
-	{
-		QItemDelegate::paint(painter, option, index);
-
-		return;
-	}
-
-	drawBackground(painter, option, index);
-
-	switch (type)
+	switch (SettingsManager::getOptionDefinition(SettingsManager::getOptionIdentifier(index.data(Qt::UserRole).toString())).type)
 	{
 		case SettingsManager::BooleanType:
-			drawDisplay(painter, option, option.rect, index.data(Qt::DisplayRole).toBool() ? QCoreApplication::translate("Otter::OptionDelegate", "Yes") : QCoreApplication::translate("Otter::OptionDelegate", "No"));
+			option->text = (index.data(Qt::DisplayRole).toBool() ? QCoreApplication::translate("Otter::OptionDelegate", "Yes") : QCoreApplication::translate("Otter::OptionDelegate", "No"));
 
 			break;
 		case SettingsManager::ColorType:
@@ -56,34 +47,25 @@ void OptionDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option
 
 				if (!color.isEmpty())
 				{
-					painter->fillRect(option.rect, QColor(color));
+					option->backgroundBrush = QColor(color);
 				}
 
-				QStyleOptionViewItem mutableOption(option);
-				mutableOption.displayAlignment = Qt::AlignCenter;
-				mutableOption.palette.setColor(QPalette::Text, Qt::white);
-
-				drawDisplay(painter, mutableOption, option.rect, color);
-
-				mutableOption.palette.setColor(QPalette::Text, Qt::black);
-
-				drawDisplay(painter, mutableOption, option.rect.adjusted(-1, -1, -1, -1), color);
+				option->displayAlignment = Qt::AlignCenter;
 
 				break;
 			}
 		case SettingsManager::FontType:
+			option->font = QFont(index.data(Qt::DisplayRole).toString());
+
+			break;
+		case SettingsManager::PasswordType:
+			if (!option->text.isEmpty())
 			{
-				const QString font(index.data(Qt::DisplayRole).toString());
-				QStyleOptionViewItem mutableOption(option);
-				mutableOption.font = QFont(font);
-
-				drawDisplay(painter, mutableOption, option.rect, font);
-
-				break;
+				option->text = QString(5, QChar(0x2022));
 			}
-		default:
-			drawDisplay(painter, option, option.rect, index.data(Qt::DisplayRole).toString());
 
+			break;
+		default:
 			break;
 	}
 }
@@ -135,14 +117,6 @@ QWidget* OptionDelegate::createEditor(QWidget *parent, const QStyleOptionViewIte
 	connect(widget, SIGNAL(commitData(QWidget*)), this, SIGNAL(commitData(QWidget*)));
 
 	return widget;
-}
-
-QSize OptionDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
-{
-	QSize size(index.data(Qt::SizeHintRole).toSize());
-	size.setHeight(option.fontMetrics.height() * 1.25);
-
-	return size;
 }
 
 }

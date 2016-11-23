@@ -196,21 +196,20 @@ QList<QUrl> BookmarksItem::getUrls() const
 }
 
 BookmarksModel::BookmarksModel(const QString &path, FormatMode mode, QObject *parent) : QStandardItemModel(parent),
+	m_rootItem(new BookmarksItem()),
+	m_trashItem(new BookmarksItem()),
 	m_mode(mode)
 {
-	BookmarksItem *rootItem(new BookmarksItem());
-	rootItem->setData(RootBookmark, TypeRole);
-	rootItem->setData(((mode == NotesMode) ? tr("Notes") : tr("Bookmarks")), TitleRole);
-	rootItem->setDragEnabled(false);
+	m_rootItem->setData(RootBookmark, TypeRole);
+	m_rootItem->setData(((mode == NotesMode) ? tr("Notes") : tr("Bookmarks")), TitleRole);
+	m_rootItem->setDragEnabled(false);
+	m_trashItem->setData(TrashBookmark, TypeRole);
+	m_trashItem->setData(tr("Trash"), TitleRole);
+	m_trashItem->setDragEnabled(false);
+	m_trashItem->setEnabled(false);
 
-	BookmarksItem *trashItem(new BookmarksItem());
-	trashItem->setData(TrashBookmark, TypeRole);
-	trashItem->setData(tr("Trash"), TitleRole);
-	trashItem->setDragEnabled(false);
-	trashItem->setEnabled(false);
-
-	appendRow(rootItem);
-	appendRow(trashItem);
+	appendRow(m_rootItem);
+	appendRow(m_trashItem);
 	setItemPrototype(new BookmarksItem());
 
 	QFile file(path);
@@ -230,7 +229,7 @@ BookmarksModel::BookmarksModel(const QString &path, FormatMode mode, QObject *pa
 		{
 			if (reader.name() == QLatin1String("folder") || reader.name() == QLatin1String("bookmark") || reader.name() == QLatin1String("separator"))
 			{
-				readBookmark(&reader, rootItem);
+				readBookmark(&reader, m_rootItem);
 			}
 			else
 			{
@@ -243,7 +242,7 @@ BookmarksModel::BookmarksModel(const QString &path, FormatMode mode, QObject *pa
 
 				Console::addMessage(((m_mode == NotesMode) ? tr("Failed to load notes file: %1") : tr("Failed to load bookmarks file: %1")).arg(reader.errorString()), Console::OtherCategory, Console::ErrorLevel, path);
 
-				QMessageBox::warning(NULL, tr("Error"), ((m_mode == NotesMode) ? tr("Failed to load notes file.") : tr("Failed to load bookmarks file.")), QMessageBox::Close);
+				QMessageBox::warning(nullptr, tr("Error"), ((m_mode == NotesMode) ? tr("Failed to load notes file.") : tr("Failed to load bookmarks file.")), QMessageBox::Close);
 
 				return;
 			}
@@ -252,7 +251,9 @@ BookmarksModel::BookmarksModel(const QString &path, FormatMode mode, QObject *pa
 
 	connect(this, SIGNAL(itemChanged(QStandardItem*)), this, SIGNAL(modelModified()));
 	connect(this, SIGNAL(rowsInserted(QModelIndex,int,int)), this, SIGNAL(modelModified()));
+	connect(this, SIGNAL(rowsInserted(QModelIndex,int,int)), this, SLOT(notifyBookmarkModified(QModelIndex)));
 	connect(this, SIGNAL(rowsRemoved(QModelIndex,int,int)), this, SIGNAL(modelModified()));
+	connect(this, SIGNAL(rowsRemoved(QModelIndex,int,int)), this, SLOT(notifyBookmarkModified(QModelIndex)));
 	connect(this, SIGNAL(rowsMoved(QModelIndex,int,int,QModelIndex,int)), this, SIGNAL(modelModified()));
 }
 
@@ -355,7 +356,7 @@ void BookmarksModel::removeBookmark(BookmarksItem *bookmark)
 
 void BookmarksModel::readBookmark(QXmlStreamReader *reader, BookmarksItem *parent)
 {
-	BookmarksItem *bookmark(NULL);
+	BookmarksItem *bookmark(nullptr);
 
 	if (reader->name() == QLatin1String("folder"))
 	{
@@ -696,6 +697,16 @@ void BookmarksModel::emptyTrash()
 	emit modelModified();
 }
 
+void BookmarksModel::notifyBookmarkModified(const QModelIndex &index)
+{
+	BookmarksItem *bookmark(getBookmark(index));
+
+	if (bookmark)
+	{
+		emit bookmarkModified(bookmark);
+	}
+}
+
 BookmarksItem* BookmarksModel::addBookmark(BookmarkType type, quint64 identifier, const QUrl &url, const QString &title, BookmarksItem *parent, int index)
 {
 	BookmarksItem *bookmark(new BookmarksItem());
@@ -748,7 +759,7 @@ BookmarksItem* BookmarksModel::getBookmark(const QString &keyword) const
 		return m_keywords[keyword];
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 BookmarksItem* BookmarksModel::getBookmark(const QModelIndex &index) const
@@ -768,17 +779,17 @@ BookmarksItem* BookmarksModel::getBookmark(quint64 identifier) const
 		return m_identifiers[identifier];
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 BookmarksItem* BookmarksModel::getRootItem() const
 {
-	return dynamic_cast<BookmarksItem*>(item(0, 0));
+	return m_rootItem;
 }
 
 BookmarksItem* BookmarksModel::getTrashItem() const
 {
-	return dynamic_cast<BookmarksItem*>(item(1, 0));
+	return m_trashItem;
 }
 
 BookmarksItem* BookmarksModel::getItem(const QString &path) const
@@ -814,7 +825,7 @@ BookmarksItem* BookmarksModel::getItem(const QString &path) const
 
 		if (!hasFound)
 		{
-			return NULL;
+			return nullptr;
 		}
 	}
 

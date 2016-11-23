@@ -45,7 +45,7 @@ WindowsManager::WindowsManager(bool isPrivate, MainWindow *parent) : QObject(par
 
 void WindowsManager::triggerAction(int identifier, const QVariantMap &parameters)
 {
-	Window *window(NULL);
+	Window *window(nullptr);
 
 	if (parameters.contains(QLatin1String("window")))
 	{
@@ -83,34 +83,7 @@ void WindowsManager::triggerAction(int identifier, const QVariantMap &parameters
 		case ActionsManager::DetachTabAction:
 			if (window && m_mainWindow->getTabBar()->count() > 1)
 			{
-				OpenHints hints(NewWindowOpen);
-
-				if (window->isPrivate())
-				{
-					hints |= PrivateOpen;
-				}
-
-				window->getContentsWidget()->setParent(NULL);
-
-				Window *newWindow(openWindow(window->getContentsWidget(), hints));
-
-				if (newWindow && window->isPinned())
-				{
-					newWindow->setPinned(true);
-				}
-
-				m_mainWindow->getTabBar()->removeTab(getWindowIndex(window->getIdentifier()));
-
-				Action *closePrivateTabsAction(m_mainWindow->getAction(ActionsManager::ClosePrivateTabsAction));
-
-				if (closePrivateTabsAction->isEnabled() && getWindowCount(true) == 0)
-				{
-					closePrivateTabsAction->setEnabled(false);
-				}
-
-				m_windows.remove(window->getIdentifier());
-
-				emit windowRemoved(window->getIdentifier());
+				moveWindow(window);
 			}
 
 			break;
@@ -260,11 +233,20 @@ void WindowsManager::triggerAction(int identifier, const QVariantMap &parameters
 			{
 				window->triggerAction(identifier, parameters);
 			}
+
+			break;
 	}
 }
 
-void WindowsManager::open(const QUrl &url, OpenHints hints)
+void WindowsManager::open(const QUrl &url, OpenHints hints, int index)
 {
+	if (index >= 0)
+	{
+		openTab(url, hints, index);
+
+		return;
+	}
+
 	Window *window(m_mainWindow->getWorkspace()->getActiveWindow());
 
 	if (hints == NewTabOpen && !url.isEmpty() && window && Utils::isUrlEmpty(window->getUrl()))
@@ -310,7 +292,7 @@ void WindowsManager::open(const QUrl &url, OpenHints hints)
 	}
 }
 
-void WindowsManager::open(BookmarksItem *bookmark, OpenHints hints)
+void WindowsManager::open(BookmarksItem *bookmark, OpenHints hints, int index)
 {
 	if (!bookmark)
 	{
@@ -327,7 +309,7 @@ void WindowsManager::open(BookmarksItem *bookmark, OpenHints hints)
 	switch (static_cast<BookmarksModel::BookmarkType>(bookmark->data(BookmarksModel::TypeRole).toInt()))
 	{
 		case BookmarksModel::UrlBookmark:
-			open(QUrl(bookmark->data(BookmarksModel::UrlRole).toUrl()), hints);
+			open(QUrl(bookmark->data(BookmarksModel::UrlRole).toUrl()), hints, index);
 
 			break;
 		case BookmarksModel::RootBookmark:
@@ -360,11 +342,11 @@ void WindowsManager::open(BookmarksItem *bookmark, OpenHints hints)
 					return;
 				}
 
-				open(urls.at(0), hints);
+				open(urls.at(0), hints, index);
 
 				for (int i = 1; i < urls.count(); ++i)
 				{
-					open(urls.at(i), ((hints == DefaultOpen || hints.testFlag(CurrentTabOpen)) ? NewTabOpen : hints));
+					open(urls.at(i), ((hints == DefaultOpen || hints.testFlag(CurrentTabOpen)) ? NewTabOpen : hints), ((index >= 0) ? (index + i) : index));
 				}
 			}
 
@@ -374,11 +356,11 @@ void WindowsManager::open(BookmarksItem *bookmark, OpenHints hints)
 	}
 }
 
-void WindowsManager::openTab(const QUrl &url, OpenHints hints)
+void WindowsManager::openTab(const QUrl &url, OpenHints hints, int index)
 {
 	Window *window(new Window(hints.testFlag(PrivateOpen)));
 
-	addWindow(window, hints);
+	addWindow(window, hints, index);
 
 	window->setUrl(((url.isEmpty() && SettingsManager::getValue(SettingsManager::StartPage_EnableStartPageOption).toBool()) ? QUrl(QLatin1String("about:start")) : url), false);
 }
@@ -425,14 +407,14 @@ void WindowsManager::search(const QString &query, const QString &searchEngine, O
 
 void WindowsManager::close(int index)
 {
-	if (index < 0 || index >= m_mainWindow->getTabBar()->count() || m_mainWindow->getTabBar()->getTabProperty(index, QLatin1String("isPinned"), false).toBool())
+	if (index < 0 || index >= m_mainWindow->getTabBar()->count())
 	{
 		return;
 	}
 
 	Window *window(getWindowByIndex(index));
 
-	if (window)
+	if (window && !window->isPinned())
 	{
 		window->close();
 	}
@@ -483,7 +465,7 @@ void WindowsManager::restore(const SessionMainWindow &session)
 		}
 		else
 		{
-			m_mainWindow->setCurrentWindow(NULL);
+			m_mainWindow->setCurrentWindow(nullptr);
 		}
 	}
 	else
@@ -612,11 +594,7 @@ void WindowsManager::addWindow(Window *window, OpenHints hints, int index, const
 
 	m_mainWindow->getTabBar()->addTab(index, window);
 	m_mainWindow->getWorkspace()->addWindow(window, geometry, state, isAlwaysOnTop);
-
-	if (!m_mainWindow->getAction(ActionsManager::CloseTabAction)->isEnabled())
-	{
-		m_mainWindow->getAction(ActionsManager::CloseTabAction)->setEnabled(true);
-	}
+	m_mainWindow->getAction(ActionsManager::CloseTabAction)->setEnabled(!window->isPinned());
 
 	if (!hints.testFlag(BackgroundOpen) || m_mainWindow->getTabBar()->count() < 2)
 	{
@@ -641,6 +619,10 @@ void WindowsManager::addWindow(Window *window, OpenHints hints, int index, const
 	}
 
 	connect(m_mainWindow, SIGNAL(controlsHiddenChanged(bool)), window, SLOT(setControlsHidden(bool)));
+	connect(window, &Window::needsAttention, [&]()
+	{
+		QApplication::alert(m_mainWindow);
+	});
 	connect(window, SIGNAL(titleChanged(QString)), this, SLOT(setTitle(QString)));
 	connect(window, SIGNAL(requestedOpenUrl(QUrl,WindowsManager::OpenHints)), this, SLOT(open(QUrl,WindowsManager::OpenHints)));
 	connect(window, SIGNAL(requestedOpenBookmark(BookmarksItem*,WindowsManager::OpenHints)), this, SLOT(open(BookmarksItem*,WindowsManager::OpenHints)));
@@ -649,8 +631,56 @@ void WindowsManager::addWindow(Window *window, OpenHints hints, int index, const
 	connect(window, SIGNAL(requestedEditBookmark(QUrl)), this, SIGNAL(requestedEditBookmark(QUrl)));
 	connect(window, SIGNAL(requestedNewWindow(ContentsWidget*,WindowsManager::OpenHints)), this, SLOT(openWindow(ContentsWidget*,WindowsManager::OpenHints)));
 	connect(window, SIGNAL(requestedCloseWindow(Window*)), this, SLOT(handleWindowClose(Window*)));
+	connect(window, SIGNAL(isPinnedChanged(bool)), this, SLOT(handleWindowIsPinnedChanged(bool)));
 
 	emit windowAdded(window->getIdentifier());
+}
+
+void WindowsManager::moveWindow(Window *window, MainWindow *mainWindow, int index)
+{
+	Window *newWindow(nullptr);
+	OpenHints hints(mainWindow ? DefaultOpen : NewWindowOpen);
+
+	if (window->isPrivate())
+	{
+		hints |= PrivateOpen;
+	}
+
+	window->getContentsWidget()->setParent(nullptr);
+
+	if (mainWindow)
+	{
+		newWindow = mainWindow->getWindowsManager()->openWindow(window->getContentsWidget(), hints, index);
+	}
+	else
+	{
+		newWindow = openWindow(window->getContentsWidget(), hints);
+	}
+
+	if (newWindow && window->isPinned())
+	{
+		newWindow->setPinned(true);
+	}
+
+	m_mainWindow->getTabBar()->removeTab(getWindowIndex(window->getIdentifier()));
+
+	m_windows.remove(window->getIdentifier());
+
+	if (mainWindow && m_windows.isEmpty())
+	{
+		m_mainWindow->close();
+	}
+	else
+	{
+		Action *closePrivateTabsAction(m_mainWindow->getAction(ActionsManager::ClosePrivateTabsAction));
+
+		if (closePrivateTabsAction->isEnabled() && getWindowCount(true) == 0)
+		{
+			closePrivateTabsAction->setEnabled(false);
+		}
+
+		emit windowRemoved(window->getIdentifier());
+	}
 }
 
 void WindowsManager::removeStoredUrl(const QString &url)
@@ -687,7 +717,7 @@ void WindowsManager::handleWindowClose(Window *window)
 		if (!Utils::isUrlEmpty(window->getUrl()) || history.entries.count() > 1)
 		{
 			Window *nextWindow(getWindowByIndex(index + 1));
-			Window *previousWindow((index > 0) ? getWindowByIndex(index - 1) : NULL);
+			Window *previousWindow((index > 0) ? getWindowByIndex(index - 1) : nullptr);
 
 			ClosedWindow closedWindow;
 			closedWindow.window = window->getSession();
@@ -730,7 +760,7 @@ void WindowsManager::handleWindowClose(Window *window)
 		else
 		{
 			m_mainWindow->getAction(ActionsManager::CloseTabAction)->setEnabled(false);
-			m_mainWindow->setCurrentWindow(NULL);
+			m_mainWindow->setCurrentWindow(nullptr);
 
 			emit windowTitleChanged(QString());
 		}
@@ -752,6 +782,16 @@ void WindowsManager::handleWindowClose(Window *window)
 	if (m_mainWindow->getTabBar()->count() < 1 && lastTabClosingAction == QLatin1String("openTab"))
 	{
 		open();
+	}
+}
+
+void WindowsManager::handleWindowIsPinnedChanged(bool isPinned)
+{
+	Window *window(qobject_cast<Window*>(sender()));
+
+	if (window && window == m_mainWindow->getWorkspace()->getActiveWindow())
+	{
+		m_mainWindow->getAction(ActionsManager::CloseTabAction)->setEnabled(!isPinned);
 	}
 }
 
@@ -802,6 +842,7 @@ void WindowsManager::setActiveWindowByIndex(int index)
 
 	window = getWindowByIndex(index);
 
+	m_mainWindow->getAction(ActionsManager::CloseTabAction)->setEnabled(window && !window->isPinned());
 	m_mainWindow->setCurrentWindow(window);
 
 	if (window)
@@ -809,7 +850,7 @@ void WindowsManager::setActiveWindowByIndex(int index)
 		m_mainWindow->getWorkspace()->setActiveWindow(window);
 
 		window->setFocus();
-		window->markActive();
+		window->markAsActive();
 
 		setStatusMessage(window->getContentsWidget()->getStatusMessage());
 
@@ -858,8 +899,6 @@ void WindowsManager::setTitle(const QString &title)
 	{
 		emit windowTitleChanged(text);
 	}
-
-	m_mainWindow->getTabBar()->setTabText(index, text.replace(QLatin1Char('&'), QLatin1String("&&")));
 }
 
 void WindowsManager::setStatusMessage(const QString &message)
@@ -873,17 +912,17 @@ Action* WindowsManager::getAction(int identifier)
 {
 	Window *window(m_mainWindow->getWorkspace()->getActiveWindow());
 
-	return (window ? window->getContentsWidget()->getAction(identifier) : NULL);
+	return (window ? window->getContentsWidget()->getAction(identifier) : nullptr);
 }
 
-Window* WindowsManager::openWindow(ContentsWidget *widget, OpenHints hints)
+Window* WindowsManager::openWindow(ContentsWidget *widget, OpenHints hints, int index)
 {
 	if (!widget)
 	{
-		return NULL;
+		return nullptr;
 	}
 
-	Window *window(NULL);
+	Window *window(nullptr);
 
 	if (hints.testFlag(NewWindowOpen))
 	{
@@ -900,7 +939,7 @@ Window* WindowsManager::openWindow(ContentsWidget *widget, OpenHints hints)
 	{
 		window = new Window((widget->isPrivate() || hints.testFlag(PrivateOpen)), widget);
 
-		addWindow(window, hints);
+		addWindow(window, hints, index);
 	}
 
 	return window;
@@ -913,12 +952,12 @@ Window* WindowsManager::getWindowByIndex(int index) const
 		index = m_mainWindow->getTabBar()->currentIndex();
 	}
 
-	return getWindowByIdentifier(m_mainWindow->getTabBar()->tabData(index).toULongLong());
+	return m_mainWindow->getTabBar()->getWindow(index);
 }
 
 Window* WindowsManager::getWindowByIdentifier(quint64 identifier) const
 {
-	return (m_windows.contains(identifier) ? m_windows[identifier] : NULL);
+	return (m_windows.contains(identifier) ? m_windows[identifier] : nullptr);
 }
 
 QVariant WindowsManager::getOption(int identifier) const
@@ -1026,7 +1065,9 @@ int WindowsManager::getWindowIndex(quint64 identifier) const
 {
 	for (int i = 0; i < m_mainWindow->getTabBar()->count(); ++i)
 	{
-		if (m_mainWindow->getTabBar()->tabData(i).toULongLong() == identifier)
+		Window *window(m_mainWindow->getTabBar()->getWindow(i));
+
+		if (window && window->getIdentifier() == identifier)
 		{
 			return i;
 		}
@@ -1046,21 +1087,11 @@ bool WindowsManager::event(QEvent *event)
 {
 	if (event->type() == QEvent::LanguageChange)
 	{
-		for (int i = 0; i < m_mainWindow->getTabBar()->count(); ++i)
+		Window *window(m_mainWindow->getWorkspace()->getActiveWindow());
+
+		if (window)
 		{
-			Window *window(getWindowByIndex(i));
-
-			if (window)
-			{
-				QString text(window->getTitle().isEmpty() ? tr("Empty") : window->getTitle());
-
-				if (i == m_mainWindow->getTabBar()->currentIndex())
-				{
-					emit windowTitleChanged(text);
-				}
-
-				m_mainWindow->getTabBar()->setTabText(i, text.replace(QLatin1Char('&'), QLatin1String("&&")));
-			}
+			emit windowTitleChanged(window->getTitle().isEmpty() ? tr("Empty") : window->getTitle());
 		}
 	}
 

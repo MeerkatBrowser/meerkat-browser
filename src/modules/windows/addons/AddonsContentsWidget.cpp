@@ -24,7 +24,6 @@
 #include "../../../core/ThemesManager.h"
 #include "../../../core/UserScript.h"
 #include "../../../core/Utils.h"
-#include "../../../ui/OptionDelegate.h"
 
 #include "ui_AddonsContentsWidget.h"
 
@@ -34,6 +33,7 @@
 #include <QtCore/QStandardPaths>
 #include <QtCore/QTimer>
 #include <QtGui/QKeyEvent>
+#include <QtWidgets/QCheckBox>
 #include <QtWidgets/QFileDialog>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMessageBox>
@@ -47,7 +47,6 @@ AddonsContentsWidget::AddonsContentsWidget(Window *window) : ContentsWidget(wind
 	m_ui(new Ui::AddonsContentsWidget)
 {
 	m_ui->setupUi(this);
-	m_ui->addonsViewWidget->setItemDelegate(new OptionDelegate(true, this));
 	m_ui->addonsViewWidget->setViewMode(ItemViewWidget::TreeViewMode);
 	m_ui->addonsViewWidget->installEventFilter(this);
 	m_ui->filterLineEdit->installEventFilter(this);
@@ -101,32 +100,99 @@ void AddonsContentsWidget::populateAddons()
 
 void AddonsContentsWidget::addAddon()
 {
-	const QString sourcePath(QFileDialog::getOpenFileName(this, tr("Select File"), QStandardPaths::standardLocations(QStandardPaths::HomeLocation).value(0), Utils::formatFileTypes(QStringList(tr("User Script files (*.js)")))));
+	const QStringList sourcePaths(QFileDialog::getOpenFileNames(this, tr("Select Files"), QStandardPaths::standardLocations(QStandardPaths::HomeLocation).value(0), Utils::formatFileTypes(QStringList(tr("User Script files (*.js)")))));
 
-	if (sourcePath.isEmpty())
+	if (sourcePaths.isEmpty())
 	{
 		return;
 	}
 
-	const QString targetPath(QDir(SessionsManager::getWritableDataPath(QLatin1String("scripts"))).filePath(QFileInfo(sourcePath).baseName()));
+	QStringList failedPaths;
+	ReplaceMode replaceMode(UnknownMode);
 
-	if (QFile::exists(targetPath))
+	for (int i = 0; i < sourcePaths.count(); ++i)
 	{
-		QMessageBox::critical(this, tr("Error"), tr("User Script with this name already exists."), QMessageBox::Close);
+		if (sourcePaths.at(i).isEmpty())
+		{
+			continue;
+		}
 
-		return;
+		const QString scriptName(QFileInfo(sourcePaths.at(i)).completeBaseName());
+		const QString targetDirectory(QDir(SessionsManager::getWritableDataPath(QLatin1String("scripts"))).filePath(scriptName));
+		const QString targetPath(QDir(targetDirectory).filePath(QFileInfo(sourcePaths.at(i)).fileName()));
+		bool replaceScript(false);
+
+		if (QFile::exists(targetPath))
+		{
+			if (replaceMode == IgnoreAllMode)
+			{
+				continue;
+			}
+
+			if (replaceMode == ReplaceAllMode)
+			{
+				replaceScript = true;
+			}
+			else
+			{
+				QMessageBox messageBox;
+				messageBox.setWindowTitle(tr("Question"));
+				messageBox.setText(tr("User Script with this name already exists:\n%1").arg(targetPath));
+				messageBox.setInformativeText(tr("Do you want to replace it?"));
+				messageBox.setIcon(QMessageBox::Question);
+				messageBox.addButton(QMessageBox::Yes);
+				messageBox.addButton(QMessageBox::No);
+
+				if (i < (sourcePaths.count() - 1))
+				{
+					messageBox.setCheckBox(new QCheckBox(tr("Apply to all")));
+				}
+
+				messageBox.exec();
+
+				replaceScript = (messageBox.standardButton(messageBox.clickedButton()) == QMessageBox::Yes);
+
+				if (messageBox.checkBox() && messageBox.checkBox()->isChecked())
+				{
+					replaceMode = (replaceScript ? ReplaceAllMode : IgnoreAllMode);
+				}
+			}
+
+			if (!replaceScript)
+			{
+				continue;
+			}
+		}
+
+		if ((replaceScript && !QDir().remove(targetPath)) || (!replaceScript && !QDir().mkpath(targetDirectory)) || !QFile::copy(sourcePaths.at(i), targetPath))
+		{
+			failedPaths.append(sourcePaths.at(i));
+
+			continue;
+		}
+
+		if (replaceScript)
+		{
+			UserScript *script(AddonsManager::getUserScript(scriptName));
+
+			if (script)
+			{
+				script->reload();
+			}
+		}
+		else
+		{
+			UserScript script(targetPath);
+
+			addAddon(&script);
+		}
 	}
 
-	if (!QDir().mkpath(targetPath) || !QFile::copy(sourcePath, QDir(targetPath).filePath(QFileInfo(sourcePath).fileName())))
+	if (!failedPaths.isEmpty())
 	{
-		QMessageBox::critical(this, tr("Error"), tr("Failed to import User Script file."), QMessageBox::Close);
-
-		return;
+		QMessageBox::critical(this, tr("Error"), tr("Failed to import following User Script file(s):\n%1", "" , failedPaths.count()).arg(failedPaths.join(QLatin1Char('\n'))), QMessageBox::Close);
 	}
 
-	UserScript script(QDir(targetPath).filePath(QFileInfo(sourcePath).fileName()));
-
-	addAddon(&script);
 	save();
 
 	AddonsManager::loadUserScripts();
@@ -139,7 +205,7 @@ void AddonsContentsWidget::addAddon(Addon *addon)
 		return;
 	}
 
-	QStandardItem *typeItem(NULL);
+	QStandardItem *typeItem(nullptr);
 
 	if (m_types.contains(addon->getType()))
 	{
@@ -170,6 +236,29 @@ void AddonsContentsWidget::addAddon(Addon *addon)
 	typeItem->appendRow(item);
 }
 
+void AddonsContentsWidget::reloadAddon()
+{
+	const QModelIndexList indexes(m_ui->addonsViewWidget->selectionModel()->selectedIndexes());
+
+	for (int i = 0; i < indexes.count(); ++i)
+	{
+		if (indexes.at(i).isValid() && indexes.at(i).parent() != m_model->invisibleRootItem()->index())
+		{
+			Addon::AddonType type(static_cast<Addon::AddonType>(indexes.at(i).parent().data(TypeRole).toInt()));
+
+			if (type == Addon::UserScriptType)
+			{
+				UserScript *script(AddonsManager::getUserScript(indexes.at(i).data(NameRole).toString()));
+
+				if (script)
+				{
+					script->reload();
+				}
+			}
+		}
+	}
+}
+
 void AddonsContentsWidget::removeAddons()
 {
 	const QModelIndexList indexes(m_ui->addonsViewWidget->selectionModel()->selectedIndexes());
@@ -184,7 +273,7 @@ void AddonsContentsWidget::removeAddons()
 
 void AddonsContentsWidget::save()
 {
-	QStandardItem *userScriptsItem(NULL);
+	QStandardItem *userScriptsItem(nullptr);
 
 	if (m_types.contains(Addon::UserScriptType))
 	{
@@ -232,6 +321,8 @@ void AddonsContentsWidget::showContextMenu(const QPoint &point)
 
 	if (index.isValid() && index.parent() != m_model->invisibleRootItem()->index())
 	{
+		menu.addAction(tr("Reload Addon"), this, SLOT(reloadAddon()));
+		menu.addSeparator();
 		menu.addAction(tr("Remove Addon…"), this, SLOT(removeAddons()))->setEnabled(false);
 		menu.addSeparator();
 	}
@@ -291,7 +382,7 @@ Action* AddonsContentsWidget::getAction(int identifier)
 
 	if (identifier != ActionsManager::DeleteAction && identifier != ActionsManager::SelectAllAction)
 	{
-		return NULL;
+		return nullptr;
 	}
 
 	Action *action(new Action(identifier, this));

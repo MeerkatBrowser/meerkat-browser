@@ -21,6 +21,7 @@
 #define MEERKAT_KEYBOARDPROFILEDIALOG_H
 
 #include "../Dialog.h"
+#include "../ItemDelegate.h"
 
 #include <QtCore/QModelIndex>
 
@@ -40,9 +41,16 @@ struct KeyboardProfile
 	QString author;
 	QString version;
 	QHash<int, QVector<QKeySequence> > shortcuts;
-	bool isModified;
+	bool isModified = false;
+};
 
-	KeyboardProfile() : isModified(false) {}
+class KeyboardShortcutDelegate : public ItemDelegate
+{
+public:
+	explicit KeyboardShortcutDelegate(QObject *parent);
+
+	void setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const;
+	QWidget* createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const;
 };
 
 class KeyboardProfileDialog : public Dialog
@@ -50,7 +58,13 @@ class KeyboardProfileDialog : public Dialog
 	Q_OBJECT
 
 public:
-	explicit KeyboardProfileDialog(const QString &profile, const QHash<QString, KeyboardProfile> &profiles, QWidget *parent = NULL);
+	enum DataRole
+	{
+		IdentifierRole = Qt::UserRole,
+		ShortcutsRole
+	};
+
+	explicit KeyboardProfileDialog(const QString &profile, const QHash<QString, KeyboardProfile> &profiles, QWidget *parent = nullptr);
 	~KeyboardProfileDialog();
 
 	KeyboardProfile getProfile() const;

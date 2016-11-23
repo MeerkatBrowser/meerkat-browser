@@ -51,11 +51,11 @@
 namespace Meerkat
 {
 
-quint64 Window::m_identifierCounter = 0;
+quint64 Window::m_identifierCounter(0);
 
 Window::Window(bool isPrivate, ContentsWidget *widget, QWidget *parent) : QWidget(parent),
-	m_navigationBar(NULL),
-	m_contentsWidget(NULL),
+	m_navigationBar(nullptr),
+	m_contentsWidget(nullptr),
 	m_identifier(++m_identifierCounter),
 	m_areControlsHidden(false),
 	m_isAboutToClose(false),
@@ -99,8 +99,8 @@ void Window::triggerAction(int identifier, const QVariantMap &parameters)
 {
 	if (parameters.contains(QLatin1String("isBounced")))
 	{
-		AddressWidget *addressWidget(NULL);
-		SearchWidget *searchWidget(NULL);
+		AddressWidget *addressWidget(nullptr);
+		SearchWidget *searchWidget(nullptr);
 
 		if (identifier == ActionsManager::ActivateAddressFieldAction || identifier == ActionsManager::ActivateSearchFieldAction)
 		{
@@ -163,7 +163,7 @@ void Window::triggerAction(int identifier, const QVariantMap &parameters)
 			{
 				m_session = getSession();
 
-				setContentsWidget(NULL);
+				setContentsWidget(nullptr);
 			}
 
 			break;
@@ -211,7 +211,7 @@ void Window::triggerAction(int identifier, const QVariantMap &parameters)
 
 void Window::clear()
 {
-	setContentsWidget(new WebContentsWidget(m_isPrivate, NULL, this));
+	setContentsWidget(new WebContentsWidget(m_isPrivate, nullptr, this));
 
 	m_isAboutToClose = false;
 
@@ -259,7 +259,7 @@ void Window::search(const QString &query, const QString &searchEngine)
 
 	if (!widget)
 	{
-		widget = new WebContentsWidget(isPrivate(), NULL, this);
+		widget = new WebContentsWidget(isPrivate(), nullptr, this);
 
 		setContentsWidget(widget);
 	}
@@ -269,7 +269,7 @@ void Window::search(const QString &query, const QString &searchEngine)
 	emit urlChanged(getUrl(), true);
 }
 
-void Window::markActive()
+void Window::markAsActive()
 {
 	if (!m_contentsWidget)
 	{
@@ -277,6 +277,8 @@ void Window::markActive()
 	}
 
 	m_lastActivity = QDateTime::currentDateTime();
+
+	emit activated();
 }
 
 void Window::handleIconChanged(const QIcon &icon)
@@ -380,7 +382,7 @@ void Window::setSearchEngine(const QString &searchEngine)
 
 void Window::setUrl(const QUrl &url, bool isTyped)
 {
-	ContentsWidget *newWidget(NULL);
+	ContentsWidget *newWidget(nullptr);
 
 	if (url.scheme() == QLatin1String("about"))
 	{
@@ -438,7 +440,7 @@ void Window::setUrl(const QUrl &url, bool isTyped)
 
 	if (!newWidget && (!m_contentsWidget || m_contentsWidget->getType() != QLatin1String("web")))
 	{
-		newWidget = new WebContentsWidget(m_isPrivate, NULL, this);
+		newWidget = new WebContentsWidget(m_isPrivate, nullptr, this);
 	}
 
 	if (newWidget)
@@ -477,13 +479,13 @@ void Window::setControlsHidden(bool hidden)
 	}
 }
 
-void Window::setPinned(bool pinned)
+void Window::setPinned(bool isPinned)
 {
-	if (pinned != m_isPinned)
+	if (isPinned != m_isPinned)
 	{
-		m_isPinned = pinned;
+		m_isPinned = isPinned;
 
-		emit isPinnedChanged(pinned);
+		emit isPinnedChanged(isPinned);
 	}
 }
 
@@ -505,7 +507,7 @@ void Window::setContentsWidget(ContentsWidget *widget)
 			layout()->removeWidget(m_navigationBar);
 
 			m_navigationBar->deleteLater();
-			m_navigationBar = NULL;
+			m_navigationBar = nullptr;
 		}
 
 		emit widgetChanged();
@@ -563,10 +565,12 @@ void Window::setContentsWidget(ContentsWidget *widget)
 	emit widgetChanged();
 	emit titleChanged(m_contentsWidget->getTitle());
 	emit iconChanged(m_contentsWidget->getIcon());
+	emit loadingStateChanged(m_contentsWidget->getLoadingState());
 	emit canZoomChanged(m_contentsWidget->canZoom());
 
 	connect(this, SIGNAL(aboutToClose()), m_contentsWidget, SLOT(close()));
 	connect(m_contentsWidget, SIGNAL(webWidgetChanged()), this, SLOT(updateNavigationBar()));
+	connect(m_contentsWidget, SIGNAL(needsAttention()), this, SIGNAL(needsAttention()));
 	connect(m_contentsWidget, SIGNAL(requestedAddBookmark(QUrl,QString,QString)), this, SIGNAL(requestedAddBookmark(QUrl,QString,QString)));
 	connect(m_contentsWidget, SIGNAL(requestedEditBookmark(QUrl)), this, SIGNAL(requestedEditBookmark(QUrl)));
 	connect(m_contentsWidget, SIGNAL(requestedOpenUrl(QUrl,WindowsManager::OpenHints)), this, SIGNAL(requestedOpenUrl(QUrl,WindowsManager::OpenHints)));
@@ -593,14 +597,14 @@ AddressWidget* Window::findAddressWidget() const
 		}
 	}
 
-	return m_addressWidgets.value(0, NULL);
+	return m_addressWidgets.value(0, nullptr);
 }
 
 Window* Window::clone(bool cloneHistory, QWidget *parent)
 {
 	if (!m_contentsWidget || !canClone())
 	{
-		return NULL;
+		return nullptr;
 	}
 
 	Window *window(new Window(false, m_contentsWidget->clone(cloneHistory), parent));

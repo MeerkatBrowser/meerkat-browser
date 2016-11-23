@@ -63,9 +63,7 @@ public:
 	{
 		QString name;
 		QString value;
-		FieldType type;
-
-		FieldInformation() : type(UnknownField) {}
+		FieldType type = UnknownField;
 	};
 
 	struct PasswordInformation
@@ -74,13 +72,12 @@ public:
 		QDateTime timeAdded;
 		QDateTime timeUsed;
 		QList<FieldInformation> fields;
-		PasswordType type;
-
-		PasswordInformation() : type(FormPassword) {}
+		PasswordType type = FormPassword;
 	};
 
-	static void createInstance(QObject *parent = NULL);
-	static void clearPasswords(const QString &host = QString());
+	static void createInstance(QObject *parent = nullptr);
+	static void clearPasswords(const QString &host);
+	static void clearPasswords(int period = 0);
 	static void addPassword(const PasswordInformation &password);
 	static void removePassword(const PasswordInformation &password);
 	static PasswordsManager* getInstance();
@@ -90,7 +87,7 @@ public:
 	static bool hasPasswords(const QUrl &url, PasswordTypes types = AnyPassword);
 
 protected:
-	explicit PasswordsManager(QObject *parent = NULL);
+	explicit PasswordsManager(QObject *parent = nullptr);
 
 private:
 	static PasswordsManager *m_instance;

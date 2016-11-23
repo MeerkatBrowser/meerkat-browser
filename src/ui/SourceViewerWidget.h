@@ -55,11 +55,9 @@ public:
 	struct BlockData : public QTextBlockUserData
 	{
 		QString context;
-		HighlightingSyntax currentSyntax;
-		HighlightingSyntax previousSyntax;
-		HighlightingState state;
-
-		BlockData() : currentSyntax(HtmlSyntax), previousSyntax(HtmlSyntax), state(NoState) {}
+		HighlightingSyntax currentSyntax = HtmlSyntax;
+		HighlightingSyntax previousSyntax = HtmlSyntax;
+		HighlightingState state = NoState;
 	};
 
 	explicit SyntaxHighlighter(QTextDocument *parent);
@@ -78,7 +76,7 @@ class MarginWidget : public QWidget
 	Q_OBJECT
 
 public:
-	explicit MarginWidget(SourceViewerWidget *parent = NULL);
+	explicit MarginWidget(SourceViewerWidget *parent = nullptr);
 
 public slots:
 	void updateNumbers(const QRect &rectangle, int offset);
@@ -101,7 +99,7 @@ class SourceViewerWidget : public QPlainTextEdit
 	Q_OBJECT
 
 public:
-	explicit SourceViewerWidget(QWidget *parent = NULL);
+	explicit SourceViewerWidget(QWidget *parent = nullptr);
 
 	void setZoom(int zoom);
 	int getZoom() const;

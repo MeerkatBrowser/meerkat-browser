@@ -49,6 +49,23 @@ public:
 
 	Q_DECLARE_FLAGS(RuleOptions, RuleOption)
 
+	enum RuleMatch
+	{
+		ContainsMatch = 0,
+		StartMatch,
+		EndMatch,
+		ExactMatch
+	};
+
+	enum ProfileFlag
+	{
+		NoFlags = 0,
+		HasCustomTitleFlag = 1,
+		HasCustomUpdateUrlFlag = 2
+	};
+
+	Q_DECLARE_FLAGS(ProfileFlags, ProfileFlag)
+
 	enum ProfileCategory
 	{
 		OtherCategory = 0,
@@ -63,16 +80,24 @@ public:
 	{
 		QStringList blockedDomains;
 		QStringList allowedDomains;
-		RuleOptions ruleOption;
-		RuleOptions exceptionRuleOption;
-		bool isException;
-		bool needsDomainCheck;
+		RuleOptions ruleOption = NoOption;
+		RuleOptions exceptionRuleOption = NoOption;
+		RuleMatch ruleMatch = ContainsMatch;
+		bool isException = false;
+		bool needsDomainCheck = false;
+
+		explicit ContentBlockingRule(QStringList blockedDomainsValue, QStringList allowedDomainsValue, RuleOptions ruleOptionValue, RuleOptions exceptionRuleOptionValue, RuleMatch ruleMatchValue, bool isExceptionValue, bool needsDomainCheckValue) : blockedDomains(blockedDomainsValue), allowedDomains(allowedDomainsValue), ruleOption(ruleOptionValue), exceptionRuleOption(exceptionRuleOptionValue), ruleMatch(ruleMatchValue), isException(isExceptionValue), needsDomainCheck(needsDomainCheckValue)
+		{
+		}
 	};
 
-	explicit ContentBlockingProfile(const QList<QString> languages, const QUrl updateUrl, const QDateTime lastUpdate, const QString &name, int updateInterval, const ProfileCategory &category, QObject *parent = NULL);
+	explicit ContentBlockingProfile(const QString &name, const QString &title, const QUrl &updateUrl, const QDateTime lastUpdate, const QList<QString> languages, int updateInterval, const ProfileCategory &category, const ProfileFlags &flags, QObject *parent = nullptr);
 
 	void clear();
+	void setCategory(const ProfileCategory &category);
+	void setTitle(const QString &title);
 	void setUpdateInterval(int interval);
+	void setUpdateUrl(const QUrl &url);
 	QString getName() const;
 	QString getTitle() const;
 	QUrl getUpdateUrl() const;
@@ -83,33 +108,31 @@ public:
 	QStringList getStyleSheetWhiteList(const QString &domain);
 	QList<QLocale::Language> getLanguages() const;
 	ProfileCategory getCategory() const;
+	ProfileFlags getFlags() const;
 	int getUpdateInterval() const;
 	bool downloadRules();
-	bool hasCustomUpdateUrl() const;
 
 protected:
 	struct Node
 	{
-		ContentBlockingRule *rule;
-		QChar value;
-		QVarLengthArray<Node*, 5> children;
-
-		Node() : rule(NULL), value(0) {}
+		QChar value = 0;
+		QVarLengthArray<Node*, 1> children;
+		QVarLengthArray<ContentBlockingRule*, 1> rules;
 	};
 
-	QString getPath(bool forceBundled = false) const;
+	QString getPath() const;
 	void loadHeader(const QString &path);
 	void parseRuleLine(QString line);
 	void parseStyleSheetRule(const QStringList &line, QMultiHash<QString, QString> &list);
 	void addRule(ContentBlockingRule *rule, const QString &ruleString);
 	void deleteNode(Node *node);
-	bool loadRules();
-	bool resolveDomainExceptions(const QString &url, const QStringList &ruleList);
+	bool evaluateRulesInNode(Node *node, const QString &currentRule, NetworkManager::ResourceType resourceType);
 	bool checkUrlSubstring(Node *node, const QString &subString, QString currentRule, NetworkManager::ResourceType resourceType);
 	bool checkRuleMatch(ContentBlockingRule *rule, const QString &currentRule, NetworkManager::ResourceType resourceType);
+	bool loadRules();
+	bool resolveDomainExceptions(const QString &url, const QStringList &ruleList);
 
 protected slots:
-	void optionChanged(int identifier, const QVariant &value);
 	void replyFinished();
 
 private:
@@ -120,24 +143,28 @@ private:
 	QString m_baseUrlHost;
 	QString m_name;
 	QString m_title;
+	QUrl m_updateUrl;
 	QDateTime m_lastUpdate;
 	QRegularExpression m_domainExpression;
-	QPair<QUrl, bool> m_updateUrl;
 	QStringList m_styleSheet;
 	QList<QLocale::Language> m_languages;
 	QMultiHash<QString, QString> m_styleSheetBlackList;
 	QMultiHash<QString, QString> m_styleSheetWhiteList;
 	ProfileCategory m_category;
+	ProfileFlags m_flags;
 	int m_updateInterval;
-	bool m_enableWildcards;
 	bool m_isUpdating;
 	bool m_isEmpty;
 	bool m_wasLoaded;
+
+	static QList<QChar> m_separators;
 
 signals:
 	void profileModified(const QString &profile);
 };
 
 }
+
+Q_DECLARE_OPERATORS_FOR_FLAGS(Otter::ContentBlockingProfile::ProfileFlags)
 
 #endif

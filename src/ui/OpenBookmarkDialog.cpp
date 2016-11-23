@@ -27,7 +27,7 @@ namespace Meerkat
 {
 
 OpenBookmarkDialog::OpenBookmarkDialog(QWidget *parent) : Dialog(parent),
-	m_completer(NULL),
+	m_completer(nullptr),
 	m_ui(new Ui::OpenBookmarkDialog)
 {
 	m_ui->setupUi(this);

@@ -31,13 +31,13 @@
 namespace Meerkat
 {
 
-SettingsManager* SettingsManager::m_instance = NULL;
+SettingsManager* SettingsManager::m_instance(nullptr);
 QString SettingsManager::m_globalPath;
 QString SettingsManager::m_overridePath;
 QVector<SettingsManager::OptionDefinition> SettingsManager::m_definitions;
 QHash<QString, int> SettingsManager::m_customOptions;
-int SettingsManager::m_identifierCounter = -1;
-int SettingsManager::m_optionIdentifierEnumerator = 0;
+int SettingsManager::m_identifierCounter(-1);
+int SettingsManager::m_optionIdentifierEnumerator(0);
 
 SettingsManager::SettingsManager(QObject *parent) : QObject(parent)
 {
@@ -125,6 +125,7 @@ void SettingsManager::createInstance(const QString &path, QObject *parent)
 	registerOption(Choices_WarnFormResendOption, true, BooleanType);
 	registerOption(Choices_WarnLowDiskSpaceOption, QLatin1String("warn"), EnumerationType, QStringList({QLatin1String("warn"), QLatin1String("continueReadOnly"), QLatin1String("continueReadWrite")}));
 	registerOption(Choices_WarnOpenBookmarkFolderOption, true, BooleanType);
+	registerOption(Choices_WarnOpenMultipleDroppedUrlsOption, true, BooleanType);
 	registerOption(Choices_WarnQuitOption, QLatin1String("noWarn"), EnumerationType, QStringList({QLatin1String("alwaysWarn"), QLatin1String("warnOpenTabs"), QLatin1String("noWarn")}));
 	registerOption(Choices_WarnQuitTransfersOption, true, BooleanType);
 	registerOption(Content_BackgroundColorOption, QLatin1String("#FFFFFF"), ColorType);
@@ -146,6 +147,7 @@ void SettingsManager::createInstance(const QString &path, QObject *parent)
 	registerOption(Content_UserStyleSheetOption, QString(), PathType);
 	registerOption(Content_VisitedLinkColorOption, QLatin1String("#551A8B"), ColorType);
 	registerOption(Content_ZoomTextOnlyOption, false, BooleanType);
+	registerOption(ContentBlocking_CosmeticFiltersModeOption, QLatin1String("all"), EnumerationType, QStringList({QLatin1String("all"), QLatin1String("domainOnly"), QLatin1String("none")}));
 	registerOption(ContentBlocking_EnableContentBlockingOption, true, BooleanType);
 	registerOption(ContentBlocking_EnableWildcardsOption, true, BooleanType);
 	registerOption(ContentBlocking_ProfilesOption, QStringList(), ListType);
@@ -234,8 +236,11 @@ void SettingsManager::createInstance(const QString &path, QObject *parent)
 	registerOption(StartPage_TilesPerRowOption, 0, IntegerType);
 	registerOption(StartPage_ZoomLevelOption, 100, IntegerType);
 	registerOption(TabBar_EnablePreviewsOption, true, BooleanType);
-	registerOption(TabBar_MaximumTabSizeOption, 250, IntegerType);
-	registerOption(TabBar_MinimumTabSizeOption, 40, IntegerType);
+	registerOption(TabBar_EnableThumbnailsOption, false, BooleanType);
+	registerOption(TabBar_MaximumTabHeightOption, -1, IntegerType);
+	registerOption(TabBar_MinimumTabHeightOption, -1, IntegerType);
+	registerOption(TabBar_MaximumTabWidthOption, 250, IntegerType);
+	registerOption(TabBar_MinimumTabWidthOption, -1, IntegerType);
 	registerOption(TabBar_OpenNextToActiveOption, true, BooleanType);
 	registerOption(TabBar_RequireModifierToSwitchTabOnScrollOption, true, BooleanType);
 	registerOption(TabBar_ShowCloseButtonOption, true, BooleanType);

@@ -1,7 +1,7 @@
 /**************************************************************************
 * Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2013 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
-* Copyright (C) 2015 Jan Bajer aka bajasoft <jbajer@gmail.com>
+* Copyright (C) 2015 - 2016 Jan Bajer aka bajasoft <jbajer@gmail.com>
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -80,6 +80,7 @@ public:
 	static QString createReport(ReportOptions options = FullReport);
 	static QString getFullVersion();
 	static QString getLocalePath();
+	static QString getSystemWidgetStyle();
 	static QList<MainWindow*> getWindows();
 	bool canClose();
 	bool isHidden() const;
@@ -107,6 +108,7 @@ private:
 	static QTranslator *m_applicationTranslator;
 	static QLocalServer *m_localServer;
 	static QString m_localePath;
+	static QString m_systemWidgetStyle;
 	static QCommandLineParser m_commandLineParser;
 	static QList<MainWindow*> m_windows;
 	static bool m_isHidden;

@@ -30,16 +30,16 @@ namespace Meerkat
 {
 
 OptionWidget::OptionWidget(const QString &option, const QVariant &value, SettingsManager::OptionType type, QWidget *parent) : QWidget(parent),
-	m_widget(NULL),
-	m_colorWidget(NULL),
-	m_filePathWidget(NULL),
-	m_iconWidget(NULL),
-	m_comboBox(NULL),
-	m_fontComboBox(NULL),
-	m_lineEdit(NULL),
-	m_spinBox(NULL),
-	m_resetButton(NULL),
-	m_saveButton(NULL),
+	m_widget(nullptr),
+	m_colorWidget(nullptr),
+	m_filePathWidget(nullptr),
+	m_iconWidget(nullptr),
+	m_comboBox(nullptr),
+	m_fontComboBox(nullptr),
+	m_lineEdit(nullptr),
+	m_spinBox(nullptr),
+	m_resetButton(nullptr),
+	m_saveButton(nullptr),
 	m_option(option),
 	m_value(value)
 {
@@ -120,6 +120,11 @@ OptionWidget::OptionWidget(const QString &option, const QVariant &value, Setting
 
 			m_lineEdit->setClearButtonEnabled(true);
 			m_lineEdit->selectAll();
+
+			if (type == SettingsManager::PasswordType)
+			{
+				m_lineEdit->setEchoMode(QLineEdit::PasswordEchoOnEdit);
+			}
 
 			connect(m_lineEdit, SIGNAL(textChanged(QString)), this, SLOT(markModified()));
 
@@ -273,10 +278,10 @@ void OptionWidget::setControlsVisible(bool isVisible)
 	else if (!isVisible && m_resetButton)
 	{
 		m_resetButton->deleteLater();
-		m_resetButton = NULL;
+		m_resetButton = nullptr;
 
 		m_saveButton->deleteLater();
-		m_saveButton = NULL;
+		m_saveButton = nullptr;
 	}
 }
 

@@ -27,9 +27,9 @@
 namespace Meerkat
 {
 
-BookmarksManager* BookmarksManager::m_instance = NULL;
-BookmarksModel* BookmarksManager::m_model = NULL;
-qulonglong BookmarksManager::m_lastUsedFolder = 0;
+BookmarksManager* BookmarksManager::m_instance(nullptr);
+BookmarksModel* BookmarksManager::m_model(nullptr);
+qulonglong BookmarksManager::m_lastUsedFolder(0);
 
 BookmarksManager::BookmarksManager(QObject *parent) : QObject(parent),
 	 m_saveTimer(0)

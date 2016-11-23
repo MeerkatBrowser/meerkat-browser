@@ -109,11 +109,11 @@ void CacheContentsWidget::triggerAction(int identifier, const QVariantMap &param
 
 void CacheContentsWidget::populateCache()
 {
-	NetworkCache *cache(NetworkManagerFactory::getCache());
-
+	m_model->clear();
 	m_model->setHorizontalHeaderLabels(QStringList({tr("Address"), tr("Type"), tr("Size"), tr("Last Modified"), tr("Expires")}));
 	m_model->setSortRole(Qt::DisplayRole);
 
+	NetworkCache *cache(NetworkManagerFactory::getCache());
 	const QList<QUrl> entries(cache->getEntries());
 
 	for (int i = 0; i < entries.count(); ++i)
@@ -123,23 +123,21 @@ void CacheContentsWidget::populateCache()
 
 	m_model->sort(0);
 
-	m_ui->cacheViewWidget->setModel(m_model);
-	m_ui->cacheViewWidget->setFilterRoles(QSet<int>({Qt::DisplayRole, Qt::UserRole}));
+	if (m_isLoading)
+	{
+		m_ui->cacheViewWidget->setModel(m_model);
+		m_ui->cacheViewWidget->setFilterRoles(QSet<int>({Qt::DisplayRole, Qt::UserRole}));
 
-	m_isLoading = false;
+		m_isLoading = false;
 
-	emit loadingStateChanged(WindowsManager::FinishedLoadingState);
+		emit loadingStateChanged(WindowsManager::FinishedLoadingState);
 
-	connect(cache, SIGNAL(cleared()), this, SLOT(clearEntries()));
-	connect(cache, SIGNAL(entryAdded(QUrl)), this, SLOT(addEntry(QUrl)));
-	connect(cache, SIGNAL(entryRemoved(QUrl)), this, SLOT(removeEntry(QUrl)));
-	connect(m_model, SIGNAL(modelReset()), this, SLOT(updateActions()));
-	connect(m_ui->cacheViewWidget, SIGNAL(needsActionsUpdate()), this, SLOT(updateActions()));
-}
-
-void CacheContentsWidget::clearEntries()
-{
-	m_model->clear();
+		connect(cache, SIGNAL(cleared()), this, SLOT(populateCache()));
+		connect(cache, SIGNAL(entryAdded(QUrl)), this, SLOT(addEntry(QUrl)));
+		connect(cache, SIGNAL(entryRemoved(QUrl)), this, SLOT(removeEntry(QUrl)));
+		connect(m_model, SIGNAL(modelReset()), this, SLOT(updateActions()));
+		connect(m_ui->cacheViewWidget, SIGNAL(needsActionsUpdate()), this, SLOT(updateActions()));
+	}
 }
 
 void CacheContentsWidget::addEntry(const QUrl &entry)
@@ -190,7 +188,7 @@ void CacheContentsWidget::addEntry(const QUrl &entry)
 	}
 
 	const QMimeType mimeType((type.isEmpty() && device) ? QMimeDatabase().mimeTypeForData(device) : QMimeDatabase().mimeTypeForName(type));
-	QList<QStandardItem*> entryItems({new QStandardItem(entry.path()), new QStandardItem(mimeType.name()), new QStandardItem(device ? Utils::formatUnit(device->size()) : QString()), new QStandardItem(metaData.lastModified().toString()), new QStandardItem(metaData.expirationDate().toString())});
+	QList<QStandardItem*> entryItems({new QStandardItem(entry.path()), new QStandardItem(mimeType.name()), new QStandardItem(device ? Utils::formatUnit(device->size()) : QString()), new QStandardItem(Utils::formatDateTime(metaData.lastModified())), new QStandardItem(Utils::formatDateTime(metaData.expirationDate()))});
 	entryItems[0]->setData(entry, Qt::UserRole);
 	entryItems[0]->setFlags(entryItems[0]->flags() | Qt::ItemNeverHasChildren);
 	entryItems[1]->setFlags(entryItems[1]->flags() | Qt::ItemNeverHasChildren);
@@ -420,8 +418,8 @@ void CacheContentsWidget::updateActions()
 		m_ui->locationLabelWidget->setUrl(localUrl);
 		m_ui->typeLabelWidget->setText(mimeType.name());
 		m_ui->sizeLabelWidget->setText(device ? Utils::formatUnit(device->size(), false, 2) : tr("Unknown"));
-		m_ui->lastModifiedLabelWidget->setText(metaData.lastModified().toString());
-		m_ui->expiresLabelWidget->setText(metaData.expirationDate().toString());
+		m_ui->lastModifiedLabelWidget->setText(Utils::formatDateTime(metaData.lastModified()));
+		m_ui->expiresLabelWidget->setText(Utils::formatDateTime(metaData.expirationDate()));
 
 		if (!preview.isNull())
 		{
@@ -459,7 +457,7 @@ void CacheContentsWidget::updateActions()
 				sizeItem->setText(Utils::formatUnit(device->size()));
 				sizeItem->setData(device->size(), Qt::UserRole);
 
-				QStandardItem *domainSizeItem(sizeItem->parent() ? m_model->item(sizeItem->parent()->row(), 2) : NULL);
+				QStandardItem *domainSizeItem(sizeItem->parent() ? m_model->item(sizeItem->parent()->row(), 2) : nullptr);
 
 				if (domainSizeItem)
 				{
@@ -503,7 +501,7 @@ QStandardItem* CacheContentsWidget::findDomain(const QString &domain)
 		}
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 QStandardItem* CacheContentsWidget::findEntry(const QUrl &entry)
@@ -526,7 +524,7 @@ QStandardItem* CacheContentsWidget::findEntry(const QUrl &entry)
 		}
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 Action* CacheContentsWidget::getAction(int identifier)
@@ -538,7 +536,7 @@ Action* CacheContentsWidget::getAction(int identifier)
 
 	if (identifier != ActionsManager::DeleteAction)
 	{
-		return NULL;
+		return nullptr;
 	}
 
 	Action *action(new Action(identifier, this));

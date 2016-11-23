@@ -20,21 +20,22 @@
 #ifndef MEERKAT_ACTIONCOMBOBOXWIDGET_H
 #define MEERKAT_ACTIONCOMBOBOXWIDGET_H
 
+#include "ComboBoxWidget.h"
+
 #include <QtCore/QTime>
 #include <QtGui/QMouseEvent>
-#include <QtWidgets/QComboBox>
 
 namespace Meerkat
 {
 
 class ItemViewWidget;
 
-class ActionComboBoxWidget : public QComboBox
+class ActionComboBoxWidget : public ComboBoxWidget
 {
 	Q_OBJECT
 
 public:
-	explicit ActionComboBoxWidget(QWidget *parent = NULL);
+	explicit ActionComboBoxWidget(QWidget *parent = nullptr);
 
 	void setActionIdentifier(int action);
 	int getActionIdentifier() const;
@@ -46,7 +47,6 @@ protected:
 	void mouseReleaseEvent(QMouseEvent *event);
 
 private:
-	ItemViewWidget *m_view;
 	QLineEdit *m_filterLineEdit;
 	QTime m_popupHideTime;
 	bool m_wasPopupVisible;

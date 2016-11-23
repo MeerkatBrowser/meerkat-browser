@@ -28,7 +28,7 @@ namespace Meerkat
 class TileDelegate : public QStyledItemDelegate
 {
 public:
-	explicit TileDelegate(QObject *parent = NULL);
+	explicit TileDelegate(QObject *parent = nullptr);
 
 	void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const;
 	void updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &option, const QModelIndex &index) const;

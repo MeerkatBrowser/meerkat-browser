@@ -27,7 +27,6 @@
 #include "../../../ui/LineEditWidget.h"
 #include "../../../ui/MainWindow.h"
 #include "../../../ui/PreferencesDialog.h"
-#include "../../../ui/SearchDelegate.h"
 #include "../../../ui/ToolBarWidget.h"
 #include "../../../ui/Window.h"
 
@@ -40,11 +39,109 @@
 namespace Meerkat
 {
 
+SearchDelegate::SearchDelegate(QObject *parent) : QItemDelegate(parent)
+{
+}
+
+void SearchDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
+{
+	drawBackground(painter, option, index);
+
+	if (index.data(Qt::AccessibleDescriptionRole).toString() == QLatin1String("separator"))
+	{
+		QStyleOptionFrame frameOption;
+		frameOption.palette = option.palette;
+		frameOption.rect = option.rect;
+		frameOption.state = option.state;
+		frameOption.frameShape = QFrame::HLine;
+
+		QApplication::style()->drawControl(QStyle::CE_ShapedFrame, &frameOption, painter, 0);
+
+		return;
+	}
+
+	QRect titleRectangle(option.rect);
+
+	if (!index.data(Qt::DecorationRole).value<QIcon>().isNull())
+	{
+		QRect decorationRectangle(option.rect);
+
+		if (option.direction == Qt::RightToLeft)
+		{
+			decorationRectangle.setLeft(option.rect.width() - option.rect.height());
+		}
+		else
+		{
+			decorationRectangle.setRight(option.rect.height());
+		}
+
+		decorationRectangle = decorationRectangle.marginsRemoved(QMargins(2, 2, 2, 2));
+
+		index.data(Qt::DecorationRole).value<QIcon>().paint(painter, decorationRectangle, option.decorationAlignment);
+	}
+
+	if (option.direction == Qt::RightToLeft)
+	{
+		titleRectangle.setRight(option.rect.width() - option.rect.height());
+	}
+	else
+	{
+		titleRectangle.setLeft(option.rect.height());
+	}
+
+	if (index.data(Qt::AccessibleDescriptionRole).toString() == QLatin1String("configure"))
+	{
+		drawDisplay(painter, option, titleRectangle, index.data(Qt::DisplayRole).toString());
+
+		return;
+	}
+
+	const int shortcutWidth((option.rect.width() > 150) ? 40 : 0);
+
+	if (shortcutWidth > 0)
+	{
+		QRect shortcutReactangle(option.rect);
+
+		if (option.direction == Qt::RightToLeft)
+		{
+			shortcutReactangle.setRight(shortcutWidth);
+
+			titleRectangle.setLeft(shortcutWidth + 5);
+		}
+		else
+		{
+			shortcutReactangle.setLeft(option.rect.right() - shortcutWidth);
+
+			titleRectangle.setRight(titleRectangle.right() - (shortcutWidth + 5));
+		}
+
+		drawDisplay(painter, option, shortcutReactangle, index.data(SearchEnginesManager::KeywordRole).toString());
+	}
+
+	drawDisplay(painter, option, titleRectangle, index.data(SearchEnginesManager::TitleRole).toString());
+}
+
+QSize SearchDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
+{
+	QSize size(index.data(Qt::SizeHintRole).toSize());
+
+	if (index.data(Qt::AccessibleDescriptionRole).toString() == QLatin1String("separator"))
+	{
+		size.setHeight(option.fontMetrics.height() * 0.75);
+	}
+	else
+	{
+		size.setHeight(option.fontMetrics.height() * 1.25);
+	}
+
+	return size;
+}
+
 SearchWidget::SearchWidget(Window *window, QWidget *parent) : ComboBoxWidget(parent),
-	m_window(NULL),
+	m_window(nullptr),
 	m_lineEdit(new LineEditWidget(this)),
 	m_completer(new QCompleter(this)),
-	m_suggester(NULL),
+	m_suggester(nullptr),
 	m_lastValidIndex(0),
 	m_isIgnoringActivation(false),
 	m_isPopupUpdated(false),
@@ -91,9 +188,21 @@ void SearchWidget::changeEvent(QEvent *event)
 {
 	ComboBoxWidget::changeEvent(event);
 
-	if (event->type() == QEvent::LanguageChange && itemData(currentIndex(), Qt::AccessibleDescriptionRole).toString().isEmpty())
+	switch (event->type())
 	{
-		m_lineEdit->setPlaceholderText(tr("Search using %1").arg(currentData(Qt::UserRole).toString()));
+		case QEvent::LanguageChange:
+			if (itemData(currentIndex(), Qt::AccessibleDescriptionRole).toString().isEmpty())
+			{
+				m_lineEdit->setPlaceholderText(tr("Search using %1").arg(currentData(SearchEnginesManager::TitleRole).toString()));
+			}
+
+			break;
+		case QEvent::LayoutDirectionChange:
+			updateGeometries();
+
+			break;
+		default:
+			break;
 	}
 }
 
@@ -128,43 +237,7 @@ void SearchWidget::resizeEvent(QResizeEvent *event)
 {
 	ComboBoxWidget::resizeEvent(event);
 
-	QStyleOptionFrame panel;
-	panel.initFrom(m_lineEdit);
-	panel.rect = rect();
-	panel.lineWidth = 1;
-
-	const QRect rectangle(style()->subElementRect(QStyle::SE_LineEditContents, &panel, this));
-
-	m_iconRectangle = rectangle;
-	m_iconRectangle.setWidth(rectangle.height());
-	m_iconRectangle = m_iconRectangle.marginsRemoved(QMargins(2, 2, 2, 2));
-
-	if (m_isSearchEngineLocked)
-	{
-		m_dropdownArrowRectangle = QRect();
-	}
-	else
-	{
-		m_dropdownArrowRectangle = rectangle;
-		m_dropdownArrowRectangle.setLeft(rectangle.left() + rectangle.height());
-		m_dropdownArrowRectangle.setWidth(12);
-	}
-
-	if (m_options.value(QLatin1String("showSearchButton"), true).toBool())
-	{
-		m_searchButtonRectangle = rectangle;
-		m_searchButtonRectangle.setLeft(rectangle.right() - rectangle.height());
-		m_searchButtonRectangle = m_searchButtonRectangle.marginsRemoved(QMargins(2, 2, 2, 2));
-	}
-	else
-	{
-		m_searchButtonRectangle = QRect();
-	}
-
-	m_lineEdit->resize((rectangle.width() - m_iconRectangle.width() - m_dropdownArrowRectangle.width() - m_searchButtonRectangle.width() - 10), rectangle.height());
-	m_lineEdit->move((m_isSearchEngineLocked ? m_iconRectangle : m_dropdownArrowRectangle).topRight() + QPoint(3, 0));
-
-	m_lineEditRectangle = m_lineEdit->geometry();
+	updateGeometries();
 }
 
 void SearchWidget::focusInEvent(QFocusEvent *event)
@@ -245,7 +318,7 @@ void SearchWidget::mouseReleaseEvent(QMouseEvent *event)
 {
 	if (event->button() == Qt::LeftButton)
 	{
-		if (!m_isSearchEngineLocked && (m_iconRectangle.contains(event->pos()) || m_dropdownArrowRectangle.contains(event->pos())))
+		if (!m_isSearchEngineLocked && m_dropdownArrowRectangle.united(m_iconRectangle.marginsAdded(QMargins(2, 2, 2, 2))).contains(event->pos()))
 		{
 			m_popupHideTime = QTime();
 
@@ -258,7 +331,7 @@ void SearchWidget::mouseReleaseEvent(QMouseEvent *event)
 				showPopup();
 			}
 		}
-		else if (m_searchButtonRectangle.contains(event->pos()))
+		else if (m_searchButtonRectangle.marginsAdded(QMargins(2, 2, 2, 2)).contains(event->pos()))
 		{
 			sendRequest();
 		}
@@ -337,9 +410,9 @@ void SearchWidget::optionChanged(int identifier, const QVariant &value)
 		else if (!value.toBool() && m_suggester)
 		{
 			m_suggester->deleteLater();
-			m_suggester = NULL;
+			m_suggester = nullptr;
 
-			m_completer->setModel(NULL);
+			m_completer->setModel(nullptr);
 		}
 	}
 }
@@ -359,10 +432,10 @@ void SearchWidget::currentIndexChanged(int index)
 		{
 			SessionsManager::markSessionModified();
 
-			emit searchEngineChanged(currentData(Qt::UserRole + 1).toString());
+			emit searchEngineChanged(currentData(SearchEnginesManager::IdentifierRole).toString());
 		}
 
-		m_lineEdit->setPlaceholderText(tr("Search using %1").arg(itemData(index, Qt::UserRole).toString()));
+		m_lineEdit->setPlaceholderText(tr("Search using %1").arg(itemData(index, SearchEnginesManager::TitleRole).toString()));
 		m_lineEdit->setText(m_query);
 
 		if (m_suggester)
@@ -420,7 +493,7 @@ void SearchWidget::sendRequest(const QString &query)
 	{
 		if (m_query.isEmpty())
 		{
-			const SearchEnginesManager::SearchEngineDefinition searchEngine(SearchEnginesManager::getSearchEngine(currentData(Qt::UserRole + 1).toString()));
+			const SearchEnginesManager::SearchEngineDefinition searchEngine(SearchEnginesManager::getSearchEngine(currentData(SearchEnginesManager::IdentifierRole).toString()));
 
 			if (searchEngine.formUrl.isValid())
 			{
@@ -429,7 +502,7 @@ void SearchWidget::sendRequest(const QString &query)
 		}
 		else
 		{
-			emit requestedSearch(m_query, currentData(Qt::UserRole + 1).toString(), WindowsManager::calculateOpenHints());
+			emit requestedSearch(m_query, currentData(SearchEnginesManager::IdentifierRole).toString(), WindowsManager::calculateOpenHints());
 		}
 	}
 }
@@ -470,6 +543,87 @@ void SearchWidget::restoreCurrentSearchEngine()
 void SearchWidget::activate(Qt::FocusReason reason)
 {
 	m_lineEdit->activate(reason);
+}
+
+void SearchWidget::updateGeometries()
+{
+	QStyleOptionFrame panel;
+	panel.initFrom(m_lineEdit);
+	panel.rect = rect();
+	panel.lineWidth = 1;
+
+	QMargins lineEditMargins(1, 0, 1, 0);
+	const QRect rectangle(style()->subElementRect(QStyle::SE_LineEditContents, &panel, this));
+	const bool isSearchButtonEnabled(m_options.value(QLatin1String("showSearchButton"), true).toBool());
+
+	m_iconRectangle = rectangle;
+
+	if (layoutDirection() == Qt::RightToLeft)
+	{
+		m_iconRectangle.setLeft(rectangle.width() - rectangle.height());
+
+		lineEditMargins.setRight(lineEditMargins.right() + rectangle.height());
+	}
+	else
+	{
+		m_iconRectangle.setRight(rectangle.height());
+
+		lineEditMargins.setLeft(lineEditMargins.left() + rectangle.height());
+	}
+
+	m_iconRectangle = m_iconRectangle.marginsRemoved(QMargins(2, 2, 2, 2));
+
+	if (m_isSearchEngineLocked)
+	{
+		m_dropdownArrowRectangle = QRect();
+	}
+	else
+	{
+		m_dropdownArrowRectangle = rectangle;
+
+		if (layoutDirection() == Qt::RightToLeft)
+		{
+			m_dropdownArrowRectangle.setRight(m_iconRectangle.left() - 2);
+			m_dropdownArrowRectangle.setLeft(m_dropdownArrowRectangle.right() - 12);
+
+			lineEditMargins.setRight(lineEditMargins.right() + 12);
+		}
+		else
+		{
+			m_dropdownArrowRectangle.setLeft(m_iconRectangle.right() + 2);
+			m_dropdownArrowRectangle.setRight(m_dropdownArrowRectangle.left() + 12);
+
+			lineEditMargins.setLeft(lineEditMargins.left() + 12);
+		}
+	}
+
+	if (isSearchButtonEnabled)
+	{
+		m_searchButtonRectangle = rectangle;
+
+		if (layoutDirection() == Qt::RightToLeft)
+		{
+			m_searchButtonRectangle.setRight(rectangle.height());
+
+			lineEditMargins.setLeft(lineEditMargins.left() + rectangle.height());
+		}
+		else
+		{
+			m_searchButtonRectangle.setLeft(rectangle.right() - rectangle.height());
+
+			lineEditMargins.setRight(lineEditMargins.right() + rectangle.height());
+		}
+
+		m_searchButtonRectangle = m_searchButtonRectangle.marginsRemoved(QMargins(2, 2, 2, 2));
+	}
+	else
+	{
+		m_searchButtonRectangle = QRect();
+	}
+
+	m_lineEditRectangle = rectangle.marginsRemoved(lineEditMargins);
+
+	m_lineEdit->setGeometry(m_lineEditRectangle);
 }
 
 void SearchWidget::setSearchEngine(const QString &searchEngine)
@@ -577,7 +731,7 @@ void SearchWidget::setWindow(Window *window)
 
 QString SearchWidget::getCurrentSearchEngine() const
 {
-	return currentData(Qt::UserRole + 1).toString();
+	return currentData(SearchEnginesManager::IdentifierRole).toString();
 }
 
 QVariantMap SearchWidget::getOptions() const

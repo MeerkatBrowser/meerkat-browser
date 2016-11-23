@@ -18,6 +18,7 @@
 **************************************************************************/
 
 #include "AddonsManager.h"
+#include "Console.h"
 #include "SessionsManager.h"
 #include "SettingsManager.h"
 #include "ThemesManager.h"
@@ -58,11 +59,11 @@ bool Addon::isEnabled() const
 	return m_isEnabled;
 }
 
-AddonsManager *AddonsManager::m_instance = NULL;
+AddonsManager *AddonsManager::m_instance(nullptr);
 QHash<QString, UserScript*> AddonsManager::m_userScripts;
 QHash<QString, WebBackend*> AddonsManager::m_webBackends;
 QHash<QString, AddonsManager::SpecialPageInformation> AddonsManager::m_specialPages;
-bool AddonsManager::m_areUserScripsInitialized = false;
+bool AddonsManager::m_areUserScripsInitialized(false);
 
 AddonsManager::AddonsManager(QObject *parent) : QObject(parent)
 {
@@ -81,7 +82,7 @@ AddonsManager::AddonsManager(QObject *parent) : QObject(parent)
 	registerSpecialPage(SpecialPageInformation(QT_TRANSLATE_NOOP("addons", "Addons Manager"), QString(), QUrl(QLatin1String("about:addons")), ThemesManager::getIcon(QLatin1String("preferences-plugin"), false)), QLatin1String("addons"));
 	registerSpecialPage(SpecialPageInformation(QT_TRANSLATE_NOOP("addons", "Bookmarks Manager"), QString(), QUrl(QLatin1String("about:bookmarks")), ThemesManager::getIcon(QLatin1String("bookmarks"), false)), QLatin1String("bookmarks"));
 	registerSpecialPage(SpecialPageInformation(QT_TRANSLATE_NOOP("addons", "Cache Manager"), QString(), QUrl(QLatin1String("about:cache")), ThemesManager::getIcon(QLatin1String("cache"), false)), QLatin1String("cache"));
-	registerSpecialPage(SpecialPageInformation(QT_TRANSLATE_NOOP("addons", "Configuration Manager"), QString(), QUrl(QLatin1String("about:config")), ThemesManager::getIcon(QLatin1String("configuration"), false)), QLatin1String("configuration"));
+	registerSpecialPage(SpecialPageInformation(QT_TRANSLATE_NOOP("addons", "Configuration Manager"), QString(), QUrl(QLatin1String("about:config")), ThemesManager::getIcon(QLatin1String("configuration"), false)), QLatin1String("config"));
 	registerSpecialPage(SpecialPageInformation(QT_TRANSLATE_NOOP("addons", "Cookies Manager"), QString(), QUrl(QLatin1String("about:cookies")), ThemesManager::getIcon(QLatin1String("cookies"), false)), QLatin1String("cookies"));
 	registerSpecialPage(SpecialPageInformation(QT_TRANSLATE_NOOP("addons", "History Manager"), QString(), QUrl(QLatin1String("about:history")), ThemesManager::getIcon(QLatin1String("view-history"), false)), QLatin1String("history"));
 	registerSpecialPage(SpecialPageInformation(QT_TRANSLATE_NOOP("addons", "Notes Manager"), QString(), QUrl(QLatin1String("about:notes")), ThemesManager::getIcon(QLatin1String("notes"), false)), QLatin1String("notes"));
@@ -137,10 +138,14 @@ void AddonsManager::loadUserScripts()
 
 		if (QFile::exists(path))
 		{
-			UserScript *script = new UserScript(path, m_instance);
+			UserScript *script(new UserScript(path, m_instance));
 			script->setEnabled(enabledScripts.value(scripts.at(i).fileName(), false));
 
 			m_userScripts[scripts.at(i).fileName()] = script;
+		}
+		else
+		{
+			Console::addMessage(QCoreApplication::translate("main", "Failed to find User Script file: %1").arg(path), Console::OtherCategory, Console::WarningLevel);
 		}
 	}
 
@@ -159,7 +164,7 @@ UserScript* AddonsManager::getUserScript(const QString &name)
 		return m_userScripts[name];
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 WebBackend* AddonsManager::getWebBackend(const QString &name)
@@ -178,10 +183,10 @@ WebBackend* AddonsManager::getWebBackend(const QString &name)
 			return m_webBackends[defaultName];
 		}
 
-		return m_webBackends.value(m_webBackends.keys().first(), NULL);
+		return m_webBackends.value(m_webBackends.keys().first(), nullptr);
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 AddonsManager::SpecialPageInformation AddonsManager::getSpecialPage(const QString &name)

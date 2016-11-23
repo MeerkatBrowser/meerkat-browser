@@ -1,6 +1,7 @@
 /**************************************************************************
 * Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2015 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
+* Copyright (C) 2016 Piotr Wójcik <chocimier@tlen.pl>
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -60,7 +61,7 @@ class StartPageWidget : public QScrollArea
 	Q_OBJECT
 
 public:
-	explicit StartPageWidget(Otter::Window *window, QWidget *parent = NULL);
+	explicit StartPageWidget(Otter::Window *window, QWidget *parent = nullptr);
 
 	void triggerAction(int identifier, const QVariantMap &parameters = QVariantMap());
 	void scrollContents(const QPoint &delta);

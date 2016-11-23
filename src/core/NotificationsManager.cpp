@@ -32,10 +32,10 @@
 namespace Meerkat
 {
 
-NotificationsManager* NotificationsManager::m_instance = NULL;
+NotificationsManager* NotificationsManager::m_instance(nullptr);
 QMap<int, QString> NotificationsManager::m_identifiers;
 QVector<EventDefinition> NotificationsManager::m_definitions;
-int NotificationsManager::m_eventIdentifierEnumerator = 0;
+int NotificationsManager::m_eventIdentifierEnumerator(0);
 
 Notification::Notification(const QString &message, NotificationLevel level, int event, QObject *parent) : QObject(parent),
 	m_message(message),

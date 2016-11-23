@@ -53,7 +53,7 @@ CertificateDialog::CertificateDialog(QList<QSslCertificate> certificates, QWidge
 	setWindowTitle(tr("View Certificate for %1").arg(certificates.first().subjectInfo(QSslCertificate::CommonName).join(QLatin1String(", "))));
 
 	QStandardItemModel *chainModel(new QStandardItemModel(this));
-	QStandardItem *certificateItem(NULL);
+	QStandardItem *certificateItem(nullptr);
 
 	for (int i = (certificates.count() - 1); i >= 0; --i)
 	{
@@ -333,7 +333,7 @@ void CertificateDialog::updateValue()
 			break;
 		case ExtensionField:
 			{
-				const QSslCertificateExtension extension = certificate.extensions().value(m_ui->detailsItemView->currentIndex().data(Qt::UserRole + 1).toInt());
+				const QSslCertificateExtension extension(certificate.extensions().value(m_ui->detailsItemView->currentIndex().data(Qt::UserRole + 1).toInt()));
 
 				m_ui->valueTextEdit->setPlainText(extension.isCritical() ? tr("Critical") : tr("Not Critical"));
 				m_ui->valueTextEdit->appendPlainText(tr("OID: %1").arg(extension.oid()));

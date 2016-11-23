@@ -42,18 +42,18 @@ public:
 
 	~SpellCheckManager();
 
-	static void createInstance(QObject *parent = NULL);
+	static void createInstance(QObject *parent = nullptr);
 	static SpellCheckManager* getInstance();
 	static QString getDefaultDictionary();
 	static QList<DictionaryInformation> getDictionaries();
 
 protected:
-	explicit SpellCheckManager(QObject *parent = NULL);
+	explicit SpellCheckManager(QObject *parent = nullptr);
 
 private:
 	static SpellCheckManager *m_instance;
 #ifdef OTTER_ENABLE_SPELLCHECK
-	static Sonnet::Speller* m_speller;
+	static Sonnet::Speller *m_speller;
 #endif
 };
 

@@ -34,12 +34,19 @@
 namespace Meerkat
 {
 
-ContentBlockingManager* ContentBlockingManager::m_instance = NULL;
+ContentBlockingManager* ContentBlockingManager::m_instance(nullptr);
 QVector<ContentBlockingProfile*> ContentBlockingManager::m_profiles;
+ContentBlockingManager::CosmeticFiltersMode ContentBlockingManager::m_cosmeticFiltersMode(AllFiltersMode);
+bool ContentBlockingManager::m_areWildcardsEnabled(true);
 
 ContentBlockingManager::ContentBlockingManager(QObject *parent) : QObject(parent),
 	m_saveTimer(0)
 {
+	m_areWildcardsEnabled = SettingsManager::getValue(SettingsManager::ContentBlocking_EnableWildcardsOption).toBool();
+
+	optionChanged(SettingsManager::ContentBlocking_CosmeticFiltersModeOption, SettingsManager::getValue(SettingsManager::ContentBlocking_CosmeticFiltersModeOption).toString());
+
+	connect(SettingsManager::getInstance(), SIGNAL(valueChanged(int,QVariant)), this, SLOT(optionChanged(int,QVariant)));
 }
 
 void ContentBlockingManager::createInstance(QObject *parent)
@@ -65,7 +72,7 @@ void ContentBlockingManager::timerEvent(QTimerEvent *event)
 		{
 			ContentBlockingProfile *profile(m_profiles.at(i));
 
-			if (profile == NULL)
+			if (profile == nullptr || profile->getName() == QLatin1String("custom"))
 			{
 				continue;
 			}
@@ -85,7 +92,12 @@ void ContentBlockingManager::timerEvent(QTimerEvent *event)
 				profileSettings[QLatin1String("lastUpdate")] = lastUpdate.toString(Qt::ISODate);
 			}
 
-			if (profile->hasCustomUpdateUrl())
+			if (profile->getFlags().testFlag(ContentBlockingProfile::HasCustomTitleFlag))
+			{
+				profileSettings[QLatin1String("title")] = profile->getTitle();
+			}
+
+			if (profile->getFlags().testFlag(ContentBlockingProfile::HasCustomUpdateUrlFlag))
 			{
 				profileSettings[QLatin1String("updateUrl")] = profile->getUpdateUrl().url();
 			}
@@ -121,11 +133,60 @@ void ContentBlockingManager::timerEvent(QTimerEvent *event)
 	}
 }
 
+void ContentBlockingManager::optionChanged(int identifier, const QVariant &value)
+{
+	switch (identifier)
+	{
+		case SettingsManager::ContentBlocking_EnableWildcardsOption:
+			m_areWildcardsEnabled = value.toBool();
+
+			break;
+		case SettingsManager::ContentBlocking_CosmeticFiltersModeOption:
+			{
+				const QString cosmeticFiltersMode(value.toString());
+
+				if (cosmeticFiltersMode == QLatin1String("none"))
+				{
+					m_cosmeticFiltersMode = NoFiltersMode;
+				}
+				else if (cosmeticFiltersMode == QLatin1String("domainOnly"))
+				{
+					m_cosmeticFiltersMode = DomainOnlyFiltersMode;
+				}
+				else
+				{
+					m_cosmeticFiltersMode = AllFiltersMode;
+				}
+			}
+
+			break;
+		default:
+			return;
+	}
+
+	for (int i = 0; i < m_profiles.count(); ++i)
+	{
+		m_profiles[i]->clear();
+	}
+}
+
 void ContentBlockingManager::scheduleSave()
 {
 	if (m_saveTimer == 0)
 	{
 		m_saveTimer = startTimer(1000);
+	}
+}
+
+void ContentBlockingManager::addProfile(ContentBlockingProfile *profile)
+{
+	if (profile)
+	{
+		m_profiles.append(profile);
+
+		getInstance()->scheduleSave();
+
+		connect(profile, SIGNAL(profileModified(QString)), m_instance, SLOT(scheduleSave()));
 	}
 }
 
@@ -161,13 +222,13 @@ QStandardItemModel* ContentBlockingManager::createModel(QObject *parent, const Q
 		}
 
 		QList<QStandardItem*> profileItems({new QStandardItem(title), new QStandardItem(QString::number(m_profiles.at(i)->getUpdateInterval())), new QStandardItem(Utils::formatDateTime(m_profiles.at(i)->getLastUpdate()))});
-		profileItems[0]->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
 		profileItems[0]->setData(name, Qt::UserRole);
 		profileItems[0]->setData(m_profiles.at(i)->getUpdateUrl(), (Qt::UserRole + 1));
+		profileItems[0]->setFlags(Qt::ItemNeverHasChildren | Qt::ItemIsSelectable | Qt::ItemIsEnabled);
 		profileItems[0]->setCheckable(true);
 		profileItems[0]->setCheckState(profiles.contains(name) ? Qt::Checked : Qt::Unchecked);
-		profileItems[1]->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsEditable);
-		profileItems[2]->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
+		profileItems[1]->setFlags(Qt::ItemNeverHasChildren | Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsEditable);
+		profileItems[2]->setFlags(Qt::ItemNeverHasChildren | Qt::ItemIsSelectable | Qt::ItemIsEnabled);
 
 		if (!categoryEntries.contains(category))
 		{
@@ -188,6 +249,7 @@ QStandardItemModel* ContentBlockingManager::createModel(QObject *parent, const Q
 
 		const QList<QList<QStandardItem*> > profileItems(categoryEntries[categoryTitles.at(i).first].values());
 		QList<QStandardItem*> categoryItems({new QStandardItem(categoryTitles.at(i).second), new QStandardItem(), new QStandardItem()});
+		categoryItems[0]->setData(categoryTitles.at(i).first, Qt::UserRole);
 		categoryItems[0]->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
 		categoryItems[1]->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
 		categoryItems[2]->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
@@ -218,7 +280,7 @@ ContentBlockingProfile* ContentBlockingManager::getProfile(const QString &profil
 		}
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 ContentBlockingManager::CheckResult ContentBlockingManager::checkUrl(const QVector<int> &profiles, const QUrl &baseUrl, const QUrl &requestUrl, NetworkManager::ResourceType resourceType)
@@ -319,12 +381,32 @@ QVector<ContentBlockingProfile*> ContentBlockingManager::getProfiles()
 	if (m_profiles.isEmpty())
 	{
 		QStringList profiles;
-		QList<QFileInfo> allProfiles(QDir(QLatin1String(":/contentBlocking/")).entryInfoList(QStringList(QLatin1String("*.txt")), QDir::Files));
-		allProfiles.append(QDir(SessionsManager::getWritableDataPath(QLatin1String("contentBlocking"))).entryInfoList(QStringList(QLatin1String("*.txt")), QDir::Files));
+		const QList<QFileInfo> existingProfiles(QDir(SessionsManager::getWritableDataPath(QLatin1String("contentBlocking"))).entryInfoList(QStringList(QLatin1String("*.txt")), QDir::Files));
+		QJsonObject bundledSettings;
+		QFile bundledFile(SessionsManager::getReadableDataPath(QLatin1String("contentBlocking.json"), true));
 
-		for (int i = 0; i < allProfiles.count(); ++i)
+		if (bundledFile.open(QIODevice::ReadOnly | QIODevice::Text))
 		{
-			const QString name(allProfiles.at(i).completeBaseName());
+			bundledSettings = QJsonDocument::fromJson(bundledFile.readAll()).object();
+
+			bundledFile.close();
+		}
+
+		for (int i = 0; i < existingProfiles.count(); ++i)
+		{
+			const QString name(existingProfiles.at(i).completeBaseName());
+
+			if (!profiles.contains(name))
+			{
+				profiles.append(name);
+			}
+		}
+
+		QJsonObject::const_iterator iterator;
+
+		for (iterator = bundledSettings.constBegin(); iterator != bundledSettings.constEnd(); ++iterator)
+		{
+			const QString name(iterator.key());
 
 			if (!profiles.contains(name))
 			{
@@ -337,7 +419,7 @@ QVector<ContentBlockingProfile*> ContentBlockingManager::getProfiles()
 		m_profiles.reserve(profiles.count());
 
 		QJsonObject settings;
-		QFile file(SessionsManager::getReadableDataPath(QLatin1String("contentBlocking.json")));
+		QFile file(SessionsManager::getWritableDataPath(QLatin1String("contentBlocking.json")));
 
 		if (file.open(QIODevice::ReadOnly | QIODevice::Text))
 		{
@@ -346,11 +428,46 @@ QVector<ContentBlockingProfile*> ContentBlockingManager::getProfiles()
 			file.close();
 		}
 
-		const QHash<QString, ContentBlockingProfile::ProfileCategory> categoryTitles({{QLatin1String("advertisements"), ContentBlockingProfile::AdvertisementsCategory}, {QLatin1String("annoyance"), ContentBlockingProfile::AnnoyanceCategory}, {QLatin1String("privacy"), ContentBlockingProfile::PrivacyCategory},{QLatin1String("social"), ContentBlockingProfile::SocialCategory}, {QLatin1String("regional"), ContentBlockingProfile::RegionalCategory}, {QLatin1String("other"), ContentBlockingProfile::OtherCategory}});
+		const QHash<QString, ContentBlockingProfile::ProfileCategory> categoryTitles({{QLatin1String("advertisements"), ContentBlockingProfile::AdvertisementsCategory}, {QLatin1String("annoyance"), ContentBlockingProfile::AnnoyanceCategory}, {QLatin1String("privacy"), ContentBlockingProfile::PrivacyCategory}, {QLatin1String("social"), ContentBlockingProfile::SocialCategory}, {QLatin1String("regional"), ContentBlockingProfile::RegionalCategory}, {QLatin1String("other"), ContentBlockingProfile::OtherCategory}});
 
 		for (int i = 0; i < profiles.count(); ++i)
 		{
-			const QJsonObject profileSettings(settings.value(profiles.at(i)).toObject());
+			QJsonObject profileSettings(settings.value(profiles.at(i)).toObject());
+			const QJsonObject bundledProfileSettings(bundledSettings.value(profiles.at(i)).toObject());
+			QString title;
+			QUrl updateUrl;
+			ContentBlockingProfile::ProfileFlags flags(ContentBlockingProfile::NoFlags);
+
+			if (profileSettings.isEmpty())
+			{
+				profileSettings = bundledProfileSettings;
+				updateUrl = QUrl(profileSettings.value(QLatin1String("updateUrl")).toString());
+				title = profileSettings.value(QLatin1String("title")).toString();
+			}
+			else
+			{
+				updateUrl = QUrl(profileSettings.value(QLatin1String("updateUrl")).toString());
+				title = profileSettings.value(QLatin1String("title")).toString();
+
+				if (updateUrl.isEmpty())
+				{
+					updateUrl = QUrl(bundledProfileSettings.value(QLatin1String("updateUrl")).toString());
+				}
+				else
+				{
+					flags |= ContentBlockingProfile::HasCustomUpdateUrlFlag;
+				}
+
+				if (title.isEmpty())
+				{
+					title = bundledProfileSettings.value(QLatin1String("title")).toString();
+				}
+				else
+				{
+					flags |= ContentBlockingProfile::HasCustomTitleFlag;
+				}
+			}
+
 			const QJsonArray languages(profileSettings.value(QLatin1String("languages")).toArray());
 			QList<QString> parsedLanguages;
 
@@ -359,7 +476,7 @@ QVector<ContentBlockingProfile*> ContentBlockingManager::getProfiles()
 				parsedLanguages.append(languages.at(j).toString());
 			}
 
-			ContentBlockingProfile *profile(new ContentBlockingProfile(parsedLanguages, QUrl(profileSettings.value(QLatin1String("updateUrl")).toString()), QDateTime::fromString(profileSettings.value(QLatin1String("lastUpdate")).toString(), Qt::ISODate), profiles.at(i), profileSettings.value(QLatin1String("updateInterval")).toInt(), categoryTitles.value(profileSettings.value(QLatin1String("category")).toString()), m_instance));
+			ContentBlockingProfile *profile(new ContentBlockingProfile(profiles.at(i), title, updateUrl, QDateTime::fromString(profileSettings.value(QLatin1String("lastUpdate")).toString(), Qt::ISODate), parsedLanguages, profileSettings.value(QLatin1String("updateInterval")).toInt(), categoryTitles.value(profileSettings.value(QLatin1String("category")).toString()), flags, m_instance));
 
 			m_profiles.append(profile);
 
@@ -390,6 +507,16 @@ QVector<int> ContentBlockingManager::getProfileList(const QStringList &names)
 	}
 
 	return profiles;
+}
+
+ContentBlockingManager::CosmeticFiltersMode ContentBlockingManager::getCosmeticFiltersMode()
+{
+	return m_cosmeticFiltersMode;
+}
+
+bool ContentBlockingManager::areWildcardsEnabled()
+{
+	return m_areWildcardsEnabled;
 }
 
 bool ContentBlockingManager::updateProfile(const QString &profile)

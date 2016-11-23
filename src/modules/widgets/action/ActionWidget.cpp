@@ -43,21 +43,6 @@ ActionWidget::ActionWidget(int identifier, Window *window, const ActionsManager:
 	}
 }
 
-void ActionWidget::actionEvent(QActionEvent *event)
-{
-	QToolButton::actionEvent(event);
-
-	if (event->type() == QEvent::ActionChanged || event->type() == QEvent::ActionAdded)
-	{
-		Action *action(qobject_cast<Action*>(defaultAction()));
-
-		if (action)
-		{
-			setText(action->getText());
-		}
-	}
-}
-
 void ActionWidget::mouseReleaseEvent(QMouseEvent *event)
 {
 	if ((m_identifier == ActionsManager::NewTabAction || m_identifier == ActionsManager::NewTabPrivateAction) && event->button() != Qt::RightButton)
@@ -76,11 +61,13 @@ void ActionWidget::mouseReleaseEvent(QMouseEvent *event)
 
 		QAction *action(defaultAction());
 
-		setDefaultAction(NULL);
+		setDefaultAction(nullptr);
 
 		ToolButtonWidget::mouseReleaseEvent(event);
 
 		setDefaultAction(action);
+		setText(getText());
+		setIcon(getIcon());
 
 		return;
 	}
@@ -90,7 +77,7 @@ void ActionWidget::mouseReleaseEvent(QMouseEvent *event)
 
 void ActionWidget::resetAction()
 {
-	Action *action(NULL);
+	Action *action(nullptr);
 
 	if (m_window && Action::isLocal(m_identifier) && m_window->getContentsWidget() && m_window->getContentsWidget()->getAction(m_identifier))
 	{
@@ -103,7 +90,8 @@ void ActionWidget::resetAction()
 
 	removeAction(defaultAction());
 	setDefaultAction(action);
-	setText(action->getText());
+	setText(getText());
+	setIcon(getIcon());
 }
 
 void ActionWidget::setWindow(Window *window)
@@ -140,7 +128,7 @@ bool ActionWidget::event(QEvent *event)
 		Action *action(qobject_cast<Action*>(defaultAction()));
 		QHelpEvent *helpEvent(dynamic_cast<QHelpEvent*>(event));
 
-		if (helpEvent)
+		if (action && helpEvent)
 		{
 			const QVector<QKeySequence> shortcuts(ActionsManager::getActionDefinition(action ? action->getIdentifier() : m_identifier).shortcuts);
 

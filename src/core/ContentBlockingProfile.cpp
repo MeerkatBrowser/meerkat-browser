@@ -35,15 +35,18 @@
 namespace Meerkat
 {
 
-ContentBlockingProfile::ContentBlockingProfile(const QList<QString> languages, const QUrl updateUrl, const QDateTime lastUpdate, const QString &name, int updateInterval, const ProfileCategory &category, QObject *parent) : QObject(parent),
-	m_root(NULL),
-	m_networkReply(NULL),
-	m_category(category),
+QList<QChar> ContentBlockingProfile::m_separators(QList<QChar>({QLatin1Char('_'), QLatin1Char('-'), QLatin1Char('.'), QLatin1Char('%')}));
+
+ContentBlockingProfile::ContentBlockingProfile(const QString &name, const QString &title, const QUrl &updateUrl, const QDateTime lastUpdate, const QList<QString> languages, int updateInterval, const ProfileCategory &category, const ProfileFlags &flags, QObject *parent) : QObject(parent),
+	m_root(nullptr),
+	m_networkReply(nullptr),
 	m_name(name),
-	m_updateUrl(updateUrl, true),
+	m_title(title),
+	m_updateUrl(updateUrl),
 	m_lastUpdate(lastUpdate),
 	m_languages({QLocale::AnyLanguage}),
-	m_enableWildcards(SettingsManager::getValue(SettingsManager::ContentBlocking_EnableWildcardsOption).toBool()),
+	m_category(category),
+	m_flags(flags),
 	m_updateInterval(updateInterval),
 	m_isUpdating(false),
 	m_isEmpty(true),
@@ -60,18 +63,6 @@ ContentBlockingProfile::ContentBlockingProfile(const QList<QString> languages, c
 	}
 
 	loadHeader(getPath());
-
-	connect(SettingsManager::getInstance(), SIGNAL(valueChanged(int,QVariant)), this, SLOT(optionChanged(int,QVariant)));
-}
-
-void ContentBlockingProfile::optionChanged(int identifier, const QVariant &value)
-{
-	if (identifier == SettingsManager::ContentBlocking_EnableWildcardsOption)
-	{
-		m_enableWildcards = value.toBool();
-
-		clear();
-	}
 }
 
 void ContentBlockingProfile::clear()
@@ -95,14 +86,12 @@ void ContentBlockingProfile::clear()
 
 void ContentBlockingProfile::loadHeader(const QString &path)
 {
-	const bool isBundled(path.startsWith(QLatin1String(":/")));
-
-	if (!isBundled)
-	{
-		loadHeader(getPath(true));
-	}
-
 	QFile file(path);
+
+	if (!file.exists())
+	{
+		return;
+	}
 
 	if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
@@ -133,18 +122,9 @@ void ContentBlockingProfile::loadHeader(const QString &path)
 			break;
 		}
 
-		if (line.startsWith(QLatin1String("! Title: ")))
+		if (line.startsWith(QLatin1String("! Title: ")) && !m_flags.testFlag(HasCustomTitleFlag))
 		{
 			m_title = line.remove(QLatin1String("! Title: "));
-
-			continue;
-		}
-
-		line.remove(QLatin1Char(' '));
-
-		if (line.startsWith(QLatin1String("!URL:")) && m_updateUrl.first.isEmpty())
-		{
-			m_updateUrl = QPair<QUrl,bool>(QUrl(line.remove(QLatin1String("!URL:"))), !isBundled);
 
 			continue;
 		}
@@ -152,7 +132,7 @@ void ContentBlockingProfile::loadHeader(const QString &path)
 
 	file.close();
 
-	if (!isBundled && !m_isUpdating && m_updateInterval > 0 && (!m_lastUpdate.isValid() || m_lastUpdate.daysTo(QDateTime::currentDateTime()) > m_updateInterval))
+	if (!m_isUpdating && m_updateInterval > 0 && (!m_lastUpdate.isValid() || m_lastUpdate.daysTo(QDateTime::currentDateTime()) > m_updateInterval))
 	{
 		downloadRules();
 	}
@@ -167,21 +147,30 @@ void ContentBlockingProfile::parseRuleLine(QString line)
 
 	if (line.startsWith(QLatin1String("##")))
 	{
-		m_styleSheet.append(line.mid(2));
+		if (ContentBlockingManager::getCosmeticFiltersMode() == ContentBlockingManager::AllFiltersMode)
+		{
+			m_styleSheet.append(line.mid(2));
+		}
 
 		return;
 	}
 
 	if (line.contains(QLatin1String("##")))
 	{
-		parseStyleSheetRule(line.split(QLatin1String("##")), m_styleSheetBlackList);
+		if (ContentBlockingManager::getCosmeticFiltersMode() != ContentBlockingManager::NoFiltersMode)
+		{
+			parseStyleSheetRule(line.split(QLatin1String("##")), m_styleSheetBlackList);
+		}
 
 		return;
 	}
 
 	if (line.contains(QLatin1String("#@#")))
 	{
-		parseStyleSheetRule(line.split(QLatin1String("#@#")), m_styleSheetWhiteList);
+		if (ContentBlockingManager::getCosmeticFiltersMode() != ContentBlockingManager::NoFiltersMode)
+		{
+			parseStyleSheetRule(line.split(QLatin1String("#@#")), m_styleSheetWhiteList);
+		}
 
 		return;
 	}
@@ -196,7 +185,7 @@ void ContentBlockingProfile::parseRuleLine(QString line)
 		line = line.left(optionSeparator);
 	}
 
-	while (line.endsWith(QLatin1Char('|')) || line.endsWith(QLatin1Char('*')) || line.endsWith(QLatin1Char('^')))
+	if (line.endsWith(QLatin1Char('*')))
 	{
 		line = line.left(line.length() - 1);
 	}
@@ -206,30 +195,45 @@ void ContentBlockingProfile::parseRuleLine(QString line)
 		line = line.mid(1);
 	}
 
-	if (line.contains(QLatin1Char('^')) || (!m_enableWildcards && line.contains(QLatin1Char('*'))))
+	if (!ContentBlockingManager::areWildcardsEnabled() && line.contains(QLatin1Char('*')))
 	{
-		// TODO - '^'
 		return;
 	}
 
-	ContentBlockingRule *rule(new ContentBlockingRule());
-	rule->ruleOption = NoOption;
-	rule->exceptionRuleOption = NoOption;
-	rule->isException = false;
-	rule->needsDomainCheck = false;
+	QStringList allowedDomains;
+	QStringList blockedDomains;
+	RuleOptions ruleOptions(NoOption);
+	RuleOptions exceptionRuleOption(NoOption);
+	RuleMatch ruleMatch(ContainsMatch);
+	bool isException(false);
+	bool needsDomainCheck(false);
 
 	if (line.startsWith(QLatin1String("@@")))
 	{
 		line = line.mid(2);
 
-		rule->isException = true;
+		isException = true;
 	}
 
 	if (line.startsWith(QLatin1String("||")))
 	{
 		line = line.mid(2);
 
-		rule->needsDomainCheck = true;
+		needsDomainCheck = true;
+	}
+
+	if (line.startsWith(QLatin1Char('|')))
+	{
+		ruleMatch = StartMatch;
+
+		line = line.mid(1);
+	}
+
+	if (line.endsWith(QLatin1Char('|')))
+	{
+		ruleMatch = (ruleMatch == StartMatch ? ExactMatch : EndMatch);
+
+		line = line.left(line.length() - 1);
 	}
 
 	for (int i = 0; i < options.count(); ++i)
@@ -238,43 +242,43 @@ void ContentBlockingProfile::parseRuleLine(QString line)
 
 		if (options.at(i).contains(QLatin1String("third-party")))
 		{
-			rule->ruleOption |= ThirdPartyOption;
-			rule->exceptionRuleOption |= (optionException ? ThirdPartyOption : NoOption);
+			ruleOptions |= ThirdPartyOption;
+			exceptionRuleOption |= (optionException ? ThirdPartyOption : NoOption);
 		}
 		else if (options.at(i).contains(QLatin1String("stylesheet")))
 		{
-			rule->ruleOption |= StyleSheetOption;
-			rule->exceptionRuleOption |= (optionException ? StyleSheetOption : NoOption);
+			ruleOptions |= StyleSheetOption;
+			exceptionRuleOption |= (optionException ? StyleSheetOption : NoOption);
 		}
 		else if (options.at(i).contains(QLatin1String("image")))
 		{
-			rule->ruleOption |= ImageOption;
-			rule->exceptionRuleOption |= (optionException ? ImageOption : NoOption);
+			ruleOptions |= ImageOption;
+			exceptionRuleOption |= (optionException ? ImageOption : NoOption);
 		}
 		else if (options.at(i).contains(QLatin1String("script")))
 		{
-			rule->ruleOption |= ScriptOption;
-			rule->exceptionRuleOption |= (optionException ? ScriptOption : NoOption);
+			ruleOptions |= ScriptOption;
+			exceptionRuleOption |= (optionException ? ScriptOption : NoOption);
 		}
 		else if (options.at(i).contains(QLatin1String("object")))
 		{
-			rule->ruleOption |= ObjectOption;
-			rule->exceptionRuleOption |= (optionException ? ObjectOption : NoOption);
+			ruleOptions |= ObjectOption;
+			exceptionRuleOption |= (optionException ? ObjectOption : NoOption);
 		}
 		else if (options.at(i).contains(QLatin1String("object-subrequest")) || options.at(i).contains(QLatin1String("object_subrequest")))
 		{
-			rule->ruleOption |= ObjectSubRequestOption;
-			rule->exceptionRuleOption |= (optionException ? ObjectSubRequestOption : NoOption);
+			ruleOptions |= ObjectSubRequestOption;
+			exceptionRuleOption |= (optionException ? ObjectSubRequestOption : NoOption);
 		}
 		else if (options.at(i).contains(QLatin1String("subdocument")))
 		{
-			rule->ruleOption |= SubDocumentOption;
-			rule->exceptionRuleOption |= (optionException ? SubDocumentOption : NoOption);
+			ruleOptions |= SubDocumentOption;
+			exceptionRuleOption |= (optionException ? SubDocumentOption : NoOption);
 		}
 		else if (options.at(i).contains(QLatin1String("xmlhttprequest")))
 		{
-			rule->ruleOption |= XmlHttpRequestOption;
-			rule->exceptionRuleOption |= (optionException ? XmlHttpRequestOption : NoOption);
+			ruleOptions |= XmlHttpRequestOption;
+			exceptionRuleOption |= (optionException ? XmlHttpRequestOption : NoOption);
 		}
 		else if (options.at(i).contains(QLatin1String("domain")))
 		{
@@ -284,24 +288,21 @@ void ContentBlockingProfile::parseRuleLine(QString line)
 			{
 				if (parsedDomains.at(j).startsWith(QLatin1Char('~')))
 				{
-					rule->allowedDomains.append(parsedDomains.at(j).mid(1));
+					allowedDomains.append(parsedDomains.at(j).mid(1));
 
 					continue;
 				}
 
-				rule->blockedDomains.append(parsedDomains.at(j));
+				blockedDomains.append(parsedDomains.at(j));
 			}
 		}
 		else
 		{
-			// TODO - document, elemhide
-			delete rule;
-
 			return;
 		}
 	}
 
-	addRule(rule, line);
+	addRule(new ContentBlockingRule(blockedDomains, allowedDomains, ruleOptions, exceptionRuleOption, ruleMatch, isException, needsDomainCheck), line);
 
 	return;
 }
@@ -350,7 +351,7 @@ void ContentBlockingProfile::addRule(ContentBlockingRule *rule, const QString &r
 		}
 	}
 
-	node->rule = rule;
+	node->rules.append(rule);
 }
 
 void ContentBlockingProfile::deleteNode(Node *node)
@@ -360,7 +361,11 @@ void ContentBlockingProfile::deleteNode(Node *node)
 		deleteNode(node->children.at(i));
 	}
 
-	delete node->rule;
+	for (int i = 0; i < node->rules.count(); ++i)
+	{
+		delete node->rules.at(i);
+	}
+
 	delete node;
 }
 
@@ -401,7 +406,7 @@ void ContentBlockingProfile::replyFinished()
 
 	QDir().mkpath(SessionsManager::getWritableDataPath(QLatin1String("contentBlocking")));
 
-	QFile file(SessionsManager::getWritableDataPath(QLatin1String("contentBlocking") + QLatin1Char('/') + m_name + QLatin1String(".txt")));
+	QFile file(SessionsManager::getWritableDataPath(QLatin1String("contentBlocking/%1.txt")).arg(m_name));
 
 	if (!file.open(QIODevice::ReadWrite | QIODevice::Truncate))
 	{
@@ -443,6 +448,38 @@ void ContentBlockingProfile::setUpdateInterval(int interval)
 	}
 }
 
+void ContentBlockingProfile::setUpdateUrl(const QUrl &url)
+{
+	if (url.isValid() && url != m_updateUrl)
+	{
+		m_updateUrl = url;
+		m_flags |= HasCustomUpdateUrlFlag;
+
+		emit profileModified(m_name);
+	}
+}
+
+void ContentBlockingProfile::setCategory(const ProfileCategory &category)
+{
+	if (category != m_category)
+	{
+		m_category = category;
+
+		emit profileModified(m_name);
+	}
+}
+
+void ContentBlockingProfile::setTitle(const QString &title)
+{
+	if (title != m_title)
+	{
+		m_title = title;
+		m_flags |= HasCustomTitleFlag;
+
+		emit profileModified(m_name);
+	}
+}
+
 QString ContentBlockingProfile::getName() const
 {
 	return m_name;
@@ -453,9 +490,9 @@ QString ContentBlockingProfile::getTitle() const
 	return (m_title.isEmpty() ? tr("(Unknown)") : m_title);
 }
 
-QString ContentBlockingProfile::getPath(bool forceBundled) const
+QString ContentBlockingProfile::getPath() const
 {
-	return SessionsManager::getReadableDataPath(QLatin1String("contentBlocking") + QLatin1Char('/') + m_name + QLatin1String(".txt"), forceBundled);
+	return SessionsManager::getWritableDataPath(QLatin1String("contentBlocking/%1.txt")).arg(m_name);
 }
 
 QDateTime ContentBlockingProfile::getLastUpdate() const
@@ -465,7 +502,7 @@ QDateTime ContentBlockingProfile::getLastUpdate() const
 
 QUrl ContentBlockingProfile::getUpdateUrl() const
 {
-	return m_updateUrl.first;
+	return m_updateUrl;
 }
 
 ContentBlockingManager::CheckResult ContentBlockingProfile::checkUrl(const QUrl &baseUrl, const QUrl &requestUrl, NetworkManager::ResourceType resourceType)
@@ -478,7 +515,7 @@ ContentBlockingManager::CheckResult ContentBlockingProfile::checkUrl(const QUrl 
 	}
 
 	m_baseUrlHost = baseUrl.host();
-	m_requestUrl = requestUrl.url(QUrl::RemoveScheme);
+	m_requestUrl = requestUrl.url();
 	m_requestHost = requestUrl.host();
 
 	if (m_requestUrl.startsWith(QLatin1String("//")))
@@ -540,14 +577,14 @@ ContentBlockingProfile::ProfileCategory ContentBlockingProfile::getCategory() co
 	return m_category;
 }
 
+ContentBlockingProfile::ProfileFlags ContentBlockingProfile::getFlags() const
+{
+	return m_flags;
+}
+
 int ContentBlockingProfile::getUpdateInterval() const
 {
 	return m_updateInterval;
-}
-
-bool ContentBlockingProfile::hasCustomUpdateUrl() const
-{
-	return m_updateUrl.second;
 }
 
 bool ContentBlockingProfile::downloadRules()
@@ -557,23 +594,23 @@ bool ContentBlockingProfile::downloadRules()
 		return false;
 	}
 
-	if (!m_updateUrl.first.isValid())
+	if (!m_updateUrl.isValid())
 	{
 		const QString path(getPath());
 
-		if (m_updateUrl.first.isEmpty())
+		if (m_updateUrl.isEmpty())
 		{
 			Console::addMessage(QCoreApplication::translate("main", "Failed to update content blocking profile, update URL is empty"), Console::OtherCategory, Console::ErrorLevel, path);
 		}
 		else
 		{
-			Console::addMessage(QCoreApplication::translate("main", "Failed to update content blocking profile, update URL (%1) is invalid").arg(m_updateUrl.first.toString()), Console::OtherCategory, Console::ErrorLevel, path);
+			Console::addMessage(QCoreApplication::translate("main", "Failed to update content blocking profile, update URL (%1) is invalid").arg(m_updateUrl.toString()), Console::OtherCategory, Console::ErrorLevel, path);
 		}
 
 		return false;
 	}
 
-	QNetworkRequest request(m_updateUrl.first);
+	QNetworkRequest request(m_updateUrl);
 	request.setHeader(QNetworkRequest::UserAgentHeader, NetworkManagerFactory::getUserAgent());
 
 	m_networkReply = NetworkManagerFactory::getNetworkManager()->get(request);
@@ -585,9 +622,22 @@ bool ContentBlockingProfile::downloadRules()
 	return true;
 }
 
+bool ContentBlockingProfile::evaluateRulesInNode(Node *node, const QString &currentRule, NetworkManager::ResourceType resourceType)
+{
+	for (int i = 0; i < node->rules.count(); ++i)
+	{
+		if (node->rules.at(i) && checkRuleMatch(node->rules.at(i), currentRule, resourceType))
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
 bool ContentBlockingProfile::loadRules()
 {
-	if (m_isEmpty)
+	if (m_isEmpty && !m_updateUrl.isEmpty())
 	{
 		downloadRules();
 
@@ -641,7 +691,7 @@ bool ContentBlockingProfile::checkUrlSubstring(Node *node, const QString &subStr
 	{
 		const QChar treeChar(subString.at(i));
 
-		if (node->rule && checkRuleMatch(node->rule, currentRule, resourceType))
+		if (evaluateRulesInNode(node, currentRule, resourceType))
 		{
 			return true;
 		}
@@ -665,7 +715,7 @@ bool ContentBlockingProfile::checkUrlSubstring(Node *node, const QString &subStr
 				}
 			}
 
-			if (nextNode->value == treeChar)
+			if (nextNode->value == treeChar || (nextNode->value == QLatin1Char('^') && !treeChar.isDigit() && !treeChar.isLetter() && !m_separators.contains(treeChar)))
 			{
 				node = nextNode;
 
@@ -683,9 +733,17 @@ bool ContentBlockingProfile::checkUrlSubstring(Node *node, const QString &subStr
 		currentRule += treeChar;
 	}
 
-	if (node->rule && checkRuleMatch(node->rule, currentRule, resourceType))
+	if (evaluateRulesInNode(node, currentRule, resourceType))
 	{
 		return true;
+	}
+
+	for (int i = 0; i < node->children.count(); ++i)
+	{
+		if (node->children.at(i)->value == QLatin1Char('^') && evaluateRulesInNode(node, currentRule, resourceType))
+		{
+			return true;
+		}
 	}
 
 	return false;
@@ -693,9 +751,36 @@ bool ContentBlockingProfile::checkUrlSubstring(Node *node, const QString &subStr
 
 bool ContentBlockingProfile::checkRuleMatch(ContentBlockingRule *rule, const QString &currentRule, NetworkManager::ResourceType resourceType)
 {
-	if (!m_requestUrl.contains(currentRule))
+	switch (rule->ruleMatch)
 	{
-		return false;
+		case StartMatch:
+			if (!m_requestUrl.startsWith(currentRule))
+			{
+				return false;
+			}
+
+			break;
+		case EndMatch:
+			if (!m_requestUrl.endsWith(currentRule))
+			{
+				return false;
+			}
+
+			break;
+		case ExactMatch:
+			if (m_requestUrl != currentRule)
+			{
+				return false;
+			}
+
+			break;
+		default:
+			if (!m_requestUrl.contains(currentRule))
+			{
+				return false;
+			}
+
+			break;
 	}
 
 	const QStringList requestSubdomainList(ContentBlockingManager::createSubdomainList(m_requestHost));

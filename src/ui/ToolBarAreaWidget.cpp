@@ -60,7 +60,12 @@ ToolBarAreaWidget::ToolBarAreaWidget(Qt::ToolBarArea area, MainWindow *parent) :
 	setLayout(m_layout);
 	setAcceptDrops(true);
 
-	const QVector<ToolBarsManager::ToolBarDefinition> toolBarDefinitions(ToolBarsManager::getToolBarDefinitions());
+	QVector<ToolBarsManager::ToolBarDefinition> toolBarDefinitions(ToolBarsManager::getToolBarDefinitions());
+
+	std::sort(toolBarDefinitions.begin(), toolBarDefinitions.end(), [&](const ToolBarsManager::ToolBarDefinition &first, const ToolBarsManager::ToolBarDefinition &second)
+	{
+		return (first.row < second.row);
+	});
 
 	for (int i = 0; i < toolBarDefinitions.count(); ++i)
 	{
@@ -155,9 +160,7 @@ void ToolBarAreaWidget::leaveEvent(QEvent *event)
 
 		for (int i = 0; i < toolBars.count(); ++i)
 		{
-			ToolBarsManager::ToolBarVisibility visibility(ToolBarsManager::getToolBarDefinition(toolBars.at(i)->getIdentifier()).fullScreenVisibility);
-
-			if (visibility == ToolBarsManager::OnHoverVisibleToolBar)
+			if (ToolBarsManager::getToolBarDefinition(toolBars.at(i)->getIdentifier()).fullScreenVisibility == ToolBarsManager::OnHoverVisibleToolBar)
 			{
 				toolBars.at(i)->hide();
 			}
@@ -167,29 +170,29 @@ void ToolBarAreaWidget::leaveEvent(QEvent *event)
 
 void ToolBarAreaWidget::dragEnterEvent(QDragEnterEvent *event)
 {
-	if (event->mimeData()->hasFormat(QLatin1String("x-toolbar-identifier")))
+	if (event->mimeData()->property("x-toolbar-identifier").isNull())
+	{
+		event->ignore();
+	}
+	else
 	{
 		event->accept();
 
 		updateDropRow(event->pos());
-	}
-	else
-	{
-		event->ignore();
 	}
 }
 
 void ToolBarAreaWidget::dragMoveEvent(QDragMoveEvent *event)
 {
-	if (event->mimeData()->hasFormat(QLatin1String("x-toolbar-identifier")))
+	if (event->mimeData()->property("x-toolbar-identifier").isNull())
+	{
+		event->ignore();
+	}
+	else
 	{
 		event->accept();
 
 		updateDropRow(event->pos());
-	}
-	else
-	{
-		event->ignore();
 	}
 }
 
@@ -204,7 +207,7 @@ void ToolBarAreaWidget::dragLeaveEvent(QDragLeaveEvent *event)
 
 void ToolBarAreaWidget::dropEvent(QDropEvent *event)
 {
-	if (!event->mimeData()->hasFormat(QLatin1String("x-toolbar-identifier")))
+	if (event->mimeData()->property("x-toolbar-identifier").isNull())
 	{
 		event->ignore();
 
@@ -215,7 +218,7 @@ void ToolBarAreaWidget::dropEvent(QDropEvent *event)
 
 	updateDropRow(event->pos());
 
-	const int draggedIdentifier(QString(event->mimeData()->data(QLatin1String("x-toolbar-identifier"))).toInt());
+	const int draggedIdentifier(event->mimeData()->property("x-toolbar-identifier").toInt());
 	QVector<int> identifiers;
 	identifiers.reserve(m_layout->count() + 1);
 
@@ -272,8 +275,8 @@ void ToolBarAreaWidget::setControlsHidden(bool areHidden)
 
 	for (int i = 0; i < toolBars.count(); ++i)
 	{
-		ToolBarsManager::ToolBarDefinition definition(ToolBarsManager::getToolBarDefinition(toolBars.at(i)->getIdentifier()));
-		ToolBarsManager::ToolBarVisibility visibility(areHidden ? definition.fullScreenVisibility : definition.normalVisibility);
+		const ToolBarsManager::ToolBarDefinition definition(ToolBarsManager::getToolBarDefinition(toolBars.at(i)->getIdentifier()));
+		const ToolBarsManager::ToolBarVisibility visibility(areHidden ? definition.fullScreenVisibility : definition.normalVisibility);
 
 		if (visibility == ToolBarsManager::AlwaysVisibleToolBar)
 		{
@@ -304,9 +307,7 @@ void ToolBarAreaWidget::activateToolBars(Qt::ToolBarAreas areas)
 
 	for (int i = 0; i < toolBars.count(); ++i)
 	{
-		ToolBarsManager::ToolBarVisibility visibility(ToolBarsManager::getToolBarDefinition(toolBars.at(i)->getIdentifier()).fullScreenVisibility);
-
-		if (visibility == ToolBarsManager::OnHoverVisibleToolBar)
+		if (ToolBarsManager::getToolBarDefinition(toolBars.at(i)->getIdentifier()).fullScreenVisibility == ToolBarsManager::OnHoverVisibleToolBar)
 		{
 			toolBars.at(i)->show();
 		}
@@ -315,7 +316,10 @@ void ToolBarAreaWidget::activateToolBars(Qt::ToolBarAreas areas)
 
 void ToolBarAreaWidget::insertToolBar(ToolBarWidget *toolBar)
 {
-	m_layout->insertWidget(ToolBarsManager::getToolBarDefinition(toolBar->getIdentifier()).row, toolBar);
+	if (toolBar)
+	{
+		m_layout->insertWidget(ToolBarsManager::getToolBarDefinition(toolBar->getIdentifier()).row, toolBar);
+	}
 }
 
 void ToolBarAreaWidget::toolBarAdded(int identifier)
@@ -327,21 +331,16 @@ void ToolBarAreaWidget::toolBarAdded(int identifier)
 		return;
 	}
 
-	ToolBarWidget *toolBar(new ToolBarWidget(identifier, NULL, this));
+	ToolBarWidget *toolBar(new ToolBarWidget(identifier, nullptr, this));
 
-	if (definition.row < 0)
-	{
-		m_layout->addWidget(toolBar);
-	}
-	else
-	{
-		m_layout->insertWidget(definition.row, toolBar);
-	}
+	m_layout->addWidget(toolBar);
 
 	if (identifier == ToolBarsManager::TabBar)
 	{
 		m_mainWindow->setTabBar(toolBar->findChild<TabBarWidget*>());
 	}
+
+	updateToolBarsOrder();
 }
 
 void ToolBarAreaWidget::toolBarModified(int identifier)
@@ -359,11 +358,15 @@ void ToolBarAreaWidget::toolBarModified(int identifier)
 				m_layout->removeWidget(toolBar);
 
 				m_mainWindow->moveToolBar(toolBar, definition.location);
+
+				updateToolBarsOrder();
 			}
 			else if (m_layout->indexOf(toolBar) != definition.row)
 			{
 				m_layout->removeWidget(toolBar);
 				m_layout->insertWidget(definition.row, toolBar);
+
+				updateToolBarsOrder();
 			}
 		}
 	}
@@ -424,6 +427,26 @@ void ToolBarAreaWidget::updateDropRow(const QPoint &position)
 		m_dropRow = row;
 
 		update();
+	}
+}
+
+void ToolBarAreaWidget::updateToolBarsOrder()
+{
+	for (int i = 0; i < m_layout->count(); ++i)
+	{
+		ToolBarWidget *toolBar(qobject_cast<ToolBarWidget*>(m_layout->itemAt(i)->widget()));
+
+		if (toolBar)
+		{
+			ToolBarsManager::ToolBarDefinition definition(ToolBarsManager::getToolBarDefinition(toolBar->getIdentifier()));
+
+			if (definition.row != i)
+			{
+				definition.row = i;
+
+				ToolBarsManager::setToolBar(definition);
+			}
+		}
 	}
 }
 

@@ -56,19 +56,17 @@ public:
 		QString title;
 		QString bookmarksPath;
 		QList<ActionsManager::ActionEntryDefinition> entries;
-		ToolBarVisibility normalVisibility;
-		ToolBarVisibility fullScreenVisibility;
-		Qt::ToolBarArea location;
-		Qt::ToolButtonStyle buttonStyle;
-		int identifier;
-		int iconSize;
-		int maximumButtonSize;
-		int row;
-		bool canReset;
-		bool isDefault;
-		bool wasRemoved;
-
-		ToolBarDefinition() : normalVisibility(AlwaysVisibleToolBar), fullScreenVisibility(AlwaysHiddenToolBar), location(Qt::NoToolBarArea), buttonStyle(Qt::ToolButtonIconOnly), identifier(-1), iconSize(-1), maximumButtonSize(-1), row(-1), canReset(false), isDefault(false), wasRemoved(false) {}
+		ToolBarVisibility normalVisibility = AlwaysVisibleToolBar;
+		ToolBarVisibility fullScreenVisibility = AlwaysHiddenToolBar;
+		Qt::ToolBarArea location = Qt::NoToolBarArea;
+		Qt::ToolButtonStyle buttonStyle = Qt::ToolButtonIconOnly;
+		int identifier = -1;
+		int iconSize = -1;
+		int maximumButtonSize = -1;
+		int row = -1;
+		bool canReset = false;
+		bool isDefault = false;
+		bool wasRemoved = false;
 
 		QString getTitle() const
 		{
@@ -76,7 +74,7 @@ public:
 		}
 	};
 
-	static void createInstance(QObject *parent = NULL);
+	static void createInstance(QObject *parent = nullptr);
 	static void resetToolBars();
 	static void setToolBar(ToolBarsManager::ToolBarDefinition definition);
 	static void setToolBarsLocked(bool locked);
@@ -108,7 +106,7 @@ private:
 	int m_saveTimer;
 
 private:
-	explicit ToolBarsManager(QObject *parent = NULL);
+	explicit ToolBarsManager(QObject *parent = nullptr);
 
 	static ToolBarsManager *m_instance;
 	static QMap<int, QString> m_identifiers;

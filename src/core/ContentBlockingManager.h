@@ -36,15 +36,21 @@ class ContentBlockingManager : public QObject
 	Q_OBJECT
 
 public:
+	enum CosmeticFiltersMode
+	{
+		NoFiltersMode = 0,
+		DomainOnlyFiltersMode = 1,
+		AllFiltersMode = 2
+	};
+
 	struct CheckResult
 	{
 		QString profile;
-		bool isBlocked;
-
-		CheckResult() : isBlocked(false) {}
+		bool isBlocked = false;
 	};
 
-	static void createInstance(QObject *parent = NULL);
+	static void createInstance(QObject *parent = nullptr);
+	static void addProfile(ContentBlockingProfile *profile);
 	static QStandardItemModel* createModel(QObject *parent, const QStringList &profiles);
 	static ContentBlockingManager* getInstance();
 	static ContentBlockingProfile* getProfile(const QString &profile);
@@ -55,20 +61,28 @@ public:
 	static QStringList getStyleSheetWhiteList(const QString &domain, const QVector<int> &profiles);
 	static QVector<ContentBlockingProfile*> getProfiles();
 	static QVector<int> getProfileList(const QStringList &names);
+	static CosmeticFiltersMode getCosmeticFiltersMode();
+	static bool areWildcardsEnabled();
 	static bool updateProfile(const QString &profile);
 
 public slots:
 	void scheduleSave();
 
 protected:
-	explicit ContentBlockingManager(QObject *parent = NULL);
+	explicit ContentBlockingManager(QObject *parent = nullptr);
 
 	void timerEvent(QTimerEvent *event);
 
+protected slots:
+	void optionChanged(int identifier, const QVariant &value);
+
 private:
 	int m_saveTimer;
+
 	static ContentBlockingManager *m_instance;
 	static QVector<ContentBlockingProfile*> m_profiles;
+	static CosmeticFiltersMode m_cosmeticFiltersMode;
+	static bool m_areWildcardsEnabled;
 
 signals:
 	void profileModified(const QString &profile);

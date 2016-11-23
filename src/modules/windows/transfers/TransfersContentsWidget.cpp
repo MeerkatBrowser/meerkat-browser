@@ -18,7 +18,6 @@
 **************************************************************************/
 
 #include "TransfersContentsWidget.h"
-#include "ProgressBarDelegate.h"
 #include "../../../core/ActionsManager.h"
 #include "../../../core/ThemesManager.h"
 #include "../../../core/TransfersManager.h"
@@ -38,6 +37,27 @@
 
 namespace Meerkat
 {
+
+ProgressBarDelegate::ProgressBarDelegate(QObject *parent) : ItemDelegate(parent)
+{
+}
+
+void ProgressBarDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
+{
+	QStyleOptionProgressBar progressBarOption;
+	progressBarOption.fontMetrics = option.fontMetrics;
+	progressBarOption.palette = option.palette;
+	progressBarOption.rect = option.rect;
+	progressBarOption.state = option.state;
+	progressBarOption.minimum = 0;
+	progressBarOption.maximum = 100;
+	progressBarOption.textAlignment = Qt::AlignCenter;
+	progressBarOption.textVisible = true;
+	progressBarOption.progress = index.data(Qt::DisplayRole).toInt();
+	progressBarOption.text = QStringLiteral("%1%").arg(progressBarOption.progress);
+
+	QApplication::style()->drawControl(QStyle::CE_ProgressBar, &progressBarOption, painter, 0);
+}
 
 TransfersContentsWidget::TransfersContentsWidget(Window *window) : ContentsWidget(window),
 	m_model(new QStandardItemModel(this)),
@@ -506,7 +526,7 @@ Transfer* TransfersContentsWidget::getTransfer(const QModelIndex &index)
 		return static_cast<Transfer*>(m_model->item(index.row(), 0)->data(Qt::UserRole).value<void*>());
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 Action* TransfersContentsWidget::getAction(int identifier)
@@ -518,7 +538,7 @@ Action* TransfersContentsWidget::getAction(int identifier)
 
 	if (identifier != ActionsManager::CopyAction && identifier != ActionsManager::DeleteAction)
 	{
-		return NULL;
+		return nullptr;
 	}
 
 	Action *action(new Action(identifier, this));

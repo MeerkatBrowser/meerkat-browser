@@ -21,6 +21,7 @@
 #define MEERKAT_MOUSEPROFILEDIALOG_H
 
 #include "../Dialog.h"
+#include "../ItemDelegate.h"
 
 namespace Meerkat
 {
@@ -38,9 +39,17 @@ struct MouseProfile
 	QString author;
 	QString version;
 	QHash<QString, QHash<QString, int> > gestures;
-	bool isModified;
+	bool isModified = false;
+};
 
-	MouseProfile() : isModified(false) {}
+class GestureActionDelegate : public ItemDelegate
+{
+public:
+	explicit GestureActionDelegate(QObject *parent);
+
+	void updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &option, const QModelIndex &index) const;
+	void setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const;
+	QWidget* createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const;
 };
 
 class MouseProfileDialog : public Dialog
@@ -48,7 +57,7 @@ class MouseProfileDialog : public Dialog
 	Q_OBJECT
 
 public:
-	explicit MouseProfileDialog(const QString &profile, const QHash<QString, MouseProfile> &profiles, QWidget *parent = NULL);
+	explicit MouseProfileDialog(const QString &profile, const QHash<QString, MouseProfile> &profiles, QWidget *parent = nullptr);
 	~MouseProfileDialog();
 
 	MouseProfile getProfile() const;

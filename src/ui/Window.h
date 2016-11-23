@@ -48,18 +48,9 @@ class ToolBarWidget;
 class Window : public QWidget
 {
 	Q_OBJECT
-	Q_PROPERTY(QString title READ getTitle NOTIFY titleChanged)
-	Q_PROPERTY(QString type READ getType)
-	Q_PROPERTY(QUrl url READ getUrl WRITE setUrl NOTIFY urlChanged)
-	Q_PROPERTY(QIcon icon READ getIcon NOTIFY iconChanged)
-	Q_PROPERTY(QPixmap thumbnail READ getThumbnail)
-	Q_PROPERTY(WindowsManager::LoadingState loadingState READ getLoadingState NOTIFY loadingStateChanged)
-	Q_PROPERTY(bool canClone READ canClone)
-	Q_PROPERTY(bool isPinned READ isPinned WRITE setPinned NOTIFY isPinnedChanged)
-	Q_PROPERTY(bool isPrivate READ isPrivate)
 
 public:
-	explicit Window(bool isPrivate, ContentsWidget *widget = NULL, QWidget *parent = NULL);
+	explicit Window(bool isPrivate, ContentsWidget *widget = nullptr, QWidget *parent = nullptr);
 
 	void clear();
 	void attachAddressWidget(AddressWidget *widget);
@@ -67,7 +58,7 @@ public:
 	void attachSearchWidget(SearchWidget *widget);
 	void detachSearchWidget(SearchWidget *widget);
 	void setSession(const SessionWindow &session);
-	Window* clone(bool cloneHistory = true, QWidget *parent = NULL);
+	Window* clone(bool cloneHistory = true, QWidget *parent = nullptr);
 	ContentsWidget* getContentsWidget();
 	QString getSearchEngine() const;
 	QString getTitle() const;
@@ -91,11 +82,11 @@ public slots:
 	void triggerAction(int identifier, const QVariantMap &parameters = QVariantMap());
 	void close();
 	void search(const QString &query, const QString &searchEngine);
-	void markActive();
+	void markAsActive();
 	void setSearchEngine(const QString &searchEngine);
 	void setUrl(const QUrl &url, bool isTyped = true);
 	void setControlsHidden(bool hidden);
-	void setPinned(bool pinned);
+	void setPinned(bool isPinned);
 
 protected:
 	void focusInEvent(QFocusEvent *event);
@@ -127,7 +118,9 @@ private:
 	static quint64 m_identifierCounter;
 
 signals:
+	void activated();
 	void aboutToClose();
+	void needsAttention();
 	void requestedOpenBookmark(BookmarksItem *bookmark, WindowsManager::OpenHints hints);
 	void requestedOpenUrl(const QUrl &url, WindowsManager::OpenHints hints);
 	void requestedSearch(const QString &query, const QString &searchEngine, WindowsManager::OpenHints hints = WindowsManager::DefaultOpen);
@@ -144,7 +137,7 @@ signals:
 	void contentStateChanged(WindowsManager::ContentStates state);
 	void loadingStateChanged(WindowsManager::LoadingState state);
 	void zoomChanged(int zoom);
-	void isPinnedChanged(bool pinned);
+	void isPinnedChanged(bool isPinned);
 	void widgetChanged();
 };
 

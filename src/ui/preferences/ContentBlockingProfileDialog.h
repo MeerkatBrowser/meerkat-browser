@@ -1,6 +1,6 @@
 /**************************************************************************
 * Otter Browser: Web browser controlled by the user, not vice-versa.
-* Copyright (C) 2013 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
+* Copyright (C) 2016 Jan Bajer aka bajasoft <jbajer@gmail.com>
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -17,23 +17,43 @@
 *
 **************************************************************************/
 
-#ifndef OTTER_PROGRESSBARDELEGATE_H
-#define OTTER_PROGRESSBARDELEGATE_H
+#ifndef CONTENTBLOCKINGPROFILEDIALOG
+#define CONTENTBLOCKINGPROFILEDIALOG
 
-#include <QtWidgets/QStyledItemDelegate>
+#include "../Dialog.h"
 
 namespace Otter
 {
 
-class ProgressBarDelegate : public QStyledItemDelegate
+namespace Ui
 {
-public:
-	explicit ProgressBarDelegate(QObject *parent);
+	class ContentBlockingProfileDialog;
+}
 
-	void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const;
-	QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const;
+class ContentBlockingProfile;
+
+class ContentBlockingProfileDialog : public Dialog
+{
+	Q_OBJECT
+
+public:
+	explicit ContentBlockingProfileDialog(QWidget *parent = nullptr, ContentBlockingProfile *profile = nullptr);
+	~ContentBlockingProfileDialog();
+
+	ContentBlockingProfile* getProfile();
+
+protected:
+	void changeEvent(QEvent *event);
+
+protected slots:
+	void save();
+
+private:
+	ContentBlockingProfile *m_profile;
+	Ui::ContentBlockingProfileDialog *m_ui;
 };
 
 }
 
 #endif
+

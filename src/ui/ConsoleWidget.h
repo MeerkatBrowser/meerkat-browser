@@ -38,10 +38,18 @@ class ConsoleWidget : public QWidget
 	Q_OBJECT
 
 public:
-	explicit ConsoleWidget(QWidget *parent = NULL);
+	explicit ConsoleWidget(QWidget *parent = nullptr);
 	~ConsoleWidget();
 
 protected:
+	enum DataRole
+	{
+		TimeRole = Qt::UserRole,
+		CategoryRole,
+		SourceRole,
+		WindowRole
+	};
+
 	enum MessagesScope
 	{
 		NoScope = 0,

@@ -102,19 +102,19 @@ GesturesManager::GestureStep::GestureStep(const QInputEvent *event) : type(event
 	}
 }
 
-bool GesturesManager::GestureStep::operator ==(const GestureStep &other)
+bool GesturesManager::GestureStep::operator ==(const GestureStep &other) const
 {
 	return (type == other.type) && (button == other.button) && (direction == other.direction) && (modifiers == other.modifiers || type == QEvent::MouseMove);
 }
 
-bool GesturesManager::GestureStep::operator !=(const GestureStep &other)
+bool GesturesManager::GestureStep::operator !=(const GestureStep &other) const
 {
 	return !((*this) == other);
 }
 
-GesturesManager* GesturesManager::m_instance = NULL;
-MouseGestures::Recognizer* GesturesManager::m_recognizer = NULL;
-QPointer<QObject> GesturesManager::m_trackedObject = NULL;
+GesturesManager* GesturesManager::m_instance(nullptr);
+MouseGestures::Recognizer* GesturesManager::m_recognizer(nullptr);
+QPointer<QObject> GesturesManager::m_trackedObject(nullptr);
 QPoint GesturesManager::m_lastClick;
 QPoint GesturesManager::m_lastPosition;
 QVariantMap GesturesManager::m_paramaters;
@@ -123,8 +123,8 @@ QHash<GesturesManager::GesturesContext, QList<QList<GesturesManager::GestureStep
 QList<QInputEvent*> GesturesManager::m_events;
 QList<GesturesManager::GestureStep> GesturesManager::m_steps;
 QList<GesturesManager::GesturesContext> GesturesManager::m_contexts;
-bool GesturesManager::m_isReleasing = false;
-bool GesturesManager::m_afterScroll = false;
+bool GesturesManager::m_isReleasing(false);
+bool GesturesManager::m_afterScroll(false);
 
 GesturesManager::GesturesManager(QObject *parent) : QObject(parent),
 	m_reloadTimer(0)
@@ -303,7 +303,7 @@ void GesturesManager::releaseObject()
 		disconnect(m_trackedObject, SIGNAL(destroyed(QObject*)), m_instance, SLOT(endGesture()));
 	}
 
-	m_trackedObject = NULL;
+	m_trackedObject = nullptr;
 }
 
 void GesturesManager::endGesture()
@@ -457,9 +457,9 @@ QList<GesturesManager::GestureStep> GesturesManager::recognizeMoveStep(QInputEve
 			{
 				MouseGestures::ActionList moves;
 
-				for (int j = m_steps.count(); j < steps.count() && steps[j].type == QEvent::MouseMove; ++j)
+				for (int k = m_steps.count(); k < steps.count() && steps[k].type == QEvent::MouseMove; ++k)
 				{
-					moves.push_back(steps[j].direction);
+					moves.push_back(steps[k].direction);
 				}
 
 				if (!moves.empty())
@@ -698,7 +698,7 @@ bool GesturesManager::triggerAction(int gestureIdentifier)
 
 bool GesturesManager::isTracking()
 {
-	return (m_trackedObject != NULL);
+	return (m_trackedObject != nullptr);
 }
 
 bool GesturesManager::eventFilter(QObject *object, QEvent *event)
@@ -760,7 +760,7 @@ bool GesturesManager::eventFilter(QObject *object, QEvent *event)
 			{
 				delete m_recognizer;
 
-				m_recognizer = NULL;
+				m_recognizer = nullptr;
 			}
 
 			gesture = matchGesture();
@@ -818,7 +818,7 @@ bool GesturesManager::eventFilter(QObject *object, QEvent *event)
 			{
 				delete m_recognizer;
 
-				m_recognizer = NULL;
+				m_recognizer = nullptr;
 			}
 
 			gesture = matchGesture();

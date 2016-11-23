@@ -54,14 +54,12 @@ public:
 
 	struct HistoryEntryMatch
 	{
-		HistoryEntryItem *entry;
+		HistoryEntryItem *entry = nullptr;
 		QString match;
-		bool isTypedIn;
-
-		HistoryEntryMatch () : entry(NULL), isTypedIn(false) {}
+		bool isTypedIn = false;
 	};
 
-	explicit HistoryModel(const QString &path, QObject *parent = NULL);
+	explicit HistoryModel(const QString &path, QObject *parent = nullptr);
 
 	void clearExcessEntries(int limit);
 	void clearRecentEntries(uint period);
