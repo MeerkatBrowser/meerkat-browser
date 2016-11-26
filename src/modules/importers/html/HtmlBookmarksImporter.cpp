@@ -178,7 +178,7 @@ QString HtmlBookmarksImporter::getBrowser() const
 
 QUrl HtmlBookmarksImporter::getHomePage() const
 {
-	return QUrl(QLatin1String("http://meerkat-browser.sourceforge.net/"));
+	return QUrl(QLatin1String("https://www.meerkat.tk/"));
 }
 
 QIcon HtmlBookmarksImporter::getIcon() const

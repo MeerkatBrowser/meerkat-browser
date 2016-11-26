@@ -148,7 +148,7 @@ QString OperaNotesImporter::getBrowser() const
 
 QUrl OperaNotesImporter::getHomePage() const
 {
-	return QUrl(QLatin1String("http://meerkat-browser.sourceforge.net/"));
+	return QUrl(QLatin1String("https://www.meerkat.tk/"));
 }
 
 QIcon OperaNotesImporter::getIcon() const

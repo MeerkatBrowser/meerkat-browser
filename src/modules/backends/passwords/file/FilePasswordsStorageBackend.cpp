@@ -332,7 +332,7 @@ QString FilePasswordsStorageBackend::getVersion() const
 
 QUrl FilePasswordsStorageBackend::getHomePage() const
 {
-    return QUrl(QLatin1String("http://meerkat-browser.sourceforge.net/"));
+    return QUrl(QLatin1String("https://www.meerkat.tk/"));
 }
 
 QIcon FilePasswordsStorageBackend::getIcon() const

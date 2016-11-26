@@ -720,7 +720,7 @@ void MainWindow::triggerAction(int identifier, const QVariantMap &parameters)
 		case ActionsManager::AboutApplicationAction:
 			{
 				WebBackend *webBackend(AddonsManager::getWebBackend());
-                QString about = tr("<b>Meerkat %1</b><br>Web browser controlled by the user, not vice-versa.<br><a href=\"http://meerkat-browser.sourceforge.net/\">http://meerkat-browser.sourceforge.net/</a>").arg(Application::getFullVersion());
+                QString about = tr("<b>Meerkat %1</b><br>Web browser controlled by the user, not vice-versa.<br><a href=\"https://www.meerkat.tk/\">https://www.meerkat.tk/</a>").arg(Application::getFullVersion());
 
 				if (webBackend)
 				{

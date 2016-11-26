@@ -249,7 +249,7 @@ void SettingsManager::createInstance(const QString &path, QObject *parent)
 	registerOption(Updates_AutomaticInstallOption, false, BooleanType);
 	registerOption(Updates_CheckIntervalOption, 7, IntegerType);
 	registerOption(Updates_LastCheckOption, QString(), StringType);
-    registerOption(Updates_ServerUrlOption, QLatin1String("http://meerkat-browser.sourceforge.net/updates/update.json"), StringType);
+    registerOption(Updates_ServerUrlOption, QLatin1String("https://www.meerkat.tk/updates/update.json"), StringType);
 }
 
 void SettingsManager::removeOverride(const QUrl &url, const QString &key)

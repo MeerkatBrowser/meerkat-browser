@@ -99,7 +99,7 @@ QString OperaBookmarksImporter::getBrowser() const
 
 QUrl OperaBookmarksImporter::getHomePage() const
 {
-	return QUrl(QLatin1String("http://meerkat-browser.sourceforge.net/"));
+	return QUrl(QLatin1String("https://www.meerkat.tk/"));
 }
 
 QIcon OperaBookmarksImporter::getIcon() const
