@@ -1,6 +1,6 @@
 <?xml version="1.0" ?><!DOCTYPE TS><TS language="lt" version="2.1">
 <context>
-    <name>Meerkat::AcceptCookieDialog</name>
+    <name>Otter::AcceptCookieDialog</name>
     <message>
         <location filename="../../src/ui/AcceptCookieDialog.ui" line="14"/>
         <source>Accept Cookie</source>
@@ -34,7 +34,7 @@
     <message>
         <location filename="../../src/ui/AcceptCookieDialog.ui" line="70"/>
         <source>Is HttpOnly:</source>
-        <translation type="unfinished"/>
+        <translation>Yra tik HTTP:</translation>
     </message>
     <message>
         <location filename="../../src/ui/AcceptCookieDialog.cpp" line="47"/>
@@ -85,7 +85,7 @@
     </message>
 </context>
 <context>
-    <name>Meerkat::AcceptLanguageDialog</name>
+    <name>Otter::AcceptLanguageDialog</name>
     <message>
         <location filename="../../src/ui/preferences/AcceptLanguageDialog.ui" line="14"/>
         <source>Preferred Webpage Language</source>
@@ -146,7 +146,7 @@
     <message>
         <location filename="../../src/ui/preferences/AcceptLanguageDialog.cpp" line="150"/>
         <source>Custom</source>
-        <translation type="unfinished"/>
+        <translation>Tinkinta</translation>
     </message>
     <message>
         <location filename="../../src/ui/preferences/AcceptLanguageDialog.cpp" line="154"/>
@@ -155,7 +155,7 @@
     </message>
 </context>
 <context>
-    <name>Meerkat::ActionComboBoxWidget</name>
+    <name>Otter::ActionComboBoxWidget</name>
     <message>
         <location filename="../../src/ui/ActionComboBoxWidget.cpp" line="87"/>
         <source>Select Action</source>
@@ -168,11 +168,11 @@
     </message>
 </context>
 <context>
-    <name>Meerkat::AddonsContentsWidget</name>
+    <name>Otter::AddonsContentsWidget</name>
     <message>
         <location filename="../../src/modules/windows/addons/AddonsContentsWidget.ui" line="29"/>
         <source>Search…</source>
-        <translation type="unfinished"/>
+        <translation>Ieškoti...</translation>
     </message>
     <message>
         <location filename="../../src/modules/windows/addons/AddonsContentsWidget.cpp" line="82"/>
@@ -182,7 +182,7 @@
     <message>
         <location filename="../../src/modules/windows/addons/AddonsContentsWidget.cpp" line="104"/>
         <source>Select File</source>
-        <translation type="unfinished"/>
+        <translation>Pasirinkti failą</translation>
     </message>
     <message>
         <location filename="../../src/modules/windows/addons/AddonsContentsWidget.cpp" line="104"/>
@@ -208,7 +208,7 @@
     <message>
         <location filename="../../src/modules/windows/addons/AddonsContentsWidget.cpp" line="235"/>
         <source>Remove Addon…</source>
-        <translation type="unfinished"/>
+        <translation>Šalinti priedą…</translation>
     </message>
     <message>
         <location filename="../../src/modules/windows/addons/AddonsContentsWidget.cpp" line="239"/>
@@ -218,20 +218,20 @@
     <message>
         <location filename="../../src/modules/windows/addons/AddonsContentsWidget.cpp" line="308"/>
         <source>Addons Manager</source>
-        <translation>Priedų tvarkymas</translation>
+        <translation>Priedų tvarkytuvė</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::AddressCompletionModel</name>
+    <name>Otter::AddressCompletionModel</name>
     <message>
         <location filename="../../src/core/AddressCompletionModel.cpp" line="93"/>
         <source>Search with %1</source>
-        <translation type="unfinished"/>
+        <translation>Ieškoti, naudojant %1</translation>
     </message>
     <message>
         <location filename="../../src/core/AddressCompletionModel.cpp" line="110"/>
         <source>Bookmarks</source>
-        <translation type="unfinished"/>
+        <translation>Adresynas</translation>
     </message>
     <message>
         <location filename="../../src/core/AddressCompletionModel.cpp" line="144"/>
@@ -241,16 +241,16 @@
     <message>
         <location filename="../../src/core/AddressCompletionModel.cpp" line="160"/>
         <source>History</source>
-        <translation type="unfinished"/>
+        <translation>Žurnalas</translation>
     </message>
     <message>
         <location filename="../../src/core/AddressCompletionModel.cpp" line="182"/>
         <source>Special pages</source>
-        <translation type="unfinished"/>
+        <translation>Specialūs puslapiai</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::AddressWidget</name>
+    <name>Otter::AddressWidget</name>
     <message>
         <location filename="../../src/modules/widgets/address/AddressWidget.cpp" line="98"/>
         <location filename="../../src/modules/widgets/address/AddressWidget.cpp" line="121"/>
@@ -339,7 +339,7 @@
     </message>
 </context>
 <context>
-    <name>Meerkat::Application</name>
+    <name>Otter::Application</name>
     <message>
         <location filename="../../src/core/Application.cpp" line="295"/>
         <location filename="../../src/core/Application.cpp" line="327"/>
@@ -351,19 +351,21 @@
     <message>
         <location filename="../../src/core/Application.cpp" line="295"/>
         <source>Profile directory (%1) is not writable, application will be running in read-only mode.</source>
-        <translation type="unfinished"/>
+        <translation>Profilio katalogas (%1) nėra įrašomas, programa bus vykdoma tik skaitymo veiksenoje.</translation>
     </message>
     <message>
         <location filename="../../src/core/Application.cpp" line="319"/>
         <source>Your profile directory (%1) ran out of free disk space.
 This may lead to malfunctions or even data loss.</source>
-        <translation type="unfinished"/>
+        <translation>Jūsų profilio kataloge (%1) nėra laisvos vietos diske.
+Tai gali privesti prie sutrikimų ar net duomenų praradimo.</translation>
     </message>
     <message>
         <location filename="../../src/core/Application.cpp" line="323"/>
         <source>Your profile directory (%1) is running low on free disk space (%2 remaining).
 This may lead to malfunctions or even data loss.</source>
-        <translation type="unfinished"/>
+        <translation>Jūsų profilio kataloge (%1) baigiasi laisva vieta diske (liko %2).
+Tai gali privesti prie sutrikimų ar net duomenų praradimo.</translation>
     </message>
     <message>
         <location filename="../../src/core/Application.cpp" line="329"/>
@@ -432,12 +434,12 @@ Ar tikrai norite jį atstatyti?</translation>
     </message>
     <message>
         <location filename="../../src/core/Application.cpp" line="1023"/>
-        <source>You are about to quit the current Meerkat Browser session.</source>
-        <translation>Jūs ketinate baigti esamą Meerkat Naršyklės seansą.</translation>
+        <source>You are about to quit the current Otter Browser session.</source>
+        <translation>Jūs ketinate baigti esamą Otter Naršyklės seansą.</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::ApplicationComboBoxWidget</name>
+    <name>Otter::ApplicationComboBoxWidget</name>
     <message>
         <location filename="../../src/ui/ApplicationComboBoxWidget.cpp" line="34"/>
         <location filename="../../src/ui/ApplicationComboBoxWidget.cpp" line="47"/>
@@ -464,7 +466,7 @@ Ar tikrai norite jį atstatyti?</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::AuthenticationDialog</name>
+    <name>Otter::AuthenticationDialog</name>
     <message>
         <location filename="../../src/ui/AuthenticationDialog.ui" line="14"/>
         <source>Authentication Required</source>
@@ -492,7 +494,7 @@ Ar tikrai norite jį atstatyti?</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::BookmarkPropertiesDialog</name>
+    <name>Otter::BookmarkPropertiesDialog</name>
     <message>
         <location filename="../../src/ui/BookmarkPropertiesDialog.ui" line="19"/>
         <source>Title:</source>
@@ -577,7 +579,7 @@ Ar tikrai norite jį atstatyti?</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::BookmarkWidget</name>
+    <name>Otter::BookmarkWidget</name>
     <message>
         <location filename="../../src/modules/widgets/bookmark/BookmarkWidget.cpp" line="83"/>
         <source>(Untitled)</source>
@@ -610,7 +612,7 @@ Ar tikrai norite jį atstatyti?</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::BookmarksBarDialog</name>
+    <name>Otter::BookmarksBarDialog</name>
     <message>
         <location filename="../../src/ui/BookmarksBarDialog.ui" line="14"/>
         <source>Edit Toolbar</source>
@@ -628,7 +630,7 @@ Ar tikrai norite jį atstatyti?</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::BookmarksComboBoxWidget</name>
+    <name>Otter::BookmarksComboBoxWidget</name>
     <message>
         <location filename="../../src/ui/BookmarksComboBoxWidget.cpp" line="50"/>
         <source>Folder Name</source>
@@ -641,7 +643,7 @@ Ar tikrai norite jį atstatyti?</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::BookmarksContentsWidget</name>
+    <name>Otter::BookmarksContentsWidget</name>
     <message>
         <location filename="../../src/modules/windows/bookmarks/BookmarksContentsWidget.ui" line="29"/>
         <source>Search…</source>
@@ -787,11 +789,11 @@ Ar tikrai norite jį atstatyti?</translation>
     <message>
         <location filename="../../src/modules/windows/bookmarks/BookmarksContentsWidget.cpp" line="352"/>
         <source>Bookmarks Manager</source>
-        <translation>Adresyno tvarkymas</translation>
+        <translation>Adresyno tvarkytuvė</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::BookmarksImporterWidget</name>
+    <name>Otter::BookmarksImporterWidget</name>
     <message>
         <location filename="../../src/ui/BookmarksImporterWidget.ui" line="17"/>
         <source>Remove existing bookmarks</source>
@@ -810,7 +812,7 @@ Ar tikrai norite jį atstatyti?</translation>
     <message>
         <location filename="../../src/ui/BookmarksImporterWidget.ui" line="81"/>
         <source>Allow to duplicate already existing bookmarks</source>
-        <translation>Leisti dublikuoti jau esamus adresyno įrašus</translation>
+        <translation>Leisti dubliuoti jau esamus adresyno įrašus</translation>
     </message>
     <message>
         <location filename="../../src/ui/BookmarksImporterWidget.ui" line="107"/>
@@ -829,7 +831,7 @@ Ar tikrai norite jį atstatyti?</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::BookmarksModel</name>
+    <name>Otter::BookmarksModel</name>
     <message>
         <location filename="../../src/core/BookmarksModel.cpp" line="99"/>
         <location filename="../../src/core/BookmarksModel.cpp" line="203"/>
@@ -885,7 +887,7 @@ Ar tikrai norite jį atstatyti?</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::CacheContentsWidget</name>
+    <name>Otter::CacheContentsWidget</name>
     <message>
         <location filename="../../src/modules/windows/cache/CacheContentsWidget.ui" line="29"/>
         <source>Search…</source>
@@ -1008,7 +1010,7 @@ Ar tikrai norite jį atstatyti?</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::CertificateDialog</name>
+    <name>Otter::CertificateDialog</name>
     <message>
         <location filename="../../src/ui/CertificateDialog.ui" line="17"/>
         <source>Certificate chain:</source>
@@ -1053,12 +1055,12 @@ Ar tikrai norite jį atstatyti?</translation>
     <message>
         <location filename="../../src/ui/CertificateDialog.cpp" line="114"/>
         <source>DER encoded X.509 certificates (*.der)</source>
-        <translation type="unfinished"/>
+        <translation>DER šifruoti X.509 liudijimai (*.der)</translation>
     </message>
     <message>
         <location filename="../../src/ui/CertificateDialog.cpp" line="114"/>
         <source>PEM encoded X.509 certificates (*.pem)</source>
-        <translation type="unfinished"/>
+        <translation>PEM šifruoti X.509 liudijimai (*.pem)</translation>
     </message>
     <message>
         <location filename="../../src/ui/CertificateDialog.cpp" line="114"/>
@@ -1078,87 +1080,87 @@ Ar tikrai norite jį atstatyti?</translation>
     <message>
         <location filename="../../src/ui/CertificateDialog.cpp" line="179"/>
         <source>Authority Key Identifier</source>
-        <translation type="unfinished"/>
+        <translation>Liudijimų įstaigos rakto identifikatorius</translation>
     </message>
     <message>
         <location filename="../../src/ui/CertificateDialog.cpp" line="183"/>
         <source>Subject Key Identifier</source>
-        <translation type="unfinished"/>
+        <translation>Subjekto rakto identifikatorius</translation>
     </message>
     <message>
         <location filename="../../src/ui/CertificateDialog.cpp" line="187"/>
         <source>Key Usage</source>
-        <translation type="unfinished"/>
+        <translation>Rakto naudojimas</translation>
     </message>
     <message>
         <location filename="../../src/ui/CertificateDialog.cpp" line="191"/>
         <source>Certificate Policies</source>
-        <translation type="unfinished"/>
+        <translation>Liudijimo politikos</translation>
     </message>
     <message>
         <location filename="../../src/ui/CertificateDialog.cpp" line="195"/>
         <source>Policy Mappings</source>
-        <translation type="unfinished"/>
+        <translation>Politikos atvaizdavimai</translation>
     </message>
     <message>
         <location filename="../../src/ui/CertificateDialog.cpp" line="199"/>
         <source>Subject Alternative Name</source>
-        <translation type="unfinished"/>
+        <translation>Subjekto alternatyvusis pavadinimas</translation>
     </message>
     <message>
         <location filename="../../src/ui/CertificateDialog.cpp" line="203"/>
         <source>Issuer Alternative Name</source>
-        <translation type="unfinished"/>
+        <translation>Išdavėjo alternatyvusis pavadinimas</translation>
     </message>
     <message>
         <location filename="../../src/ui/CertificateDialog.cpp" line="207"/>
         <source>Subject Directory Attributes</source>
-        <translation type="unfinished"/>
+        <translation>Subjekto katalogo atributai</translation>
     </message>
     <message>
         <location filename="../../src/ui/CertificateDialog.cpp" line="211"/>
         <source>Basic Constraints</source>
-        <translation type="unfinished"/>
+        <translation>Pagrindiniai apribojimai</translation>
     </message>
     <message>
         <location filename="../../src/ui/CertificateDialog.cpp" line="215"/>
         <source>Name Constraints</source>
-        <translation type="unfinished"/>
+        <translation>Pavadinimų apribojimai</translation>
     </message>
     <message>
         <location filename="../../src/ui/CertificateDialog.cpp" line="219"/>
         <source>Policy Constraints</source>
-        <translation type="unfinished"/>
+        <translation>Politikos apribojimai</translation>
     </message>
     <message>
         <location filename="../../src/ui/CertificateDialog.cpp" line="223"/>
         <source>Extended Key Usage</source>
-        <translation type="unfinished"/>
+        <translation>Išplėstinis rakto naudojimas</translation>
     </message>
     <message>
         <location filename="../../src/ui/CertificateDialog.cpp" line="227"/>
         <source>CRL Distribution Points</source>
-        <translation type="unfinished"/>
+        <translation>CRL skirstomieji punktai</translation>
     </message>
     <message>
         <location filename="../../src/ui/CertificateDialog.cpp" line="231"/>
         <source>Inhibit Any Policy</source>
-        <translation type="unfinished"/>
+        <translation>Uždrausti bet kurią politiką</translation>
     </message>
     <message>
         <location filename="../../src/ui/CertificateDialog.cpp" line="235"/>
         <source>Delta CRL Distribution Point</source>
-        <translation type="unfinished"/>
+        <translation>Delta CRL skirstomasis punktas</translation>
     </message>
     <message>
         <location filename="../../src/ui/CertificateDialog.cpp" line="239"/>
         <source>Authority Information Access</source>
-        <translation type="unfinished"/>
+        <translation>Liudijimų įstaigos informacijos prieiga</translation>
     </message>
     <message>
         <location filename="../../src/ui/CertificateDialog.cpp" line="243"/>
         <source>Subject Information Access</source>
-        <translation type="unfinished"/>
+        <translation>Subjekto informacijos prieiga</translation>
     </message>
     <message>
         <location filename="../../src/ui/CertificateDialog.cpp" line="325"/>
@@ -1166,17 +1168,20 @@ Ar tikrai norite jį atstatyti?</translation>
 %1
 
 Exponent: %2</source>
-        <translation type="unfinished"/>
+        <translation>Modulis:
+%1
+
+Skaičiaus eilė: %2</translation>
     </message>
     <message>
         <location filename="../../src/ui/CertificateDialog.cpp" line="338"/>
         <source>Critical</source>
-        <translation type="unfinished"/>
+        <translation>Kritinis</translation>
     </message>
     <message>
         <location filename="../../src/ui/CertificateDialog.cpp" line="338"/>
         <source>Not Critical</source>
-        <translation type="unfinished"/>
+        <translation>Nekritinis</translation>
     </message>
     <message>
         <location filename="../../src/ui/CertificateDialog.cpp" line="339"/>
@@ -1196,42 +1201,42 @@ Exponent: %2</source>
     <message>
         <location filename="../../src/ui/CertificateDialog.cpp" line="401"/>
         <source>Serial Number</source>
-        <translation type="unfinished"/>
+        <translation>Serijos numeris</translation>
     </message>
     <message>
         <location filename="../../src/ui/CertificateDialog.cpp" line="405"/>
         <source>Certificate Signature Algorithm</source>
-        <translation type="unfinished"/>
+        <translation>Liudijimo parašo algoritmas</translation>
     </message>
     <message>
         <location filename="../../src/ui/CertificateDialog.cpp" line="409"/>
         <source>Issuer</source>
-        <translation type="unfinished"/>
+        <translation>Išdavėjas</translation>
     </message>
     <message>
         <location filename="../../src/ui/CertificateDialog.cpp" line="413"/>
         <source>Validity</source>
-        <translation type="unfinished"/>
+        <translation>Galiojimas</translation>
     </message>
     <message>
         <location filename="../../src/ui/CertificateDialog.cpp" line="417"/>
         <source>Not Before</source>
-        <translation type="unfinished"/>
+        <translation>Ne anksčiau</translation>
     </message>
     <message>
         <location filename="../../src/ui/CertificateDialog.cpp" line="421"/>
         <source>Not After</source>
-        <translation type="unfinished"/>
+        <translation>Ne vėliau</translation>
     </message>
     <message>
         <location filename="../../src/ui/CertificateDialog.cpp" line="425"/>
         <source>Subject</source>
-        <translation type="unfinished"/>
+        <translation>Subjektas</translation>
     </message>
     <message>
         <location filename="../../src/ui/CertificateDialog.cpp" line="429"/>
         <source>Subject Public Key</source>
-        <translation type="unfinished"/>
+        <translation>Subjekto viešasis raktas</translation>
     </message>
     <message>
         <location filename="../../src/ui/CertificateDialog.cpp" line="433"/>
@@ -1246,7 +1251,7 @@ Exponent: %2</source>
     <message>
         <location filename="../../src/ui/CertificateDialog.cpp" line="441"/>
         <source>Extensions</source>
-        <translation type="unfinished"/>
+        <translation>Plėtiniai</translation>
     </message>
     <message>
         <location filename="../../src/ui/CertificateDialog.cpp" line="449"/>
@@ -1265,7 +1270,7 @@ Exponent: %2</source>
     </message>
 </context>
 <context>
-    <name>Meerkat::ClearHistoryDialog</name>
+    <name>Otter::ClearHistoryDialog</name>
     <message>
         <location filename="../../src/ui/ClearHistoryDialog.ui" line="14"/>
         <source>Clear History</source>
@@ -1333,11 +1338,11 @@ Exponent: %2</source>
     </message>
 </context>
 <context>
-    <name>Meerkat::ColorWidget</name>
+    <name>Otter::ColorWidget</name>
     <message>
         <location filename="../../src/ui/ColorWidget.cpp" line="34"/>
         <source>Select Color…</source>
-        <translation>Pasirinkite spalvą...</translation>
+        <translation>Pasirinkti spalvą...</translation>
     </message>
     <message>
         <location filename="../../src/ui/ColorWidget.cpp" line="35"/>
@@ -1358,7 +1363,7 @@ Exponent: %2</source>
     </message>
 </context>
 <context>
-    <name>Meerkat::ConfigurationContentsWidget</name>
+    <name>Otter::ConfigurationContentsWidget</name>
     <message>
         <location filename="../../src/modules/windows/configuration/ConfigurationContentsWidget.ui" line="29"/>
         <source>Search…</source>
@@ -1397,11 +1402,11 @@ Exponent: %2</source>
     <message>
         <location filename="../../src/modules/windows/configuration/ConfigurationContentsWidget.cpp" line="236"/>
         <source>Configuration Manager</source>
-        <translation>Nuostatų tvarkymas</translation>
+        <translation>Konfigūracijos tvarkytuvė</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::ConsoleWidget</name>
+    <name>Otter::ConsoleWidget</name>
     <message>
         <location filename="../../src/ui/ConsoleWidget.ui" line="31"/>
         <source>Scope</source>
@@ -1468,7 +1473,7 @@ Exponent: %2</source>
     </message>
 </context>
 <context>
-    <name>Meerkat::ContentBlockingDialog</name>
+    <name>Otter::ContentBlockingDialog</name>
     <message>
         <location filename="../../src/ui/preferences/ContentBlockingDialog.ui" line="14"/>
         <source>Content Blocking</source>
@@ -1477,17 +1482,17 @@ Exponent: %2</source>
     <message>
         <location filename="../../src/ui/preferences/ContentBlockingDialog.ui" line="24"/>
         <source>General</source>
-        <translation type="unfinished"/>
+        <translation>Bendra</translation>
     </message>
     <message>
         <location filename="../../src/ui/preferences/ContentBlockingDialog.ui" line="36"/>
         <source>Profiles</source>
-        <translation type="unfinished"/>
+        <translation>Profiliai</translation>
     </message>
     <message>
         <location filename="../../src/ui/preferences/ContentBlockingDialog.ui" line="43"/>
         <source>Select lists which you want to use for content blocking (AdBlock Plus compatible):</source>
-        <translation type="unfinished"/>
+        <translation>Pasirinkite sąrašus, kuriuos norite naudoti turinio blokavimui (suderinama su AdBlock Plus):</translation>
     </message>
     <message>
         <location filename="../../src/ui/preferences/ContentBlockingDialog.ui" line="73"/>
@@ -1520,22 +1525,22 @@ Exponent: %2</source>
     <message>
         <location filename="../../src/ui/preferences/ContentBlockingDialog.ui" line="143"/>
         <source>Enable cosmetic filters</source>
-        <translation type="unfinished"/>
+        <translation>Įjungti kosmetinius filtrus</translation>
     </message>
     <message>
         <location filename="../../src/ui/preferences/ContentBlockingDialog.ui" line="150"/>
         <source>Enable wildcard expressions</source>
-        <translation type="unfinished"/>
+        <translation>Įjungti pakaitos simbolių reiškinius</translation>
     </message>
     <message>
         <location filename="../../src/ui/preferences/ContentBlockingDialog.ui" line="157"/>
         <source>Enable custom rules</source>
-        <translation type="unfinished"/>
+        <translation>Įjungti tinkintas taisykles</translation>
     </message>
     <message>
         <location filename="../../src/ui/preferences/ContentBlockingDialog.ui" line="165"/>
         <source>Custom Rules</source>
-        <translation type="unfinished"/>
+        <translation>Tinkintos taisyklės</translation>
     </message>
     <message>
         <location filename="../../src/ui/preferences/ContentBlockingDialog.cpp" line="239"/>
@@ -1545,79 +1550,79 @@ Exponent: %2</source>
     <message>
         <location filename="../../src/ui/preferences/ContentBlockingDialog.cpp" line="239"/>
         <source>Failed to create a file with custom rules!</source>
-        <translation type="unfinished"/>
+        <translation>Nepavyko sukurti failo su tinkintomis taisyklėmis!</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::ContentBlockingInformationWidget</name>
+    <name>Otter::ContentBlockingInformationWidget</name>
     <message>
         <location filename="../../src/modules/widgets/contentBlockingInformation/ContentBlockingInformationWidget.cpp" line="44"/>
         <source>Active Profiles</source>
-        <translation type="unfinished"/>
+        <translation>Aktyvūs profiliai</translation>
     </message>
     <message>
         <location filename="../../src/modules/widgets/contentBlockingInformation/ContentBlockingInformationWidget.cpp" line="45"/>
         <source>Blocked Elements</source>
-        <translation type="unfinished"/>
+        <translation>Užblokuoti elementai</translation>
     </message>
     <message>
         <location filename="../../src/modules/widgets/contentBlockingInformation/ContentBlockingInformationWidget.cpp" line="194"/>
         <source>main frame</source>
-        <translation type="unfinished"/>
+        <translation>pagrindinis rėmelis</translation>
     </message>
     <message>
         <location filename="../../src/modules/widgets/contentBlockingInformation/ContentBlockingInformationWidget.cpp" line="198"/>
         <source>subframe</source>
-        <translation type="unfinished"/>
+        <translation>po-rėmelis</translation>
     </message>
     <message>
         <location filename="../../src/modules/widgets/contentBlockingInformation/ContentBlockingInformationWidget.cpp" line="202"/>
         <source>stylesheet</source>
-        <translation type="unfinished"/>
+        <translation>stilių aprašas</translation>
     </message>
     <message>
         <location filename="../../src/modules/widgets/contentBlockingInformation/ContentBlockingInformationWidget.cpp" line="206"/>
         <source>script</source>
-        <translation type="unfinished"/>
+        <translation>scenarijus</translation>
     </message>
     <message>
         <location filename="../../src/modules/widgets/contentBlockingInformation/ContentBlockingInformationWidget.cpp" line="210"/>
         <source>image</source>
-        <translation type="unfinished"/>
+        <translation>paveikslas</translation>
     </message>
     <message>
         <location filename="../../src/modules/widgets/contentBlockingInformation/ContentBlockingInformationWidget.cpp" line="214"/>
         <source>object</source>
-        <translation type="unfinished"/>
+        <translation>objektas</translation>
     </message>
     <message>
         <location filename="../../src/modules/widgets/contentBlockingInformation/ContentBlockingInformationWidget.cpp" line="218"/>
         <source>object subrequest</source>
-        <translation type="unfinished"/>
+        <translation>objekto po-užklausa</translation>
     </message>
     <message>
         <location filename="../../src/modules/widgets/contentBlockingInformation/ContentBlockingInformationWidget.cpp" line="222"/>
         <source>XHR</source>
-        <translation type="unfinished"/>
+        <translation>XHR</translation>
     </message>
     <message>
         <location filename="../../src/modules/widgets/contentBlockingInformation/ContentBlockingInformationWidget.cpp" line="226"/>
         <source>other</source>
-        <translation type="unfinished"/>
+        <translation>kita</translation>
     </message>
     <message>
         <location filename="../../src/modules/widgets/contentBlockingInformation/ContentBlockingInformationWidget.cpp" line="245"/>
         <source>Enable Content Blocking</source>
-        <translation type="unfinished"/>
+        <translation>Įjungti turinio blokavimą</translation>
     </message>
     <message>
         <location filename="../../src/modules/widgets/contentBlockingInformation/ContentBlockingInformationWidget.cpp" line="298"/>
         <source>Blocked Elements: %1</source>
-        <translation type="unfinished"/>
+        <translation>Užblokuoti elementai: %1</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::ContentBlockingIntervalDelegate</name>
+    <name>Otter::ContentBlockingIntervalDelegate</name>
     <message numerus="yes">
         <location filename="../../src/ui/preferences/ContentBlockingIntervalDelegate.cpp" line="41"/>
         <source>%n day(s)</source>
@@ -1636,55 +1641,55 @@ Exponent: %2</source>
     </message>
 </context>
 <context>
-    <name>Meerkat::ContentBlockingManager</name>
+    <name>Otter::ContentBlockingManager</name>
     <message>
         <location filename="../../src/core/ContentBlockingManager.cpp" line="136"/>
         <source>Title</source>
-        <translation type="unfinished"/>
+        <translation>Pavadinimas</translation>
     </message>
     <message>
         <location filename="../../src/core/ContentBlockingManager.cpp" line="136"/>
         <source>Update Interval</source>
-        <translation type="unfinished"/>
+        <translation>Atnaujinimo intervalas</translation>
     </message>
     <message>
         <location filename="../../src/core/ContentBlockingManager.cpp" line="136"/>
         <source>Last Update</source>
-        <translation type="unfinished"/>
+        <translation>Paskutinis atnaujinimas</translation>
     </message>
     <message>
         <location filename="../../src/core/ContentBlockingManager.cpp" line="180"/>
         <source>Advertisements</source>
-        <translation type="unfinished"/>
+        <translation>Reklamos</translation>
     </message>
     <message>
         <location filename="../../src/core/ContentBlockingManager.cpp" line="180"/>
         <source>Annoyance</source>
-        <translation type="unfinished"/>
+        <translation>Erzinimai</translation>
     </message>
     <message>
         <location filename="../../src/core/ContentBlockingManager.cpp" line="180"/>
         <source>Privacy</source>
-        <translation type="unfinished"/>
+        <translation>Privatumas</translation>
     </message>
     <message>
         <location filename="../../src/core/ContentBlockingManager.cpp" line="180"/>
         <source>Social</source>
-        <translation type="unfinished"/>
+        <translation>Socialiniai</translation>
     </message>
     <message>
         <location filename="../../src/core/ContentBlockingManager.cpp" line="180"/>
         <source>Regional</source>
-        <translation type="unfinished"/>
+        <translation>Regioniniai</translation>
     </message>
     <message>
         <location filename="../../src/core/ContentBlockingManager.cpp" line="180"/>
         <source>Other</source>
-        <translation type="unfinished"/>
+        <translation>Kita</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::ContentBlockingProfile</name>
+    <name>Otter::ContentBlockingProfile</name>
     <message>
         <location filename="../../src/core/ContentBlockingProfile.cpp" line="453"/>
         <source>(Unknown)</source>
@@ -1692,7 +1697,7 @@ Exponent: %2</source>
     </message>
 </context>
 <context>
-    <name>Meerkat::ContentsDialog</name>
+    <name>Otter::ContentsDialog</name>
     <message>
         <location filename="../../src/ui/ContentsDialog.cpp" line="74"/>
         <source>Close</source>
@@ -1700,7 +1705,7 @@ Exponent: %2</source>
     </message>
 </context>
 <context>
-    <name>Meerkat::CookiesContentsWidget</name>
+    <name>Otter::CookiesContentsWidget</name>
     <message>
         <location filename="../../src/modules/windows/cookies/CookiesContentsWidget.ui" line="29"/>
         <source>Search…</source>
@@ -1740,7 +1745,7 @@ Exponent: %2</source>
     <message>
         <location filename="../../src/modules/windows/cookies/CookiesContentsWidget.ui" line="183"/>
         <source>HttpOnly</source>
-        <translation type="unfinished"/>
+        <translation>Tik HTTP</translation>
     </message>
     <message>
         <location filename="../../src/modules/windows/cookies/CookiesContentsWidget.ui" line="198"/>
@@ -1797,11 +1802,11 @@ Exponent: %2</source>
     <message>
         <location filename="../../src/modules/windows/cookies/CookiesContentsWidget.cpp" line="448"/>
         <source>Cookies Manager</source>
-        <translation>Slapukų tvarkymas</translation>
+        <translation>Slapukų tvarkytuvė</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::CookiesExceptionsDialog</name>
+    <name>Otter::CookiesExceptionsDialog</name>
     <message>
         <location filename="../../src/ui/preferences/CookiesExceptionsDialog.ui" line="14"/>
         <source>Third-party Cookies Exceptions</source>
@@ -1837,35 +1842,35 @@ Exponent: %2</source>
     </message>
 </context>
 <context>
-    <name>Meerkat::FilePasswordsStorageBackend</name>
+    <name>Otter::FilePasswordsStorageBackend</name>
     <message>
         <location filename="../../src/modules/backends/passwords/file/FilePasswordsStorageBackend.cpp" line="45"/>
         <source>Failed to open passwords file: %1</source>
-        <translation type="unfinished"/>
+        <translation>Nepavyko atverti slaptažodžių failo: %1</translation>
     </message>
     <message>
         <location filename="../../src/modules/backends/passwords/file/FilePasswordsStorageBackend.cpp" line="99"/>
         <source>Failed to save passwords file: %1</source>
-        <translation type="unfinished"/>
+        <translation>Nepavyko įrašyti slaptažodžių failo: %1</translation>
     </message>
     <message>
         <location filename="../../src/modules/backends/passwords/file/FilePasswordsStorageBackend.cpp" line="176"/>
         <source>Failed to remove passwords file</source>
-        <translation type="unfinished"/>
+        <translation>Nepavyko pašalinti slaptažodžių failo</translation>
     </message>
     <message>
         <location filename="../../src/modules/backends/passwords/file/FilePasswordsStorageBackend.cpp" line="261"/>
         <source>Encrypted File</source>
-        <translation type="unfinished"/>
+        <translation>Šifruotas failas</translation>
     </message>
     <message>
         <location filename="../../src/modules/backends/passwords/file/FilePasswordsStorageBackend.cpp" line="266"/>
         <source>Stores passwords in AES encrypted file.</source>
-        <translation type="unfinished"/>
+        <translation>Laiko slaptažodžius AES šifruotame faile.</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::FilePathWidget</name>
+    <name>Otter::FilePathWidget</name>
     <message>
         <location filename="../../src/ui/FilePathWidget.cpp" line="38"/>
         <source>Browse…</source>
@@ -1883,7 +1888,7 @@ Exponent: %2</source>
     </message>
 </context>
 <context>
-    <name>Meerkat::FreeDesktopOrgPlatformIntegration</name>
+    <name>Otter::FreeDesktopOrgPlatformIntegration</name>
     <message>
         <location filename="../../src/modules/platforms/freedesktoporg/FreeDesktopOrgPlatformIntegration.cpp" line="195"/>
         <source>Error</source>
@@ -1906,7 +1911,7 @@ Exponent: %2</source>
     </message>
 </context>
 <context>
-    <name>Meerkat::HeaderViewWidget</name>
+    <name>Otter::HeaderViewWidget</name>
     <message>
         <location filename="../../src/ui/ItemViewWidget.cpp" line="64"/>
         <source>Sorting</source>
@@ -1939,7 +1944,7 @@ Exponent: %2</source>
     </message>
 </context>
 <context>
-    <name>Meerkat::HistoryContentsWidget</name>
+    <name>Otter::HistoryContentsWidget</name>
     <message>
         <location filename="../../src/modules/windows/history/HistoryContentsWidget.ui" line="29"/>
         <source>Search…</source>
@@ -2053,7 +2058,7 @@ Exponent: %2</source>
     </message>
 </context>
 <context>
-    <name>Meerkat::HistoryModel</name>
+    <name>Otter::HistoryModel</name>
     <message>
         <location filename="../../src/core/HistoryModel.cpp" line="61"/>
         <source>Failed to open history file: %1</source>
@@ -2061,7 +2066,7 @@ Exponent: %2</source>
     </message>
 </context>
 <context>
-    <name>Meerkat::HtmlBookmarksImporter</name>
+    <name>Otter::HtmlBookmarksImporter</name>
     <message>
         <location filename="../../src/modules/importers/html/HtmlBookmarksImporter.cpp" line="151"/>
         <source>HTML Bookmarks</source>
@@ -2079,7 +2084,7 @@ Exponent: %2</source>
     </message>
 </context>
 <context>
-    <name>Meerkat::IconWidget</name>
+    <name>Otter::IconWidget</name>
     <message>
         <location filename="../../src/ui/IconWidget.cpp" line="36"/>
         <source>Select From File…</source>
@@ -2114,7 +2119,7 @@ Exponent: %2</source>
     </message>
 </context>
 <context>
-    <name>Meerkat::ImagePropertiesDialog</name>
+    <name>Otter::ImagePropertiesDialog</name>
     <message>
         <location filename="../../src/ui/ImagePropertiesDialog.ui" line="14"/>
         <source>Image Properties</source>
@@ -2133,7 +2138,7 @@ Exponent: %2</source>
     <message>
         <location filename="../../src/ui/ImagePropertiesDialog.ui" line="36"/>
         <source>File Size:</source>
-        <translation>Rinkmenos dydis:</translation>
+        <translation>Failo dydis:</translation>
     </message>
     <message>
         <location filename="../../src/ui/ImagePropertiesDialog.ui" line="43"/>
@@ -2195,7 +2200,7 @@ Exponent: %2</source>
     </message>
 </context>
 <context>
-    <name>Meerkat::ImportDialog</name>
+    <name>Otter::ImportDialog</name>
     <message>
         <location filename="../../src/ui/ImportDialog.ui" line="22"/>
         <source>Source:</source>
@@ -2219,7 +2224,7 @@ Exponent: %2</source>
     </message>
 </context>
 <context>
-    <name>Meerkat::JavaScriptPreferencesDialog</name>
+    <name>Otter::JavaScriptPreferencesDialog</name>
     <message>
         <location filename="../../src/ui/preferences/JavaScriptPreferencesDialog.ui" line="14"/>
         <source>JavaScript Options</source>
@@ -2263,7 +2268,7 @@ Exponent: %2</source>
     <message>
         <location filename="../../src/ui/preferences/JavaScriptPreferencesDialog.ui" line="95"/>
         <source>Allow to enter full screen mode:</source>
-        <translation>Leisti įjungti pilno ekrano režimą:</translation>
+        <translation>Leisti įjungti viso ekrano veikseną:</translation>
     </message>
     <message>
         <location filename="../../src/ui/preferences/JavaScriptPreferencesDialog.cpp" line="38"/>
@@ -2285,7 +2290,7 @@ Exponent: %2</source>
     </message>
 </context>
 <context>
-    <name>Meerkat::KeyboardProfileDialog</name>
+    <name>Otter::KeyboardProfileDialog</name>
     <message>
         <location filename="../../src/ui/preferences/KeyboardProfileDialog.ui" line="14"/>
         <source>Profile Configuration</source>
@@ -2348,7 +2353,7 @@ Exponent: %2</source>
     </message>
 </context>
 <context>
-    <name>Meerkat::LocalListingNetworkReply</name>
+    <name>Otter::LocalListingNetworkReply</name>
     <message>
         <location filename="../../src/core/LocalListingNetworkReply.cpp" line="73"/>
         <source>Directory Contents</source>
@@ -2376,7 +2381,7 @@ Exponent: %2</source>
     </message>
 </context>
 <context>
-    <name>Meerkat::LocaleDialog</name>
+    <name>Otter::LocaleDialog</name>
     <message>
         <location filename="../../src/ui/LocaleDialog.ui" line="14"/>
         <source>Switch Application Language</source>
@@ -2390,7 +2395,7 @@ Exponent: %2</source>
     <message>
         <location filename="../../src/ui/LocaleDialog.ui" line="32"/>
         <source>Custom path:</source>
-        <translation>Pasirinktinas kelias:</translation>
+        <translation>Tinkintas kelias:</translation>
     </message>
     <message>
         <location filename="../../src/ui/LocaleDialog.ui" line="43"/>
@@ -2400,21 +2405,21 @@ Exponent: %2</source>
     <message>
         <location filename="../../src/ui/LocaleDialog.ui" line="48"/>
         <source>Custom</source>
-        <translation>Pasirinktina</translation>
+        <translation>Tinkinta</translation>
     </message>
     <message>
         <location filename="../../src/ui/LocaleDialog.cpp" line="47"/>
         <source>Unknown [%1]</source>
-        <translation type="unfinished"/>
+        <translation>Nežinoma [%1]</translation>
     </message>
     <message>
         <location filename="../../src/ui/LocaleDialog.cpp" line="72"/>
         <source>Translation files (*.qm)</source>
-        <translation type="unfinished"/>
+        <translation>Vertimų failai (*.qm)</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::MainWindow</name>
+    <name>Otter::MainWindow</name>
     <message>
         <location filename="../../src/ui/MainWindow.ui" line="19"/>
         <source>Console</source>
@@ -2423,12 +2428,12 @@ Exponent: %2</source>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="426"/>
         <source>Open File</source>
-        <translation>Atverti rinkmeną</translation>
+        <translation>Atverti failą</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="724"/>
-        <source>&lt;b&gt;Meerkat %1&lt;/b&gt;&lt;br&gt;Web browser controlled by the user, not vice-versa.&lt;br&gt;&lt;a href=&quot;https://www.meerkat-browser.org/&quot;&gt;https://www.meerkat-browser.org/&lt;/a&gt;</source>
-        <translation>&lt;b&gt;Meerkat %1&lt;/b&gt;&lt;br&gt;Naršyklė, kurią valdo naudotojas, o ne atvirkščiai.&lt;br&gt;&lt;a href=&quot;https://www.meerkat-browser.org/&quot;&gt;https://www.meerkat-browser.org/&lt;/a&gt;</translation>
+        <source>&lt;b&gt;Otter %1&lt;/b&gt;&lt;br&gt;Web browser controlled by the user, not vice-versa.&lt;br&gt;&lt;a href=&quot;https://www.otter-browser.org/&quot;&gt;https://www.otter-browser.org/&lt;/a&gt;</source>
+        <translation>&lt;b&gt;Otter %1&lt;/b&gt;&lt;br&gt;Naršyklė, kurią valdo naudotojas, o ne atvirkščiai.&lt;br&gt;&lt;a href=&quot;https://www.otter-browser.org/&quot;&gt;https://www.otter-browser.org/&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="730"/>
@@ -2459,30 +2464,30 @@ Ar norite tęsti?</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::MasterPasswordDialog</name>
+    <name>Otter::MasterPasswordDialog</name>
     <message>
         <location filename="../../src/ui/MasterPasswordDialog.ui" line="14"/>
         <source>Set Master Password</source>
-        <translation type="unfinished"/>
+        <translation>Nustatyti pagrindinį slaptažodį</translation>
     </message>
     <message>
         <location filename="../../src/ui/MasterPasswordDialog.ui" line="22"/>
         <source>Current password:</source>
-        <translation type="unfinished"/>
+        <translation>Dabartinis slaptažodis:</translation>
     </message>
     <message>
         <location filename="../../src/ui/MasterPasswordDialog.ui" line="32"/>
         <source>New password:</source>
-        <translation type="unfinished"/>
+        <translation>Naujas slaptažodis:</translation>
     </message>
     <message>
         <location filename="../../src/ui/MasterPasswordDialog.ui" line="42"/>
         <source>Confirm new password:</source>
-        <translation type="unfinished"/>
+        <translation>Patvirtinkite naują slaptažodį:</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::Menu</name>
+    <name>Otter::Menu</name>
     <message>
         <location filename="../../src/ui/Menu.cpp" line="216"/>
         <source>Open</source>
@@ -2526,7 +2531,7 @@ Ar norite tęsti?</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::MenuButtonWidget</name>
+    <name>Otter::MenuButtonWidget</name>
     <message>
         <location filename="../../src/modules/widgets/menuButton/MenuButtonWidget.cpp" line="36"/>
         <source>Menu</source>
@@ -2534,7 +2539,7 @@ Ar norite tęsti?</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::MouseProfileDialog</name>
+    <name>Otter::MouseProfileDialog</name>
     <message>
         <location filename="../../src/ui/preferences/MouseProfileDialog.ui" line="14"/>
         <source>Profile Configuration</source>
@@ -2620,7 +2625,7 @@ Ar norite tęsti?</translation>
     <message>
         <location filename="../../src/ui/preferences/MouseProfileDialog.cpp" line="38"/>
         <source>Any Toolbar</source>
-        <translation type="unfinished"/>
+        <translation>Bet kuri įrankių juosta</translation>
     </message>
     <message>
         <location filename="../../src/ui/preferences/MouseProfileDialog.cpp" line="68"/>
@@ -2644,26 +2649,26 @@ Ar norite tęsti?</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::NavigationActionWidget</name>
+    <name>Otter::NavigationActionWidget</name>
     <message>
         <location filename="../../src/modules/widgets/action/NavigationActionWidget.cpp" line="58"/>
         <location filename="../../src/modules/widgets/action/NavigationActionWidget.cpp" line="162"/>
         <source>(Untitled)</source>
-        <translation type="unfinished"/>
+        <translation>(Be pavadinimo)</translation>
     </message>
     <message>
         <location filename="../../src/modules/widgets/action/NavigationActionWidget.cpp" line="191"/>
         <source>Remove Entry</source>
-        <translation type="unfinished"/>
+        <translation>Šalinti įrašą</translation>
     </message>
     <message>
         <location filename="../../src/modules/widgets/action/NavigationActionWidget.cpp" line="192"/>
         <source>Purge Entry</source>
-        <translation type="unfinished"/>
+        <translation>Sunaikinti įrašą</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::NetworkManager</name>
+    <name>Otter::NetworkManager</name>
     <message>
         <location filename="../../src/core/NetworkManager.cpp" line="128"/>
         <source>Warning</source>
@@ -2684,11 +2689,11 @@ Ar norite tęsti?</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::NetworkManagerFactory</name>
+    <name>Otter::NetworkManagerFactory</name>
     <message>
         <location filename="../../src/core/NetworkManagerFactory.cpp" line="307"/>
         <source>Custom</source>
-        <translation>Susikurtas</translation>
+        <translation>Tinkintas</translation>
     </message>
     <message>
         <location filename="../../src/core/NetworkManagerFactory.cpp" line="322"/>
@@ -2697,7 +2702,7 @@ Ar norite tęsti?</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::NetworkProxyFactory</name>
+    <name>Otter::NetworkProxyFactory</name>
     <message>
         <location filename="../../src/core/NetworkProxyFactory.cpp" line="70"/>
         <location filename="../../src/core/NetworkProxyFactory.cpp" line="145"/>
@@ -2711,7 +2716,7 @@ Ar norite tęsti?</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::NotesContentsWidget</name>
+    <name>Otter::NotesContentsWidget</name>
     <message>
         <location filename="../../src/modules/windows/notes/NotesContentsWidget.ui" line="29"/>
         <source>Search…</source>
@@ -2725,7 +2730,7 @@ Ar norite tęsti?</translation>
     <message>
         <location filename="../../src/modules/windows/notes/NotesContentsWidget.ui" line="105"/>
         <source>Date:</source>
-        <translation type="unfinished"/>
+        <translation>Data:</translation>
     </message>
     <message>
         <location filename="../../src/modules/windows/notes/NotesContentsWidget.ui" line="139"/>
@@ -2796,11 +2801,11 @@ Ar norite tęsti?</translation>
     <message>
         <location filename="../../src/modules/windows/notes/NotesContentsWidget.cpp" line="370"/>
         <source>Notes Manager</source>
-        <translation>Pastabų tvarkymas</translation>
+        <translation>Pastabų tvarkytuvė</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::NotificationDialog</name>
+    <name>Otter::NotificationDialog</name>
     <message>
         <location filename="../../src/ui/NotificationDialog.cpp" line="73"/>
         <source>Close</source>
@@ -2808,7 +2813,7 @@ Ar norite tęsti?</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::OpenAddressDialog</name>
+    <name>Otter::OpenAddressDialog</name>
     <message>
         <location filename="../../src/ui/OpenAddressDialog.ui" line="14"/>
         <source>Go to Page</source>
@@ -2821,11 +2826,11 @@ Ar norite tęsti?</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::OpenBookmarkDialog</name>
+    <name>Otter::OpenBookmarkDialog</name>
     <message>
         <location filename="../../src/ui/OpenBookmarkDialog.ui" line="14"/>
         <source>Go to Bookmark</source>
-        <translation type="unfinished"/>
+        <translation>Eiti į adresyno įrašą</translation>
     </message>
     <message>
         <location filename="../../src/ui/OpenBookmarkDialog.ui" line="20"/>
@@ -2834,7 +2839,7 @@ Ar norite tęsti?</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::OperaBookmarksImporter</name>
+    <name>Otter::OperaBookmarksImporter</name>
     <message>
         <location filename="../../src/modules/importers/opera/OperaBookmarksImporter.cpp" line="57"/>
         <source>Opera Bookmarks</source>
@@ -2852,7 +2857,7 @@ Ar norite tęsti?</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::OperaNotesImporter</name>
+    <name>Otter::OperaNotesImporter</name>
     <message>
         <location filename="../../src/modules/importers/opera/OperaNotesImporter.cpp" line="98"/>
         <source>Import into folder:</source>
@@ -2875,7 +2880,7 @@ Ar norite tęsti?</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::OperaSessionImporter</name>
+    <name>Otter::OperaSessionImporter</name>
     <message>
         <location filename="../../src/modules/importers/opera/OperaSessionImporter.cpp" line="42"/>
         <source>Opera Session</source>
@@ -2893,7 +2898,7 @@ Ar norite tęsti?</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::OptionDelegate</name>
+    <name>Otter::OptionDelegate</name>
     <message>
         <location filename="../../src/ui/OptionDelegate.cpp" line="50"/>
         <source>Yes</source>
@@ -2906,7 +2911,7 @@ Ar norite tęsti?</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::OptionWidget</name>
+    <name>Otter::OptionWidget</name>
     <message>
         <location filename="../../src/ui/OptionWidget.cpp" line="51"/>
         <source>No</source>
@@ -2929,7 +2934,7 @@ Ar norite tęsti?</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::PasswordBarWidget</name>
+    <name>Otter::PasswordBarWidget</name>
     <message>
         <location filename="../../src/modules/windows/web/PasswordBarWidget.ui" line="61"/>
         <source>Save</source>
@@ -2948,30 +2953,30 @@ Ar norite tęsti?</translation>
     <message>
         <location filename="../../src/modules/windows/web/PasswordBarWidget.cpp" line="35"/>
         <source>Do you want to update login data for %1?</source>
-        <translation type="unfinished"/>
+        <translation>Ar norite atnaujinti prisijungimo duomenis svetainei %1?</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::PasswordsContentsWidget</name>
+    <name>Otter::PasswordsContentsWidget</name>
     <message>
         <location filename="../../src/modules/windows/passwords/PasswordsContentsWidget.ui" line="29"/>
         <source>Search…</source>
-        <translation type="unfinished"/>
+        <translation>Ieškoti...</translation>
     </message>
     <message>
         <location filename="../../src/modules/windows/passwords/PasswordsContentsWidget.cpp" line="72"/>
         <source>Name</source>
-        <translation type="unfinished"/>
+        <translation>Pavadinimas</translation>
     </message>
     <message>
         <location filename="../../src/modules/windows/passwords/PasswordsContentsWidget.cpp" line="72"/>
         <source>Value</source>
-        <translation type="unfinished"/>
+        <translation>Reikšmė</translation>
     </message>
     <message>
         <location filename="../../src/modules/windows/passwords/PasswordsContentsWidget.cpp" line="85"/>
         <source>Set #%1</source>
-        <translation type="unfinished"/>
+        <translation>Rinkinys #%1</translation>
     </message>
     <message>
         <location filename="../../src/modules/windows/passwords/PasswordsContentsWidget.cpp" line="167"/>
@@ -2984,7 +2989,7 @@ Ar norite tęsti?</translation>
         <location filename="../../src/modules/windows/passwords/PasswordsContentsWidget.cpp" line="168"/>
         <location filename="../../src/modules/windows/passwords/PasswordsContentsWidget.cpp" line="224"/>
         <source>You are about to delete %n password(s).</source>
-        <translation type="unfinished"><numerusform></numerusform><numerusform></numerusform><numerusform></numerusform></translation>
+        <translation><numerusform>Jūs ketinate ištrinti %n slaptažodį.</numerusform><numerusform>Jūs ketinate ištrinti %n slaptažodžius.</numerusform><numerusform>Jūs ketinate ištrinti %n slaptažodžių.</numerusform></translation>
     </message>
     <message>
         <location filename="../../src/modules/windows/passwords/PasswordsContentsWidget.cpp" line="169"/>
@@ -3001,17 +3006,17 @@ Ar norite tęsti?</translation>
     <message>
         <location filename="../../src/modules/windows/passwords/PasswordsContentsWidget.cpp" line="264"/>
         <source>Remove Password</source>
-        <translation type="unfinished"/>
+        <translation>Šalinti slaptažodį</translation>
     </message>
     <message>
         <location filename="../../src/modules/windows/passwords/PasswordsContentsWidget.cpp" line="267"/>
         <source>Remove All Passwords from This Domain…</source>
-        <translation type="unfinished"/>
+        <translation>Šalinti visus šio domeno slaptažodžius…</translation>
     </message>
     <message>
         <location filename="../../src/modules/windows/passwords/PasswordsContentsWidget.cpp" line="270"/>
         <source>Remove All Passwords…</source>
-        <translation type="unfinished"/>
+        <translation>Šalinti visus slaptažodžius…</translation>
     </message>
     <message>
         <location filename="../../src/modules/windows/passwords/PasswordsContentsWidget.cpp" line="341"/>
@@ -3020,7 +3025,7 @@ Ar norite tęsti?</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::PermissionBarWidget</name>
+    <name>Otter::PermissionBarWidget</name>
     <message>
         <location filename="../../src/modules/windows/web/PermissionBarWidget.ui" line="62"/>
         <source>Allow this time</source>
@@ -3049,7 +3054,7 @@ Ar norite tęsti?</translation>
     <message>
         <location filename="../../src/modules/windows/web/PermissionBarWidget.cpp" line="41"/>
         <source>%1 wants to enter full screen mode.</source>
-        <translation>%1 nori įjungti pilno ekrano režimą.</translation>
+        <translation>%1 nori įjungti viso ekrano veikseną.</translation>
     </message>
     <message>
         <location filename="../../src/modules/windows/web/PermissionBarWidget.cpp" line="46"/>
@@ -3084,7 +3089,7 @@ Ar norite tęsti?</translation>
     <message>
         <location filename="../../src/modules/windows/web/PermissionBarWidget.cpp" line="76"/>
         <source>%1 wants to play audio.</source>
-        <translation type="unfinished"/>
+        <translation>%1 nori groti garsą.</translation>
     </message>
     <message>
         <location filename="../../src/modules/windows/web/PermissionBarWidget.cpp" line="81"/>
@@ -3093,7 +3098,7 @@ Ar norite tęsti?</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::PlatformIntegration</name>
+    <name>Otter::PlatformIntegration</name>
     <message>
         <location filename="../../src/core/PlatformIntegration.cpp" line="105"/>
         <source>Error</source>
@@ -3106,7 +3111,7 @@ Ar norite tęsti?</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::PopupsBarWidget</name>
+    <name>Otter::PopupsBarWidget</name>
     <message>
         <location filename="../../src/modules/windows/web/PopupsBarWidget.ui" line="61"/>
         <source>Details</source>
@@ -3154,7 +3159,7 @@ Ar norite tęsti?</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::PreferencesAdvancedPageWidget</name>
+    <name>Otter::PreferencesAdvancedPageWidget</name>
     <message>
         <location filename="../../src/ui/preferences/PreferencesAdvancedPageWidget.ui" line="55"/>
         <source>Address Field Suggestions</source>
@@ -3178,22 +3183,22 @@ Ar norite tęsti?</translation>
     <message>
         <location filename="../../src/ui/preferences/PreferencesAdvancedPageWidget.ui" line="88"/>
         <source>Local paths</source>
-        <translation type="unfinished"/>
+        <translation>Vietiniai keliai</translation>
     </message>
     <message>
         <location filename="../../src/ui/preferences/PreferencesAdvancedPageWidget.ui" line="103"/>
         <source>Address Completion</source>
-        <translation type="unfinished"/>
+        <translation>Adresų užbaigimas</translation>
     </message>
     <message>
         <location filename="../../src/ui/preferences/PreferencesAdvancedPageWidget.ui" line="112"/>
         <source>Show category headers</source>
-        <translation type="unfinished"/>
+        <translation>Rodyti kategorijų pavadinimus</translation>
     </message>
     <message>
         <location filename="../../src/ui/preferences/PreferencesAdvancedPageWidget.ui" line="121"/>
         <source>Display mode:</source>
-        <translation type="unfinished"/>
+        <translation>Rodymo veiksena:</translation>
     </message>
     <message>
         <location filename="../../src/ui/preferences/PreferencesAdvancedPageWidget.ui" line="158"/>
@@ -3238,7 +3243,7 @@ Ar norite tęsti?</translation>
     <message>
         <location filename="../../src/ui/preferences/PreferencesAdvancedPageWidget.ui" line="292"/>
         <source>Style sheet:</source>
-        <translation>Stilių lapas:</translation>
+        <translation>Stilių aprašas:</translation>
     </message>
     <message>
         <location filename="../../src/ui/preferences/PreferencesAdvancedPageWidget.ui" line="316"/>
@@ -3259,7 +3264,7 @@ Ar norite tęsti?</translation>
     <message>
         <location filename="../../src/ui/preferences/PreferencesAdvancedPageWidget.ui" line="366"/>
         <source>Images:</source>
-        <translation type="unfinished"/>
+        <translation>Paveikslai:</translation>
     </message>
     <message>
         <location filename="../../src/ui/preferences/PreferencesAdvancedPageWidget.ui" line="383"/>
@@ -3342,7 +3347,7 @@ Ar norite tęsti?</translation>
     <message>
         <location filename="../../src/ui/preferences/PreferencesAdvancedPageWidget.ui" line="709"/>
         <source>User Agent:</source>
-        <translation>Naršyklės nustatymas:</translation>
+        <translation>Naršyklės identifikavimas:</translation>
     </message>
     <message>
         <location filename="../../src/ui/preferences/PreferencesAdvancedPageWidget.ui" line="722"/>
@@ -3559,12 +3564,12 @@ Ar norite tęsti?</translation>
     <message>
         <location filename="../../src/ui/preferences/PreferencesAdvancedPageWidget.cpp" line="104"/>
         <source>Compact</source>
-        <translation type="unfinished"/>
+        <translation>Kompaktiška</translation>
     </message>
     <message>
         <location filename="../../src/ui/preferences/PreferencesAdvancedPageWidget.cpp" line="105"/>
         <source>Columns</source>
-        <translation type="unfinished"/>
+        <translation>Stulpeliai</translation>
     </message>
     <message>
         <location filename="../../src/ui/preferences/PreferencesAdvancedPageWidget.cpp" line="114"/>
@@ -3586,22 +3591,22 @@ Ar norite tęsti?</translation>
         <location filename="../../src/ui/preferences/PreferencesAdvancedPageWidget.cpp" line="146"/>
         <location filename="../../src/ui/preferences/PreferencesAdvancedPageWidget.cpp" line="167"/>
         <source>Style sheets (*.css)</source>
-        <translation type="unfinished"/>
+        <translation>Stilių aprašai (*.css)</translation>
     </message>
     <message>
         <location filename="../../src/ui/preferences/PreferencesAdvancedPageWidget.cpp" line="149"/>
         <source>All images</source>
-        <translation type="unfinished"/>
+        <translation>Visi paveikslai</translation>
     </message>
     <message>
         <location filename="../../src/ui/preferences/PreferencesAdvancedPageWidget.cpp" line="150"/>
         <source>Cached images</source>
-        <translation type="unfinished"/>
+        <translation>Podėlio paveikslai</translation>
     </message>
     <message>
         <location filename="../../src/ui/preferences/PreferencesAdvancedPageWidget.cpp" line="151"/>
         <source>No images</source>
-        <translation type="unfinished"/>
+        <translation>Be paveikslų</translation>
     </message>
     <message>
         <location filename="../../src/ui/preferences/PreferencesAdvancedPageWidget.cpp" line="159"/>
@@ -3669,7 +3674,7 @@ Ar norite tęsti?</translation>
     <message>
         <location filename="../../src/ui/preferences/PreferencesAdvancedPageWidget.cpp" line="266"/>
         <source>Proxy configuration files (*.pac)</source>
-        <translation type="unfinished"/>
+        <translation>Įgaliotojo serverio konfigūracijos failai (*.pac)</translation>
     </message>
     <message>
         <location filename="../../src/ui/preferences/PreferencesAdvancedPageWidget.cpp" line="324"/>
@@ -3684,7 +3689,7 @@ Ar norite tęsti?</translation>
     <message>
         <location filename="../../src/ui/preferences/PreferencesAdvancedPageWidget.cpp" line="326"/>
         <source>Weekly development version</source>
-        <translation>Savaitinė dar kuriama versija</translation>
+        <translation>Savaitinė aktyviai kuriama versija</translation>
     </message>
     <message>
         <location filename="../../src/ui/preferences/PreferencesAdvancedPageWidget.cpp" line="382"/>
@@ -3743,7 +3748,7 @@ Ar norite tęsti?</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::PreferencesContentPageWidget</name>
+    <name>Otter::PreferencesContentPageWidget</name>
     <message>
         <location filename="../../src/ui/preferences/PreferencesContentPageWidget.ui" line="23"/>
         <source>Blocking</source>
@@ -3909,7 +3914,7 @@ Ar norite tęsti?</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::PreferencesDialog</name>
+    <name>Otter::PreferencesDialog</name>
     <message>
         <location filename="../../src/ui/PreferencesDialog.ui" line="17"/>
         <source>Preferences</source>
@@ -3947,7 +3952,7 @@ Ar norite tęsti?</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::PreferencesGeneralPageWidget</name>
+    <name>Otter::PreferencesGeneralPageWidget</name>
     <message>
         <location filename="../../src/ui/preferences/PreferencesGeneralPageWidget.ui" line="23"/>
         <source>Startup</source>
@@ -4090,7 +4095,7 @@ Ar norite tęsti?</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::PreferencesPrivacyPageWidget</name>
+    <name>Otter::PreferencesPrivacyPageWidget</name>
     <message>
         <location filename="../../src/ui/preferences/PreferencesPrivacyPageWidget.ui" line="23"/>
         <source>Tracking</source>
@@ -4109,7 +4114,7 @@ Ar norite tęsti?</translation>
     <message>
         <location filename="../../src/ui/preferences/PreferencesPrivacyPageWidget.ui" line="64"/>
         <source>Private mode</source>
-        <translation>Privataus naršymo režimas</translation>
+        <translation>Privataus naršymo veiksena</translation>
     </message>
     <message>
         <location filename="../../src/ui/preferences/PreferencesPrivacyPageWidget.ui" line="107"/>
@@ -4250,7 +4255,7 @@ Ar norite tęsti?</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::PreferencesSearchPageWidget</name>
+    <name>Otter::PreferencesSearchPageWidget</name>
     <message>
         <location filename="../../src/ui/preferences/PreferencesSearchPageWidget.ui" line="21"/>
         <source>Search…</source>
@@ -4320,7 +4325,7 @@ Ar norite tęsti?</translation>
     <message>
         <location filename="../../src/ui/preferences/PreferencesSearchPageWidget.cpp" line="210"/>
         <source>Keyword is already in use. Do you want to continue anyway?</source>
-        <translation type="unfinished"/>
+        <translation>Raktažodis jau naudojamas. Ar vis tiek norite tęsti?</translation>
     </message>
     <message>
         <location filename="../../src/ui/preferences/PreferencesSearchPageWidget.cpp" line="302"/>
@@ -4339,35 +4344,35 @@ Ar norite tęsti?</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::ProgressInformationWidget</name>
+    <name>Otter::ProgressInformationWidget</name>
     <message>
         <location filename="../../src/modules/widgets/progressInformation/ProgressInformationWidget.cpp" line="69"/>
         <source>Document: %p%</source>
-        <translation type="unfinished"/>
+        <translation>Dokumentas: %p%</translation>
     </message>
     <message>
         <location filename="../../src/modules/widgets/progressInformation/ProgressInformationWidget.cpp" line="111"/>
         <source>Total: %1</source>
-        <translation type="unfinished"/>
+        <translation>Viso: %1</translation>
     </message>
     <message>
         <location filename="../../src/modules/widgets/progressInformation/ProgressInformationWidget.cpp" line="118"/>
         <source>Elements: %1/%2</source>
-        <translation type="unfinished"/>
+        <translation>Elementai: %1/%2</translation>
     </message>
     <message>
         <location filename="../../src/modules/widgets/progressInformation/ProgressInformationWidget.cpp" line="125"/>
         <source>Speed: %1</source>
-        <translation type="unfinished"/>
+        <translation>Sparta: %1</translation>
     </message>
     <message>
         <location filename="../../src/modules/widgets/progressInformation/ProgressInformationWidget.cpp" line="135"/>
         <source>Time: %1</source>
-        <translation type="unfinished"/>
+        <translation>Laikas: %1</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::QtWebKitFtpListingNetworkReply</name>
+    <name>Otter::QtWebKitFtpListingNetworkReply</name>
     <message>
         <location filename="../../src/modules/backends/web/qtwebkit/QtWebKitFtpListingNetworkReply.cpp" line="70"/>
         <source>Unknown command</source>
@@ -4400,7 +4405,7 @@ Ar norite tęsti?</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::QtWebKitInspector</name>
+    <name>Otter::QtWebKitInspector</name>
     <message>
         <location filename="../../src/modules/backends/web/qtwebkit/QtWebKitInspector.cpp" line="39"/>
         <source>Close</source>
@@ -4408,7 +4413,7 @@ Ar norite tęsti?</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::QtWebKitNetworkManager</name>
+    <name>Otter::QtWebKitNetworkManager</name>
     <message>
         <location filename="../../src/modules/backends/web/qtwebkit/QtWebKitNetworkManager.cpp" line="187"/>
         <source>Receiving data from %1…</source>
@@ -4452,7 +4457,7 @@ Ar norite tęsti?</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::QtWebKitPage</name>
+    <name>Otter::QtWebKitPage</name>
     <message>
         <location filename="../../src/modules/backends/web/qtwebkit/QtWebKitPage.cpp" line="291"/>
         <location filename="../../src/modules/backends/web/qtwebkit/QtWebKitPage.cpp" line="494"/>
@@ -4514,7 +4519,7 @@ Ar norite tęsti?</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::QtWebKitPluginWidget</name>
+    <name>Otter::QtWebKitPluginWidget</name>
     <message>
         <location filename="../../src/modules/backends/web/qtwebkit/QtWebKitPluginWidget.cpp" line="34"/>
         <location filename="../../src/modules/backends/web/qtwebkit/QtWebKitPluginWidget.cpp" line="43"/>
@@ -4523,11 +4528,11 @@ Ar norite tęsti?</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::QtWebKitWebBackend</name>
+    <name>Otter::QtWebKitWebBackend</name>
     <message>
         <location filename="../../src/modules/backends/web/qtwebkit/QtWebKitWebBackend.cpp" line="214"/>
         <source>WebKit Backend (legacy)</source>
-        <translation type="unfinished"/>
+        <translation>WebKit vidinė pusė (liekamoji)</translation>
     </message>
     <message>
         <location filename="../../src/modules/backends/web/qtwebkit/QtWebKitWebBackend.cpp" line="216"/>
@@ -4541,7 +4546,7 @@ Ar norite tęsti?</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::QtWebKitWebWidget</name>
+    <name>Otter::QtWebKitWebWidget</name>
     <message>
         <location filename="../../src/modules/backends/web/qtwebkit/QtWebKitWebWidget.cpp" line="436"/>
         <source>Error</source>
@@ -4614,7 +4619,7 @@ Ar norite tęsti?</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::ReloadTimeDialog</name>
+    <name>Otter::ReloadTimeDialog</name>
     <message>
         <location filename="../../src/ui/ReloadTimeDialog.ui" line="14"/>
         <source>Automatic Page Reload</source>
@@ -4632,7 +4637,7 @@ Ar norite tęsti?</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::ReportDialog</name>
+    <name>Otter::ReportDialog</name>
     <message>
         <location filename="../../src/ui/ReportDialog.ui" line="14"/>
         <source>Diagnostic Report</source>
@@ -4645,7 +4650,7 @@ Ar norite tęsti?</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::SaveSessionDialog</name>
+    <name>Otter::SaveSessionDialog</name>
     <message>
         <location filename="../../src/ui/SaveSessionDialog.ui" line="14"/>
         <source>Save Session</source>
@@ -4690,7 +4695,7 @@ Ar norite perrašyti egzistuojantį seansą?</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::SearchBarWidget</name>
+    <name>Otter::SearchBarWidget</name>
     <message>
         <location filename="../../src/modules/windows/web/SearchBarWidget.ui" line="35"/>
         <source>Find…</source>
@@ -4723,11 +4728,11 @@ Ar norite perrašyti egzistuojantį seansą?</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::SearchEnginePropertiesDialog</name>
+    <name>Otter::SearchEnginePropertiesDialog</name>
     <message>
         <location filename="../../src/ui/SearchEnginePropertiesDialog.ui" line="14"/>
         <source>Edit Search Engine</source>
-        <translation>Redaguoti Paieškos Sistemą</translation>
+        <translation>Redaguoti paieškos sistemą</translation>
     </message>
     <message>
         <location filename="../../src/ui/SearchEnginePropertiesDialog.ui" line="22"/>
@@ -4811,7 +4816,7 @@ Ar norite perrašyti egzistuojantį seansą?</translation>
     <message>
         <location filename="../../src/ui/SearchEnginePropertiesDialog.cpp" line="134"/>
         <source>Search Terms</source>
-        <translation>Paieškos Žodžiai</translation>
+        <translation>Paieškos žodžiai</translation>
     </message>
     <message>
         <location filename="../../src/ui/SearchEnginePropertiesDialog.cpp" line="135"/>
@@ -4820,7 +4825,7 @@ Ar norite perrašyti egzistuojantį seansą?</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::SearchEnginesManager</name>
+    <name>Otter::SearchEnginesManager</name>
     <message>
         <location filename="../../src/core/SearchEnginesManager.cpp" line="175"/>
         <source>Manage Search Engines…</source>
@@ -4828,7 +4833,7 @@ Ar norite perrašyti egzistuojantį seansą?</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::SearchWidget</name>
+    <name>Otter::SearchWidget</name>
     <message>
         <location filename="../../src/modules/widgets/search/SearchWidget.cpp" line="96"/>
         <location filename="../../src/modules/widgets/search/SearchWidget.cpp" line="365"/>
@@ -4887,16 +4892,16 @@ Ar norite perrašyti egzistuojantį seansą?</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::SelectPasswordDialog</name>
+    <name>Otter::SelectPasswordDialog</name>
     <message>
         <location filename="../../src/modules/windows/web/SelectPasswordDialog.ui" line="14"/>
         <source>Select Password</source>
-        <translation type="unfinished"/>
+        <translation>Pasirinkti slaptažodį</translation>
     </message>
     <message>
         <location filename="../../src/modules/windows/web/SelectPasswordDialog.ui" line="20"/>
         <source>Select set of credentials:</source>
-        <translation type="unfinished"/>
+        <translation>Pasirinkite prisijungimo duomenų rinkinį:</translation>
     </message>
     <message>
         <location filename="../../src/modules/windows/web/SelectPasswordDialog.ui" line="41"/>
@@ -4906,17 +4911,17 @@ Ar norite perrašyti egzistuojantį seansą?</translation>
     <message>
         <location filename="../../src/modules/windows/web/SelectPasswordDialog.cpp" line="39"/>
         <source>Name</source>
-        <translation type="unfinished"/>
+        <translation>Pavadinimas</translation>
     </message>
     <message>
         <location filename="../../src/modules/windows/web/SelectPasswordDialog.cpp" line="39"/>
         <source>Value</source>
-        <translation type="unfinished"/>
+        <translation>Reikšmė</translation>
     </message>
     <message>
         <location filename="../../src/modules/windows/web/SelectPasswordDialog.cpp" line="43"/>
         <source>Set #%1</source>
-        <translation type="unfinished"/>
+        <translation>Rinkinys #%1</translation>
     </message>
     <message>
         <location filename="../../src/modules/windows/web/SelectPasswordDialog.cpp" line="86"/>
@@ -4926,11 +4931,11 @@ Ar norite perrašyti egzistuojantį seansą?</translation>
     <message>
         <location filename="../../src/modules/windows/web/SelectPasswordDialog.cpp" line="86"/>
         <source>Do you really want to remove this credentials set?</source>
-        <translation type="unfinished"/>
+        <translation>Ar tikrai norite šalinti šį prisijungimo duomenų rinkinį?</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::SessionsManager</name>
+    <name>Otter::SessionsManager</name>
     <message>
         <location filename="../../src/core/SessionsManager.cpp" line="222"/>
         <source>Default</source>
@@ -4944,11 +4949,11 @@ Ar norite perrašyti egzistuojantį seansą?</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::SessionsManagerDialog</name>
+    <name>Otter::SessionsManagerDialog</name>
     <message>
         <location filename="../../src/ui/SessionsManagerDialog.ui" line="14"/>
         <source>Sessions Manager</source>
-        <translation>Seansų tvarkymas</translation>
+        <translation>Seansų tvarkytuvė</translation>
     </message>
     <message>
         <location filename="../../src/ui/SessionsManagerDialog.ui" line="52"/>
@@ -4989,12 +4994,12 @@ Ar norite perrašyti egzistuojantį seansą?</translation>
     <message numerus="yes">
         <location filename="../../src/ui/SessionsManagerDialog.cpp" line="69"/>
         <source>%n window(s) (%1)</source>
-        <translation type="unfinished"><numerusform></numerusform><numerusform></numerusform><numerusform></numerusform></translation>
+        <translation><numerusform>%n langas (%1)</numerusform><numerusform>%n langai (%1)</numerusform><numerusform>%n langų (%1)</numerusform></translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/ui/SessionsManagerDialog.cpp" line="69"/>
         <source>%n tab(s)</source>
-        <translation type="unfinished"><numerusform></numerusform><numerusform></numerusform><numerusform></numerusform></translation>
+        <translation><numerusform>%n kortelė</numerusform><numerusform>%n kortelės</numerusform><numerusform>%n kortelių</numerusform></translation>
     </message>
     <message>
         <location filename="../../src/ui/SessionsManagerDialog.cpp" line="105"/>
@@ -5030,7 +5035,7 @@ Ar tikrai norite jį atstatyti?</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::SidebarWidget</name>
+    <name>Otter::SidebarWidget</name>
     <message>
         <location filename="../../src/ui/SidebarWidget.cpp" line="216"/>
         <source>Add Web Panel…</source>
@@ -5083,7 +5088,7 @@ Ar tikrai norite jį atstatyti?</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::SourceViewerWebWidget</name>
+    <name>Otter::SourceViewerWebWidget</name>
     <message>
         <location filename="../../src/ui/SourceViewerWebWidget.cpp" line="87"/>
         <source>Failed to save file: %1</source>
@@ -5123,7 +5128,7 @@ Norite įrašyti pakeitimus ar juos atmesti?</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::StartPageModel</name>
+    <name>Otter::StartPageModel</name>
     <message>
         <location filename="../../src/modules/windows/web/StartPageModel.cpp" line="175"/>
         <location filename="../../src/modules/windows/web/StartPageModel.cpp" line="176"/>
@@ -5132,7 +5137,7 @@ Norite įrašyti pakeitimus ar juos atmesti?</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::StartPagePreferencesDialog</name>
+    <name>Otter::StartPagePreferencesDialog</name>
     <message>
         <location filename="../../src/modules/windows/web/StartPagePreferencesDialog.ui" line="14"/>
         <source>Start Page Preferences</source>
@@ -5141,7 +5146,7 @@ Norite įrašyti pakeitimus ar juos atmesti?</translation>
     <message>
         <location filename="../../src/modules/windows/web/StartPagePreferencesDialog.ui" line="20"/>
         <source>Use custom background image</source>
-        <translation>Naudoti pasirinktiną fono paveikslą</translation>
+        <translation>Naudoti tinkintą fono paveikslą</translation>
     </message>
     <message>
         <location filename="../../src/modules/windows/web/StartPagePreferencesDialog.ui" line="66"/>
@@ -5215,7 +5220,7 @@ Norite įrašyti pakeitimus ar juos atmesti?</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::StartPageWidget</name>
+    <name>Otter::StartPageWidget</name>
     <message>
         <location filename="../../src/modules/windows/web/StartPageWidget.cpp" line="405"/>
         <source>Add Tile</source>
@@ -5253,12 +5258,12 @@ Norite įrašyti pakeitimus ar juos atmesti?</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::StartupDialog</name>
+    <name>Otter::StartupDialog</name>
     <message>
         <location filename="../../src/ui/StartupDialog.ui" line="14"/>
         <location filename="../../src/ui/StartupDialog.ui" line="27"/>
-        <source>Welcome to Meerkat</source>
-        <translation>Meerkat sveikina Jus</translation>
+        <source>Welcome to Otter</source>
+        <translation>Otter sveikina Jus</translation>
     </message>
     <message>
         <location filename="../../src/ui/StartupDialog.ui" line="34"/>
@@ -5298,7 +5303,7 @@ Norite įrašyti pakeitimus ar juos atmesti?</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::TabBarWidget</name>
+    <name>Otter::TabBarWidget</name>
     <message>
         <location filename="../../src/ui/TabBarWidget.cpp" line="205"/>
         <source>Arrange</source>
@@ -5326,7 +5331,7 @@ Norite įrašyti pakeitimus ar juos atmesti?</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::TextLabelWidget</name>
+    <name>Otter::TextLabelWidget</name>
     <message>
         <location filename="../../src/ui/TextLabelWidget.cpp" line="61"/>
         <source>Copy</source>
@@ -5335,16 +5340,16 @@ Norite įrašyti pakeitimus ar juos atmesti?</translation>
     <message>
         <location filename="../../src/ui/TextLabelWidget.cpp" line="65"/>
         <source>Copy Link Location</source>
-        <translation type="unfinished"/>
+        <translation>Kopijuoti nuorodos vietą</translation>
     </message>
     <message>
         <location filename="../../src/ui/TextLabelWidget.cpp" line="69"/>
         <source>Select All</source>
-        <translation type="unfinished"/>
+        <translation>Pažymėti viską</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::ToolBarDialog</name>
+    <name>Otter::ToolBarDialog</name>
     <message>
         <location filename="../../src/ui/ToolBarDialog.ui" line="14"/>
         <source>Edit Toolbar</source>
@@ -5404,7 +5409,7 @@ Norite įrašyti pakeitimus ar juos atmesti?</translation>
     <message>
         <location filename="../../src/ui/ToolBarDialog.ui" line="143"/>
         <source>Visibility in full screen mode:</source>
-        <translation type="unfinished"/>
+        <translation>Matomumas viso ekrano veiksenoje:</translation>
     </message>
     <message>
         <location filename="../../src/ui/ToolBarDialog.ui" line="179"/>
@@ -5440,7 +5445,7 @@ Norite įrašyti pakeitimus ar juos atmesti?</translation>
     <message>
         <location filename="../../src/ui/ToolBarDialog.cpp" line="47"/>
         <source>Custom Toolbar</source>
-        <translation>Tinkinta Įrankių juosta</translation>
+        <translation>Tinkinta įrankių juosta</translation>
     </message>
     <message>
         <location filename="../../src/ui/ToolBarDialog.cpp" line="50"/>
@@ -5463,7 +5468,7 @@ Norite įrašyti pakeitimus ar juos atmesti?</translation>
     <message>
         <location filename="../../src/ui/ToolBarDialog.cpp" line="60"/>
         <source>Visible only when cursor is close to screen edge</source>
-        <translation type="unfinished"/>
+        <translation>Matoma tik tuomet, kai žymeklis arti ekrano krašto</translation>
     </message>
     <message>
         <location filename="../../src/ui/ToolBarDialog.cpp" line="65"/>
@@ -5473,12 +5478,12 @@ Norite įrašyti pakeitimus ar juos atmesti?</translation>
     <message>
         <location filename="../../src/ui/ToolBarDialog.cpp" line="66"/>
         <source>Icon only</source>
-        <translation type="unfinished"/>
+        <translation>Tik piktograma</translation>
     </message>
     <message>
         <location filename="../../src/ui/ToolBarDialog.cpp" line="67"/>
         <source>Text only</source>
-        <translation type="unfinished"/>
+        <translation>Tik tekstas</translation>
     </message>
     <message>
         <location filename="../../src/ui/ToolBarDialog.cpp" line="68"/>
@@ -5514,12 +5519,12 @@ Norite įrašyti pakeitimus ar juos atmesti?</translation>
     <message>
         <location filename="../../src/ui/ToolBarDialog.cpp" line="277"/>
         <source>Custom icon:</source>
-        <translation>Pasirinkta piktograma:</translation>
+        <translation>Tinkinta piktograma:</translation>
     </message>
     <message>
         <location filename="../../src/ui/ToolBarDialog.cpp" line="278"/>
         <source>Custom text:</source>
-        <translation>Pasirinktas tekstas:</translation>
+        <translation>Tinkintas tekstas:</translation>
     </message>
     <message>
         <location filename="../../src/ui/ToolBarDialog.cpp" line="287"/>
@@ -5539,7 +5544,7 @@ Norite įrašyti pakeitimus ar juos atmesti?</translation>
     <message>
         <location filename="../../src/ui/ToolBarDialog.cpp" line="374"/>
         <source>Arbitrary List of Actions</source>
-        <translation type="unfinished"/>
+        <translation>Pasirinktinis veiksmų sąrašas</translation>
     </message>
     <message>
         <location filename="../../src/ui/ToolBarDialog.cpp" line="381"/>
@@ -5554,7 +5559,7 @@ Norite įrašyti pakeitimus ar juos atmesti?</translation>
     <message>
         <location filename="../../src/ui/ToolBarDialog.cpp" line="389"/>
         <source>Content Blocking Details</source>
-        <translation type="unfinished"/>
+        <translation>Išsamesnė turinio blokavimo informacija</translation>
     </message>
     <message>
         <location filename="../../src/ui/ToolBarDialog.cpp" line="393"/>
@@ -5569,37 +5574,37 @@ Norite įrašyti pakeitimus ar juos atmesti?</translation>
     <message>
         <location filename="../../src/ui/ToolBarDialog.cpp" line="401"/>
         <source>Sidebar Panel Chooser</source>
-        <translation type="unfinished"/>
+        <translation>Šoninės juostos skydelio selektorius</translation>
     </message>
     <message>
         <location filename="../../src/ui/ToolBarDialog.cpp" line="405"/>
         <source>Progress Information (Document Progress)</source>
-        <translation type="unfinished"/>
+        <translation>Eigos informacija (Dokumento eiga)</translation>
     </message>
     <message>
         <location filename="../../src/ui/ToolBarDialog.cpp" line="409"/>
         <source>Progress Information (Total Progress)</source>
-        <translation type="unfinished"/>
+        <translation>Eigos informacija (Bendra eiga)</translation>
     </message>
     <message>
         <location filename="../../src/ui/ToolBarDialog.cpp" line="413"/>
         <source>Progress Information (Loaded Elements)</source>
-        <translation type="unfinished"/>
+        <translation>Eigos informacija (Įkelti elementai)</translation>
     </message>
     <message>
         <location filename="../../src/ui/ToolBarDialog.cpp" line="417"/>
         <source>Progress Information (Loading Speed)</source>
-        <translation type="unfinished"/>
+        <translation>Eigos informacija (Įkėlimo sparta)</translation>
     </message>
     <message>
         <location filename="../../src/ui/ToolBarDialog.cpp" line="421"/>
         <source>Progress Information (Elapsed Time)</source>
-        <translation type="unfinished"/>
+        <translation>Eigos informacija (Praėjęs laikas)</translation>
     </message>
     <message>
         <location filename="../../src/ui/ToolBarDialog.cpp" line="425"/>
         <source>Progress Information (Status Message)</source>
-        <translation type="unfinished"/>
+        <translation>Eigos informacija (Būsenos pranešimas)</translation>
     </message>
     <message>
         <location filename="../../src/ui/ToolBarDialog.cpp" line="433"/>
@@ -5644,7 +5649,7 @@ Norite įrašyti pakeitimus ar juos atmesti?</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::ToolBarDragAreaWidget</name>
+    <name>Otter::ToolBarDragAreaWidget</name>
     <message>
         <location filename="../../src/ui/ToolBarWidget.cpp" line="49"/>
         <source>Drag to move toolbar</source>
@@ -5652,7 +5657,7 @@ Norite įrašyti pakeitimus ar juos atmesti?</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::ToolBarWidget</name>
+    <name>Otter::ToolBarWidget</name>
     <message>
         <location filename="../../src/ui/ToolBarWidget.cpp" line="176"/>
         <source>Switch tabs using the mouse wheel</source>
@@ -5695,7 +5700,7 @@ Norite įrašyti pakeitimus ar juos atmesti?</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::ToolBarsManager</name>
+    <name>Otter::ToolBarsManager</name>
     <message>
         <location filename="../../src/core/ToolBarsManager.cpp" line="259"/>
         <source>Reset Toolbar</source>
@@ -5728,7 +5733,7 @@ Norite įrašyti pakeitimus ar juos atmesti?</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::ToolButtonWidget</name>
+    <name>Otter::ToolButtonWidget</name>
     <message>
         <location filename="../../src/ui/ToolButtonWidget.cpp" line="59"/>
         <location filename="../../src/ui/ToolButtonWidget.cpp" line="122"/>
@@ -5737,7 +5742,7 @@ Norite įrašyti pakeitimus ar juos atmesti?</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::Transfer</name>
+    <name>Otter::Transfer</name>
     <message>
         <location filename="../../src/core/TransfersManager.cpp" line="265"/>
         <location filename="../../src/core/TransfersManager.cpp" line="791"/>
@@ -5754,7 +5759,7 @@ Ar norite jį perrašyti?</translation>
     <message>
         <location filename="../../src/core/TransfersManager.cpp" line="620"/>
         <source>file</source>
-        <translation>rinkmena</translation>
+        <translation>failas</translation>
     </message>
     <message>
         <location filename="../../src/core/TransfersManager.cpp" line="791"/>
@@ -5769,7 +5774,7 @@ Ar norite jį pakeisti?
     </message>
 </context>
 <context>
-    <name>Meerkat::TransferDialog</name>
+    <name>Otter::TransferDialog</name>
     <message>
         <location filename="../../src/ui/TransferDialog.ui" line="14"/>
         <source>Opening unknown file</source>
@@ -5832,7 +5837,7 @@ Ar norite jį pakeisti?
     </message>
 </context>
 <context>
-    <name>Meerkat::TransfersContentsWidget</name>
+    <name>Otter::TransfersContentsWidget</name>
     <message>
         <location filename="../../src/modules/windows/transfers/TransfersContentsWidget.ui" line="31"/>
         <source>Quick Download…</source>
@@ -5879,7 +5884,7 @@ Ar norite jį pakeisti?
     <message>
         <location filename="../../src/modules/windows/transfers/TransfersContentsWidget.cpp" line="49"/>
         <source>Filename</source>
-        <translation>Rinkmenos pavadinimas</translation>
+        <translation>Failo pavadinimas</translation>
     </message>
     <message>
         <location filename="../../src/modules/windows/transfers/TransfersContentsWidget.cpp" line="49"/>
@@ -5980,11 +5985,11 @@ Eiga: %5&lt;/div&gt;</translation>
     <message>
         <location filename="../../src/modules/windows/transfers/TransfersContentsWidget.cpp" line="535"/>
         <source>Transfers Manager</source>
-        <translation>Atsiuntimų tvarkymas</translation>
+        <translation>Atsiuntimų tvarkytuvė</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::TransfersManager</name>
+    <name>Otter::TransfersManager</name>
     <message>
         <location filename="../../src/core/TransfersManager.cpp" line="994"/>
         <source>Transfer completed:
@@ -5994,12 +5999,12 @@ Eiga: %5&lt;/div&gt;</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::TrayIcon</name>
+    <name>Otter::TrayIcon</name>
     <message>
         <location filename="../../src/ui/TrayIcon.cpp" line="52"/>
         <location filename="../../src/ui/TrayIcon.cpp" line="128"/>
-        <source>Meerkat Browser</source>
-        <translation>Meerkat Naršyklė</translation>
+        <source>Otter Browser</source>
+        <translation>Otter naršyklė</translation>
     </message>
     <message>
         <location filename="../../src/ui/TrayIcon.cpp" line="119"/>
@@ -6013,7 +6018,7 @@ Eiga: %5&lt;/div&gt;</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::UpdateCheckerDialog</name>
+    <name>Otter::UpdateCheckerDialog</name>
     <message>
         <location filename="../../src/ui/UpdateCheckerDialog.ui" line="14"/>
         <source>Check for Updates</source>
@@ -6057,7 +6062,7 @@ Eiga: %5&lt;/div&gt;</translation>
     <message>
         <location filename="../../src/ui/UpdateCheckerDialog.cpp" line="129"/>
         <source>Some of the updates do not contain packages for your platform. Try to check for updates later or visit details page for more info.</source>
-        <translation type="unfinished"/>
+        <translation>Kai kuriuose atnaujinimuose nėra jūsų platformai skirtų paketų. Pabandykite patikrinti ar yra atnaujinimų vėliau arba išsamesnei informacijai apsilankykite nurodytoje svetainėje.</translation>
     </message>
     <message>
         <location filename="../../src/ui/UpdateCheckerDialog.cpp" line="173"/>
@@ -6076,9 +6081,9 @@ Eiga: %5&lt;/div&gt;</translation>
     </message>
     <message>
         <location filename="../../src/ui/UpdateCheckerDialog.cpp" line="191"/>
-        <source>New version of Meerkat Browser is ready to install.
+        <source>New version of Otter Browser is ready to install.
 Click Install button to restart browser and install the update or close this dialog to install the update during next browser restart.</source>
-        <translation>Nauja Naršyklės Meerkat versija yra paruošta įdiegimui.
+        <translation>Nauja Naršyklės Otter versija yra paruošta įdiegimui.
 Spustelėkite mygtuką Įdiegti, kad iš naujo paleistumėte naršyklę ir įdiegtumėte atnaujinimą arba užverkite šį dialogą, kad įdiegtumėte atnaujinimą kito naršyklės paleidimo metu.</translation>
     </message>
     <message>
@@ -6093,7 +6098,7 @@ Spustelėkite mygtuką Įdiegti, kad iš naujo paleistumėte naršyklę ir įdie
     </message>
 </context>
 <context>
-    <name>Meerkat::UserAgentsManagerDialog</name>
+    <name>Otter::UserAgentsManagerDialog</name>
     <message>
         <location filename="../../src/ui/UserAgentsManagerDialog.ui" line="14"/>
         <source>Manage User Agents</source>
@@ -6126,26 +6131,26 @@ Spustelėkite mygtuką Įdiegti, kad iš naujo paleistumėte naršyklę ir įdie
     </message>
 </context>
 <context>
-    <name>Meerkat::WebContentsWidget</name>
+    <name>Otter::WebContentsWidget</name>
     <message>
         <location filename="../../src/modules/windows/web/WebContentsWidget.cpp" line="505"/>
         <source>Pop-Ups</source>
-        <translation type="unfinished"/>
+        <translation>Iškylantieji langai</translation>
     </message>
     <message>
         <location filename="../../src/modules/windows/web/WebContentsWidget.cpp" line="506"/>
         <source>Open All</source>
-        <translation type="unfinished"/>
+        <translation>Visus atverti</translation>
     </message>
     <message>
         <location filename="../../src/modules/windows/web/WebContentsWidget.cpp" line="510"/>
         <source>Open in Background</source>
-        <translation type="unfinished"/>
+        <translation>Atverti fone</translation>
     </message>
     <message>
         <location filename="../../src/modules/windows/web/WebContentsWidget.cpp" line="514"/>
         <source>Block All</source>
-        <translation type="unfinished"/>
+        <translation>Blokuoti visus</translation>
     </message>
     <message>
         <location filename="../../src/modules/windows/web/WebContentsWidget.cpp" line="518"/>
@@ -6155,22 +6160,22 @@ Spustelėkite mygtuką Įdiegti, kad iš naujo paleistumėte naršyklę ir įdie
     <message>
         <location filename="../../src/modules/windows/web/WebContentsWidget.cpp" line="546"/>
         <source>Images</source>
-        <translation type="unfinished"/>
+        <translation>Paveikslai</translation>
     </message>
     <message>
         <location filename="../../src/modules/windows/web/WebContentsWidget.cpp" line="547"/>
         <source>All Images</source>
-        <translation type="unfinished"/>
+        <translation>Visi paveikslai</translation>
     </message>
     <message>
         <location filename="../../src/modules/windows/web/WebContentsWidget.cpp" line="551"/>
         <source>Cached Images</source>
-        <translation type="unfinished"/>
+        <translation>Podėlio paveikslai</translation>
     </message>
     <message>
         <location filename="../../src/modules/windows/web/WebContentsWidget.cpp" line="555"/>
         <source>No Images</source>
-        <translation type="unfinished"/>
+        <translation>Be paveikslų</translation>
     </message>
     <message>
         <location filename="../../src/modules/windows/web/WebContentsWidget.cpp" line="582"/>
@@ -6185,22 +6190,22 @@ Spustelėkite mygtuką Įdiegti, kad iš naujo paleistumėte naršyklę ir įdie
     <message>
         <location filename="../../src/modules/windows/web/WebContentsWidget.cpp" line="592"/>
         <source>Plugins</source>
-        <translation type="unfinished"/>
+        <translation>Papildiniai</translation>
     </message>
     <message>
         <location filename="../../src/modules/windows/web/WebContentsWidget.cpp" line="593"/>
         <source>Enabled</source>
-        <translation type="unfinished"/>
+        <translation>Įjungta</translation>
     </message>
     <message>
         <location filename="../../src/modules/windows/web/WebContentsWidget.cpp" line="597"/>
         <source>On Demand</source>
-        <translation type="unfinished"/>
+        <translation>Pareikalavus</translation>
     </message>
     <message>
         <location filename="../../src/modules/windows/web/WebContentsWidget.cpp" line="601"/>
         <source>Disabled</source>
-        <translation type="unfinished"/>
+        <translation>Išjungta</translation>
     </message>
     <message>
         <location filename="../../src/modules/windows/web/WebContentsWidget.cpp" line="630"/>
@@ -6210,7 +6215,7 @@ Spustelėkite mygtuką Įdiegti, kad iš naujo paleistumėte naršyklę ir įdie
     <message>
         <location filename="../../src/modules/windows/web/WebContentsWidget.cpp" line="634"/>
         <source>Enable Referrer</source>
-        <translation type="unfinished"/>
+        <translation>Siųsti duomenis apie nukreipiantį puslapį</translation>
     </message>
     <message>
         <location filename="../../src/modules/windows/web/WebContentsWidget.cpp" line="638"/>
@@ -6245,16 +6250,16 @@ Spustelėkite mygtuką Įdiegti, kad iš naujo paleistumėte naršyklę ir įdie
     <message>
         <location filename="../../src/modules/windows/web/WebContentsWidget.cpp" line="1127"/>
         <source>Select User Agent</source>
-        <translation type="unfinished"/>
+        <translation>Pasirinkite naršyklės identifikavimą</translation>
     </message>
     <message>
         <location filename="../../src/modules/windows/web/WebContentsWidget.cpp" line="1127"/>
         <source>Enter User Agent:</source>
-        <translation type="unfinished"/>
+        <translation>Įrašykite naršyklės identifikavimą:</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::WebWidget</name>
+    <name>Otter::WebWidget</name>
     <message>
         <location filename="../../src/ui/WebWidget.cpp" line="341"/>
         <source>Default Application</source>
@@ -6333,7 +6338,7 @@ Spustelėkite mygtuką Įdiegti, kad iš naujo paleistumėte naršyklę ir įdie
     <message>
         <location filename="../../src/ui/WebWidget.cpp" line="1234"/>
         <source>Custom…</source>
-        <translation>Susikurtas...</translation>
+        <translation>Tinkintas...</translation>
     </message>
     <message>
         <location filename="../../src/ui/WebWidget.cpp" line="1236"/>
@@ -6342,7 +6347,7 @@ Spustelėkite mygtuką Įdiegti, kad iš naujo paleistumėte naršyklę ir įdie
     </message>
 </context>
 <context>
-    <name>Meerkat::WebsiteInformationDialog</name>
+    <name>Otter::WebsiteInformationDialog</name>
     <message>
         <location filename="../../src/ui/WebsiteInformationDialog.ui" line="57"/>
         <source>General</source>
@@ -6442,7 +6447,7 @@ Spustelėkite mygtuką Įdiegti, kad iš naujo paleistumėte naršyklę ir įdie
     <message>
         <location filename="../../src/ui/WebsiteInformationDialog.ui" line="260"/>
         <source>Enter full screen mode:</source>
-        <translation type="unfinished"/>
+        <translation>Įjungti viso ekrano veikseną:</translation>
     </message>
     <message>
         <location filename="../../src/ui/WebsiteInformationDialog.ui" line="271"/>
@@ -6532,8 +6537,8 @@ Spustelėkite mygtuką Įdiegti, kad iš naujo paleistumėte naršyklę ir įdie
     </message>
     <message>
         <location filename="../../src/ui/WebsiteInformationDialog.cpp" line="72"/>
-        <source>You are viewing safe page from Meerkat Browser.</source>
-        <translation>Jūs matote saugų puslapį iš Meerkat naršyklės</translation>
+        <source>You are viewing safe page from Otter Browser.</source>
+        <translation>Jūs matote saugų puslapį iš Otter naršyklės</translation>
     </message>
     <message>
         <location filename="../../src/ui/WebsiteInformationDialog.cpp" line="77"/>
@@ -6595,7 +6600,7 @@ Spustelėkite mygtuką Įdiegti, kad iš naujo paleistumėte naršyklę ir įdie
     <message>
         <location filename="../../src/ui/WebsiteInformationDialog.cpp" line="142"/>
         <source>Only cached</source>
-        <translation type="unfinished"/>
+        <translation>Tik iš podėlio</translation>
     </message>
     <message>
         <location filename="../../src/ui/WebsiteInformationDialog.cpp" line="167"/>
@@ -6631,7 +6636,7 @@ Spustelėkite mygtuką Įdiegti, kad iš naujo paleistumėte naršyklę ir įdie
     </message>
 </context>
 <context>
-    <name>Meerkat::WebsitePreferencesDialog</name>
+    <name>Otter::WebsitePreferencesDialog</name>
     <message>
         <location filename="../../src/ui/WebsitePreferencesDialog.ui" line="14"/>
         <source>Website Preferences</source>
@@ -6684,7 +6689,7 @@ Spustelėkite mygtuką Įdiegti, kad iš naujo paleistumėte naršyklę ir įdie
     <message>
         <location filename="../../src/ui/WebsitePreferencesDialog.ui" line="181"/>
         <source>Images:</source>
-        <translation type="unfinished"/>
+        <translation>Paveikslai:</translation>
     </message>
     <message>
         <location filename="../../src/ui/WebsitePreferencesDialog.ui" line="195"/>
@@ -6784,7 +6789,7 @@ Spustelėkite mygtuką Įdiegti, kad iš naujo paleistumėte naršyklę ir įdie
     <message>
         <location filename="../../src/ui/WebsitePreferencesDialog.ui" line="618"/>
         <source>Allow to enter full screen mode:</source>
-        <translation>Leisti įjungti pilno ekrano režimą:</translation>
+        <translation>Leisti įjungti viso ekrano veikseną:</translation>
     </message>
     <message>
         <location filename="../../src/ui/WebsitePreferencesDialog.ui" line="639"/>
@@ -6879,12 +6884,12 @@ Spustelėkite mygtuką Įdiegti, kad iš naujo paleistumėte naršyklę ir įdie
     <message>
         <location filename="../../src/ui/WebsitePreferencesDialog.ui" line="986"/>
         <source>Profiles</source>
-        <translation type="unfinished"/>
+        <translation>Profiliai</translation>
     </message>
     <message>
         <location filename="../../src/ui/WebsitePreferencesDialog.ui" line="1016"/>
         <source>Enable custom rules</source>
-        <translation type="unfinished"/>
+        <translation>Įjungti tinkintas taisykles</translation>
     </message>
     <message>
         <location filename="../../src/ui/WebsitePreferencesDialog.cpp" line="62"/>
@@ -6916,17 +6921,17 @@ Spustelėkite mygtuką Įdiegti, kad iš naujo paleistumėte naršyklę ir įdie
     <message>
         <location filename="../../src/ui/WebsitePreferencesDialog.cpp" line="81"/>
         <source>All images</source>
-        <translation type="unfinished"/>
+        <translation>Visi paveikslai</translation>
     </message>
     <message>
         <location filename="../../src/ui/WebsitePreferencesDialog.cpp" line="82"/>
         <source>Cached images</source>
-        <translation type="unfinished"/>
+        <translation>Podėlio paveikslai</translation>
     </message>
     <message>
         <location filename="../../src/ui/WebsitePreferencesDialog.cpp" line="83"/>
         <source>No images</source>
-        <translation type="unfinished"/>
+        <translation>Be paveikslų</translation>
     </message>
     <message>
         <location filename="../../src/ui/WebsitePreferencesDialog.cpp" line="85"/>
@@ -7037,11 +7042,11 @@ Spustelėkite mygtuką Įdiegti, kad iš naujo paleistumėte naršyklę ir įdie
     <message>
         <location filename="../../src/ui/WebsitePreferencesDialog.cpp" line="349"/>
         <source>Style sheets (*.css)</source>
-        <translation type="unfinished"/>
+        <translation>Stilių aprašai (*.css)</translation>
     </message>
 </context>
 <context>
-    <name>Meerkat::Window</name>
+    <name>Otter::Window</name>
     <message>
         <location filename="../../src/ui/Window.cpp" line="176"/>
         <source>Print Page</source>
@@ -7054,7 +7059,7 @@ Spustelėkite mygtuką Įdiegti, kad iš naujo paleistumėte naršyklę ir įdie
     </message>
 </context>
 <context>
-    <name>Meerkat::WindowsManager</name>
+    <name>Otter::WindowsManager</name>
     <message>
         <location filename="../../src/core/WindowsManager.cpp" line="342"/>
         <source>Question</source>
@@ -7084,7 +7089,7 @@ Spustelėkite mygtuką Įdiegti, kad iš naujo paleistumėte naršyklę ir įdie
     </message>
 </context>
 <context>
-    <name>Meerkat::WindowsPlatformIntegration</name>
+    <name>Otter::WindowsPlatformIntegration</name>
     <message>
         <location filename="../../src/modules/platforms/windows/WindowsPlatformIntegration.cpp" line="155"/>
         <source>Failed to run command &quot;%1&quot;, file is not executable</source>
@@ -7108,7 +7113,7 @@ Spustelėkite mygtuką Įdiegti, kad iš naujo paleistumėte naršyklę ir įdie
     </message>
 </context>
 <context>
-    <name>Meerkat::WorkspaceWidget</name>
+    <name>Otter::WorkspaceWidget</name>
     <message>
         <location filename="../../src/ui/WorkspaceWidget.cpp" line="521"/>
         <source>Arrange</source>
@@ -7116,7 +7121,7 @@ Spustelėkite mygtuką Įdiegti, kad iš naujo paleistumėte naršyklę ir įdie
     </message>
 </context>
 <context>
-    <name>Meerkat::ZoomWidget</name>
+    <name>Otter::ZoomWidget</name>
     <message>
         <location filename="../../src/modules/widgets/zoom/ZoomWidget.cpp" line="95"/>
         <location filename="../../src/modules/widgets/zoom/ZoomWidget.cpp" line="96"/>
@@ -7250,7 +7255,7 @@ Spustelėkite mygtuką Įdiegti, kad iš naujo paleistumėte naršyklę ir įdie
     <message>
         <location filename="../../src/core/ActionsManager.cpp" line="319"/>
         <source>Edit</source>
-        <translation>Redaguoti</translation>
+        <translation>Taisa</translation>
     </message>
     <message>
         <location filename="../../src/core/ActionsManager.cpp" line="320"/>
@@ -7332,7 +7337,7 @@ Spustelėkite mygtuką Įdiegti, kad iš naujo paleistumėte naršyklę ir įdie
     <message>
         <location filename="../../src/core/ActionsManager.cpp" line="338"/>
         <source>New Tab</source>
-        <translation>Nauja Kortelė</translation>
+        <translation>Nauja kortelė</translation>
     </message>
     <message>
         <location filename="../../src/core/ActionsManager.cpp" line="339"/>
@@ -7378,12 +7383,12 @@ Spustelėkite mygtuką Įdiegti, kad iš naujo paleistumėte naršyklę ir įdie
     <message>
         <location filename="../../src/core/ActionsManager.cpp" line="347"/>
         <source>Maximize</source>
-        <translation>Padidinti</translation>
+        <translation>Išskleisti</translation>
     </message>
     <message>
         <location filename="../../src/core/ActionsManager.cpp" line="347"/>
         <source>Maximize Tab</source>
-        <translation>Padidinti kortelę</translation>
+        <translation>Išskleisti kortelę</translation>
     </message>
     <message>
         <location filename="../../src/core/ActionsManager.cpp" line="348"/>
@@ -7434,7 +7439,7 @@ Spustelėkite mygtuką Įdiegti, kad iš naujo paleistumėte naršyklę ir įdie
         <location filename="../../src/core/ActionsManager.cpp" line="353"/>
         <location filename="../../src/ui/WebWidget.cpp" line="447"/>
         <source>Mute Tab Media</source>
-        <translation type="unfinished"/>
+        <translation>Nutildyti kortelės mediją</translation>
     </message>
     <message>
         <location filename="../../src/core/ActionsManager.cpp" line="354"/>
@@ -7474,7 +7479,7 @@ Spustelėkite mygtuką Įdiegti, kad iš naujo paleistumėte naršyklę ir įdie
     <message>
         <location filename="../../src/core/ActionsManager.cpp" line="360"/>
         <source>Maximize All</source>
-        <translation>Padidinti visas</translation>
+        <translation>Išskleisti visas</translation>
     </message>
     <message>
         <location filename="../../src/core/ActionsManager.cpp" line="361"/>
@@ -7720,7 +7725,7 @@ Spustelėkite mygtuką Įdiegti, kad iš naujo paleistumėte naršyklę ir įdie
     <message>
         <location filename="../../src/core/ActionsManager.cpp" line="405"/>
         <source>Log In</source>
-        <translation type="unfinished"/>
+        <translation>Prisijungti</translation>
     </message>
     <message>
         <location filename="../../src/core/ActionsManager.cpp" line="406"/>
@@ -7865,7 +7870,7 @@ Spustelėkite mygtuką Įdiegti, kad iš naujo paleistumėte naršyklę ir įdie
     <message>
         <location filename="../../src/core/ActionsManager.cpp" line="435"/>
         <source>Deselect</source>
-        <translation type="unfinished"/>
+        <translation>Nuimti žymėjimą</translation>
     </message>
     <message>
         <location filename="../../src/core/ActionsManager.cpp" line="436"/>
@@ -8101,7 +8106,7 @@ Spustelėkite mygtuką Įdiegti, kad iš naujo paleistumėte naršyklę ir įdie
     <message>
         <location filename="../../src/core/ActionsManager.cpp" line="482"/>
         <source>Enable Referrer</source>
-        <translation type="unfinished"/>
+        <translation>Siųsti duomenis apie nukreipiantį puslapį</translation>
     </message>
     <message>
         <location filename="../../src/core/ActionsManager.cpp" line="483"/>
@@ -8181,12 +8186,12 @@ Spustelėkite mygtuką Įdiegti, kad iš naujo paleistumėte naršyklę ir įdie
     <message>
         <location filename="../../src/core/ActionsManager.cpp" line="498"/>
         <source>Reset to Defaults…</source>
-        <translation type="unfinished"/>
+        <translation>Atstatyti į numatytuosius...</translation>
     </message>
     <message>
         <location filename="../../src/core/ActionsManager.cpp" line="498"/>
         <source>Reset Toolbars to Defaults…</source>
-        <translation type="unfinished"/>
+        <translation>Atstatyti įrankių juostas į numatytąsias...</translation>
     </message>
     <message>
         <location filename="../../src/core/ActionsManager.cpp" line="499"/>
@@ -8227,7 +8232,7 @@ Spustelėkite mygtuką Įdiegti, kad iš naujo paleistumėte naršyklę ir įdie
     <message>
         <location filename="../../src/core/ActionsManager.cpp" line="506"/>
         <source>Passwords</source>
-        <translation type="unfinished"/>
+        <translation>Slaptažodžiai</translation>
     </message>
     <message>
         <location filename="../../src/core/ActionsManager.cpp" line="507"/>
@@ -8282,8 +8287,8 @@ Spustelėkite mygtuką Įdiegti, kad iš naujo paleistumėte naršyklę ir įdie
     </message>
     <message>
         <location filename="../../src/core/ActionsManager.cpp" line="517"/>
-        <source>About Meerkat…</source>
-        <translation>Apie Meerkat…</translation>
+        <source>About Otter…</source>
+        <translation>Apie Otter…</translation>
     </message>
     <message>
         <location filename="../../src/core/ActionsManager.cpp" line="518"/>
@@ -8313,7 +8318,7 @@ Spustelėkite mygtuką Įdiegti, kad iš naujo paleistumėte naršyklę ir įdie
     <message>
         <location filename="../../src/core/ToolBarsManager.cpp" line="51"/>
         <source>Progress Bar</source>
-        <translation type="unfinished"/>
+        <translation>Eigos juosta</translation>
     </message>
     <message>
         <location filename="../../src/core/ToolBarsManager.cpp" line="52"/>
@@ -8333,37 +8338,37 @@ Spustelėkite mygtuką Įdiegti, kad iš naujo paleistumėte naršyklę ir įdie
     <message>
         <location filename="../../src/ui/Menu.cpp" line="103"/>
         <source>Import Opera Bookmarks…</source>
-        <translation type="unfinished"/>
+        <translation>Importuoti Opera adresyną…</translation>
     </message>
     <message>
         <location filename="../../src/ui/Menu.cpp" line="107"/>
         <source>Import HTML Bookmarks…</source>
-        <translation type="unfinished"/>
+        <translation>Importuoti HTML adresyną…</translation>
     </message>
     <message>
         <location filename="../../src/ui/Menu.cpp" line="113"/>
         <source>Import Opera Notes…</source>
-        <translation type="unfinished"/>
+        <translation>Importuoti Opera pastabas...</translation>
     </message>
     <message>
         <location filename="../../src/ui/Menu.cpp" line="119"/>
         <source>Import Opera Search Engines…</source>
-        <translation type="unfinished"/>
+        <translation>Importuoti Opera paieškos sistemas...</translation>
     </message>
     <message>
         <location filename="../../src/ui/Menu.cpp" line="125"/>
         <source>Import Opera Session…</source>
-        <translation type="unfinished"/>
+        <translation>Importuoti Opera seansą…</translation>
     </message>
     <message>
         <location filename="../../src/ui/Menu.cpp" line="346"/>
         <source>Open All</source>
-        <translation type="unfinished"/>
+        <translation>Atverti visus</translation>
     </message>
     <message>
         <location filename="../../src/ui/Menu.cpp" line="358"/>
         <source>This Folder</source>
-        <translation type="unfinished"/>
+        <translation>Šis aplankas</translation>
     </message>
     <message>
         <location filename="../../src/ui/Menu.cpp" line="384"/>
@@ -8371,47 +8376,47 @@ Spustelėkite mygtuką Įdiegti, kad iš naujo paleistumėte naršyklę ir įdie
         <location filename="../../src/ui/Menu.cpp" line="698"/>
         <location filename="../../src/ui/Menu.cpp" line="762"/>
         <source>(Untitled)</source>
-        <translation type="unfinished"/>
+        <translation>(Be pavadinimo)</translation>
     </message>
     <message>
         <location filename="../../src/ui/Menu.cpp" line="426"/>
         <source>Auto Detect</source>
-        <translation type="unfinished"/>
+        <translation>Automatiškai aptikti</translation>
     </message>
     <message>
         <location filename="../../src/ui/Menu.cpp" line="482"/>
         <source>Clear</source>
-        <translation type="unfinished"/>
+        <translation>Išvalyti</translation>
     </message>
     <message>
         <location filename="../../src/ui/Menu.cpp" line="572"/>
         <source>Default Style</source>
-        <translation type="unfinished"/>
+        <translation>Numatytasis stilius</translation>
     </message>
     <message>
         <location filename="../../src/ui/Menu.cpp" line="639"/>
         <source>Add New</source>
-        <translation type="unfinished"/>
+        <translation>Pridėti naują</translation>
     </message>
     <message>
         <location filename="../../src/ui/Menu.cpp" line="642"/>
         <source>Add Toolbar…</source>
-        <translation type="unfinished"/>
+        <translation>Pridėti įrankių juostą...</translation>
     </message>
     <message>
         <location filename="../../src/ui/Menu.cpp" line="645"/>
         <source>Add Bookmarks Bar…</source>
-        <translation type="unfinished"/>
+        <translation>Pridėti adresyno juostą...</translation>
     </message>
     <message>
         <location filename="../../src/ui/Menu.cpp" line="676"/>
         <source>Default User Agent</source>
-        <translation type="unfinished"/>
+        <translation>Numatytasis naršyklės identifikavimas</translation>
     </message>
     <message>
         <location filename="../../src/ui/Menu.cpp" line="715"/>
         <source>Custom User Agent…</source>
-        <translation type="unfinished"/>
+        <translation>Tinkintas naršyklės identifikavimas...</translation>
     </message>
     <message>
         <location filename="../../src/ui/TabBarWidget.cpp" line="171"/>
@@ -8426,7 +8431,7 @@ Spustelėkite mygtuką Įdiegti, kad iš naujo paleistumėte naršyklę ir įdie
     <message>
         <location filename="../../src/ui/WebWidget.cpp" line="447"/>
         <source>Unmute Tab Media</source>
-        <translation type="unfinished"/>
+        <translation>Įjungti kortelės medijos garsą</translation>
     </message>
     <message>
         <location filename="../../src/ui/WebWidget.cpp" line="604"/>
@@ -8441,7 +8446,7 @@ Spustelėkite mygtuką Įdiegti, kad iš naujo paleistumėte naršyklę ir įdie
     <message>
         <location filename="../../src/ui/WebWidget.cpp" line="827"/>
         <source>Edit Link Bookmark…</source>
-        <translation type="unfinished"/>
+        <translation>Redaguoti adresyno įrašo nuorodą…</translation>
     </message>
     <message>
         <location filename="../../src/ui/WebWidget.cpp" line="890"/>
@@ -8489,47 +8494,47 @@ Spustelėkite mygtuką Įdiegti, kad iš naujo paleistumėte naršyklę ir įdie
     <message>
         <location filename="../../src/core/AddonsManager.cpp" line="81"/>
         <source>Addons Manager</source>
-        <translation type="unfinished"/>
+        <translation>Priedų tvarkytuvė</translation>
     </message>
     <message>
         <location filename="../../src/core/AddonsManager.cpp" line="82"/>
         <source>Bookmarks Manager</source>
-        <translation type="unfinished"/>
+        <translation>Adresyno tvarkytuvė</translation>
     </message>
     <message>
         <location filename="../../src/core/AddonsManager.cpp" line="83"/>
         <source>Cache Manager</source>
-        <translation type="unfinished"/>
+        <translation>Podėlio tvarkytuvė</translation>
     </message>
     <message>
         <location filename="../../src/core/AddonsManager.cpp" line="84"/>
         <source>Configuration Manager</source>
-        <translation type="unfinished"/>
+        <translation>Konfigūracijos tvarkytuvė</translation>
     </message>
     <message>
         <location filename="../../src/core/AddonsManager.cpp" line="85"/>
         <source>Cookies Manager</source>
-        <translation type="unfinished"/>
+        <translation>Slapukų tvarkytuvė</translation>
     </message>
     <message>
         <location filename="../../src/core/AddonsManager.cpp" line="86"/>
         <source>History Manager</source>
-        <translation type="unfinished"/>
+        <translation>Žurnalo tvarkytuvė</translation>
     </message>
     <message>
         <location filename="../../src/core/AddonsManager.cpp" line="87"/>
         <source>Notes Manager</source>
-        <translation type="unfinished"/>
+        <translation>Pastabų tvarkytuvė</translation>
     </message>
     <message>
         <location filename="../../src/core/AddonsManager.cpp" line="88"/>
         <source>Passwords Manager</source>
-        <translation type="unfinished"/>
+        <translation>Slaptažodžių tvarkytuvė</translation>
     </message>
     <message>
         <location filename="../../src/core/AddonsManager.cpp" line="89"/>
         <source>Transfers Manager</source>
-        <translation type="unfinished"/>
+        <translation>Persiuntimų tvarkytuvė</translation>
     </message>
 </context>
 <context>
@@ -8562,7 +8567,7 @@ Spustelėkite mygtuką Įdiegti, kad iš naujo paleistumėte naršyklę ir įdie
     <message>
         <location filename="../../src/core/Application.cpp" line="120"/>
         <source>Forces session chooser dialog</source>
-        <translation type="unfinished"/>
+        <translation>Priverstinai rodo seanso selektoriaus dialogą</translation>
     </message>
     <message>
         <location filename="../../src/core/Application.cpp" line="121"/>
@@ -8648,7 +8653,7 @@ Skriptas: %2</translation>
     <message>
         <location filename="../../src/core/Updater.cpp" line="84"/>
         <source>Downloaded update script is not valid: %1</source>
-        <translation type="unfinished"/>
+        <translation>Atsisiųstas atnaujinimo scenarijus nėra teisingas: %1</translation>
     </message>
     <message>
         <location filename="../../src/core/Updater.cpp" line="104"/>
@@ -8665,12 +8670,12 @@ Klaida: %2</translation>
     <message>
         <location filename="../../src/core/UserScript.cpp" line="116"/>
         <source>Invalid match rule for User Script: %1</source>
-        <translation type="unfinished"/>
+        <translation>Neteisinga naudotojo scenarijaus atitikimo taisyklė: %1</translation>
     </message>
     <message>
         <location filename="../../src/core/UserScript.cpp" line="162"/>
         <source>Failed to locate header of user script file</source>
-        <translation type="unfinished"/>
+        <translation>Nepavyko nustatyti naudotojo scenarijaus failo antraštės vietą</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="171"/>
@@ -8702,12 +8707,12 @@ Programos ID: %2</translation>
     <message>
         <location filename="../../src/ui/preferences/ContentBlockingDialog.cpp" line="72"/>
         <source>Failed to load custom rules: invalid adblock header</source>
-        <translation type="unfinished"/>
+        <translation>Nepavyko įkelti tinkintų taisyklių: neteisinga reklamos blokavimo antraštė</translation>
     </message>
     <message>
         <location filename="../../src/ui/preferences/ContentBlockingDialog.cpp" line="237"/>
         <source>Failed to create a file with custom rules: %1</source>
-        <translation type="unfinished"/>
+        <translation>Nepavyko sukurti failo su tinkintomis taisyklėmis: %1</translation>
     </message>
 </context>
 <context>
@@ -8738,32 +8743,32 @@ Programos ID: %2</translation>
     <message>
         <location filename="../../src/core/NetworkManagerFactory.cpp" line="58"/>
         <source>Mask as Google Chrome 50 (Windows)</source>
-        <translation type="unfinished"/>
+        <translation>Maskuoti kaip Google Chrome 50 (Windows)</translation>
     </message>
     <message>
         <location filename="../../src/core/NetworkManagerFactory.cpp" line="59"/>
         <source>Mask as Mozilla Firefox 45 (Windows)</source>
-        <translation type="unfinished"/>
+        <translation>Maskuoti kaip Mozilla Firefox 45 (Windows)</translation>
     </message>
     <message>
         <location filename="../../src/core/NetworkManagerFactory.cpp" line="60"/>
         <source>Mask as Microsoft Edge 25 (Windows)</source>
-        <translation type="unfinished"/>
+        <translation>Maskuoti kaip Microsoft Edge 25 (Windows)</translation>
     </message>
     <message>
         <location filename="../../src/core/NetworkManagerFactory.cpp" line="61"/>
         <source>Mask as Internet Explorer 10.0 (Windows)</source>
-        <translation type="unfinished"/>
+        <translation>Maskuoti kaip Internet Explorer 10.0 (Windows)</translation>
     </message>
     <message>
         <location filename="../../src/core/NetworkManagerFactory.cpp" line="62"/>
         <source>Mask as Opera 12.16 (Windows)</source>
-        <translation type="unfinished"/>
+        <translation>Maskuoti kaip Opera 12.16 (Windows)</translation>
     </message>
     <message>
         <location filename="../../src/core/NetworkManagerFactory.cpp" line="63"/>
         <source>Mask as Safari 9.0 (MacOS)</source>
-        <translation type="unfinished"/>
+        <translation>Maskuoti kaip Safari 9.0 (MacOS)</translation>
     </message>
 </context>
 <context>
@@ -8776,22 +8781,22 @@ Programos ID: %2</translation>
     <message>
         <location filename="../../src/core/Utils.cpp" line="153"/>
         <source>You tried to access the address &lt;a href=&quot;%1&quot;&gt;%1&lt;/a&gt;, which is currently unavailable. Please make sure that the web address (URL) is correctly spelled and punctuated, then try reloading the page.</source>
-        <translation type="unfinished"/>
+        <translation>Jūs bandėte gauti prieigą prie adreso &lt;a href=&quot;%1&quot;&gt;%1&lt;/a&gt;, kuris šiuo metu yra neprieinamas. Prašome įsitikinti, kad saityno adresas (URL) yra teisingai parašytas ir teisingai uždėti skyrybos ženklai, o tuomet pabandyti iš naujo įkelti puslapį.</translation>
     </message>
     <message>
         <location filename="../../src/core/Utils.cpp" line="159"/>
         <source>Make sure your internet connection is active and check whether other applications that rely on the same connection are working.</source>
-        <translation type="unfinished"/>
+        <translation>Įsitikinkite, kad interneto ryšys yra aktyvus ir patikrinkite ar kitos, tą patį ryšį naudojančios, programos veikia.</translation>
     </message>
     <message>
         <location filename="../../src/core/Utils.cpp" line="159"/>
         <source>Check that the setup of any internet security software is correct and does not interfere with ordinary web browsing.</source>
-        <translation type="unfinished"/>
+        <translation>Patikrinkite ar bet kokios internetinio saugumo programinės įrangos sąranka yra teisinga ir ar ji nekliudo įprastam naršymui.</translation>
     </message>
     <message>
         <location filename="../../src/core/Utils.cpp" line="159"/>
         <source>Try pressing the F12 key on your keyboard and disabling proxy servers, unless you know that you are required to use a proxy to connect to the internet, and then reload the page.</source>
-        <translation type="unfinished"/>
+        <translation>Pabandykite savo klaviatūroje paspausti klavišą F12 ir išjungti įgaliotuosius serverius, nebent žinote, kad prisijungimui prie interneto turite naudoti įgaliotąjį serverį, o tuomet pabandykite iš naujo įkelti puslapį.</translation>
     </message>
     <message>
         <location filename="../../src/core/Utils.cpp" line="260"/>
@@ -8803,12 +8808,12 @@ Programos ID: %2</translation>
     <message>
         <location filename="../../src/core/Utils.cpp" line="332"/>
         <source>%1 files (*.%2)</source>
-        <translation type="unfinished"/>
+        <translation>%1 failai (*.%2)</translation>
     </message>
     <message>
         <location filename="../../src/core/Utils.cpp" line="342"/>
         <source>Save File</source>
-        <translation type="unfinished"/>
+        <translation>Įrašyti failą</translation>
     </message>
     <message>
         <location filename="../../src/core/Utils.cpp" line="363"/>
@@ -8819,13 +8824,14 @@ Programos ID: %2</translation>
     <message>
         <location filename="../../src/core/Utils.cpp" line="363"/>
         <source>This path is already used by different download, pick another one.</source>
-        <translation type="unfinished"/>
+        <translation>Šis kelias jau yra naudojamas kito atsiuntimo, pasirinkite kitą kelią.</translation>
     </message>
     <message>
         <location filename="../../src/core/Utils.cpp" line="372"/>
         <source>Target path is not writable.
 Select another one.</source>
-        <translation type="unfinished"/>
+        <translation>Paskirties kelias nėra įrašomas.
+Pasirinkite kitą.</translation>
     </message>
 </context>
 </TS>
