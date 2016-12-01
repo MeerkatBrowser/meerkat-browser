@@ -38,13 +38,21 @@ public:
 	{
 		NoOption = 0,
 		ThirdPartyOption = 1,
-		StyleSheetOption = 2,
-		ScriptOption = 4,
-		ImageOption = 8,
-		ObjectOption = 16,
-		ObjectSubRequestOption = 32,
-		SubDocumentOption = 64,
-		XmlHttpRequestOption = 128
+		ThirdPartyExceptionOption = 2,
+		StyleSheetOption = 4,
+		StyleSheetExceptionOption = 8,
+		ScriptOption = 16,
+		ScriptExceptionOption = 32,
+		ImageOption = 64,
+		ImageExceptionOption = 128,
+		ObjectOption = 256,
+		ObjectExceptionOption = 512,
+		ObjectSubRequestOption = 1024,
+		ObjectSubRequestExceptionOption = 2048,
+		SubDocumentOption = 4096,
+		SubDocumentExceptionOption = 8192,
+		XmlHttpRequestOption = 16384,
+		XmlHttpRequestExceptionOption = 32768
 	};
 
 	Q_DECLARE_FLAGS(RuleOptions, RuleOption)
@@ -78,15 +86,15 @@ public:
 
 	struct ContentBlockingRule
 	{
+		QString rule;
 		QStringList blockedDomains;
 		QStringList allowedDomains;
-		RuleOptions ruleOption = NoOption;
-		RuleOptions exceptionRuleOption = NoOption;
+		RuleOptions ruleOptions = NoOption;
 		RuleMatch ruleMatch = ContainsMatch;
 		bool isException = false;
 		bool needsDomainCheck = false;
 
-		explicit ContentBlockingRule(QStringList blockedDomainsValue, QStringList allowedDomainsValue, RuleOptions ruleOptionValue, RuleOptions exceptionRuleOptionValue, RuleMatch ruleMatchValue, bool isExceptionValue, bool needsDomainCheckValue) : blockedDomains(blockedDomainsValue), allowedDomains(allowedDomainsValue), ruleOption(ruleOptionValue), exceptionRuleOption(exceptionRuleOptionValue), ruleMatch(ruleMatchValue), isException(isExceptionValue), needsDomainCheck(needsDomainCheckValue)
+		explicit ContentBlockingRule(QString ruleValue, QStringList blockedDomainsValue, QStringList allowedDomainsValue, RuleOptions ruleOptionsValue, RuleMatch ruleMatchValue, bool isExceptionValue, bool needsDomainCheckValue) : rule(ruleValue), blockedDomains(blockedDomainsValue), allowedDomains(allowedDomainsValue), ruleOptions(ruleOptionsValue), ruleMatch(ruleMatchValue), isException(isExceptionValue), needsDomainCheck(needsDomainCheckValue)
 		{
 		}
 	};
@@ -126,9 +134,9 @@ protected:
 	void parseStyleSheetRule(const QStringList &line, QMultiHash<QString, QString> &list);
 	void addRule(ContentBlockingRule *rule, const QString &ruleString);
 	void deleteNode(Node *node);
-	bool evaluateRulesInNode(Node *node, const QString &currentRule, NetworkManager::ResourceType resourceType);
-	bool checkUrlSubstring(Node *node, const QString &subString, QString currentRule, NetworkManager::ResourceType resourceType);
-	bool checkRuleMatch(ContentBlockingRule *rule, const QString &currentRule, NetworkManager::ResourceType resourceType);
+	ContentBlockingManager::CheckResult checkUrlSubstring(Node *node, const QString &subString, QString currentRule, NetworkManager::ResourceType resourceType);
+	ContentBlockingManager::CheckResult checkRuleMatch(ContentBlockingRule *rule, const QString &currentRule, NetworkManager::ResourceType resourceType);
+	ContentBlockingManager::CheckResult evaluateRulesInNode(Node *node, const QString &currentRule, NetworkManager::ResourceType resourceType);
 	bool loadRules();
 	bool resolveDomainExceptions(const QString &url, const QStringList &ruleList);
 
@@ -158,6 +166,8 @@ private:
 	bool m_wasLoaded;
 
 	static QList<QChar> m_separators;
+	static QHash<QString, RuleOption> m_options;
+	static QHash<NetworkManager::ResourceType, RuleOption> m_resourceTypes;
 
 signals:
 	void profileModified(const QString &profile);

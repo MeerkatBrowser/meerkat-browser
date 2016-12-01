@@ -1532,24 +1532,20 @@ void QtWebKitWebWidget::triggerAction(int identifier, const QVariantMap &paramet
 
 					for (int i = 0; i < inputs.count(); ++i)
 					{
-						QString value;
+						const QString name(inputs.at(i).attribute(QLatin1String("name")));
 
-						if (inputs.at(i).tagName().toLower() == QLatin1String("textarea"))
+						if (name.isEmpty())
 						{
-							value = inputs.at(i).toPlainText();
+							continue;
 						}
-						else if (inputs.at(i).tagName().toLower() == QLatin1String("select"))
+
+						if (inputs.at(i).tagName().toLower() == QLatin1String("select"))
 						{
-							const QWebElementCollection options(inputs.at(i).findAll(QLatin1String("option")));
+							const QWebElementCollection options(inputs.at(i).findAll(QLatin1String("option:checked")));
 
 							for (int j = 0; j < options.count(); ++j)
 							{
-								if (options.at(j).hasAttribute(QLatin1String("selected")))
-								{
-									value = options.at(j).attribute(QLatin1String("value"), options.at(j).toPlainText());
-
-									return;
-								}
+								parameters.addQueryItem(name, options.at(j).evaluateJavaScript(QLatin1String("this.value")).toString());
 							}
 						}
 						else
@@ -1559,10 +1555,8 @@ void QtWebKitWebWidget::triggerAction(int identifier, const QVariantMap &paramet
 								continue;
 							}
 
-							value = inputs.at(i).attribute(QLatin1String("value"));
+							parameters.addQueryItem(name, ((inputs.at(i) == hitResult.element()) ? QLatin1String("{searchTerms}") : inputs.at(i).evaluateJavaScript(QLatin1String("this.value")).toString()));
 						}
-
-						parameters.addQueryItem(inputs.at(i).attribute(QLatin1String("name")), ((inputs.at(i) == hitResult.element()) ? QLatin1String("{searchTerms}") : value));
 					}
 
 					const QStringList identifiers(SearchEnginesManager::getSearchEngines());
