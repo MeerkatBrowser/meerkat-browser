@@ -100,7 +100,7 @@ FreeDesktopOrgPlatformIntegration::FreeDesktopOrgPlatformIntegration(Application
 	m_notificationsInterface(new QDBusInterface(QLatin1String("org.freedesktop.Notifications"), QLatin1String("/org/freedesktop/Notifications"), QLatin1String("org.freedesktop.Notifications"), QDBusConnection::sessionBus(), this))
 {
 #if QT_VERSION >= 0x050700
-	QGuiApplication::setDesktopFileName(QLatin1String("otter-browser.desktop"));
+	QGuiApplication::setDesktopFileName(QLatin1String("meerkat-browser.desktop"));
 #endif
 
 	qDBusRegisterMetaType<QImage>();
@@ -274,7 +274,7 @@ void FreeDesktopOrgPlatformIntegration::updateTransfersProgress(bool clear)
 	properties[QLatin1String("progress-visible")] = hasActiveTransfers;
 
 	QVariantList arguments;
-	arguments << QLatin1String("application://otter-browser.desktop");
+	arguments << QLatin1String("application://meerkat-browser.desktop");
 	arguments << properties;
 
 	QDBusMessage message(QDBusMessage::createSignal(QLatin1String("/com/canonical/unity/launcherentry/9ddcf02c30a33cd63e9762f06957263f"), QLatin1String("com.canonical.Unity.LauncherEntry"), QLatin1String("Update")));
