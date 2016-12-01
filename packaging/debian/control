@@ -11,6 +11,7 @@ Build-Depends: debhelper (>= 9.0),
  qtdeclarative5-dev (>=5.3.0),
  qtmultimedia5-dev (>=5.3.0),
 Standards-Version: 3.9.6
+Homepage: https://www.meerkat.tk/
 
 Package: meerkat-browser
 Architecture: any
