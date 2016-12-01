@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2013 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 * Copyright (C) 2014 Piotr Wójcik <chocimier@tlen.pl>
 * Copyright (C) 2015 - 2016 Jan Bajer aka bajasoft <jbajer@gmail.com>
@@ -43,7 +43,7 @@
 #include <QtNetwork/QNetworkProxy>
 #include <QtNetwork/QNetworkReply>
 
-namespace Otter
+namespace Meerkat
 {
 
 WebBackend* QtWebKitNetworkManager::m_backend(nullptr);
@@ -546,11 +546,11 @@ QNetworkReply* QtWebKitNetworkManager::createRequest(QNetworkAccessManager::Oper
 		return QNetworkAccessManager::createRequest(QNetworkAccessManager::GetOperation, QNetworkRequest());
 	}
 
-	if (request.url().path() == QLatin1String("/otter-password") && request.hasRawHeader(QByteArray("X-Otter-Token")) && request.hasRawHeader(QByteArray("X-Otter-Data")))
+	if (request.url().path() == QLatin1String("/meerkat-password") && request.hasRawHeader(QByteArray("X-Meerkat-Token")) && request.hasRawHeader(QByteArray("X-Meerkat-Data")))
 	{
-		if (QString(request.rawHeader(QByteArray("X-Otter-Token"))) == m_widget->getPasswordToken())
+		if (QString(request.rawHeader(QByteArray("X-Meerkat-Token"))) == m_widget->getPasswordToken())
 		{
-			const QJsonObject passwordObject(QJsonDocument::fromJson(QByteArray::fromBase64(request.rawHeader(QByteArray("X-Otter-Data")))).object());
+			const QJsonObject passwordObject(QJsonDocument::fromJson(QByteArray::fromBase64(request.rawHeader(QByteArray("X-Meerkat-Data")))).object());
 			const QJsonArray fieldsArray(passwordObject.value(QLatin1String("fields")).toArray());
 			PasswordsManager::PasswordInformation password;
 			password.url = QUrl(passwordObject.value(QLatin1String("url")).toString());

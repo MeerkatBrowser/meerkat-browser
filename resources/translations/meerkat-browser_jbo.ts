@@ -1,6 +1,6 @@
 <?xml version="1.0" ?><!DOCTYPE TS><TS language="jbo" version="2.1">
 <context>
-    <name>Otter::AcceptCookieDialog</name>
+    <name>Meerkat::AcceptCookieDialog</name>
     <message>
         <location filename="../../src/ui/AcceptCookieDialog.ui" line="14"/>
         <source>Accept Cookie</source>
@@ -85,7 +85,7 @@
     </message>
 </context>
 <context>
-    <name>Otter::AcceptLanguageDialog</name>
+    <name>Meerkat::AcceptLanguageDialog</name>
     <message>
         <location filename="../../src/ui/preferences/AcceptLanguageDialog.ui" line="14"/>
         <source>Preferred Webpage Language</source>
@@ -155,7 +155,7 @@
     </message>
 </context>
 <context>
-    <name>Otter::ActionComboBoxWidget</name>
+    <name>Meerkat::ActionComboBoxWidget</name>
     <message>
         <location filename="../../src/ui/ActionComboBoxWidget.cpp" line="87"/>
         <source>Select Action</source>
@@ -168,7 +168,7 @@
     </message>
 </context>
 <context>
-    <name>Otter::AddonsContentsWidget</name>
+    <name>Meerkat::AddonsContentsWidget</name>
     <message>
         <location filename="../../src/modules/windows/addons/AddonsContentsWidget.ui" line="29"/>
         <source>Search…</source>
@@ -222,7 +222,7 @@
     </message>
 </context>
 <context>
-    <name>Otter::AddressCompletionModel</name>
+    <name>Meerkat::AddressCompletionModel</name>
     <message>
         <location filename="../../src/core/AddressCompletionModel.cpp" line="93"/>
         <source>Search with %1</source>
@@ -250,7 +250,7 @@
     </message>
 </context>
 <context>
-    <name>Otter::AddressWidget</name>
+    <name>Meerkat::AddressWidget</name>
     <message>
         <location filename="../../src/modules/widgets/address/AddressWidget.cpp" line="98"/>
         <location filename="../../src/modules/widgets/address/AddressWidget.cpp" line="121"/>
@@ -339,7 +339,7 @@
     </message>
 </context>
 <context>
-    <name>Otter::Application</name>
+    <name>Meerkat::Application</name>
     <message>
         <location filename="../../src/core/Application.cpp" line="295"/>
         <location filename="../../src/core/Application.cpp" line="327"/>
@@ -430,12 +430,12 @@ Are you sure that you want to restore this session anyway?</source>
     </message>
     <message>
         <location filename="../../src/core/Application.cpp" line="1023"/>
-        <source>You are about to quit the current Otter Browser session.</source>
+        <source>You are about to quit the current Meerkat Browser session.</source>
         <translation>do pu&apos;o co&apos;u pilno lo vreji be lo nu ru&apos;i vitke sepi&apos;o lo brauzero be fa la utra</translation>
     </message>
 </context>
 <context>
-    <name>Otter::ApplicationComboBoxWidget</name>
+    <name>Meerkat::ApplicationComboBoxWidget</name>
     <message>
         <location filename="../../src/ui/ApplicationComboBoxWidget.cpp" line="34"/>
         <location filename="../../src/ui/ApplicationComboBoxWidget.cpp" line="47"/>
@@ -462,7 +462,7 @@ Are you sure that you want to restore this session anyway?</source>
     </message>
 </context>
 <context>
-    <name>Otter::AuthenticationDialog</name>
+    <name>Meerkat::AuthenticationDialog</name>
     <message>
         <location filename="../../src/ui/AuthenticationDialog.ui" line="14"/>
         <source>Authentication Required</source>
@@ -490,7 +490,7 @@ Are you sure that you want to restore this session anyway?</source>
     </message>
 </context>
 <context>
-    <name>Otter::BookmarkPropertiesDialog</name>
+    <name>Meerkat::BookmarkPropertiesDialog</name>
     <message>
         <location filename="../../src/ui/BookmarkPropertiesDialog.ui" line="19"/>
         <source>Title:</source>
@@ -575,7 +575,7 @@ Are you sure that you want to restore this session anyway?</source>
     </message>
 </context>
 <context>
-    <name>Otter::BookmarkWidget</name>
+    <name>Meerkat::BookmarkWidget</name>
     <message>
         <location filename="../../src/modules/widgets/bookmark/BookmarkWidget.cpp" line="83"/>
         <source>(Untitled)</source>
@@ -608,7 +608,7 @@ Are you sure that you want to restore this session anyway?</source>
     </message>
 </context>
 <context>
-    <name>Otter::BookmarksBarDialog</name>
+    <name>Meerkat::BookmarksBarDialog</name>
     <message>
         <location filename="../../src/ui/BookmarksBarDialog.ui" line="14"/>
         <source>Edit Toolbar</source>
@@ -626,7 +626,7 @@ Are you sure that you want to restore this session anyway?</source>
     </message>
 </context>
 <context>
-    <name>Otter::BookmarksComboBoxWidget</name>
+    <name>Meerkat::BookmarksComboBoxWidget</name>
     <message>
         <location filename="../../src/ui/BookmarksComboBoxWidget.cpp" line="50"/>
         <source>Folder Name</source>
@@ -639,7 +639,7 @@ Are you sure that you want to restore this session anyway?</source>
     </message>
 </context>
 <context>
-    <name>Otter::BookmarksContentsWidget</name>
+    <name>Meerkat::BookmarksContentsWidget</name>
     <message>
         <location filename="../../src/modules/windows/bookmarks/BookmarksContentsWidget.ui" line="29"/>
         <source>Search…</source>
@@ -789,7 +789,7 @@ Are you sure that you want to restore this session anyway?</source>
     </message>
 </context>
 <context>
-    <name>Otter::BookmarksImporterWidget</name>
+    <name>Meerkat::BookmarksImporterWidget</name>
     <message>
         <location filename="../../src/ui/BookmarksImporterWidget.ui" line="17"/>
         <source>Remove existing bookmarks</source>
@@ -827,7 +827,7 @@ Are you sure that you want to restore this session anyway?</source>
     </message>
 </context>
 <context>
-    <name>Otter::BookmarksModel</name>
+    <name>Meerkat::BookmarksModel</name>
     <message>
         <location filename="../../src/core/BookmarksModel.cpp" line="99"/>
         <location filename="../../src/core/BookmarksModel.cpp" line="203"/>
@@ -883,7 +883,7 @@ Are you sure that you want to restore this session anyway?</source>
     </message>
 </context>
 <context>
-    <name>Otter::CacheContentsWidget</name>
+    <name>Meerkat::CacheContentsWidget</name>
     <message>
         <location filename="../../src/modules/windows/cache/CacheContentsWidget.ui" line="29"/>
         <source>Search…</source>
@@ -1006,7 +1006,7 @@ Are you sure that you want to restore this session anyway?</source>
     </message>
 </context>
 <context>
-    <name>Otter::CertificateDialog</name>
+    <name>Meerkat::CertificateDialog</name>
     <message>
         <location filename="../../src/ui/CertificateDialog.ui" line="17"/>
         <source>Certificate chain:</source>
@@ -1263,7 +1263,7 @@ Exponent: %2</source>
     </message>
 </context>
 <context>
-    <name>Otter::ClearHistoryDialog</name>
+    <name>Meerkat::ClearHistoryDialog</name>
     <message>
         <location filename="../../src/ui/ClearHistoryDialog.ui" line="14"/>
         <source>Clear History</source>
@@ -1331,7 +1331,7 @@ Exponent: %2</source>
     </message>
 </context>
 <context>
-    <name>Otter::ColorWidget</name>
+    <name>Meerkat::ColorWidget</name>
     <message>
         <location filename="../../src/ui/ColorWidget.cpp" line="34"/>
         <source>Select Color…</source>
@@ -1356,7 +1356,7 @@ Exponent: %2</source>
     </message>
 </context>
 <context>
-    <name>Otter::ConfigurationContentsWidget</name>
+    <name>Meerkat::ConfigurationContentsWidget</name>
     <message>
         <location filename="../../src/modules/windows/configuration/ConfigurationContentsWidget.ui" line="29"/>
         <source>Search…</source>
@@ -1399,7 +1399,7 @@ Exponent: %2</source>
     </message>
 </context>
 <context>
-    <name>Otter::ConsoleWidget</name>
+    <name>Meerkat::ConsoleWidget</name>
     <message>
         <location filename="../../src/ui/ConsoleWidget.ui" line="31"/>
         <source>Scope</source>
@@ -1466,7 +1466,7 @@ Exponent: %2</source>
     </message>
 </context>
 <context>
-    <name>Otter::ContentBlockingDialog</name>
+    <name>Meerkat::ContentBlockingDialog</name>
     <message>
         <location filename="../../src/ui/preferences/ContentBlockingDialog.ui" line="14"/>
         <source>Content Blocking</source>
@@ -1547,7 +1547,7 @@ Exponent: %2</source>
     </message>
 </context>
 <context>
-    <name>Otter::ContentBlockingInformationWidget</name>
+    <name>Meerkat::ContentBlockingInformationWidget</name>
     <message>
         <location filename="../../src/modules/widgets/contentBlockingInformation/ContentBlockingInformationWidget.cpp" line="44"/>
         <source>Active Profiles</source>
@@ -1615,7 +1615,7 @@ Exponent: %2</source>
     </message>
 </context>
 <context>
-    <name>Otter::ContentBlockingIntervalDelegate</name>
+    <name>Meerkat::ContentBlockingIntervalDelegate</name>
     <message numerus="yes">
         <location filename="../../src/ui/preferences/ContentBlockingIntervalDelegate.cpp" line="41"/>
         <source>%n day(s)</source>
@@ -1634,7 +1634,7 @@ Exponent: %2</source>
     </message>
 </context>
 <context>
-    <name>Otter::ContentBlockingManager</name>
+    <name>Meerkat::ContentBlockingManager</name>
     <message>
         <location filename="../../src/core/ContentBlockingManager.cpp" line="136"/>
         <source>Title</source>
@@ -1682,7 +1682,7 @@ Exponent: %2</source>
     </message>
 </context>
 <context>
-    <name>Otter::ContentBlockingProfile</name>
+    <name>Meerkat::ContentBlockingProfile</name>
     <message>
         <location filename="../../src/core/ContentBlockingProfile.cpp" line="453"/>
         <source>(Unknown)</source>
@@ -1690,7 +1690,7 @@ Exponent: %2</source>
     </message>
 </context>
 <context>
-    <name>Otter::ContentsDialog</name>
+    <name>Meerkat::ContentsDialog</name>
     <message>
         <location filename="../../src/ui/ContentsDialog.cpp" line="74"/>
         <source>Close</source>
@@ -1698,7 +1698,7 @@ Exponent: %2</source>
     </message>
 </context>
 <context>
-    <name>Otter::CookiesContentsWidget</name>
+    <name>Meerkat::CookiesContentsWidget</name>
     <message>
         <location filename="../../src/modules/windows/cookies/CookiesContentsWidget.ui" line="29"/>
         <source>Search…</source>
@@ -1799,7 +1799,7 @@ Exponent: %2</source>
     </message>
 </context>
 <context>
-    <name>Otter::CookiesExceptionsDialog</name>
+    <name>Meerkat::CookiesExceptionsDialog</name>
     <message>
         <location filename="../../src/ui/preferences/CookiesExceptionsDialog.ui" line="14"/>
         <source>Third-party Cookies Exceptions</source>
@@ -1835,7 +1835,7 @@ Exponent: %2</source>
     </message>
 </context>
 <context>
-    <name>Otter::FilePasswordsStorageBackend</name>
+    <name>Meerkat::FilePasswordsStorageBackend</name>
     <message>
         <location filename="../../src/modules/backends/passwords/file/FilePasswordsStorageBackend.cpp" line="45"/>
         <source>Failed to open passwords file: %1</source>
@@ -1863,7 +1863,7 @@ Exponent: %2</source>
     </message>
 </context>
 <context>
-    <name>Otter::FilePathWidget</name>
+    <name>Meerkat::FilePathWidget</name>
     <message>
         <location filename="../../src/ui/FilePathWidget.cpp" line="38"/>
         <source>Browse…</source>
@@ -1881,7 +1881,7 @@ Exponent: %2</source>
     </message>
 </context>
 <context>
-    <name>Otter::FreeDesktopOrgPlatformIntegration</name>
+    <name>Meerkat::FreeDesktopOrgPlatformIntegration</name>
     <message>
         <location filename="../../src/modules/platforms/freedesktoporg/FreeDesktopOrgPlatformIntegration.cpp" line="195"/>
         <source>Error</source>
@@ -1904,7 +1904,7 @@ Exponent: %2</source>
     </message>
 </context>
 <context>
-    <name>Otter::HeaderViewWidget</name>
+    <name>Meerkat::HeaderViewWidget</name>
     <message>
         <location filename="../../src/ui/ItemViewWidget.cpp" line="64"/>
         <source>Sorting</source>
@@ -1937,7 +1937,7 @@ Exponent: %2</source>
     </message>
 </context>
 <context>
-    <name>Otter::HistoryContentsWidget</name>
+    <name>Meerkat::HistoryContentsWidget</name>
     <message>
         <location filename="../../src/modules/windows/history/HistoryContentsWidget.ui" line="29"/>
         <source>Search…</source>
@@ -2051,7 +2051,7 @@ Exponent: %2</source>
     </message>
 </context>
 <context>
-    <name>Otter::HistoryModel</name>
+    <name>Meerkat::HistoryModel</name>
     <message>
         <location filename="../../src/core/HistoryModel.cpp" line="61"/>
         <source>Failed to open history file: %1</source>
@@ -2059,7 +2059,7 @@ Exponent: %2</source>
     </message>
 </context>
 <context>
-    <name>Otter::HtmlBookmarksImporter</name>
+    <name>Meerkat::HtmlBookmarksImporter</name>
     <message>
         <location filename="../../src/modules/importers/html/HtmlBookmarksImporter.cpp" line="151"/>
         <source>HTML Bookmarks</source>
@@ -2077,7 +2077,7 @@ Exponent: %2</source>
     </message>
 </context>
 <context>
-    <name>Otter::IconWidget</name>
+    <name>Meerkat::IconWidget</name>
     <message>
         <location filename="../../src/ui/IconWidget.cpp" line="36"/>
         <source>Select From File…</source>
@@ -2112,7 +2112,7 @@ Exponent: %2</source>
     </message>
 </context>
 <context>
-    <name>Otter::ImagePropertiesDialog</name>
+    <name>Meerkat::ImagePropertiesDialog</name>
     <message>
         <location filename="../../src/ui/ImagePropertiesDialog.ui" line="14"/>
         <source>Image Properties</source>
@@ -2193,7 +2193,7 @@ Exponent: %2</source>
     </message>
 </context>
 <context>
-    <name>Otter::ImportDialog</name>
+    <name>Meerkat::ImportDialog</name>
     <message>
         <location filename="../../src/ui/ImportDialog.ui" line="22"/>
         <source>Source:</source>
@@ -2217,7 +2217,7 @@ Exponent: %2</source>
     </message>
 </context>
 <context>
-    <name>Otter::JavaScriptPreferencesDialog</name>
+    <name>Meerkat::JavaScriptPreferencesDialog</name>
     <message>
         <location filename="../../src/ui/preferences/JavaScriptPreferencesDialog.ui" line="14"/>
         <source>JavaScript Options</source>
@@ -2283,7 +2283,7 @@ Exponent: %2</source>
     </message>
 </context>
 <context>
-    <name>Otter::KeyboardProfileDialog</name>
+    <name>Meerkat::KeyboardProfileDialog</name>
     <message>
         <location filename="../../src/ui/preferences/KeyboardProfileDialog.ui" line="14"/>
         <source>Profile Configuration</source>
@@ -2346,7 +2346,7 @@ Exponent: %2</source>
     </message>
 </context>
 <context>
-    <name>Otter::LocalListingNetworkReply</name>
+    <name>Meerkat::LocalListingNetworkReply</name>
     <message>
         <location filename="../../src/core/LocalListingNetworkReply.cpp" line="73"/>
         <source>Directory Contents</source>
@@ -2374,7 +2374,7 @@ Exponent: %2</source>
     </message>
 </context>
 <context>
-    <name>Otter::LocaleDialog</name>
+    <name>Meerkat::LocaleDialog</name>
     <message>
         <location filename="../../src/ui/LocaleDialog.ui" line="14"/>
         <source>Switch Application Language</source>
@@ -2412,7 +2412,7 @@ Exponent: %2</source>
     </message>
 </context>
 <context>
-    <name>Otter::MainWindow</name>
+    <name>Meerkat::MainWindow</name>
     <message>
         <location filename="../../src/ui/MainWindow.ui" line="19"/>
         <source>Console</source>
@@ -2425,7 +2425,7 @@ Exponent: %2</source>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="724"/>
-        <source>&lt;b&gt;Otter %1&lt;/b&gt;&lt;br&gt;Web browser controlled by the user, not vice-versa.&lt;br&gt;&lt;a href=&quot;https://www.otter-browser.org/&quot;&gt;https://www.otter-browser.org/&lt;/a&gt;</source>
+        <source>&lt;b&gt;Meerkat %1&lt;/b&gt;&lt;br&gt;Web browser controlled by the user, not vice-versa.&lt;br&gt;&lt;a href=&quot;https://www.meerkat-browser.org/&quot;&gt;https://www.meerkat-browser.org/&lt;/a&gt;</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -2456,7 +2456,7 @@ Do you want to continue?</source>
     </message>
 </context>
 <context>
-    <name>Otter::MasterPasswordDialog</name>
+    <name>Meerkat::MasterPasswordDialog</name>
     <message>
         <location filename="../../src/ui/MasterPasswordDialog.ui" line="14"/>
         <source>Set Master Password</source>
@@ -2479,7 +2479,7 @@ Do you want to continue?</source>
     </message>
 </context>
 <context>
-    <name>Otter::Menu</name>
+    <name>Meerkat::Menu</name>
     <message>
         <location filename="../../src/ui/Menu.cpp" line="216"/>
         <source>Open</source>
@@ -2523,7 +2523,7 @@ Do you want to continue?</source>
     </message>
 </context>
 <context>
-    <name>Otter::MenuButtonWidget</name>
+    <name>Meerkat::MenuButtonWidget</name>
     <message>
         <location filename="../../src/modules/widgets/menuButton/MenuButtonWidget.cpp" line="36"/>
         <source>Menu</source>
@@ -2531,7 +2531,7 @@ Do you want to continue?</source>
     </message>
 </context>
 <context>
-    <name>Otter::MouseProfileDialog</name>
+    <name>Meerkat::MouseProfileDialog</name>
     <message>
         <location filename="../../src/ui/preferences/MouseProfileDialog.ui" line="14"/>
         <source>Profile Configuration</source>
@@ -2641,7 +2641,7 @@ Do you want to continue?</source>
     </message>
 </context>
 <context>
-    <name>Otter::NavigationActionWidget</name>
+    <name>Meerkat::NavigationActionWidget</name>
     <message>
         <location filename="../../src/modules/widgets/action/NavigationActionWidget.cpp" line="58"/>
         <location filename="../../src/modules/widgets/action/NavigationActionWidget.cpp" line="162"/>
@@ -2660,7 +2660,7 @@ Do you want to continue?</source>
     </message>
 </context>
 <context>
-    <name>Otter::NetworkManager</name>
+    <name>Meerkat::NetworkManager</name>
     <message>
         <location filename="../../src/core/NetworkManager.cpp" line="128"/>
         <source>Warning</source>
@@ -2677,7 +2677,7 @@ Do you want to continue?</source>
     </message>
 </context>
 <context>
-    <name>Otter::NetworkManagerFactory</name>
+    <name>Meerkat::NetworkManagerFactory</name>
     <message>
         <location filename="../../src/core/NetworkManagerFactory.cpp" line="307"/>
         <source>Custom</source>
@@ -2690,7 +2690,7 @@ Do you want to continue?</source>
     </message>
 </context>
 <context>
-    <name>Otter::NetworkProxyFactory</name>
+    <name>Meerkat::NetworkProxyFactory</name>
     <message>
         <location filename="../../src/core/NetworkProxyFactory.cpp" line="70"/>
         <location filename="../../src/core/NetworkProxyFactory.cpp" line="145"/>
@@ -2704,7 +2704,7 @@ Do you want to continue?</source>
     </message>
 </context>
 <context>
-    <name>Otter::NotesContentsWidget</name>
+    <name>Meerkat::NotesContentsWidget</name>
     <message>
         <location filename="../../src/modules/windows/notes/NotesContentsWidget.ui" line="29"/>
         <source>Search…</source>
@@ -2793,7 +2793,7 @@ Do you want to continue?</source>
     </message>
 </context>
 <context>
-    <name>Otter::NotificationDialog</name>
+    <name>Meerkat::NotificationDialog</name>
     <message>
         <location filename="../../src/ui/NotificationDialog.cpp" line="73"/>
         <source>Close</source>
@@ -2801,7 +2801,7 @@ Do you want to continue?</source>
     </message>
 </context>
 <context>
-    <name>Otter::OpenAddressDialog</name>
+    <name>Meerkat::OpenAddressDialog</name>
     <message>
         <location filename="../../src/ui/OpenAddressDialog.ui" line="14"/>
         <source>Go to Page</source>
@@ -2814,7 +2814,7 @@ Do you want to continue?</source>
     </message>
 </context>
 <context>
-    <name>Otter::OpenBookmarkDialog</name>
+    <name>Meerkat::OpenBookmarkDialog</name>
     <message>
         <location filename="../../src/ui/OpenBookmarkDialog.ui" line="14"/>
         <source>Go to Bookmark</source>
@@ -2827,7 +2827,7 @@ Do you want to continue?</source>
     </message>
 </context>
 <context>
-    <name>Otter::OperaBookmarksImporter</name>
+    <name>Meerkat::OperaBookmarksImporter</name>
     <message>
         <location filename="../../src/modules/importers/opera/OperaBookmarksImporter.cpp" line="57"/>
         <source>Opera Bookmarks</source>
@@ -2845,7 +2845,7 @@ Do you want to continue?</source>
     </message>
 </context>
 <context>
-    <name>Otter::OperaNotesImporter</name>
+    <name>Meerkat::OperaNotesImporter</name>
     <message>
         <location filename="../../src/modules/importers/opera/OperaNotesImporter.cpp" line="98"/>
         <source>Import into folder:</source>
@@ -2868,7 +2868,7 @@ Do you want to continue?</source>
     </message>
 </context>
 <context>
-    <name>Otter::OperaSessionImporter</name>
+    <name>Meerkat::OperaSessionImporter</name>
     <message>
         <location filename="../../src/modules/importers/opera/OperaSessionImporter.cpp" line="42"/>
         <source>Opera Session</source>
@@ -2886,7 +2886,7 @@ Do you want to continue?</source>
     </message>
 </context>
 <context>
-    <name>Otter::OptionDelegate</name>
+    <name>Meerkat::OptionDelegate</name>
     <message>
         <location filename="../../src/ui/OptionDelegate.cpp" line="50"/>
         <source>Yes</source>
@@ -2899,7 +2899,7 @@ Do you want to continue?</source>
     </message>
 </context>
 <context>
-    <name>Otter::OptionWidget</name>
+    <name>Meerkat::OptionWidget</name>
     <message>
         <location filename="../../src/ui/OptionWidget.cpp" line="51"/>
         <source>No</source>
@@ -2922,7 +2922,7 @@ Do you want to continue?</source>
     </message>
 </context>
 <context>
-    <name>Otter::PasswordBarWidget</name>
+    <name>Meerkat::PasswordBarWidget</name>
     <message>
         <location filename="../../src/modules/windows/web/PasswordBarWidget.ui" line="61"/>
         <source>Save</source>
@@ -2945,7 +2945,7 @@ Do you want to continue?</source>
     </message>
 </context>
 <context>
-    <name>Otter::PasswordsContentsWidget</name>
+    <name>Meerkat::PasswordsContentsWidget</name>
     <message>
         <location filename="../../src/modules/windows/passwords/PasswordsContentsWidget.ui" line="29"/>
         <source>Search…</source>
@@ -3013,7 +3013,7 @@ Do you want to continue?</source>
     </message>
 </context>
 <context>
-    <name>Otter::PermissionBarWidget</name>
+    <name>Meerkat::PermissionBarWidget</name>
     <message>
         <location filename="../../src/modules/windows/web/PermissionBarWidget.ui" line="62"/>
         <source>Allow this time</source>
@@ -3086,7 +3086,7 @@ Do you want to continue?</source>
     </message>
 </context>
 <context>
-    <name>Otter::PlatformIntegration</name>
+    <name>Meerkat::PlatformIntegration</name>
     <message>
         <location filename="../../src/core/PlatformIntegration.cpp" line="105"/>
         <source>Error</source>
@@ -3099,7 +3099,7 @@ Do you want to continue?</source>
     </message>
 </context>
 <context>
-    <name>Otter::PopupsBarWidget</name>
+    <name>Meerkat::PopupsBarWidget</name>
     <message>
         <location filename="../../src/modules/windows/web/PopupsBarWidget.ui" line="61"/>
         <source>Details</source>
@@ -3147,7 +3147,7 @@ Do you want to continue?</source>
     </message>
 </context>
 <context>
-    <name>Otter::PreferencesAdvancedPageWidget</name>
+    <name>Meerkat::PreferencesAdvancedPageWidget</name>
     <message>
         <location filename="../../src/ui/preferences/PreferencesAdvancedPageWidget.ui" line="55"/>
         <source>Address Field Suggestions</source>
@@ -3736,7 +3736,7 @@ Do you want to continue?</source>
     </message>
 </context>
 <context>
-    <name>Otter::PreferencesContentPageWidget</name>
+    <name>Meerkat::PreferencesContentPageWidget</name>
     <message>
         <location filename="../../src/ui/preferences/PreferencesContentPageWidget.ui" line="23"/>
         <source>Blocking</source>
@@ -3902,7 +3902,7 @@ Do you want to continue?</source>
     </message>
 </context>
 <context>
-    <name>Otter::PreferencesDialog</name>
+    <name>Meerkat::PreferencesDialog</name>
     <message>
         <location filename="../../src/ui/PreferencesDialog.ui" line="17"/>
         <source>Preferences</source>
@@ -3940,7 +3940,7 @@ Do you want to continue?</source>
     </message>
 </context>
 <context>
-    <name>Otter::PreferencesGeneralPageWidget</name>
+    <name>Meerkat::PreferencesGeneralPageWidget</name>
     <message>
         <location filename="../../src/ui/preferences/PreferencesGeneralPageWidget.ui" line="23"/>
         <source>Startup</source>
@@ -4083,7 +4083,7 @@ Do you want to continue?</source>
     </message>
 </context>
 <context>
-    <name>Otter::PreferencesPrivacyPageWidget</name>
+    <name>Meerkat::PreferencesPrivacyPageWidget</name>
     <message>
         <location filename="../../src/ui/preferences/PreferencesPrivacyPageWidget.ui" line="23"/>
         <source>Tracking</source>
@@ -4243,7 +4243,7 @@ Do you want to continue?</source>
     </message>
 </context>
 <context>
-    <name>Otter::PreferencesSearchPageWidget</name>
+    <name>Meerkat::PreferencesSearchPageWidget</name>
     <message>
         <location filename="../../src/ui/preferences/PreferencesSearchPageWidget.ui" line="21"/>
         <source>Search…</source>
@@ -4332,7 +4332,7 @@ Do you want to continue?</source>
     </message>
 </context>
 <context>
-    <name>Otter::ProgressInformationWidget</name>
+    <name>Meerkat::ProgressInformationWidget</name>
     <message>
         <location filename="../../src/modules/widgets/progressInformation/ProgressInformationWidget.cpp" line="69"/>
         <source>Document: %p%</source>
@@ -4360,7 +4360,7 @@ Do you want to continue?</source>
     </message>
 </context>
 <context>
-    <name>Otter::QtWebKitFtpListingNetworkReply</name>
+    <name>Meerkat::QtWebKitFtpListingNetworkReply</name>
     <message>
         <location filename="../../src/modules/backends/web/qtwebkit/QtWebKitFtpListingNetworkReply.cpp" line="70"/>
         <source>Unknown command</source>
@@ -4393,7 +4393,7 @@ Do you want to continue?</source>
     </message>
 </context>
 <context>
-    <name>Otter::QtWebKitInspector</name>
+    <name>Meerkat::QtWebKitInspector</name>
     <message>
         <location filename="../../src/modules/backends/web/qtwebkit/QtWebKitInspector.cpp" line="39"/>
         <source>Close</source>
@@ -4401,7 +4401,7 @@ Do you want to continue?</source>
     </message>
 </context>
 <context>
-    <name>Otter::QtWebKitNetworkManager</name>
+    <name>Meerkat::QtWebKitNetworkManager</name>
     <message>
         <location filename="../../src/modules/backends/web/qtwebkit/QtWebKitNetworkManager.cpp" line="187"/>
         <source>Receiving data from %1…</source>
@@ -4445,7 +4445,7 @@ Do you want to continue?</source>
     </message>
 </context>
 <context>
-    <name>Otter::QtWebKitPage</name>
+    <name>Meerkat::QtWebKitPage</name>
     <message>
         <location filename="../../src/modules/backends/web/qtwebkit/QtWebKitPage.cpp" line="291"/>
         <location filename="../../src/modules/backends/web/qtwebkit/QtWebKitPage.cpp" line="494"/>
@@ -4507,7 +4507,7 @@ Do you want to continue?</source>
     </message>
 </context>
 <context>
-    <name>Otter::QtWebKitPluginWidget</name>
+    <name>Meerkat::QtWebKitPluginWidget</name>
     <message>
         <location filename="../../src/modules/backends/web/qtwebkit/QtWebKitPluginWidget.cpp" line="34"/>
         <location filename="../../src/modules/backends/web/qtwebkit/QtWebKitPluginWidget.cpp" line="43"/>
@@ -4516,7 +4516,7 @@ Do you want to continue?</source>
     </message>
 </context>
 <context>
-    <name>Otter::QtWebKitWebBackend</name>
+    <name>Meerkat::QtWebKitWebBackend</name>
     <message>
         <location filename="../../src/modules/backends/web/qtwebkit/QtWebKitWebBackend.cpp" line="214"/>
         <source>WebKit Backend (legacy)</source>
@@ -4534,7 +4534,7 @@ Do you want to continue?</source>
     </message>
 </context>
 <context>
-    <name>Otter::QtWebKitWebWidget</name>
+    <name>Meerkat::QtWebKitWebWidget</name>
     <message>
         <location filename="../../src/modules/backends/web/qtwebkit/QtWebKitWebWidget.cpp" line="436"/>
         <source>Error</source>
@@ -4607,7 +4607,7 @@ Do you want to continue?</source>
     </message>
 </context>
 <context>
-    <name>Otter::ReloadTimeDialog</name>
+    <name>Meerkat::ReloadTimeDialog</name>
     <message>
         <location filename="../../src/ui/ReloadTimeDialog.ui" line="14"/>
         <source>Automatic Page Reload</source>
@@ -4625,7 +4625,7 @@ Do you want to continue?</source>
     </message>
 </context>
 <context>
-    <name>Otter::ReportDialog</name>
+    <name>Meerkat::ReportDialog</name>
     <message>
         <location filename="../../src/ui/ReportDialog.ui" line="14"/>
         <source>Diagnostic Report</source>
@@ -4638,7 +4638,7 @@ Do you want to continue?</source>
     </message>
 </context>
 <context>
-    <name>Otter::SaveSessionDialog</name>
+    <name>Meerkat::SaveSessionDialog</name>
     <message>
         <location filename="../../src/ui/SaveSessionDialog.ui" line="14"/>
         <source>Save Session</source>
@@ -4682,7 +4682,7 @@ Do you want to overwrite it?</source>
     </message>
 </context>
 <context>
-    <name>Otter::SearchBarWidget</name>
+    <name>Meerkat::SearchBarWidget</name>
     <message>
         <location filename="../../src/modules/windows/web/SearchBarWidget.ui" line="35"/>
         <source>Find…</source>
@@ -4715,7 +4715,7 @@ Do you want to overwrite it?</source>
     </message>
 </context>
 <context>
-    <name>Otter::SearchEnginePropertiesDialog</name>
+    <name>Meerkat::SearchEnginePropertiesDialog</name>
     <message>
         <location filename="../../src/ui/SearchEnginePropertiesDialog.ui" line="14"/>
         <source>Edit Search Engine</source>
@@ -4812,7 +4812,7 @@ Do you want to overwrite it?</source>
     </message>
 </context>
 <context>
-    <name>Otter::SearchEnginesManager</name>
+    <name>Meerkat::SearchEnginesManager</name>
     <message>
         <location filename="../../src/core/SearchEnginesManager.cpp" line="175"/>
         <source>Manage Search Engines…</source>
@@ -4820,7 +4820,7 @@ Do you want to overwrite it?</source>
     </message>
 </context>
 <context>
-    <name>Otter::SearchWidget</name>
+    <name>Meerkat::SearchWidget</name>
     <message>
         <location filename="../../src/modules/widgets/search/SearchWidget.cpp" line="96"/>
         <location filename="../../src/modules/widgets/search/SearchWidget.cpp" line="365"/>
@@ -4879,7 +4879,7 @@ Do you want to overwrite it?</source>
     </message>
 </context>
 <context>
-    <name>Otter::SelectPasswordDialog</name>
+    <name>Meerkat::SelectPasswordDialog</name>
     <message>
         <location filename="../../src/modules/windows/web/SelectPasswordDialog.ui" line="14"/>
         <source>Select Password</source>
@@ -4922,7 +4922,7 @@ Do you want to overwrite it?</source>
     </message>
 </context>
 <context>
-    <name>Otter::SessionsManager</name>
+    <name>Meerkat::SessionsManager</name>
     <message>
         <location filename="../../src/core/SessionsManager.cpp" line="222"/>
         <source>Default</source>
@@ -4936,7 +4936,7 @@ Do you want to overwrite it?</source>
     </message>
 </context>
 <context>
-    <name>Otter::SessionsManagerDialog</name>
+    <name>Meerkat::SessionsManagerDialog</name>
     <message>
         <location filename="../../src/ui/SessionsManagerDialog.ui" line="14"/>
         <source>Sessions Manager</source>
@@ -5021,7 +5021,7 @@ Are you sure that you want to restore this session anyway?</source>
     </message>
 </context>
 <context>
-    <name>Otter::SidebarWidget</name>
+    <name>Meerkat::SidebarWidget</name>
     <message>
         <location filename="../../src/ui/SidebarWidget.cpp" line="216"/>
         <source>Add Web Panel…</source>
@@ -5074,7 +5074,7 @@ Are you sure that you want to restore this session anyway?</source>
     </message>
 </context>
 <context>
-    <name>Otter::SourceViewerWebWidget</name>
+    <name>Meerkat::SourceViewerWebWidget</name>
     <message>
         <location filename="../../src/ui/SourceViewerWebWidget.cpp" line="87"/>
         <source>Failed to save file: %1</source>
@@ -5113,7 +5113,7 @@ Do you want to save your changes or discard them?</source>
     </message>
 </context>
 <context>
-    <name>Otter::StartPageModel</name>
+    <name>Meerkat::StartPageModel</name>
     <message>
         <location filename="../../src/modules/windows/web/StartPageModel.cpp" line="175"/>
         <location filename="../../src/modules/windows/web/StartPageModel.cpp" line="176"/>
@@ -5122,7 +5122,7 @@ Do you want to save your changes or discard them?</source>
     </message>
 </context>
 <context>
-    <name>Otter::StartPagePreferencesDialog</name>
+    <name>Meerkat::StartPagePreferencesDialog</name>
     <message>
         <location filename="../../src/modules/windows/web/StartPagePreferencesDialog.ui" line="14"/>
         <source>Start Page Preferences</source>
@@ -5205,7 +5205,7 @@ Do you want to save your changes or discard them?</source>
     </message>
 </context>
 <context>
-    <name>Otter::StartPageWidget</name>
+    <name>Meerkat::StartPageWidget</name>
     <message>
         <location filename="../../src/modules/windows/web/StartPageWidget.cpp" line="405"/>
         <source>Add Tile</source>
@@ -5243,11 +5243,11 @@ Do you want to save your changes or discard them?</source>
     </message>
 </context>
 <context>
-    <name>Otter::StartupDialog</name>
+    <name>Meerkat::StartupDialog</name>
     <message>
         <location filename="../../src/ui/StartupDialog.ui" line="14"/>
         <location filename="../../src/ui/StartupDialog.ui" line="27"/>
-        <source>Welcome to Otter</source>
+        <source>Welcome to Meerkat</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -5288,7 +5288,7 @@ Do you want to save your changes or discard them?</source>
     </message>
 </context>
 <context>
-    <name>Otter::TabBarWidget</name>
+    <name>Meerkat::TabBarWidget</name>
     <message>
         <location filename="../../src/ui/TabBarWidget.cpp" line="205"/>
         <source>Arrange</source>
@@ -5316,7 +5316,7 @@ Do you want to save your changes or discard them?</source>
     </message>
 </context>
 <context>
-    <name>Otter::TextLabelWidget</name>
+    <name>Meerkat::TextLabelWidget</name>
     <message>
         <location filename="../../src/ui/TextLabelWidget.cpp" line="61"/>
         <source>Copy</source>
@@ -5334,7 +5334,7 @@ Do you want to save your changes or discard them?</source>
     </message>
 </context>
 <context>
-    <name>Otter::ToolBarDialog</name>
+    <name>Meerkat::ToolBarDialog</name>
     <message>
         <location filename="../../src/ui/ToolBarDialog.ui" line="14"/>
         <source>Edit Toolbar</source>
@@ -5634,7 +5634,7 @@ Do you want to save your changes or discard them?</source>
     </message>
 </context>
 <context>
-    <name>Otter::ToolBarDragAreaWidget</name>
+    <name>Meerkat::ToolBarDragAreaWidget</name>
     <message>
         <location filename="../../src/ui/ToolBarWidget.cpp" line="49"/>
         <source>Drag to move toolbar</source>
@@ -5642,7 +5642,7 @@ Do you want to save your changes or discard them?</source>
     </message>
 </context>
 <context>
-    <name>Otter::ToolBarWidget</name>
+    <name>Meerkat::ToolBarWidget</name>
     <message>
         <location filename="../../src/ui/ToolBarWidget.cpp" line="176"/>
         <source>Switch tabs using the mouse wheel</source>
@@ -5685,7 +5685,7 @@ Do you want to save your changes or discard them?</source>
     </message>
 </context>
 <context>
-    <name>Otter::ToolBarsManager</name>
+    <name>Meerkat::ToolBarsManager</name>
     <message>
         <location filename="../../src/core/ToolBarsManager.cpp" line="259"/>
         <source>Reset Toolbar</source>
@@ -5718,7 +5718,7 @@ Do you want to save your changes or discard them?</source>
     </message>
 </context>
 <context>
-    <name>Otter::ToolButtonWidget</name>
+    <name>Meerkat::ToolButtonWidget</name>
     <message>
         <location filename="../../src/ui/ToolButtonWidget.cpp" line="59"/>
         <location filename="../../src/ui/ToolButtonWidget.cpp" line="122"/>
@@ -5727,7 +5727,7 @@ Do you want to save your changes or discard them?</source>
     </message>
 </context>
 <context>
-    <name>Otter::Transfer</name>
+    <name>Meerkat::Transfer</name>
     <message>
         <location filename="../../src/core/TransfersManager.cpp" line="265"/>
         <location filename="../../src/core/TransfersManager.cpp" line="791"/>
@@ -5755,7 +5755,7 @@ Do you want to overwrite it?
     </message>
 </context>
 <context>
-    <name>Otter::TransferDialog</name>
+    <name>Meerkat::TransferDialog</name>
     <message>
         <location filename="../../src/ui/TransferDialog.ui" line="14"/>
         <source>Opening unknown file</source>
@@ -5818,7 +5818,7 @@ Do you want to overwrite it?
     </message>
 </context>
 <context>
-    <name>Otter::TransfersContentsWidget</name>
+    <name>Meerkat::TransfersContentsWidget</name>
     <message>
         <location filename="../../src/modules/windows/transfers/TransfersContentsWidget.ui" line="31"/>
         <source>Quick Download…</source>
@@ -5965,7 +5965,7 @@ Progress: %5&lt;/div&gt;</source>
     </message>
 </context>
 <context>
-    <name>Otter::TransfersManager</name>
+    <name>Meerkat::TransfersManager</name>
     <message>
         <location filename="../../src/core/TransfersManager.cpp" line="994"/>
         <source>Transfer completed:
@@ -5974,11 +5974,11 @@ Progress: %5&lt;/div&gt;</source>
     </message>
 </context>
 <context>
-    <name>Otter::TrayIcon</name>
+    <name>Meerkat::TrayIcon</name>
     <message>
         <location filename="../../src/ui/TrayIcon.cpp" line="52"/>
         <location filename="../../src/ui/TrayIcon.cpp" line="128"/>
-        <source>Otter Browser</source>
+        <source>Meerkat Browser</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -5993,7 +5993,7 @@ Progress: %5&lt;/div&gt;</source>
     </message>
 </context>
 <context>
-    <name>Otter::UpdateCheckerDialog</name>
+    <name>Meerkat::UpdateCheckerDialog</name>
     <message>
         <location filename="../../src/ui/UpdateCheckerDialog.ui" line="14"/>
         <source>Check for Updates</source>
@@ -6056,7 +6056,7 @@ Progress: %5&lt;/div&gt;</source>
     </message>
     <message>
         <location filename="../../src/ui/UpdateCheckerDialog.cpp" line="191"/>
-        <source>New version of Otter Browser is ready to install.
+        <source>New version of Meerkat Browser is ready to install.
 Click Install button to restart browser and install the update or close this dialog to install the update during next browser restart.</source>
         <translation type="unfinished"/>
     </message>
@@ -6072,7 +6072,7 @@ Click Install button to restart browser and install the update or close this dia
     </message>
 </context>
 <context>
-    <name>Otter::UserAgentsManagerDialog</name>
+    <name>Meerkat::UserAgentsManagerDialog</name>
     <message>
         <location filename="../../src/ui/UserAgentsManagerDialog.ui" line="14"/>
         <source>Manage User Agents</source>
@@ -6105,7 +6105,7 @@ Click Install button to restart browser and install the update or close this dia
     </message>
 </context>
 <context>
-    <name>Otter::WebContentsWidget</name>
+    <name>Meerkat::WebContentsWidget</name>
     <message>
         <location filename="../../src/modules/windows/web/WebContentsWidget.cpp" line="505"/>
         <source>Pop-Ups</source>
@@ -6233,7 +6233,7 @@ Click Install button to restart browser and install the update or close this dia
     </message>
 </context>
 <context>
-    <name>Otter::WebWidget</name>
+    <name>Meerkat::WebWidget</name>
     <message>
         <location filename="../../src/ui/WebWidget.cpp" line="341"/>
         <source>Default Application</source>
@@ -6321,7 +6321,7 @@ Click Install button to restart browser and install the update or close this dia
     </message>
 </context>
 <context>
-    <name>Otter::WebsiteInformationDialog</name>
+    <name>Meerkat::WebsiteInformationDialog</name>
     <message>
         <location filename="../../src/ui/WebsiteInformationDialog.ui" line="57"/>
         <source>General</source>
@@ -6511,7 +6511,7 @@ Click Install button to restart browser and install the update or close this dia
     </message>
     <message>
         <location filename="../../src/ui/WebsiteInformationDialog.cpp" line="72"/>
-        <source>You are viewing safe page from Otter Browser.</source>
+        <source>You are viewing safe page from Meerkat Browser.</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -6610,7 +6610,7 @@ Click Install button to restart browser and install the update or close this dia
     </message>
 </context>
 <context>
-    <name>Otter::WebsitePreferencesDialog</name>
+    <name>Meerkat::WebsitePreferencesDialog</name>
     <message>
         <location filename="../../src/ui/WebsitePreferencesDialog.ui" line="14"/>
         <source>Website Preferences</source>
@@ -7020,7 +7020,7 @@ Click Install button to restart browser and install the update or close this dia
     </message>
 </context>
 <context>
-    <name>Otter::Window</name>
+    <name>Meerkat::Window</name>
     <message>
         <location filename="../../src/ui/Window.cpp" line="176"/>
         <source>Print Page</source>
@@ -7033,7 +7033,7 @@ Click Install button to restart browser and install the update or close this dia
     </message>
 </context>
 <context>
-    <name>Otter::WindowsManager</name>
+    <name>Meerkat::WindowsManager</name>
     <message>
         <location filename="../../src/core/WindowsManager.cpp" line="342"/>
         <source>Question</source>
@@ -7063,7 +7063,7 @@ Click Install button to restart browser and install the update or close this dia
     </message>
 </context>
 <context>
-    <name>Otter::WindowsPlatformIntegration</name>
+    <name>Meerkat::WindowsPlatformIntegration</name>
     <message>
         <location filename="../../src/modules/platforms/windows/WindowsPlatformIntegration.cpp" line="155"/>
         <source>Failed to run command &quot;%1&quot;, file is not executable</source>
@@ -7087,7 +7087,7 @@ Click Install button to restart browser and install the update or close this dia
     </message>
 </context>
 <context>
-    <name>Otter::WorkspaceWidget</name>
+    <name>Meerkat::WorkspaceWidget</name>
     <message>
         <location filename="../../src/ui/WorkspaceWidget.cpp" line="521"/>
         <source>Arrange</source>
@@ -7095,7 +7095,7 @@ Click Install button to restart browser and install the update or close this dia
     </message>
 </context>
 <context>
-    <name>Otter::ZoomWidget</name>
+    <name>Meerkat::ZoomWidget</name>
     <message>
         <location filename="../../src/modules/widgets/zoom/ZoomWidget.cpp" line="95"/>
         <location filename="../../src/modules/widgets/zoom/ZoomWidget.cpp" line="96"/>
@@ -8252,7 +8252,7 @@ Click Install button to restart browser and install the update or close this dia
     </message>
     <message>
         <location filename="../../src/core/ActionsManager.cpp" line="517"/>
-        <source>About Otter…</source>
+        <source>About Meerkat…</source>
         <translation type="unfinished"/>
     </message>
     <message>

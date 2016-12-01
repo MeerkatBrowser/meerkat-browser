@@ -1,12 +1,12 @@
 # How to contribute
 
-If you want to help with the development of Otter Browser, please observe the following rules.
+If you want to help with the development of Meerkat Browser, please observe the following rules.
 
 ## Reporting bugs and feature requests
 
 * Make sure that you have a [GitHub account](https://github.com/signup/free).
 * Check if the issue has already been reported (including closed tickets).
-* Check list of [known upstream issues](https://github.com/OtterBrowser/otter-browser/wiki/Upstream-Bugs).
+* Check list of [known upstream issues](https://github.com/MeerkatBrowser/meerkat-browser/wiki/Upstream-Bugs).
 * If possible, try to reproduce the issue with current snapshot from relevant branch of the source code repository.
 * Create a ticket for your issue.
 * Describe the issue clearly and succinctly.
@@ -21,7 +21,7 @@ If you want to help with the development of Otter Browser, please observe the fo
 ## Submitting patches
 
 * Make sure that you have a [GitHub account](https://github.com/signup/free).
-* Ensure that nobody is currently working on the selected task (check if someone is assigned to the ticket or ask on *#otter-browser* at freenode).
+* Ensure that nobody is currently working on the selected task (check if someone is assigned to the ticket or ask on *#meerkat-browser* at freenode).
 * Fork the repository on GitHub.
 * Create a branch just for that task.
 * Submit your changes as a pull request so they can be reviewed.

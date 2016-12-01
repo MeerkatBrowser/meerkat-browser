@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2014 - 2016 Piotr Wójcik <chocimier@tlen.pl>
 * Copyright (C) 2015 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 *
@@ -29,7 +29,7 @@
 #include <QtGui/QGuiApplication>
 #include <QtWidgets/QFileIconProvider>
 
-namespace Otter
+namespace Meerkat
 {
 
 QtWebKitFtpListingNetworkReply::QtWebKitFtpListingNetworkReply(const QNetworkRequest &request, QObject *parent) : QNetworkReply(parent),

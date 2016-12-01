@@ -7,7 +7,7 @@
 # How to run PowerShell scripts: http://technet.microsoft.com/en-us/library/ee176949.aspx
 
 # Command line parameters
-# [-o] - set output file name (otter-browser.ps1 -o nameOfFile)
+# [-o] - set output file name (meerkat-browser.ps1 -o nameOfFile)
 # [-a] - set architecture of binaries (Argument: 32/64)
 # [-t] - type of build, default is weekly. Ignored if -a is included (Argument: weekly/beta/release)
 
@@ -19,11 +19,11 @@ Param(
 
 # Global values
 $Global:outputPath = "C:\develop\github\"
-$Global:inputPath = "C:\downloads\Otter\"
+$Global:inputPath = "C:\downloads\Meerkat\"
 $Global:7ZipBinaryPath = "C:\Program Files\7-Zip\7z.exe"
 $Global:innoBinaryPath = "C:\Program Files (x86)\Inno Setup 5\ISCC.exe"
-$Global:innoScriptPath = ".\otter-browser.iss"
-$Global:configPath = ".\otter\config.h"
+$Global:innoScriptPath = ".\meerkat-browser.iss"
+$Global:configPath = ".\meerkat\config.h"
 
 # Main-function
 function main 
@@ -33,19 +33,19 @@ function main
     # Find version information
     ForEach ($line in Get-Content $Global:configPath)
     {
-        if ($line -like '*OTTER_VERSION_MAIN*')
+        if ($line -like '*MEERKAT_VERSION_MAIN*')
         {
-            $mainVersion = $line -replace '^#define OTTER_VERSION_MAIN ' -replace '"'
+            $mainVersion = $line -replace '^#define MEERKAT_VERSION_MAIN ' -replace '"'
         }
         
-        if ($line -like '*OTTER_VERSION_WEEKLY*')
+        if ($line -like '*MEERKAT_VERSION_WEEKLY*')
         {
-            $weeklyVersion = $line -replace '^#define OTTER_VERSION_WEEKLY ' -replace '"'
+            $weeklyVersion = $line -replace '^#define MEERKAT_VERSION_WEEKLY ' -replace '"'
         }
         
-        if ($line -like '*OTTER_VERSION_CONTEXT*')
+        if ($line -like '*MEERKAT_VERSION_CONTEXT*')
         {
-            $contextVersion = $line -replace '^#define OTTER_VERSION_CONTEXT ' -replace '"'
+            $contextVersion = $line -replace '^#define MEERKAT_VERSION_CONTEXT ' -replace '"'
         }
     }
 
@@ -66,8 +66,8 @@ function main
         {
             "beta"
             {
-                $packageName = "otter-browser-win" + $architecture + "-" + $contextVersion
-                $setupName = "otter-browser-win" + $architecture + "-" + $contextVersion + "-setup"
+                $packageName = "meerkat-browser-win" + $architecture + "-" + $contextVersion
+                $setupName = "meerkat-browser-win" + $architecture + "-" + $contextVersion + "-setup"
             }
             "release"
             {
@@ -75,8 +75,8 @@ function main
             }
             default
             {
-                $packageName = "otter-browser-win" + $architecture + "-weekly" + $weeklyVersion
-                $setupName = "otter-browser-win" + $architecture + "-weekly" + $weeklyVersion + "-setup"
+                $packageName = "meerkat-browser-win" + $architecture + "-weekly" + $weeklyVersion
+                $setupName = "meerkat-browser-win" + $architecture + "-weekly" + $weeklyVersion + "-setup"
             }
         }
     }

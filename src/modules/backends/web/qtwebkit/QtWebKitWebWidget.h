@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2013 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 * Copyright (C) 2015 - 2016 Jan Bajer aka bajasoft <jbajer@gmail.com>
 *
@@ -18,8 +18,8 @@
 *
 **************************************************************************/
 
-#ifndef OTTER_QTWEBKITWEBWIDGET_H
-#define OTTER_QTWEBKITWEBWIDGET_H
+#ifndef MEERKAT_QTWEBKITWEBWIDGET_H
+#define MEERKAT_QTWEBKITWEBWIDGET_H
 
 #include "../../../../ui/WebWidget.h"
 
@@ -32,7 +32,7 @@
 #include <QtWidgets/QSplitter>
 #include <QtWidgets/QToolButton>
 
-namespace Otter
+namespace Meerkat
 {
 
 class ContentsDialog;
@@ -77,7 +77,7 @@ public:
 	WindowsManager::LoadingState getLoadingState() const;
 	int getZoom() const;
 	bool hasSelection() const;
-#ifndef OTTER_ENABLE_QTWEBKIT_LEGACY
+#ifndef MEERKAT_ENABLE_QTWEBKIT_LEGACY
 	bool isAudible() const;
 	bool isAudioMuted() const;
 #endif
@@ -115,7 +115,7 @@ protected:
 	void focusInEvent(QFocusEvent *event);
 	void clearPluginToken();
 	void resetSpellCheck(QWebElement element);
-#ifndef OTTER_ENABLE_QTWEBKIT_LEGACY
+#ifndef MEERKAT_ENABLE_QTWEBKIT_LEGACY
 	void muteAudio(QWebFrame *frame, bool isMuted);
 #endif
 	void openRequest(const QUrl &url, QNetworkAccessManager::Operation operation, QIODevice *outgoingData);
@@ -123,7 +123,7 @@ protected:
 	void pasteText(const QString &text);
 	void startDelayedTransfer(Transfer *transfer);
 	void handleHistory();
-#ifdef OTTER_ENABLE_QTWEBKIT_LEGACY
+#ifdef MEERKAT_ENABLE_QTWEBKIT_LEGACY
 	void setHistory(QDataStream &stream);
 #else
 	void setHistory(const QVariantMap &history);

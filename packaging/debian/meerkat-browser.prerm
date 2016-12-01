@@ -3,8 +3,8 @@
 set -e
 
 if [ "$1" = "remove" ] || [ "$1" = "deconfigure" ]; then
-    update-alternatives --remove x-www-browser /usr/bin/otter-browser
-    update-alternatives --remove gnome-www-browser /usr/bin/otter-browser
+    update-alternatives --remove x-www-browser /usr/bin/meerkat-browser
+    update-alternatives --remove gnome-www-browser /usr/bin/meerkat-browser
 fi
 
 #DEBHELPER#

@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2013 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 * Copyright (C) 2014 Jan Bajer aka bajasoft <jbajer@gmail.com>
 *
@@ -32,7 +32,7 @@
 #include <QtWebKit/QWebHistoryInterface>
 #include <QtWebKit/QWebSettings>
 
-namespace Otter
+namespace Meerkat
 {
 
 QtWebKitWebBackend* QtWebKitWebBackend::m_instance(nullptr);
@@ -179,7 +179,7 @@ WebWidget* QtWebKitWebBackend::createWidget(bool isPrivate, ContentsWidget *pare
 	{
 		m_isInitialized = true;
 
-#ifndef OTTER_ENABLE_QTWEBKIT_LEGACY
+#ifndef MEERKAT_ENABLE_QTWEBKIT_LEGACY
 		QStringList pluginSearchPaths(QWebSettings::pluginSearchPaths());
 		pluginSearchPaths.append(QCoreApplication::applicationDirPath());
 
@@ -210,7 +210,7 @@ QtWebKitWebBackend* QtWebKitWebBackend::getInstance()
 
 QString QtWebKitWebBackend::getTitle() const
 {
-#ifdef OTTER_ENABLE_QTWEBKIT_LEGACY
+#ifdef MEERKAT_ENABLE_QTWEBKIT_LEGACY
 	return tr("WebKit Backend (legacy)");
 #else
 	return tr("WebKit Backend");
@@ -266,7 +266,7 @@ QString QtWebKitWebBackend::getUserAgent(const QString &pattern) const
 
 QUrl QtWebKitWebBackend::getHomePage() const
 {
-	return QUrl(QLatin1String("http://otter-browser.org/"));
+	return QUrl(QLatin1String("https://www.meerkat.tk/"));
 }
 
 QIcon QtWebKitWebBackend::getIcon() const

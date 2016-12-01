@@ -1,6 +1,6 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
-* Copyright (C) 2014 Martin Rejda <rejdi@otter.ksp.sk>
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
+* Copyright (C) 2014 Martin Rejda <rejdi@meerkat.ksp.sk>
 * Copyright (C) 2014 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 *
 * This program is free software: you can redistribute it and/or modify
@@ -23,7 +23,7 @@
 #include <QtGui/QMouseEvent>
 #include <QtGui/QPainter>
 
-namespace Otter
+namespace Meerkat
 {
 
 QtWebKitPluginWidget::QtWebKitPluginWidget(const QString &mimeType, const QUrl &url, QWidget *parent) : QWidget(parent),

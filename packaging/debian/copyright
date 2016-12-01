@@ -1,6 +1,6 @@
 
-Upstream-Name: Otter Browser
-Source: https://github.com/Emdek/otter
+Upstream-Name: Meerkat Browser
+Source: https://github.com/Emdek/meerkat
 
 Files: *
 Copyright: 2013 - 2014 Michal Dutkiewicz aka Emdek <michal@emdek.pl>

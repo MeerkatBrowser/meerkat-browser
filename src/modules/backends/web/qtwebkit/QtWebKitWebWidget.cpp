@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2013 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 * Copyright (C) 2015 - 2016 Jan Bajer aka bajasoft <jbajer@gmail.com>
 *
@@ -72,7 +72,7 @@
 #include <QtWidgets/QMessageBox>
 #include <QtWidgets/QVBoxLayout>
 
-namespace Otter
+namespace Meerkat
 {
 
 QtWebKitWebWidget::QtWebKitWebWidget(bool isPrivate, WebBackend *backend, QtWebKitNetworkManager *networkManager, ContentsWidget *parent) : WebWidget(isPrivate, backend, parent),
@@ -120,7 +120,7 @@ QtWebKitWebWidget::QtWebKitWebWidget(bool isPrivate, WebBackend *backend, QtWebK
 	m_webView->settings()->setAttribute(QWebSettings::PrivateBrowsingEnabled, isPrivate);
 	m_webView->installEventFilter(this);
 
-#ifndef OTTER_ENABLE_QTWEBKIT_LEGACY
+#ifndef MEERKAT_ENABLE_QTWEBKIT_LEGACY
 	if (isPrivate)
 	{
 		m_webView->settings()->setAttribute(QWebSettings::LocalStorageEnabled, false);
@@ -154,7 +154,7 @@ QtWebKitWebWidget::QtWebKitWebWidget(bool isPrivate, WebBackend *backend, QtWebK
 	connect(m_page, SIGNAL(featurePermissionRequestCanceled(QWebFrame*,QWebPage::Feature)), this, SLOT(handlePermissionCancel(QWebFrame*,QWebPage::Feature)));
 	connect(m_page, SIGNAL(loadStarted()), this, SLOT(pageLoadStarted()));
 	connect(m_page, SIGNAL(loadFinished(bool)), this, SLOT(pageLoadFinished()));
-#ifndef OTTER_ENABLE_QTWEBKIT_LEGACY
+#ifndef MEERKAT_ENABLE_QTWEBKIT_LEGACY
 	connect(m_page, SIGNAL(recentlyAudibleChanged(bool)), this, SLOT(handleAudibleStateChange(bool)));
 #endif
 	connect(m_page, SIGNAL(viewingMediaChanged(bool)), this, SLOT(updateNavigationActions()));
@@ -316,7 +316,7 @@ void QtWebKitWebWidget::pageLoadStarted()
 
 void QtWebKitWebWidget::pageLoadFinished()
 {
-#ifndef OTTER_ENABLE_QTWEBKIT_LEGACY
+#ifndef MEERKAT_ENABLE_QTWEBKIT_LEGACY
 	if (m_isAudioMuted)
 	{
 		muteAudio(m_page->mainFrame(), true);
@@ -537,11 +537,11 @@ void QtWebKitWebWidget::clearPluginToken()
 	while (!frames.isEmpty())
 	{
 		QWebFrame *frame(frames.takeFirst());
-		QWebElement element(frame->documentElement().findFirst(QStringLiteral("object[data-otter-browser=\"%1\"], embed[data-otter-browser=\"%1\"]").arg(m_pluginToken)));
+		QWebElement element(frame->documentElement().findFirst(QStringLiteral("object[data-meerkat-browser=\"%1\"], embed[data-meerkat-browser=\"%1\"]").arg(m_pluginToken)));
 
 		if (!element.isNull())
 		{
-			element.removeAttribute(QLatin1String("data-otter-browser"));
+			element.removeAttribute(QLatin1String("data-meerkat-browser"));
 
 			break;
 		}
@@ -572,7 +572,7 @@ void QtWebKitWebWidget::resetSpellCheck(QWebElement element)
 	}
 }
 
-#ifndef OTTER_ENABLE_QTWEBKIT_LEGACY
+#ifndef MEERKAT_ENABLE_QTWEBKIT_LEGACY
 void QtWebKitWebWidget::muteAudio(QWebFrame *frame, bool isMuted)
 {
 	if (!frame)
@@ -869,7 +869,7 @@ void QtWebKitWebWidget::updateOptions(const QUrl &url)
 	settings->setAttribute(QWebSettings::OfflineStorageDatabaseEnabled, getOption(SettingsManager::Browser_EnableOfflineStorageDatabaseOption, url).toBool());
 	settings->setAttribute(QWebSettings::OfflineWebApplicationCacheEnabled, getOption(SettingsManager::Browser_EnableOfflineWebApplicationCacheOption, url).toBool());
 	settings->setDefaultTextEncoding((encoding == QLatin1String("auto")) ? QString() : encoding);
-#ifndef OTTER_ENABLE_QTWEBKIT_LEGACY
+#ifndef MEERKAT_ENABLE_QTWEBKIT_LEGACY
 	settings->setAttribute(QWebSettings::MediaEnabled, getOption(QtWebKitWebBackend::getOptionIdentifier(QtWebKitWebBackend::QtWebKitBackend_EnableMediaOption), url).toBool());
 	settings->setAttribute(QWebSettings::MediaSourceEnabled, getOption(QtWebKitWebBackend::getOptionIdentifier(QtWebKitWebBackend::QtWebKitBackend_EnableMediaSourceOption), url).toBool());
 
@@ -1021,7 +1021,7 @@ void QtWebKitWebWidget::triggerAction(int identifier, const QVariantMap &paramet
 			updateNavigationActions();
 
 			return;
-#ifndef OTTER_ENABLE_QTWEBKIT_LEGACY
+#ifndef MEERKAT_ENABLE_QTWEBKIT_LEGACY
 		case ActionsManager::MuteTabMediaAction:
 			m_isAudioMuted = !m_isAudioMuted;
 
@@ -1783,7 +1783,7 @@ void QtWebKitWebWidget::setHistory(const WindowHistoryInformation &history)
 
 	const int index(qMin(history.index, (m_webView->history()->maximumItemCount() - 1)));
 
-#ifdef OTTER_ENABLE_QTWEBKIT_LEGACY
+#ifdef MEERKAT_ENABLE_QTWEBKIT_LEGACY
 	qint64 documentSequence(0);
 	qint64 itemSequence(0);
 	QByteArray data;
@@ -1843,7 +1843,7 @@ void QtWebKitWebWidget::setHistory(const WindowHistoryInformation &history)
 	m_webView->page()->triggerAction(QWebPage::Reload);
 }
 
-#ifdef OTTER_ENABLE_QTWEBKIT_LEGACY
+#ifdef MEERKAT_ENABLE_QTWEBKIT_LEGACY
 void QtWebKitWebWidget::setHistory(QDataStream &stream)
 {
 	stream.device()->reset();
@@ -2001,7 +2001,7 @@ WebWidget* QtWebKitWebWidget::clone(bool cloneHistory, bool isPrivate)
 
 	if (cloneHistory)
 	{
-#ifdef OTTER_ENABLE_QTWEBKIT_LEGACY
+#ifdef MEERKAT_ENABLE_QTWEBKIT_LEGACY
 		QByteArray data;
 		QDataStream stream(&data, QIODevice::ReadWrite);
 		stream << *(m_webView->page()->history());
@@ -2543,7 +2543,7 @@ bool QtWebKitWebWidget::hasSelection() const
 	return m_page->hasSelection();
 }
 
-#ifndef OTTER_ENABLE_QTWEBKIT_LEGACY
+#ifndef MEERKAT_ENABLE_QTWEBKIT_LEGACY
 bool QtWebKitWebWidget::isAudible() const
 {
 	return m_page->recentlyAudible();
@@ -2610,12 +2610,12 @@ bool QtWebKitWebWidget::eventFilter(QObject *object, QEvent *event)
 			const QWebHitTestResult hitResult(m_webView->page()->mainFrame()->hitTestContent(mouseEvent->pos()));
 			const QString tagName(hitResult.element().tagName().toLower());
 
-			if (widget && widget->metaObject()->className() == QLatin1String("Otter::QtWebKitPluginWidget") && (tagName == QLatin1String("object") || tagName == QLatin1String("embed")))
+			if (widget && widget->metaObject()->className() == QLatin1String("Meerkat::QtWebKitPluginWidget") && (tagName == QLatin1String("object") || tagName == QLatin1String("embed")))
 			{
 				m_pluginToken = QUuid::createUuid().toString();
 
 				QWebElement element(hitResult.element().clone());
-				element.setAttribute(QLatin1String("data-otter-browser"), m_pluginToken);
+				element.setAttribute(QLatin1String("data-meerkat-browser"), m_pluginToken);
 
 				hitResult.element().replace(element);
 

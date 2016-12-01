@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2015 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 *
 * This program is free software: you can redistribute it and/or modify
@@ -21,18 +21,18 @@
 #include "QtWebKitWebWidget.h"
 #include "../../../../core/ThemesManager.h"
 
-namespace Otter
+namespace Meerkat
 {
 
 QtWebKitInspector::QtWebKitInspector(QtWebKitWebWidget *parent) : QWebInspector(parent),
 	m_widget(parent)
-#ifdef OTTER_ENABLE_QTWEBKIT_LEGACY
+#ifdef MEERKAT_ENABLE_QTWEBKIT_LEGACY
 	, m_closeButton(new QToolButton(this))
 #endif
 {
 	setMinimumHeight(200);
 
-#ifdef OTTER_ENABLE_QTWEBKIT_LEGACY
+#ifdef MEERKAT_ENABLE_QTWEBKIT_LEGACY
 	m_closeButton->setAutoFillBackground(false);
 	m_closeButton->setAutoRaise(true);
 	m_closeButton->setIcon(ThemesManager::getIcon(QLatin1String("window-close")));
@@ -61,7 +61,7 @@ void QtWebKitInspector::childEvent(QChildEvent *event)
 	}
 }
 
-#ifdef OTTER_ENABLE_QTWEBKIT_LEGACY
+#ifdef MEERKAT_ENABLE_QTWEBKIT_LEGACY
 void QtWebKitInspector::showEvent(QShowEvent *event)
 {
 	QWebInspector::showEvent(event);

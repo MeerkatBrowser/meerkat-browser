@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2015 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 *
 * This program is free software: you can redistribute it and/or modify
@@ -103,10 +103,10 @@ static MacPlatformIntegrationDockIconView *getSharedDockIconView = nil;
 @interface MacPlatformIntegrationUserNotificationCenterDelegate : NSObject<NSUserNotificationCenterDelegate>
 {
 	@public
-		Otter::MacPlatformIntegration *m_platformIntegration;
+		Meerkat::MacPlatformIntegration *m_platformIntegration;
 }
 
-- (id)initWithPlatformIntegration:(Otter::MacPlatformIntegration*)platformIntegration;
+- (id)initWithPlatformIntegration:(Meerkat::MacPlatformIntegration*)platformIntegration;
 - (void)userNotificationCenter:(NSUserNotificationCenter*)center didActivateNotification:(NSUserNotification*)notification;
 - (BOOL)userNotificationCenter:(NSUserNotificationCenter*)center shouldPresentNotification:(NSUserNotification*)notification;
 
@@ -114,7 +114,7 @@ static MacPlatformIntegrationDockIconView *getSharedDockIconView = nil;
 
 @implementation MacPlatformIntegrationUserNotificationCenterDelegate
 
--(id)initWithPlatformIntegration:(Otter::MacPlatformIntegration*)platformIntegration
+-(id)initWithPlatformIntegration:(Meerkat::MacPlatformIntegration*)platformIntegration
 {
 	self = [super init];
 
@@ -145,7 +145,7 @@ static MacPlatformIntegrationDockIconView *getSharedDockIconView = nil;
 
 @end
 
-namespace Otter
+namespace Meerkat
 {
 
 MacPlatformIntegration::MacPlatformIntegration(Application *parent) : PlatformIntegration(parent),

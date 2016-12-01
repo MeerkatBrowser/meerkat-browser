@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2013 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 * Copyright (C) 2014 - 2016 Jan Bajer aka bajasoft <jbajer@gmail.com>
 *
@@ -40,7 +40,7 @@
 #include <QtWebKit/QWebElement>
 #include <QtWebKitWidgets/QWebFrame>
 
-namespace Otter
+namespace Meerkat
 {
 
 QtWebKitPage::QtWebKitPage(QtWebKitNetworkManager *networkManager, QtWebKitWebWidget *parent) : QWebPage(parent),
@@ -56,7 +56,7 @@ QtWebKitPage::QtWebKitPage(QtWebKitNetworkManager *networkManager, QtWebKitWebWi
 	optionChanged(SettingsManager::Interface_ShowScrollBarsOption);
 
 	connect(this, SIGNAL(loadFinished(bool)), this, SLOT(pageLoadFinished()));
-#ifndef OTTER_ENABLE_QTWEBKIT_LEGACY
+#ifndef MEERKAT_ENABLE_QTWEBKIT_LEGACY
 	connect(this, SIGNAL(consoleMessageReceived(MessageSource,MessageLevel,QString,int,QString)), this, SLOT(handleConsoleMessage(MessageSource,MessageLevel,QString,int,QString)));
 #endif
 	connect(SettingsManager::getInstance(), SIGNAL(valueChanged(int,QVariant)), this, SLOT(optionChanged(int)));
@@ -172,7 +172,7 @@ void QtWebKitPage::applyContentBlockingRules(const QStringList &rules, bool remo
 	}
 }
 
-#ifndef OTTER_ENABLE_QTWEBKIT_LEGACY
+#ifndef MEERKAT_ENABLE_QTWEBKIT_LEGACY
 void QtWebKitPage::handleConsoleMessage(MessageSource category, MessageLevel level, const QString &message, int line, const QString &source)
 {
 	Console::MessageLevel mappedLevel(Console::UnknownLevel);
@@ -302,7 +302,7 @@ void QtWebKitPage::javaScriptAlert(QWebFrame *frame, const QString &message)
 	}
 }
 
-#ifdef OTTER_ENABLE_QTWEBKIT_LEGACY
+#ifdef MEERKAT_ENABLE_QTWEBKIT_LEGACY
 void QtWebKitPage::javaScriptConsoleMessage(const QString &note, int line, const QString &source)
 {
 	Console::addMessage(note, Console::JavaScriptCategory, Console::ErrorLevel, source, line, (m_widget ? m_widget->getWindowIdentifier() : 0));

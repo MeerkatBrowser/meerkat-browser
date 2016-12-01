@@ -121,7 +121,7 @@
 
 0.9.03 (2014-11-01):
 - initial version of sidebar;
-- added possibility to set Otter Browser as default under Windows;
+- added possibility to set Meerkat Browser as default under Windows;
 - added initial versions of Website Preferences and Quick Preferences (F12);
 - added Trash to Bookmarks Manager;
 - added Ctrl+Tab tabs switching;

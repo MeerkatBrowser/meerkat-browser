@@ -1,4 +1,4 @@
-Source: otter-browser
+Source: meerkat-browser
 Section: web
 Priority: extra
 Maintainer: Rog131 <samrog131@hotmail.com>
@@ -11,13 +11,12 @@ Build-Depends: debhelper (>= 9.0),
  qtdeclarative5-dev (>=5.3.0),
  qtmultimedia5-dev (>=5.3.0),
 Standards-Version: 3.9.6
-Homepage: http://otter-browser.org/
 
-Package: otter-browser
+Package: meerkat-browser
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Recommends: gstreamer0.10-plugins-base,
  gstreamer0.10-plugins-good
 Description: Web browser controlled by the user, not vice-versa
- Otter Browser aims to recreate the best aspects of the classic Opera (12.x) UI
+ Meerkat Browser aims to recreate the best aspects of the classic Opera (12.x) UI
  using Qt5

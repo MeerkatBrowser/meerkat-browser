@@ -1,8 +1,8 @@
-#define MyAppName "Otter Browser"
+#define MyAppName "Meerkat Browser"
 #define MyAppVersion "0.9.09-dev"
-#define MyAppURL "http://otter-browser.org/"
-#define MyAppExeName "otter-browser.exe"
-#define MyAppIdentifier "OtterBrowser"
+#define MyAppURL "https://www.meerkat.tk/"
+#define MyAppExeName "meerkat-browser.exe"
+#define MyAppIdentifier "MeerkatBrowser"
 
 [Setup]
 AppId={{A0517512-5271-465D-AE59-D08F487B5CAF}
@@ -14,9 +14,9 @@ AppUpdatesURL={#MyAppURL}
 DefaultDirName={pf}\{#MyAppName}
 DefaultGroupName={#MyAppName}
 AllowNoIcons=yes
-LicenseFile=Z:\otter-browser-inno\input\COPYING
-OutputDir=Z:\otter-browser-inno\output\
-OutputBaseFilename=otter-browser-{#MyAppVersion}-setup
+LicenseFile=Z:\meerkat-browser-inno\input\COPYING
+OutputDir=Z:\meerkat-browser-inno\output\
+OutputBaseFilename=meerkat-browser-{#MyAppVersion}-setup
 Compression=lzma2/ultra64
 SolidCompression=yes
 VersionInfoVersion=0.9.09
@@ -55,7 +55,7 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked; OnlyBelowVersion: 0,6.1
 
 [Files]
-Source: "Z:\otter-browser-inno\input\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs
+Source: "Z:\meerkat-browser-inno\input\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs
 
 [Registry]
 Root: HKLM; Subkey: "Software\Clients\StartMenuInternet\{#MyAppIdentifier}"; Flags: uninsdeletekey

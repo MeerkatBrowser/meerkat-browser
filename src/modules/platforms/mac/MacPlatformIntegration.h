@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2015 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 *
 * This program is free software: you can redistribute it and/or modify
@@ -17,13 +17,13 @@
 *
 **************************************************************************/
 
-#ifndef OTTER_MACPLATFORMINTEGRATION_H
-#define OTTER_MACPLATFORMINTEGRATION_H
+#ifndef MEERKAT_MACPLATFORMINTEGRATION_H
+#define MEERKAT_MACPLATFORMINTEGRATION_H
 
 #include "../../../core/Utils.h"
 #include "../../../core/PlatformIntegration.h"
 
-namespace Otter
+namespace Meerkat
 {
 
 class MacPlatformIntegration : public PlatformIntegration

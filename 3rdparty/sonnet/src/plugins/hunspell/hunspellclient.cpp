@@ -60,11 +60,11 @@ HunspellClient::HunspellClient(QObject *parent)
     directories << QLatin1String("/usr/share/hunspell/") << QLatin1String("/usr/local/share/hunspell/") << QLatin1String("/usr/share/myspell/") << QLatin1String("/usr/share/myspell/dicts/") << QLatin1String("/usr/local/share/mozilla-dicts/");
 #endif
 
-    const QString otterDirectory(qgetenv("OTTER_DICTIONARIES"));
+    const QString meerkatDirectory(qgetenv("MEERKAT_DICTIONARIES"));
 
-    if (!otterDirectory.isEmpty())
+    if (!meerkatDirectory.isEmpty())
     {
-        directories.append(otterDirectory);
+        directories.append(meerkatDirectory);
     }
 
     for (int i = 0; i < directories.count(); ++i) {

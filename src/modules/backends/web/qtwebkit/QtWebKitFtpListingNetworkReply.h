@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2014 - 2016 Piotr Wójcik <chocimier@tlen.pl>
 * Copyright (C) 2015 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 *
@@ -18,8 +18,8 @@
 *
 **************************************************************************/
 
-#ifndef OTTER_QTWEBKITFTPLISTINGNETWORKREPLY_H
-#define OTTER_QTWEBKITFTPLISTINGNETWORKREPLY_H
+#ifndef MEERKAT_QTWEBKITFTPLISTINGNETWORKREPLY_H
+#define MEERKAT_QTWEBKITFTPLISTINGNETWORKREPLY_H
 
 #include "3rdparty/qtftp/qftp.h"
 #include "3rdparty/qtftp/qurlinfo.h"
@@ -27,7 +27,7 @@
 #include <QtCore/QUrl>
 #include <QtNetwork/QNetworkReply>
 
-namespace Otter
+namespace Meerkat
 {
 
 class QtWebKitFtpListingNetworkReply : public QNetworkReply

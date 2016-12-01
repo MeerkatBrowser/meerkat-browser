@@ -24,9 +24,9 @@
 			if (hasPassword)
 			{
 				var request = new XMLHttpRequest();
-				request.open('GET', '/otter-password', true);
-				request.setRequestHeader('X-Otter-Token', '%1');
-				request.setRequestHeader('X-Otter-Data', btoa(JSON.stringify({ url: window.location.href, fields: fields })));
+				request.open('GET', '/meerkat-password', true);
+				request.setRequestHeader('X-Meerkat-Token', '%1');
+				request.setRequestHeader('X-Meerkat-Data', btoa(JSON.stringify({ url: window.location.href, fields: fields })));
 				request.send(null);
 			}
 		});

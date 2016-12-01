@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2015 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 * Copyright (C) 2010 David Sansome <me@davidsansome.com>
 * Copyright (C) 2015 Piotr Wójcik <chocimier@tlen.pl>
@@ -19,8 +19,8 @@
 *
 **************************************************************************/
 
-#ifndef OTTER_FREEDESKTOPORGPLATFORMINTEGRATION_H
-#define OTTER_FREEDESKTOPORGPLATFORMINTEGRATION_H
+#ifndef MEERKAT_FREEDESKTOPORGPLATFORMINTEGRATION_H
+#define MEERKAT_FREEDESKTOPORGPLATFORMINTEGRATION_H
 
 #include "../../../core/Utils.h"
 #include "../../../core/PlatformIntegration.h"
@@ -32,7 +32,7 @@
 QDBusArgument& operator<<(QDBusArgument &argument, const QImage &image);
 const QDBusArgument& operator>>(const QDBusArgument &argument, QImage &image);
 
-namespace Otter
+namespace Meerkat
 {
 
 class FreeDesktopOrgPlatformIntegration : public PlatformIntegration

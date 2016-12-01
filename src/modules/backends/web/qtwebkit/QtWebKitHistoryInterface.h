@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2013 - 2015 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 *
 * This program is free software: you can redistribute it and/or modify
@@ -17,13 +17,13 @@
 *
 **************************************************************************/
 
-#ifndef OTTER_QTWEBKITHISTORYINTERFACE_H
-#define OTTER_QTWEBKITHISTORYINTERFACE_H
+#ifndef MEERKAT_QTWEBKITHISTORYINTERFACE_H
+#define MEERKAT_QTWEBKITHISTORYINTERFACE_H
 
 #include <QtCore/QStringList>
 #include <QtWebKit/QWebHistoryInterface>
 
-namespace Otter
+namespace Meerkat
 {
 
 class QtWebKitHistoryInterface : public QWebHistoryInterface

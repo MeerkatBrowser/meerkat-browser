@@ -21,7 +21,7 @@ do
 	fi
 
 	cd ../
-	dput ppa:otter-browser/${channel} *.changes
+	dput ppa:meerkat-browser/${channel} *.changes
 	rm *.build
 	rm *.changes
 	rm *.dsc

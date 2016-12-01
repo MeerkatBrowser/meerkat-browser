@@ -1,5 +1,5 @@
 #
-# Spec file for package Otter Browser
+# Spec file for package Meerkat Browser
 #
 # Copyright © 2014 George Machitidze <giomac@gmail.com>
 # Copyright © 2014 David Eder <david@eder.us>
@@ -21,14 +21,14 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-Name:           otter-browser
+Name:           meerkat-browser
 Summary:        Modern web browser inspired by Opera 12
 Version:        0.9.04
 Release:        0%{?dist}
 Group:          Applications/Internet
 License:        GPL-3.0+
-Url:            http://otter-browser.org/
-Source:         https://github.com/OtterBrowser/%{name}/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
+Url:            https://www.meerkat.tk/
+Source:         https://github.com/MeerkatBrowser/%{name}/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 BuildRequires:  cmake
 BuildRequires:  desktop-file-utils
 BuildRequires:  hicolor-icon-theme
@@ -46,7 +46,7 @@ BuildRequires:  pkgconfig(Qt5Widgets) >= 5.2
 BuildRequires:  pkgconfig(Qt5XmlPatterns) >= 5.2
 
 %description
-Otter Browser aims to recreate classic Opera (Presto) UI using Qt
+Meerkat Browser aims to recreate classic Opera (Presto) UI using Qt
 and designed to give the user full control.
 
 %prep

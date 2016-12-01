@@ -1,5 +1,5 @@
 /**************************************************************************
-* Otter Browser: Web browser controlled by the user, not vice-versa.
+* Meerkat Browser: Web browser controlled by the user, not vice-versa.
 * Copyright (C) 2013 - 2016 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 * Copyright (C) 2014 - 2016 Jan Bajer aka bajasoft <jbajer@gmail.com>
 *
@@ -18,15 +18,15 @@
 *
 **************************************************************************/
 
-#ifndef OTTER_QTWEBKITPAGE_H
-#define OTTER_QTWEBKITPAGE_H
+#ifndef MEERKAT_QTWEBKITPAGE_H
+#define MEERKAT_QTWEBKITPAGE_H
 
 #include "../../../../core/WindowsManager.h"
 
 #include <QtWebKit/QWebElement>
 #include <QtWebKitWidgets/QWebPage>
 
-namespace Otter
+namespace Meerkat
 {
 
 class QtWebKitNetworkManager;
@@ -58,7 +58,7 @@ protected:
 	void markAsPopup();
 	void applyContentBlockingRules(const QStringList &rules, bool remove);
 	void javaScriptAlert(QWebFrame *frame, const QString &message);
-#ifdef OTTER_ENABLE_QTWEBKIT_LEGACY
+#ifdef MEERKAT_ENABLE_QTWEBKIT_LEGACY
 	void javaScriptConsoleMessage(const QString &note, int line, const QString &source);
 #endif
 	QWebPage* createWindow(WebWindowType type);
@@ -73,7 +73,7 @@ protected slots:
 	void optionChanged(int identifier);
 	void pageLoadFinished();
 	void removePopup(const QUrl &url);
-#ifndef OTTER_ENABLE_QTWEBKIT_LEGACY
+#ifndef MEERKAT_ENABLE_QTWEBKIT_LEGACY
 	void handleConsoleMessage(MessageSource category, MessageLevel level, const QString &message, int line, const QString &source);
 #endif
 
