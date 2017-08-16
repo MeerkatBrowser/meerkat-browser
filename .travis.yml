@@ -1,5 +1,8 @@
 sudo: required
 
+before_install:
+  - sudo apt-get install qtdeclarative5-dev
+
 # Enable C++ support
 language: cpp
 
