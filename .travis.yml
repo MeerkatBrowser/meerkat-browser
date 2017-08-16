@@ -6,3 +6,9 @@ language: cpp
 # Compiler selection
 compiler:
 - gcc
+
+script:
+  - mkdir build
+  - cd build
+  - cmake ../
+  - make
