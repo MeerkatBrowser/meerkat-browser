@@ -1,7 +1,9 @@
 sudo: required
 
 before_install:
-  - sudo apt-get install qtdeclarative5-dev
+ - sudo add-apt-repository --yes ppa:levi-armstrong/qt-libraries-trusty
+  - sudo apt-get update -qq
+  - sudo apt-get install qt57declarative 
 
 # Enable C++ support
 language: cpp
